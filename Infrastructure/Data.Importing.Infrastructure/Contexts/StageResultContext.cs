@@ -8,6 +8,6 @@ namespace Data.Importing.Infrastructure.Contexts
 {
     public abstract class StageResultContext
     {
-        public ICollection<ValidationResult>
+        
     }
 }
