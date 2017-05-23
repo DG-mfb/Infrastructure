@@ -24,7 +24,7 @@ namespace Data.Importing.Tests
 
             var seed = new Func<ImportContext, StageResultContext>(c =>
             {
-                return new MockStageResultContext();
+                return new MockStageResultContext(c, null);
             });
             var context = new ImportContext(null, null);
             var del = instances.Aggregate(seed, (f, next) => new Func<ImportContext, StageResultContext>(c => next.Process(c, f)));

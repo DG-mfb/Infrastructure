@@ -46,6 +46,7 @@
     <Compile Include="StageProcessors\ParseStageProcessor.cs" />
     <Compile Include="StageProcessors\StageProcessor.cs" />
     <Compile Include="StageProcessors\ValidateAfterParseStageProcessor.cs" />
+    <Compile Include="StageResultContexts\DownloadStageResult.cs" />
     <Compile Include="Validation\ImportValidator.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -80,6 +80,13 @@
     <Compile Include="Logging\ICustomLogger.cs" />
     <Compile Include="Logging\ILogProvider.cs" />
     <Compile Include="Logging\ILogWriter.cs" />
+    <Compile Include="Messaging\Response\AbstractResponse.cs" />
+    <Compile Include="Messaging\Response\ResponseDataStatuses.cs" />
+    <Compile Include="Messaging\Response\ResponseMessage.cs" />
+    <Compile Include="Messaging\Response\ResponseMessageCollection.cs" />
+    <Compile Include="Messaging\Response\ResponseMessageTypes.cs" />
+    <Compile Include="Messaging\Response\ResponseMetrics.cs" />
+    <Compile Include="Messaging\Response\ResponseStatuses.cs" />
     <Compile Include="Notification\IDestinationTargetProvider.cs" />
     <Compile Include="Notification\INotificationSender.cs" />
     <Compile Include="Notification\INotifier.cs" />
@@ -98,7 +105,9 @@
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\ValidationContext.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Messaging\Request\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

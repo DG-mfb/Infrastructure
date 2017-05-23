@@ -25,7 +25,7 @@ namespace Data.Importing.Tests.MockData.StageProcessors
         public override StageResultContext Process(ImportContext context)
         {
             base.Action();
-            return new MockStageResultContext();
+            return new MockStageResultContext(context, this);
         }
     }
 }

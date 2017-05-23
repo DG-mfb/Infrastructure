@@ -18,7 +18,7 @@ namespace Data.Importing.StageProcessors
         public StageResultContext Process(ImportContext context, Func<ImportContext, StageResultContext> next)
         {
             var result = this.Process(context);
-            context.Results.Add(this, result);
+            context.Results.Add(result);
             return next(context);
         }
 
