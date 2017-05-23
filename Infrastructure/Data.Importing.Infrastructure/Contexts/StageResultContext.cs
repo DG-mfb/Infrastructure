@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Data.Importing.Infrastructure.Contexts
+{
+    public abstract class StageResultContext
+    {
+        public ICollection<ValidationResult>
+    }
+}

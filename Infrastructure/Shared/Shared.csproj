@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA2CD1BF-A890-4306-9EDB-A1B10042E57E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Shared</RootNamespace>
+    <AssemblyName>Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\ApplicationConfiguration.cs" />
+    <Compile Include="Data\Repository\DbRepository.cs" />
+    <Compile Include="Initialisation\ApplicationSettingProvider.cs" />
+    <Compile Include="Initialisation\Initialiser.cs" />
+    <Compile Include="Initialisation\IServerInitialiser.cs" />
+    <Compile Include="Initialisation\SettingsProviderBase.cs" />
+    <Compile Include="Logging\AbstractLogger.cs" />
+    <Compile Include="Logging\AbstractLogWriter.cs" />
+    <Compile Include="Logging\ConfigurationSections\ExceptionNotificationSettingsCollection.cs" />
+    <Compile Include="Logging\ConfigurationSections\ExceptionNotificationSettingsConfigurationElement.cs" />
+    <Compile Include="Logging\ConfigurationSections\ExceptionNotificationSettingsSection.cs" />
+    <Compile Include="Logging\ExceptionIdentityContext.cs" />
+    <Compile Include="Logging\ExceptionNotificationSettings.cs" />
+    <Compile Include="Logging\ExceptionNotificationSettingsProvider.cs" />
+    <Compile Include="Logging\ExceptionStatistics.cs" />
+    <Compile Include="Logging\Exceptions\PAS3BaseException.cs" />
+    <Compile Include="Logging\InformationLogEventWriter.cs" />
+    <Compile Include="Logging\LogErrorCommand.cs" />
+    <Compile Include="Logging\LogEventSourceProvider.cs" />
+    <Compile Include="Logging\LogExceptionCommand.cs" />
+    <Compile Include="Logging\LoggerManager.cs" />
+    <Compile Include="Logging\WarningLogEventWriter.cs" />
+    <Compile Include="Notification\ConfigurationSections\EmailConfigurationElement.cs" />
+    <Compile Include="Notification\ConfigurationSections\SmptProviderSettingsSection.cs" />
+    <Compile Include="Notification\ConfigurationSections\SmptSettingsCollections.cs" />
+    <Compile Include="Notification\ConfigurationSections\SmtpConfigurationElement.cs" />
+    <Compile Include="Notification\EmailMessage.cs" />
+    <Compile Include="Notification\NotificationManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Command\ICommandService.cs" />
+    <Compile Include="Services\Query\Assets\IAssetQueryService.cs" />
+    <Compile Include="Services\Query\Authentication\IAuthenticationQueryService.cs" />
+    <Compile Include="Services\Query\Location\ILocationQueryService.cs" />
+    <Compile Include="Services\Requests\Query\AuthenticateUserRequest.cs" />
+    <Compile Include="Services\Responses\Query\AbstractResponse.cs" />
+    <Compile Include="Services\Responses\Query\AuthenticateUserResponse.cs" />
+    <Compile Include="Services\Responses\Query\AuthenticationResults.cs" />
+    <Compile Include="Services\Responses\Query\BaseAuthenticateUserResponse.cs" />
+    <Compile Include="Services\Responses\Query\ResponseStatuses.cs" />
+    <Compile Include="Services\Responses\ResponseMessage.cs" />
+    <Compile Include="Services\Responses\ResponseMessageCollection.cs" />
+    <Compile Include="Services\Responses\ResponseMessageTypes.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Kernel\Kernel\Kernel.csproj">
+      <Project>{e198c691-91a6-4082-9976-f5f006f24960}</Project>
+      <Name>Kernel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataModels\DataModels.csproj">
+      <Project>{213f6bcc-8330-4494-8f4b-5eb7fe8ec4d9}</Project>
+      <Name>DataModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
