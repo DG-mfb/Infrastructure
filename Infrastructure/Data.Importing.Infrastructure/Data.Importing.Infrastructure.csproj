@@ -47,6 +47,8 @@
     <Compile Include="Contexts\ResourceContext.cs" />
     <Compile Include="Contexts\StageImportContext.cs" />
     <Compile Include="Contexts\StageResultContext.cs" />
+    <Compile Include="Factories\IImporterFactory.cs" />
+    <Compile Include="IImporter.cs" />
     <Compile Include="Importers\IImporter.cs" />
     <Compile Include="ImportStage.1.cs" />
     <Compile Include="ImportStage.cs" />
@@ -78,9 +80,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Providers\" />
     <Folder Include="Resources\FileResource\" />
     <Folder Include="Resources\HTTPResource\" />
+    <Folder Include="StageProcessors\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

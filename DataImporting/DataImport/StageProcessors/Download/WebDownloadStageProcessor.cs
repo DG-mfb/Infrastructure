@@ -6,7 +6,7 @@ using Kernel.DependancyResolver;
 
 namespace Data.Importing.StageProcessors
 {
-    internal class DownloadStageProcessor : StageProcessor
+    internal class WebDownloadStageProcessor : StageProcessor
     {
         public override ImportStage<ImportStages> Stage
         {
@@ -16,7 +16,7 @@ namespace Data.Importing.StageProcessors
             }
         }
 
-        public DownloadStageProcessor(IDependencyResolver dependencyResolver) : base(dependencyResolver)
+        public WebDownloadStageProcessor(IDependencyResolver dependencyResolver) : base(dependencyResolver)
         {
         }
 

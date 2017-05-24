@@ -6,7 +6,7 @@ using Kernel.DependancyResolver;
 
 namespace Data.Importing.StageProcessors
 {
-    internal class ParseStageProcessor : StageProcessor
+    internal class JsonParseStageProcessor : StageProcessor
     {
         public  override ImportStage<ImportStages> Stage
         {
@@ -16,7 +16,7 @@ namespace Data.Importing.StageProcessors
             }
         }
 
-        public ParseStageProcessor(IDependencyResolver dependencyResolver) : base(dependencyResolver)
+        public JsonParseStageProcessor(IDependencyResolver dependencyResolver) : base(dependencyResolver)
         {
             
         }
