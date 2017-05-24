@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Data.Importing.Infrastructure;
 using Data.Importing.Infrastructure.Contexts;
 using Data.Importing.StageProcessors;
-using Data.Importing.Tests.MockData.Contexts;
 using Kernel.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
