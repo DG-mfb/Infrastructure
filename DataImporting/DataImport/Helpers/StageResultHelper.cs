@@ -24,7 +24,10 @@ namespace Data.Importing.Helpers
         private static Func<ISerializer, object, object> BuildConstructorDelegate(Type type)
         {
             var minfo = typeof(ISerializer).GetMethods()
-                .FirstOrDefault(c => c.IsGenericMethod && c.Name == "Deserialize");
+                .SingleOrDefault(c => c.IsGenericMethod && c.Name == "Deserialize");
+            if (minfo == null)
+                throw new MissingMethodException("Deserialize");
+
             minfo = minfo.MakeGenericMethod(type);
             var processorPar = Expression.Parameter(typeof(ISerializer));
             var contentPar = Expression.Parameter(typeof(object));
