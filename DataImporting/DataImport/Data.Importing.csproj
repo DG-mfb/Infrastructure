@@ -42,9 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factories\ImporterFactory.cs" />
+    <Compile Include="Helpers\Class1.cs" />
+    <Compile Include="Helpers\StageResultHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StageProcessors\Download\WebDownloadStageProcessor.cs" />
-    <Compile Include="StageProcessors\Parse\JsonParseStageProcessor.cs" />
+    <Compile Include="StageProcessors\Parse\ParseStageProcessor.cs" />
     <Compile Include="StageProcessors\StageProcessor.cs" />
     <Compile Include="StageProcessors\Validation\ValidateAfterParseStageProcessor.cs" />
     <Compile Include="Validation\ImportValidator.cs" />

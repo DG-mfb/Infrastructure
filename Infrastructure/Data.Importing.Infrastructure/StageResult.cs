@@ -8,9 +8,16 @@ namespace Data.Importing.Infrastructure
 
         public bool IsCompleted { get; }
 
+        public bool IsResultValid { get; private set; }
+
         public StageResult(object result)
         {
             this.Result = result;
+        }
+
+        public void Validated()
+        {
+            this.IsResultValid = true;
         }
     }
 }
