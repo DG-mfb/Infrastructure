@@ -19,7 +19,9 @@ namespace Data.Importing.StageProcessors
 
         public StageResult GetResult(StageImportContext context)
         {
-            throw new NotImplementedException();
+            var result = Task.Factory.StartNew<Task<StageResult>>(async () => await this.GetResultAsync(context));
+            result.Wait();
+            return result.Result.Result;
         }
 
         public async Task<StageResult> GetResultAsync(StageImportContext context, Func<StageImportContext, Task<StageResult>> next)
