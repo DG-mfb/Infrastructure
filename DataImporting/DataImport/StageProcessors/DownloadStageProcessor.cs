@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Data.Importing.Infrastructure;
 using Data.Importing.Infrastructure.Contexts;
 using Kernel.DependancyResolver;
@@ -18,7 +19,8 @@ namespace Data.Importing.StageProcessors
         public DownloadStageProcessor(IDependencyResolver dependencyResolver) : base(dependencyResolver)
         {
         }
-        public override StageResultContext Process(ImportContext context)
+
+        public override Task<StageResult> GetResultAsync(StageImportContext context)
         {
             throw new NotImplementedException();
         }

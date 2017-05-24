@@ -46,7 +46,6 @@
     <Compile Include="StageProcessors\ParseStageProcessor.cs" />
     <Compile Include="StageProcessors\StageProcessor.cs" />
     <Compile Include="StageProcessors\ValidateAfterParseStageProcessor.cs" />
-    <Compile Include="StageResultContexts\DownloadStageResult.cs" />
     <Compile Include="Validation\ImportValidator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +57,9 @@
       <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
       <Name>Kernel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="StageResultContexts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

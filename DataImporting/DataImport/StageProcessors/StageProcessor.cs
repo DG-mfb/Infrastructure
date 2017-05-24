@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Data.Importing.Infrastructure;
 using Data.Importing.Infrastructure.Contexts;
 using Kernel.DependancyResolver;
@@ -15,13 +16,20 @@ namespace Data.Importing.StageProcessors
         {
             this.DependencyResolver = dependencyResolver;
         }
-        public StageResultContext Process(ImportContext context, Func<ImportContext, StageResultContext> next)
+
+        public StageResult GetResult(StageImportContext context)
         {
-            var result = this.Process(context);
-            context.Results.Add(result);
-            return next(context);
+            throw new NotImplementedException();
         }
 
-        public abstract StageResultContext Process(ImportContext context);
+        public async Task<StageResult> GetResultAsync(StageImportContext context, Func<StageImportContext, Task<StageResult>> next)
+        {
+            var result = await this.GetResultAsync(context);
+            if (result.IsCompleted)
+                return result;
+            return await next(context);
+        }
+
+        public abstract Task<StageResult> GetResultAsync(StageImportContext context);
     }
 }

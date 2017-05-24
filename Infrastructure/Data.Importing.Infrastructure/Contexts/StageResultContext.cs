@@ -7,15 +7,18 @@ using Kernel.Messaging.Response;
 
 namespace Data.Importing.Infrastructure.Contexts
 {
-    public abstract class StageResultContext : AbstractResponse
+    public class StageResultContext
     {
-        public ImportContext ImportContext { get; private set; }
-        public IStageProcessor StageProcessor { get; private set; }
-
-        public StageResultContext(ImportContext importContext, IStageProcessor stageProcessor)
+        private Lazy<Task<StageResult>> _lazyResult;
+        private StageImportContext ImportContext;
+        private IStageProcessor StageProcessor;
+        
+        public Task<StageResult> Result { get { return this._lazyResult.Value; } }
+        public StageResultContext(StageImportContext importContext, IStageProcessor stageProcessor)
         {
             this.ImportContext = importContext;
             this.StageProcessor = stageProcessor;
+            this._lazyResult = new Lazy<Task<StageResult>>(new Func<Task<StageResult>>(() => stageProcessor.GetResultAsync(importContext)));
         }
     }
 }

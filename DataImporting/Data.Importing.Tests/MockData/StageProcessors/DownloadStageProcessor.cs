@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Data.Importing.Infrastructure;
 using Data.Importing.Infrastructure.Contexts;
-using Data.Importing.Tests.MockData.Contexts;
 using Data.Importing.Tests.MockData.DependencyResolvers;
 
 namespace Data.Importing.Tests.MockData.StageProcessors
@@ -24,10 +20,10 @@ namespace Data.Importing.Tests.MockData.StageProcessors
         {
             
         }
-        public override StageResultContext Process(ImportContext context)
+        public override Task<StageResult> GetResultAsync(StageImportContext context)
         {
             base.Action();
-            return new MockStageResultContext(context, this);
+            return Task.FromResult(new StageResult(null));
         }
     }
 }

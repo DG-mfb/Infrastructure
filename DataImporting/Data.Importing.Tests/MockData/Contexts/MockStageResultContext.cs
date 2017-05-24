@@ -10,7 +10,7 @@ namespace Data.Importing.Tests.MockData.Contexts
 {
     public class MockStageResultContext : StageResultContext
     {
-        public MockStageResultContext(ImportContext importContext, IStageProcessor stageProcessor) : base(importContext, stageProcessor)
+        public MockStageResultContext(StageImportContext importContext, IStageProcessor stageProcessor) : base(importContext, stageProcessor)
         {
         }
     }

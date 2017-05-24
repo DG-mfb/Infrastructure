@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Data.Importing.Infrastructure;
 using Data.Importing.Infrastructure.Contexts;
 using Kernel.DependancyResolver;
@@ -19,7 +20,7 @@ namespace Data.Importing.StageProcessors
         {
             
         }
-        public override StageResultContext Process(ImportContext context)
+        public override Task<StageResult> GetResultAsync(StageImportContext context)
         {
             throw new NotImplementedException();
         }

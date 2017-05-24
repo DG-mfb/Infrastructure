@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Data.Importing.Infrastructure;
 using Data.Importing.Infrastructure.Contexts;
 using Data.Importing.StageProcessors;
@@ -22,13 +23,14 @@ namespace Data.Importing.Tests
                 .OrderByDescending(o => o.Stage)
                 .ToList();
 
-            var seed = new Func<ImportContext, StageResultContext>(c =>
+            var seed = new Func<StageImportContext, Task<StageResult>>(c =>
             {
-                return new MockStageResultContext(c, null);
+                return Task.FromResult(new StageResult(null));
             });
             var context = new ImportContext(null, null);
-            var del = instances.Aggregate(seed, (f, next) => new Func<ImportContext, StageResultContext>(c => next.Process(c, f)));
-            var res = del(context);
+            var stageContext = new StageImportContext(null, context);
+            var del = instances.Aggregate(seed, (f, next) => new Func<StageImportContext, Task<StageResult>>(c => next.GetResultAsync(c, f)));
+            var res = del(stageContext);
         }
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="Configuration\ImportConfiguration.cs" />
     <Compile Include="Contexts\ImportContext.cs" />
     <Compile Include="Contexts\ResourceContext.cs" />
+    <Compile Include="Contexts\StageImportContext.cs" />
     <Compile Include="Contexts\StageResultContext.cs" />
     <Compile Include="Importers\IImporter.cs" />
     <Compile Include="ImportStage.1.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Resources\Resource.cs" />
     <Compile Include="Resources\WebResourceConfiguration.cs" />
     <Compile Include="Resources\ResourceConfiguration.cs" />
+    <Compile Include="StageResult.cs" />
     <Compile Include="Validation\IImportValidator%271.cs" />
     <Compile Include="Validation\IImportValidator.cs" />
     <Compile Include="Validation\ImportValidationResult.cs" />
