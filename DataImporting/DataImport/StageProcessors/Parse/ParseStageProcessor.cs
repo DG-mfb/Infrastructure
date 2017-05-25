@@ -29,7 +29,7 @@ namespace Data.Importing.StageProcessors
             StageResult result;
             var previousResult = context.Source;
             if (!previousResult.IsResultValid)
-                result = new StageResult(previousResult.Result);
+                result = previousResult;
             else
             {
                 var del = StageResultHelper.GetDeserialiserDelegate(context.ImportContext.TargetContext.ParseTo);

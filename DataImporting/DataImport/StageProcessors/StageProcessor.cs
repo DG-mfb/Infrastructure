@@ -29,7 +29,7 @@ namespace Data.Importing.StageProcessors
             var result = await this.GetResultAsync(context);
             if (result.IsCompleted)
                 return result;
-            return await next(context);
+            return await next(new StageImportContext(result, context.ImportContext));
         }
 
         public abstract Task<StageResult> GetResultAsync(StageImportContext context);
