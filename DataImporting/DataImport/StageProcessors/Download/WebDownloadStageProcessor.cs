@@ -20,7 +20,7 @@ namespace Data.Importing.StageProcessors
         {
         }
 
-        public override Task<StageResult> GetResultAsync(StageImportContext context)
+        public override Task<StageResultContext> GetResultAsync(StageImportContext context)
         {
             throw new NotImplementedException();
         }

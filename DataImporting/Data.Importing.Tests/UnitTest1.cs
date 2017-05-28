@@ -22,13 +22,13 @@ namespace Data.Importing.Tests
                 .OrderByDescending(o => o.Stage)
                 .ToList();
 
-            var seed = new Func<StageImportContext, Task<StageResult>>(c =>
+            var seed = new Func<StageImportContext, Task<StageResultContext>>(c =>
             {
-                return Task.FromResult(new StageResult(null));
+                return Task.FromResult(new StageResultContext(null, null, null));
             });
             var context = new ImportContext(null, null);
             var stageContext = new StageImportContext(null, context);
-            var del = instances.Aggregate(seed, (f, next) => new Func<StageImportContext, Task<StageResult>>(c => next.GetResultAsync(c, f)));
+            var del = instances.Aggregate(seed, (f, next) => new Func<StageImportContext, Task<StageResultContext>>(c => next.GetResultAsync(c, f)));
             var res = del(stageContext);
         }
     }

@@ -17,21 +17,21 @@ namespace Data.Importing.StageProcessors
             this.DependencyResolver = dependencyResolver;
         }
 
-        public StageResult GetResult(StageImportContext context)
+        public StageResultContext GetResult(StageImportContext context)
         {
-            var result = Task.Factory.StartNew<Task<StageResult>>(async () => await this.GetResultAsync(context));
+            var result = Task.Factory.StartNew<Task<StageResultContext>>(async () => await this.GetResultAsync(context));
             result.Wait();
             return result.Result.Result;
         }
 
-        public async Task<StageResult> GetResultAsync(StageImportContext context, Func<StageImportContext, Task<StageResult>> next)
+        public async Task<StageResultContext> GetResultAsync(StageImportContext context, Func<StageImportContext, Task<StageResultContext>> next)
         {
             var result = await this.GetResultAsync(context);
             if (result.IsCompleted)
                 return result;
-            return await next(new StageImportContext(result, context.ImportContext));
+            return await next(new StageImportContext(result.Result, context.ImportContext));
         }
 
-        public abstract Task<StageResult> GetResultAsync(StageImportContext context);
+        public abstract Task<StageResultContext> GetResultAsync(StageImportContext context);
     }
 }

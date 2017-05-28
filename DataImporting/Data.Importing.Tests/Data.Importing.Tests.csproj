@@ -53,7 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextTests\SourceContextTests.cs" />
-    <Compile Include="MockData\Contexts\MockStageResultContext.cs" />
     <Compile Include="MockData\DependencyResolvers\MockDependencyResolver.cs" />
     <Compile Include="MockData\MockImportContext.cs" />
     <Compile Include="MockData\StageProcessors\MockStageProcessor.cs" />
@@ -84,6 +83,9 @@
       <Project>{1d6fd8fd-77e4-4d4b-8595-22e474488adc}</Project>
       <Name>Data.Importing</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MockData\Contexts\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

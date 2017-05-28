@@ -6,7 +6,7 @@ namespace Data.Importing.Infrastructure
 {
     public interface IStageProcessor
     {
-        StageResult GetResult(StageImportContext context);
-        Task<StageResult> GetResultAsync(StageImportContext context);
+        StageResultContext GetResult(StageImportContext context);
+        Task<StageResultContext> GetResultAsync(StageImportContext context);
     }
 }

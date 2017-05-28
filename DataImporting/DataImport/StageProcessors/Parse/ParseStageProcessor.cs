@@ -24,19 +24,9 @@ namespace Data.Importing.StageProcessors
         {
             this._serializer = serializer;
         }
-        public override Task<StageResult> GetResultAsync(StageImportContext context)
+        public override Task<StageResultContext> GetResultAsync(StageImportContext context)
         {
-            StageResult result;
-            var previousResult = context.Source;
-            if (!previousResult.IsResultValid)
-                result = previousResult;
-            else
-            {
-                var del = StageResultHelper.GetDeserialiserDelegate(context.ImportContext.TargetContext.ParseTo);
-                var deserialised = del(this._serializer, previousResult.Result);
-                result = new StageResult(deserialised);
-            }
-            return Task.FromResult(result);
+            throw new NotImplementedException();
         }
     }
 }

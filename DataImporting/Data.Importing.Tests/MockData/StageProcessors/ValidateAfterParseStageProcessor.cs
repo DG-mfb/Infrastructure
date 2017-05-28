@@ -20,10 +20,10 @@ namespace Data.Importing.Tests.MockData.StageProcessors
         {
             
         }
-        public override Task<StageResult> GetResultAsync(StageImportContext context)
+        public override Task<StageResultContext> GetResultAsync(StageImportContext context)
         {
             base.Action();
-            return Task.FromResult(new StageResult(null));
+            return Task.FromResult(new StageResultContext(null, null, null));
         }
     }
 }

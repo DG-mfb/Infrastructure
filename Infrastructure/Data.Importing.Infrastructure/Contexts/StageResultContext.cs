@@ -1,24 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Kernel.Messaging.Response;
-
-namespace Data.Importing.Infrastructure.Contexts
+﻿namespace Data.Importing.Infrastructure.Contexts
 {
     public class StageResultContext
     {
-        private Lazy<Task<StageResult>> _lazyResult;
-        private StageImportContext ImportContext;
+        //private Lazy<Task<StageResultContext>> _lazyResult;
+        private ImportContext ImportContext;
         private IStageProcessor StageProcessor;
         
-        public Task<StageResult> Result { get { return this._lazyResult.Value; } }
-        public StageResultContext(StageImportContext importContext, IStageProcessor stageProcessor)
+        public StageResult Result { get; private set; }
+
+        public bool IsCompleted
+        {
+            get
+            {
+                return this.Result.IsCompleted;
+            }
+        }
+
+        public StageResultContext(StageResult result, ImportContext importContext, IStageProcessor stageProcessor)
         {
             this.ImportContext = importContext;
             this.StageProcessor = stageProcessor;
-            this._lazyResult = new Lazy<Task<StageResult>>(new Func<Task<StageResult>>(() => stageProcessor.GetResultAsync(importContext)));
+            this.Result = result;
+            //var stageContext = new StageImportContext(result, importContext);
+            //this._lazyResult = new Lazy<Task<StageResultContext>>(new Func<Task<StageResultContext>>(() => stageProcessor.GetResultAsync(stageContext)));
         }
     }
 }
