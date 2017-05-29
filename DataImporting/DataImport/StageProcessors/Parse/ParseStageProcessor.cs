@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Data.Importing.Helpers;
 using Data.Importing.Infrastructure;
 using Data.Importing.Infrastructure.Contexts;
 using Kernel.DependancyResolver;
@@ -24,7 +23,7 @@ namespace Data.Importing.StageProcessors
         {
             this._serializer = serializer;
         }
-        public override Task<StageResultContext> GetResultAsync(StageImportContext context)
+        protected override Task<StageResult> GetResultAsyncInternal(ImportContext context)
         {
             throw new NotImplementedException();
         }

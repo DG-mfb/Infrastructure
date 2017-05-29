@@ -45,10 +45,11 @@
     <Compile Include="Configuration\ImportConfiguration.cs" />
     <Compile Include="Contexts\ImportContext.cs" />
     <Compile Include="Contexts\ResourceContext.cs" />
-    <Compile Include="Contexts\StageImportContext.cs" />
     <Compile Include="Contexts\StageResultContext.cs" />
+    <Compile Include="Contexts\SourceContext.cs" />
     <Compile Include="Factories\IImporterFactory.cs" />
     <Compile Include="IImporter.cs" />
+    <Compile Include="ImportedEntry.cs" />
     <Compile Include="Importers\IImporter.cs" />
     <Compile Include="ImportStage.1.cs" />
     <Compile Include="ImportStage.cs" />

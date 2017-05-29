@@ -1,16 +1,18 @@
-﻿using Kernel.Messaging.Response;
+﻿using System;
+using Kernel.Data.DataRepository;
+using Kernel.Messaging.Response;
 
 namespace Data.Importing.Infrastructure
 {
     public class StageResult : AbstractResponse
     {
-        public object Result { get; private set; }
+        public IReadOnlyRepository<ImportedEntry, Guid> Result { get; private set; }
 
         public bool IsCompleted { get; }
 
         public bool IsResultValid { get; private set; }
 
-        public StageResult(object result)
+        public StageResult(IReadOnlyRepository<ImportedEntry, Guid> result)
         {
             this.Result = result;
         }

@@ -4,15 +4,13 @@ namespace Data.Importing.Infrastructure.Contexts
 {
     public class ImportContext
     {
-        public ICollection<StageResultContext> Results { get; private set; }
-        public ResourceContext SourceContext { get; private set; }
+        public SourceContext SourceContext { get; private set; }
         public TargetContext TargetContext { get; private set; }
 
-        public ImportContext(ResourceContext resource, TargetContext target)
+        public ImportContext(SourceContext source, TargetContext target)
         {
-            this.SourceContext = resource;
+            this.SourceContext = source;
             this.TargetContext = target;
-            this.Results = new List<StageResultContext>();
         }
     }
 }

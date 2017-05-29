@@ -19,7 +19,7 @@ namespace Data.Importing.StageProcessors
         public ValidateAfterParseStageProcessor(IDependencyResolver dependencyResolver) : base(dependencyResolver)
         {
         }
-        public override Task<StageResultContext> GetResultAsync(StageImportContext context)
+        protected override Task<StageResult> GetResultAsyncInternal(ImportContext context)
         {
             throw new NotImplementedException();
         }
