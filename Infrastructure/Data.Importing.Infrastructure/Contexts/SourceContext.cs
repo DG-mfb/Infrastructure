@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Kernel.Data.DataRepository;
 
 namespace Data.Importing.Infrastructure.Contexts
 {
     public class SourceContext
     {
-        private Lazy<IReadOnlyRepository<ImportedEntry, Guid>> _source;
-        public IReadOnlyRepository<ImportedEntry, Guid> Source
+        private Lazy<Task<StageResultContext>> _source;
+        public Task<StageResultContext> Source
         {
             get
             {
@@ -14,9 +15,9 @@ namespace Data.Importing.Infrastructure.Contexts
             }
         }
 
-        public SourceContext(Func<IReadOnlyRepository<ImportedEntry, Guid>> source)
+        public SourceContext(Func<Task<StageResultContext>> source)
         {
-            this._source = new Lazy<IReadOnlyRepository<ImportedEntry, Guid>>(source);
+            this._source = new Lazy<Task<StageResultContext>>(source);
         }
     }
 }

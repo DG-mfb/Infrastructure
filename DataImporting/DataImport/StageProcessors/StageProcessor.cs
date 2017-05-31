@@ -26,10 +26,11 @@ namespace Data.Importing.StageProcessors
 
         public async Task<StageResultContext> GetResultAsync(ImportContext context, Func<ImportContext, Task<StageResultContext>> next)
         {
-            var result = await this.GetResultAsync(context);
+            var result = await context.SourceContext.Source;
+            //var result = await this.GetResultAsync(context);
             if (result.IsCompleted)
                 return result;
-            var sourceContext = new SourceContext(() => result.Result.Result);
+            var sourceContext = new SourceContext(async() => await this.GetResultAsync(context));
             return await next(new ImportContext(sourceContext, new TargetContext()));
         }
 
