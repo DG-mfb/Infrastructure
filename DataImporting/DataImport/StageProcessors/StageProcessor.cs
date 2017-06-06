@@ -26,16 +26,20 @@ namespace Data.Importing.StageProcessors
 
         public async Task<StageResultContext> GetResultAsync(ImportContext context, Func<ImportContext, Task<StageResultContext>> next)
         {
-            var result = await context.SourceContext.Source;
-            //var result = await this.GetResultAsync(context);
-            if (result.IsCompleted)
-                return result;
-            var sourceContext = new SourceContext(async() => await this.GetResultAsync(context));
+            //var result = await context.SourceContext.Source;
+            ////var result = await this.GetResultAsync(context);
+            //if (result.IsCompleted)
+            //    return result;
+            var sourceContext = new SourceContext(() => this.GetResultAsync(context));
             return await next(new ImportContext(sourceContext, new TargetContext()));
         }
 
         public async Task<StageResultContext> GetResultAsync(ImportContext context)
         {
+            var source = await context.SourceContext.Source;
+            //var result = await this.GetResultAsync(context);
+            if (source.IsCompleted)
+                return source;
             var result = await this.GetResultAsyncInternal(context);
             return new StageResultContext(result, context, this);
 
