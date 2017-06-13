@@ -11,7 +11,7 @@ namespace Data.Importing.Repositories
     internal class RamRepository : IReadOnlyRepository<ImportedEntry, Guid>
     {
         private ICollection<ImportedEntry> _entries;
-        private IEnumerable<ImportedEntry> enumerable;
+        //private IEnumerable<ImportedEntry> enumerable;
 
         public RamRepository() : this(Enumerable.Empty<ImportedEntry>())
         {
@@ -19,7 +19,8 @@ namespace Data.Importing.Repositories
 
         public RamRepository(IEnumerable<ImportedEntry> enumerable)
         {
-            this.enumerable = enumerable;
+            this._entries = enumerable
+                .ToList();
         }
 
         public IQueryable<ImportedEntry> Read()
