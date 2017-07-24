@@ -220,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Client\Angular\src\app\login\login.component.html" />
     <Content Include="Client\Angular\src\favicon.ico" />
     <Content Include="Client\Angular\src\index.html" />
     <Content Include="Client\Angular\src\styles.css" />
@@ -254,6 +255,7 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Client\Angular\src\tsconfig.json" />
     <Content Include="package.json" />
+    <Content Include="Client\Angular\src\app\login\login.component.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -323,6 +325,7 @@
     <TypeScriptCompile Include="Client\Angular\src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="Client\Angular\src\app\app.component.ts" />
     <TypeScriptCompile Include="Client\Angular\src\app\app.module.ts" />
+    <TypeScriptCompile Include="Client\Angular\src\app\login\login.component.ts" />
     <TypeScriptCompile Include="Client\Angular\src\main.ts" />
   </ItemGroup>
   <ItemGroup>
