@@ -1,4 +1,4 @@
-﻿namespace Kernel
+﻿namespace Kernel.CQRS
 {
 	using System;
 
@@ -7,6 +7,6 @@
 	/// </summary>
 	public interface ICommand
 	{
-		Guid Id { get; set; }
+		Guid Id { get; }
 	}
 }

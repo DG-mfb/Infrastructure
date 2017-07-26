@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataModels;
 using Kernel.Data.Connection;
 using Kernel.Data.ORM;
@@ -12,7 +8,7 @@ using Provider.EntityFramework.Initialisation;
 
 namespace Provider.EntityFramework
 {
-	public class DBContext : DbContext, IDbContext
+    public class DBContext : DbContext, IDbContext
 	{
 		static DBContext()
 		{

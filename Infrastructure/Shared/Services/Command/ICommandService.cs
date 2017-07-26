@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
 using System.Threading.Tasks;
-using Kernel;
+using Kernel.CQRS;
 
 namespace Shared.Services.Command
 {

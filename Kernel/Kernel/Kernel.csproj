@@ -47,10 +47,6 @@
     <Compile Include="Cache\ICacheItemPolicy.cs" />
     <Compile Include="Cache\ICachePopulator.cs" />
     <Compile Include="Cache\ICacheProvider.cs" />
-    <Compile Include="Command\CommandBase.cs" />
-    <Compile Include="Command\ICommand.cs" />
-    <Compile Include="Command\ICommandHandler.cs" />
-    <Compile Include="Command\ICommandProcessor.cs" />
     <Compile Include="Configuration\AbstractConfigurationElement.cs" />
     <Compile Include="Configuration\AbstractConfigurationElementCollection.cs" />
     <Compile Include="Configuration\AbstractConfigurationSection.cs" />

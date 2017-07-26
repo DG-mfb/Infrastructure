@@ -89,6 +89,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\Kernel\Kernel.CQRS\Kernel.CQRS.csproj">
+      <Project>{dbe9a282-f646-41c9-896d-00abdc5b9aad}</Project>
+      <Name>Kernel.CQRS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel\Kernel.csproj">
       <Project>{e198c691-91a6-4082-9976-f5f006f24960}</Project>
       <Name>Kernel</Name>

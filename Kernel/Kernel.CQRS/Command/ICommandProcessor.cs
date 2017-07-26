@@ -1,4 +1,4 @@
-﻿namespace Kernel
+﻿namespace Kernel.CQRS
 {
 	using System.Threading.Tasks;
 
