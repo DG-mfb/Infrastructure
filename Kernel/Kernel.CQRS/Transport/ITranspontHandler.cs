@@ -5,6 +5,6 @@ namespace Kernel.CQRS.Transport
 {
     public interface ITranspontHandler
     {
-        Task SentMessage<TMassage>(TMassage message) where TMassage : Message;
+        Task SentMessage<TMessage>(TMessage message) where TMessage : Message;
     }
 }
