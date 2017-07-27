@@ -18,7 +18,7 @@ namespace CQRS.MessageHandling.Initialisation
             throw new NotImplementedException();
         }
 
-        internal static Func<Type, IHandlerFactory> RegisterHandlerFactories(IDependencyResolver dependencyResolver)
+        internal static Func<Type, IHandlerResolver> RegisterHandlerFactories(IDependencyResolver dependencyResolver)
         {
             return t =>
             {

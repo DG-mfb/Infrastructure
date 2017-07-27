@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Kernel.CQRS.MessageHandling
 {
-    public interface IHandlerFactorySettings
+    public interface IHandlerResolverSettings
     {
         IEnumerable<Assembly> LimitAssembliesTo { get; }
     }

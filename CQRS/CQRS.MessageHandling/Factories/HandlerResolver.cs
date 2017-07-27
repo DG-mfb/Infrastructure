@@ -9,27 +9,27 @@ using Kernel.Reflection;
 
 namespace CQRS.MessageHandling.Factories
 {
-    internal class HandlerFactory : IHandlerFactory
+    internal class HandlerResolver : IHandlerResolver
     {
         private readonly IDependencyResolver _resolver;
-        private readonly IHandlerFactorySettings _factorySettings;
+        private readonly IHandlerResolverSettings _factorySettings;
 
         //internal static readonly Func<Type, IMessageDispatcherSettings, bool> _normalisedHandlerCondition = new Func<Type, IMessageDispatcherSettings, bool>((t, s) => t.Assembly.GetName().Name == s.NormalisedAssemblyName);
         //internal static readonly Func<Type, IMessageDispatcherSettings, bool> _subscriberHandlerCondition = new Func<Type, IMessageDispatcherSettings, bool>((t, s) =>
         //s.LimitAssembliesTo.Any(x => x.Equals(t.Assembly.GetName().Name, StringComparison.Ordinal)) && !_normalisedHandlerCondition(t, s));
 
-        public HandlerFactory(IDependencyResolver resolver, IHandlerFactorySettings factorySettings)
+        public HandlerResolver(IDependencyResolver resolver, IHandlerResolverSettings factorySettings)
         {
             _resolver = resolver;
             _factorySettings = factorySettings;
         }
 
-        public ICollection<object> GetAllHandlersFor(Type targetType)
+        public ICollection<object> ResolveAllHandlersFor(Type targetType)
         {
-            return GetHandlersFor(targetType, (t, s) => true);
+            return ResolveHandlersFor(targetType, (t, s) => true);
         }
 
-        public ICollection<object> GetHandlersFor(Type targetType, Func<Type, IHandlerFactorySettings, bool> filter)
+        public ICollection<object> ResolveHandlersFor(Type targetType, Func<Type, IHandlerResolverSettings, bool> filter)
         {
             var handlerType = BuildHandlerType(targetType);
             return GetHandlersInternal(handlerType, filter);
@@ -45,7 +45,7 @@ namespace CQRS.MessageHandling.Factories
         //    return this.GetHandlersFor(targetType, HandlerFactory._normalisedHandlerCondition);
         //}
 
-        protected virtual ICollection<object> GetHandlersInternal(Type handlerType, Func<Type, IHandlerFactorySettings, bool> filter)
+        protected virtual ICollection<object> GetHandlersInternal(Type handlerType, Func<Type, IHandlerResolverSettings, bool> filter)
         {
             var handlers = ResolveHandlers(handlerType, filter);
             //var filteredHandlers = ApplyHandlerFilter(handlers);
@@ -60,7 +60,7 @@ namespace CQRS.MessageHandling.Factories
         }
         //protected abstract ICollection<object> ApplyHandlerFilter(ICollection<object> handlers);
 
-        protected virtual ICollection<object> ResolveHandlers(Type handlerType, Func<Type, IHandlerFactorySettings, bool> filter)
+        protected virtual ICollection<object> ResolveHandlers(Type handlerType, Func<Type, IHandlerResolverSettings, bool> filter)
         {
             //object handler;
             var handlers = this._resolver.ResolveAll(handlerType)
@@ -79,7 +79,7 @@ namespace CQRS.MessageHandling.Factories
             return handlers;
         }
 
-        private ICollection<object> TryResolveFromAssemblies(Type handlerType, Func<Type, IHandlerFactorySettings, bool> filter)
+        private ICollection<object> TryResolveFromAssemblies(Type handlerType, Func<Type, IHandlerResolverSettings, bool> filter)
         {
             var filterAssembles = AssemblyScanner.ScannableAssemblies
                 .Select(a => new { Name = a.GetName().Name, a })

@@ -8,7 +8,7 @@ using Kernel.CQRS.MessageHandling;
 
 namespace CQRS.MessageHandling.Test.MockData.MessageHandling
 {
-    internal class HandlerFactorySettingsMock : IHandlerFactorySettings
+    internal class HandlerFactorySettingsMock : IHandlerResolverSettings
     {
         public IEnumerable<Assembly> LimitAssembliesTo
         {

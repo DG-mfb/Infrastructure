@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factories\HandlerFactory.cs" />
+    <Compile Include="Factories\HandlerResolver.cs" />
     <Compile Include="Initialisation\MessageHandlingInitialiser.cs" />
     <Compile Include="Invocation\HandlerDelegateFactory.cs" />
     <Compile Include="Invocation\HandlerInvoker.cs" />
