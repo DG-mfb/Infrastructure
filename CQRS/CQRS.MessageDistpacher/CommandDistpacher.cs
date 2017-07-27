@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Kernel.CQRS.Command;
+using CQRS.Infrastructure.Messaging;
 using Kernel.CQRS.Dispatching;
 using Kernel.CQRS.Messaging;
 using Kernel.CQRS.Transport;

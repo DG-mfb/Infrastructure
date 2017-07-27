@@ -1,8 +1,8 @@
 ﻿namespace Shared.Logging
 {
-	using System;
-	using System.Collections.Generic;
-	using Kernel.CQRS.Command;
+    using System;
+    using System.Collections.Generic;
+    using CQRS.Infrastructure.Messaging;
 
     [Serializable]
 	public class LogExceptionCommand : Command

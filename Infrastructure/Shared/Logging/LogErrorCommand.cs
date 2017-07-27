@@ -1,8 +1,7 @@
 ﻿namespace Shared.Logging
 {
-	using System;
-	using Kernel;
-    using Kernel.CQRS.Command;
+    using System;
+    using CQRS.Infrastructure.Messaging;
 
     [Serializable]
     public class LogErrorCommand : Command

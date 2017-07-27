@@ -9,7 +9,7 @@ using Kernel.Reflection;
 
 namespace CQRS.MessageHandling.Factories
 {
-    internal abstract class HandlerFactory : IHandlerFactory
+    internal class HandlerFactory : IHandlerFactory
     {
         private readonly IDependencyResolver _resolver;
         private readonly IHandlerFactorySettings _factorySettings;
@@ -48,12 +48,17 @@ namespace CQRS.MessageHandling.Factories
         protected virtual ICollection<object> GetHandlersInternal(Type handlerType, Func<Type, IHandlerFactorySettings, bool> filter)
         {
             var handlers = ResolveHandlers(handlerType, filter);
-            var filteredHandlers = ApplyHandlerFilter(handlers);
-            return filteredHandlers;
+            //var filteredHandlers = ApplyHandlerFilter(handlers);
+            return handlers;
         }
 
-        protected abstract Type BuildHandlerType(Type type);
-        protected abstract ICollection<object> ApplyHandlerFilter(ICollection<object> handlers);
+        protected virtual Type BuildHandlerType(Type type)
+        {
+            var handlerType = typeof(IMessageHandler<>)
+               .MakeGenericType(type);
+            return handlerType;
+        }
+        //protected abstract ICollection<object> ApplyHandlerFilter(ICollection<object> handlers);
 
         protected virtual ICollection<object> ResolveHandlers(Type handlerType, Func<Type, IHandlerFactorySettings, bool> filter)
         {
@@ -78,7 +83,7 @@ namespace CQRS.MessageHandling.Factories
         {
             var filterAssembles = AssemblyScanner.ScannableAssemblies
                 .Select(a => new { Name = a.GetName().Name, a })
-                .Join(this._factorySettings.LimitAssembliesTo, key => key.Name, keyIn => keyIn.FullName, (a, b) => a.a);
+                .Join(this._factorySettings.LimitAssembliesTo, key => key.Name, keyIn => keyIn.GetName().Name, (a, b) => a.a);
             var implementors = ReflectionHelper.GetAllTypes(filterAssembles, t => !t.IsAbstract && !t.IsInterface && TypeExtensions.IsAssignableToGenericType(t, handlerType) && filter(t, this._factorySettings));
 
             var root = new List<object>();

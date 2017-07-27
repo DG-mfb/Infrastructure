@@ -1,4 +1,4 @@
-﻿namespace Kernel.CQRS.Command
+﻿namespace CQRS.Infrastructure.Messaging
 {
 	using System;
     using Kernel.CQRS.Messaging;

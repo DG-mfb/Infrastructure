@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Kernel.CQRS.Command;
 using Kernel.CQRS.MessageHandling;
 using Kernel.DependancyResolver;
 using Shared.Initialisation;

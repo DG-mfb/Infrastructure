@@ -3,9 +3,9 @@ using CQRS.Infrastructure.Messaging;
 
 namespace CQRS.MessageHandling.Test.MockData.MessageHandling
 {
-    internal class TestCommand : Command
+    internal class TestEvent : Event
     {
-        public TestCommand(Guid id, Guid correlationId) : base(id, correlationId)
+        public TestEvent(Guid id, Guid correlationId) : base(id, correlationId)
         {
         }
     }

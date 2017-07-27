@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Kernel.CQRS.MessageHandling.CommandHandling;
+using Kernel.CQRS.MessageHandling;
 
 namespace CQRS.MessageHandling.Test.MockData.MessageHandling
 {
-    internal class TestHandler : ICommandHandler<TestCommand>
+    internal class TestEventHandler : IMessageHandler<TestEvent>
     {
         private readonly Action _action;
-        public  TestHandler(Action action)
+        public TestEventHandler(Action action)
         {
             this._action = action;
         }
 
-        public Task Handle(TestCommand command)
+        public Task Handle(TestEvent command)
         {
             this._action();
             return Task.CompletedTask;

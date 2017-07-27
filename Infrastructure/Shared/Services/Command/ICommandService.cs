@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
 using System.Threading.Tasks;
-using Kernel.CQRS;
+using Kernel.CQRS.Messaging;
 
 namespace Shared.Services.Command
 {
@@ -10,9 +10,9 @@ namespace Shared.Services.Command
 		/// <summary>
 		/// Processes the command.
 		/// </summary>
-		/// <typeparam name="TCommand">The type of the command.</typeparam>
+		/// <typeparam name="TMessage">The type of the command.</typeparam>
 		/// <param name="command">The command.</param>
 		/// <returns></returns>
-		Task<object> ProcessCommand<TCommand>(TCommand command) where TCommand : Kernel.CQRS.Command.Command;
+		Task<object> ProcessCommand<TMessage>(TMessage command) where TMessage : Message;
 	}
 }

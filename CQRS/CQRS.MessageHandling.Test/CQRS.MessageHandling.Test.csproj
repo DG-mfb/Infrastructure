@@ -48,7 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageHandling\HandlerFactoryTests.cs" />
-    <Compile Include="MockData\MessageHandling\TestHandler.cs" />
+    <Compile Include="MockData\DependencyResolverMock.cs" />
+    <Compile Include="MockData\MessageHandling\HandlerFactorySettings.cs" />
+    <Compile Include="MockData\MessageHandling\TestEventHandler.cs" />
+    <Compile Include="MockData\MessageHandling\TestEvent.cs" />
+    <Compile Include="MockData\MessageHandling\TestCommandHandler.cs" />
     <Compile Include="MockData\MessageHandling\TestCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,6 +60,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\CQRS.Infrastructure\CQRS.Infrastructure.csproj">
+      <Project>{496E6B52-33D0-4E4E-945F-692E97642506}</Project>
+      <Name>CQRS.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel.CQRS\Kernel.CQRS.csproj">
       <Project>{dbe9a282-f646-41c9-896d-00abdc5b9aad}</Project>
       <Name>Kernel.CQRS</Name>

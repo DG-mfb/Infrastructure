@@ -41,9 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command\Command.cs" />
-    <Compile Include="MessageHandling\CommandHandling\ICommandHandler.cs" />
-    <Compile Include="Command\ICommandProcessor.cs" />
+    <Compile Include="MessageHandling\IMessageHandler.cs" />
+    <Compile Include="Command\IMessageProcessor.cs" />
     <Compile Include="Dispatching\IMessageDispatcher%271.cs" />
     <Compile Include="Dispatching\IMessageDispatcher.cs" />
     <Compile Include="MessageHandling\IHandlerFactory.cs" />

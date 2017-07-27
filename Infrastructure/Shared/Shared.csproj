@@ -97,6 +97,10 @@
       <Project>{e198c691-91a6-4082-9976-f5f006f24960}</Project>
       <Name>Kernel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CQRS.Infrastructure\CQRS.Infrastructure.csproj">
+      <Project>{496E6B52-33D0-4E4E-945F-692E97642506}</Project>
+      <Name>CQRS.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataModels\DataModels.csproj">
       <Project>{213f6bcc-8330-4494-8f4b-5eb7fe8ec4d9}</Project>
       <Name>DataModels</Name>
