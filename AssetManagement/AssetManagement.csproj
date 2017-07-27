@@ -325,6 +325,7 @@
     <TypeScriptCompile Include="Client\Angular\src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="Client\Angular\src\app\app.component.ts" />
     <TypeScriptCompile Include="Client\Angular\src\app\app.module.ts" />
+    <TypeScriptCompile Include="Client\Angular\src\app\app.routing.ts" />
     <TypeScriptCompile Include="Client\Angular\src\app\login\login.component.ts" />
     <TypeScriptCompile Include="Client\Angular\src\main.ts" />
   </ItemGroup>

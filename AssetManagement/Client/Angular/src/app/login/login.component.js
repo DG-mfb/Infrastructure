@@ -46,7 +46,7 @@ LoginComponent = __decorate([
         moduleId: module.id,
         selector: 'login',
         templateUrl: 'login.component.html',
-        styleUrls: ['login.component.css']
+        styleUrls: ['login.component.scss']
     }),
     __metadata("design:paramtypes", [])
 ], LoginComponent);
