@@ -72,6 +72,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Initialisation\IAutoRegister.cs" />
+    <Compile Include="Initialisation\IAutoRegisterAsSingleton.cs" />
     <Compile Include="Initialisation\IAutoRegisterAsTransient.cs" />
     <Compile Include="Logging\ICustomLogger.cs" />
     <Compile Include="Logging\ILogProvider.cs" />

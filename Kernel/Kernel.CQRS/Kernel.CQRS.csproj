@@ -46,6 +46,8 @@
     <Compile Include="Command\ICommandProcessor.cs" />
     <Compile Include="Dispatching\IMessageDispatcher%271.cs" />
     <Compile Include="Dispatching\IMessageDispatcher.cs" />
+    <Compile Include="MessageHandling\IHandlerFactory.cs" />
+    <Compile Include="MessageHandling\IHandlerFactorySettings.cs" />
     <Compile Include="MessageHandling\IHandlerInvoker.cs" />
     <Compile Include="Messaging\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

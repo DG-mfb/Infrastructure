@@ -25,7 +25,7 @@ namespace CQRS.MessageHandling.Invocation
 
             asList.Aggregate(tasks, (c, handler) =>
             {
-                var del = HandlerFactory.BuildMessageHandlerDelegate(handler.GetType(), message.GetType());
+                var del = HandlerDelegateFactory.BuildMessageHandlerDelegate(handler.GetType(), message.GetType());
                 var delTask = del(handler, new[] { message });
                 tasks.Add(delTask);
                 return c;

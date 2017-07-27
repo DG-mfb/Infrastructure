@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Kernel.DependancyResolver;
 using Kernel.Initialisation;
@@ -13,7 +14,15 @@ namespace ServerInitialisation
 {
 	public class ServerInitialiser : IServerInitialiser
 	{
-		public async Task Initialise(IDependencyResolver dependencyResolver)
+        private IEnumerable<Assembly> AssemblyToAdd
+        {
+            get
+            {
+                return Enumerable.Empty<Assembly>();
+            }
+        }
+
+        public async Task Initialise(IDependencyResolver dependencyResolver)
 		{
 			await this.Initialise(dependencyResolver, i => true);
 		}
@@ -79,17 +88,26 @@ namespace ServerInitialisation
 		/// <summary>
 		/// Discovers and register types.
 		/// </summary>
-		private void DiscoverAndRegisterTypes(IDependencyResolver dependencyResolver)
-		{
-			using (new InformationLogEventWriter())
-			{
-				var types = ReflectionHelper.GetAllTypes(t => !t.IsAbstract && !t.IsInterface && typeof(IAutoRegister).IsAssignableFrom(t));
+        private void DiscoverAndRegisterTypes(IDependencyResolver dependencyResolver)
+        {
+            var scannableAssemblies = AssemblyScanner.ScannableAssemblies
+                 .Union(this.AssemblyToAdd);
 
-				foreach (var t in types)
-				{
-					dependencyResolver.RegisterType(t, Lifetime.Transient);
-				}
-			}
-		}
-	}
+            var typeToRegister = ReflectionHelper.GetAllTypes(scannableAssemblies, t => !t.IsAbstract && !t.IsInterface && typeof(IAutoRegister).IsAssignableFrom(t));
+
+            //get all transient type and register them
+            var transientTypes = typeToRegister.Where(t => typeof(IAutoRegisterAsTransient).IsAssignableFrom(t));
+            foreach (var t in transientTypes)
+            {
+                dependencyResolver.RegisterType(t, Lifetime.Transient);
+            }
+
+            //get all transient type and register them
+            var singletonTypes = typeToRegister.Where(t => typeof(IAutoRegisterAsSingleton).IsAssignableFrom(t));
+            foreach (var t in singletonTypes)
+            {
+                dependencyResolver.RegisterType(t, Lifetime.Singleton);
+            }
+        }
+    }
 }

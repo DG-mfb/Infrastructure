@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Kernel.Extensions;
 
 namespace CQRS.MessageHandling.Invocation
 {
-    internal class HandlerFactory
+    internal class HandlerDelegateFactory
     {
         private static readonly ConcurrentDictionary<Tuple<Type, Type>, Func<object, object[], Task>> MessageHandlerDelegatesCache = new ConcurrentDictionary<Tuple<Type, Type>, Func<object, object[], Task>>();
 
         public static Func<object, object[], Task> BuildMessageHandlerDelegate(Type handlerType, Type commandType)
         {
-            return HandlerFactory.MessageHandlerDelegatesCache.GetOrAdd(new Tuple<Type, Type>(handlerType, commandType), t => HandlerFactory.BuildMessageHandlerDelegateInternal(handlerType, commandType));
+            return HandlerDelegateFactory.MessageHandlerDelegatesCache.GetOrAdd(new Tuple<Type, Type>(handlerType, commandType), t => HandlerDelegateFactory.BuildMessageHandlerDelegateInternal(handlerType, commandType));
         }
 
         private static Func<object, object[], Task> BuildMessageHandlerDelegateInternal(Type targetType, Type commandType)
