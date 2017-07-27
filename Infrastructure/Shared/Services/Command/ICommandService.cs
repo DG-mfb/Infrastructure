@@ -13,6 +13,6 @@ namespace Shared.Services.Command
 		/// <typeparam name="TCommand">The type of the command.</typeparam>
 		/// <param name="command">The command.</param>
 		/// <returns></returns>
-		Task<object> ProcessCommand<TCommand>(TCommand command) where TCommand : ICommand;
+		Task<object> ProcessCommand<TCommand>(TCommand command) where TCommand : Kernel.CQRS.Command.Command;
 	}
 }

@@ -6,6 +6,6 @@ namespace Kernel.CQRS.Dispatching
 {
     public interface IMessageDispatcher : IAutoRegisterAsTransient
     {
-        Task SendMessage<TMessage>(TMessage message) where TMessage : Message;
+        Task SendMessage(Message message);
     }
 }

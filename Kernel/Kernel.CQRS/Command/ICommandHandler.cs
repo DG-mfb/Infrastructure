@@ -6,7 +6,7 @@
 	/// Provides methods to handle commands
 	/// </summary>
 	/// <typeparam name="TCommand">The type of the command.</typeparam>
-	public interface ICommandHandler<TCommand> : IAutoRegisterAsTransient where TCommand : class, ICommand
+	public interface ICommandHandler<TCommand> : IAutoRegisterAsTransient where TCommand : Command.Command
 	{
 		/// <summary>
 		/// Handles the specified command.

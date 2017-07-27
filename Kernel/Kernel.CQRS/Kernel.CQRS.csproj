@@ -42,9 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command\Command.cs" />
-    <Compile Include="Command\ICommand.cs" />
     <Compile Include="Command\ICommandHandler.cs" />
     <Compile Include="Command\ICommandProcessor.cs" />
+    <Compile Include="Dispatching\IMessageDispatcher%271.cs" />
     <Compile Include="Dispatching\IMessageDispatcher.cs" />
     <Compile Include="Messaging\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

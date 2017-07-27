@@ -8,6 +8,6 @@
 	public interface ICommandProcessor
 	{
 		Task ProcessCommand(string command);
-		Task ProcessCommand(ICommand command);
+		Task ProcessCommand(Command.Command command);
 	}
 }

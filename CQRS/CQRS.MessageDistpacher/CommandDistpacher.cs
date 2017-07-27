@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Kernel.CQRS.Command;
 using Kernel.CQRS.Dispatching;
 using Kernel.CQRS.Messaging;
 using Kernel.CQRS.Transport;
 
 namespace CQRS.MessageDistpacher
 {
-    public class CommandDistpacher : IMessageDispatcher
+    public class CommandDistpacher : IMessageDispatcher<Command>
     {
         private readonly ITranspontHandler _transpontHandler;
 
@@ -14,7 +15,7 @@ namespace CQRS.MessageDistpacher
         {
             this._transpontHandler = transpontHandler;
         }
-        public Task SendMessage<TMessage>(TMessage message) where TMessage : Message
+        Task IMessageDispatcher.SendMessage(Message message)
         {
             return Task.Factory.StartNew(async () =>
             {
@@ -27,6 +28,11 @@ namespace CQRS.MessageDistpacher
                     HandleError(message, e);
                 }
             });
+        }
+
+        public Task SendMessage(Command message)
+        {
+            return ((IMessageDispatcher)this).SendMessage(message);
         }
 
         private void HandleError(Message message, Exception e)
