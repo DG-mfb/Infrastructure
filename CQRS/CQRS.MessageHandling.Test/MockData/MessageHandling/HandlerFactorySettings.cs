@@ -10,12 +10,34 @@ namespace CQRS.MessageHandling.Test.MockData.MessageHandling
 {
     internal class HandlerFactorySettingsMock : IHandlerResolverSettings
     {
+        private ICollection<Assembly> _limitAssembliesTo = new List<Assembly>
+        {
+
+        };
         public IEnumerable<Assembly> LimitAssembliesTo
         {
             get
             {
-                yield return this.GetType().Assembly;
+                return this._limitAssembliesTo;
             }
+        }
+
+        public bool HasCustomAssemlyList
+        {
+            get
+            {
+                return this.LimitAssembliesTo != null && this.LimitAssembliesTo.Count() > 0;
+            }
+        }
+
+        internal void AddAssembly(Assembly assembly)
+        {
+            this._limitAssembliesTo.Add(assembly);
+        }
+
+        internal void ClearList()
+        {
+            this._limitAssembliesTo.Clear();
         }
     }
 }

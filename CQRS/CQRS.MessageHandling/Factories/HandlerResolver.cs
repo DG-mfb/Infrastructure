@@ -34,21 +34,10 @@ namespace CQRS.MessageHandling.Factories
             var handlerType = BuildHandlerType(targetType);
             return GetHandlersInternal(handlerType, filter);
         }
-
-        //public ICollection<object> GetSubscriberHandlersFor(Type targetType)
-        //{
-        //    return this.GetHandlersFor(targetType, HandlerFactory._subscriberHandlerCondition);
-        //}
-
-        //public ICollection<object> GetNormilisedHandlersFor(Type targetType)
-        //{
-        //    return this.GetHandlersFor(targetType, HandlerFactory._normalisedHandlerCondition);
-        //}
-
+        
         protected virtual ICollection<object> GetHandlersInternal(Type handlerType, Func<Type, IHandlerResolverSettings, bool> filter)
         {
             var handlers = ResolveHandlers(handlerType, filter);
-            //var filteredHandlers = ApplyHandlerFilter(handlers);
             return handlers;
         }
 
@@ -58,8 +47,7 @@ namespace CQRS.MessageHandling.Factories
                .MakeGenericType(type);
             return handlerType;
         }
-        //protected abstract ICollection<object> ApplyHandlerFilter(ICollection<object> handlers);
-
+        
         protected virtual ICollection<object> ResolveHandlers(Type handlerType, Func<Type, IHandlerResolverSettings, bool> filter)
         {
             //object handler;
@@ -81,10 +69,11 @@ namespace CQRS.MessageHandling.Factories
 
         private ICollection<object> TryResolveFromAssemblies(Type handlerType, Func<Type, IHandlerResolverSettings, bool> filter)
         {
-            var filterAssembles = AssemblyScanner.ScannableAssemblies
-                .Select(a => new { Name = a.GetName().Name, a })
-                .Join(this._factorySettings.LimitAssembliesTo, key => key.Name, keyIn => keyIn.GetName().Name, (a, b) => a.a);
-            var implementors = ReflectionHelper.GetAllTypes(filterAssembles, t => !t.IsAbstract && !t.IsInterface && TypeExtensions.IsAssignableToGenericType(t, handlerType) && filter(t, this._factorySettings));
+            var scannableAsseblies = this._factorySettings.HasCustomAssemlyList ? 
+                this._factorySettings.LimitAssembliesTo :
+                AssemblyScanner.ScannableAssemblies;
+           
+            var implementors = ReflectionHelper.GetAllTypes(scannableAsseblies, t => !t.IsAbstract && !t.IsInterface && TypeExtensions.IsAssignableToGenericType(t, handlerType) && filter(t, this._factorySettings));
 
             var root = new List<object>();
             var instances = implementors.Aggregate(root, (c, next) => { c.Add(this.CreateInstance(next)); return c; });

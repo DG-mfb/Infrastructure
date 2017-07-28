@@ -6,5 +6,6 @@ namespace Kernel.CQRS.MessageHandling
     public interface IHandlerResolverSettings
     {
         IEnumerable<Assembly> LimitAssembliesTo { get; }
+        bool HasCustomAssemlyList { get; }
     }
 }

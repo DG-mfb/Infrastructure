@@ -31,7 +31,7 @@ namespace CQRS.MessageHandling.Test.MessageHandling
         }
 
         [Test]
-        public void CommandHandlerFactoryTest()
+        public void CommandHandlerResolverTest_resolve_by_assembly_scanning_no_limit()
         {
             //ARRANGE
             var dependencyResolver = new DependencyResolverMock();
@@ -45,7 +45,24 @@ namespace CQRS.MessageHandling.Test.MessageHandling
             //ASSERT
             Assert.IsInstanceOf<TestCommandHandler>(handler.Single());
         }
+        [Test]
+        public void CommandHandlerResolverTest_resolve_by_assembly_scanning_limit_to_current_assembly()
+        {
+            //ARRANGE
+            var dependencyResolver = new DependencyResolverMock();
+            var handlerFactorySettings = new HandlerFactorySettingsMock();
+            handlerFactorySettings.ClearList();
+            handlerFactorySettings.AddAssembly(this.GetType().Assembly);
+            var handlerResolver = new HandlerResolver(dependencyResolver, handlerFactorySettings);
+            dependencyResolver.RegisterFactory<Action>(t => () => { }, Lifetime.Singleton);
 
+            //ACT
+            var handler = handlerResolver.ResolveAllHandlersFor(typeof(TestCommand));
+
+            //ASSERT
+            Assert.IsInstanceOf<TestCommandHandler>(handler.Single());
+        }
+        
         [Test]
         public void EventHandlerFactoryTest()
         {
