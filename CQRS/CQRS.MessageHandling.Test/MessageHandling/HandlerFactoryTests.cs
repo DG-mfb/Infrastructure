@@ -23,7 +23,7 @@ namespace CQRS.MessageHandling.Test.MessageHandling
             var handler = new TestCommandHandler(() => result = 10);
             
             //ACT
-            var del = HandlerDelegateFactory.BuildMessageHandlerDelegate(typeof(TestCommandHandler), typeof(TestCommand));
+            var del = HandlerDelegateFactory.GetdMessageHandlerDelegate(typeof(TestCommandHandler), typeof(TestCommand));
             del(handler, new[] { command });
             
             //ASSERT

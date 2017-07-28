@@ -9,7 +9,7 @@ namespace CQRS.MessageHandling.Invocation
     {
         private static readonly ConcurrentDictionary<Tuple<Type, Type>, Func<object, object[], Task>> MessageHandlerDelegatesCache = new ConcurrentDictionary<Tuple<Type, Type>, Func<object, object[], Task>>();
 
-        public static Func<object, object[], Task> BuildMessageHandlerDelegate(Type handlerType, Type commandType)
+        public static Func<object, object[], Task> GetdMessageHandlerDelegate(Type handlerType, Type commandType)
         {
             return HandlerDelegateFactory.MessageHandlerDelegatesCache.GetOrAdd(new Tuple<Type, Type>(handlerType, commandType), t => HandlerDelegateFactory.BuildMessageHandlerDelegateInternal(handlerType, commandType));
         }
