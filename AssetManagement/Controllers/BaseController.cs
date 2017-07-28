@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using CQRS.Infrastructure.Messaging;
+using Kernel.CQRS.Dispatching;
 using Kernel.DependancyResolver;
 using Shared.Services.Command;
 
@@ -30,14 +32,14 @@ namespace AssetManagement.Controllers
 		/// <value>
 		/// The resolve command service.
 		/// </value>
-		protected ICommandService CommandService
+		protected IMessageDispatcher<Command> CommandDispacher
 		{
 			get
 			{
 				if (this.DependencyResolver == null)
 					throw new InvalidOperationException("Dependency resolver not register in DI container");
 
-				return this.DependencyResolver.Resolve<ICommandService>();
+				return this.DependencyResolver.Resolve<IMessageDispatcher<Command>>();
 			}
 		}
 

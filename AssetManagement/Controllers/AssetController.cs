@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DataModels;
 using Shared.Services.Query.Assets;
 
 namespace AssetManagement.Controllers
 {
     [Authorize]
-	[RoutePrefix("odata/Assets")]
+	[RoutePrefix("api/assets")]
 	public class AssetController : BaseController<IAssetQueryService>
     {
 		public AssetController(IAssetQueryService service) : base(service) { }
