@@ -9,5 +9,7 @@ namespace Kernel.CQRS.Transport
         Task Start();
         Task Stop();
         Task<bool> EnqueueMessage(byte[] message);
+        Task RegisterListener(IMessageListener listener);
+        Task MessageReceived();
     }
 }

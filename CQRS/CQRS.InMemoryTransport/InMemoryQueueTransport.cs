@@ -1,4 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Kernel.CQRS.Transport;
 
@@ -9,7 +11,6 @@ namespace CQRS.InMemoryTransport
         private ConcurrentQueue<byte[]> _queue;
         private bool _isStarted;
         private ITransportManager _manager;
-
         public bool IsEmpty
         {
             get
@@ -59,6 +60,7 @@ namespace CQRS.InMemoryTransport
                 return false;
 
             this._queue.Enqueue(message);
+            this.Manager.MessageReceived();
             return true;
         }
 

@@ -11,6 +11,12 @@ namespace CQRS.InMemoryTransport
     {
         public Task<bool> AttachTo(ITransportManager transportManager)
         {
+            transportManager.RegisterListener(this);
+            return Task.FromResult(true);
+        }
+
+        public Task RecieveMessage(byte[] message)
+        {
             throw new NotImplementedException();
         }
 
