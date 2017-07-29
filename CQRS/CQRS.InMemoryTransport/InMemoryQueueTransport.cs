@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using Kernel.CQRS.Transport;
 
 namespace CQRS.InMemoryTransport
 {
-    internal class InMemoryTransport : ITransport
+    internal class InMemoryQueueTransport : ITransport
     {
         private ConcurrentQueue<byte[]> _queue;
         private bool _isStarted;
@@ -30,7 +26,7 @@ namespace CQRS.InMemoryTransport
             }
         }
 
-        public InMemoryTransport()
+        public InMemoryQueueTransport()
         {
             this._queue = new ConcurrentQueue<byte[]>();
         }

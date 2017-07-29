@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InMemoryTransport.cs" />
+    <Compile Include="InMemoryQueueTransport.cs" />
     <Compile Include="MessageListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransportDispatcher.cs" />

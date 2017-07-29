@@ -5,9 +5,9 @@ namespace CQRS.InMemoryTransport
 {
     internal class TransportManager : ITransportManager
     {
-        private readonly InMemoryTransport _transport;
+        private readonly InMemoryQueueTransport _transport;
 
-        public TransportManager(InMemoryTransport transport)
+        public TransportManager(InMemoryQueueTransport transport)
         {
             this._transport = transport;
             transport.RegisterManager(this);
