@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Kernel.CQRS.Transport;
 
 namespace CQRS.InMemoryTransport
@@ -9,7 +6,7 @@ namespace CQRS.InMemoryTransport
     internal class TransportManager : ITransportManager
     {
         private readonly InMemoryQueueTransport _transport;
-        internal ICollection<Func<byte[], Task>> MessageListeners;
+        
         public TransportManager(InMemoryQueueTransport transport)
         {
             this._transport = transport;
@@ -29,7 +26,7 @@ namespace CQRS.InMemoryTransport
 
         public Task RegisterListener(IMessageListener listener)
         {
-            this.MessageListeners.Add(listener.RecieveMessage);
+            this._transport.MessageListeners.Add(listener.RecieveMessage);
             return Task.CompletedTask;
         }
 
@@ -41,14 +38,6 @@ namespace CQRS.InMemoryTransport
         public Task Stop()
         {
             return this._transport.Stop();
-        }
-
-        public Task MessageReceived()
-        {
-            byte[] message;
-            this._transport.TryDequeue(out message);
-            Parallel.ForEach(this.MessageListeners, s => s(message));
-            return Task.CompletedTask;
         }
     }
 }

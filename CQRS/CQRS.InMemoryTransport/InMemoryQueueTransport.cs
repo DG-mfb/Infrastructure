@@ -11,6 +11,7 @@ namespace CQRS.InMemoryTransport
         private ConcurrentQueue<byte[]> _queue;
         private bool _isStarted;
         private ITransportManager _manager;
+        internal ICollection<Func<byte[], Task>> MessageListeners;
         public bool IsEmpty
         {
             get
@@ -30,6 +31,7 @@ namespace CQRS.InMemoryTransport
         public InMemoryQueueTransport()
         {
             this._queue = new ConcurrentQueue<byte[]>();
+            this.MessageListeners = new List<Func<byte[], Task>>();
         }
         internal void RegisterManager(ITransportManager manager)
         {
@@ -60,13 +62,25 @@ namespace CQRS.InMemoryTransport
                 return false;
 
             this._queue.Enqueue(message);
-            this.Manager.MessageReceived();
+            this.EmptyQueue();
             return true;
         }
 
         public bool TryDequeue(out byte[] message)
         {
             return this._queue.TryDequeue(out message);   
+        }
+
+        public Task EmptyQueue()
+        {
+            while (!this._queue.IsEmpty)
+            {
+                byte[] message;
+                this.TryDequeue(out message);
+                Parallel.ForEach(this.MessageListeners, s => s(message));
+                return Task.CompletedTask;
+            }
+            return Task.CompletedTask;
         }
     }
 }
