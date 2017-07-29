@@ -64,7 +64,7 @@ namespace CQRS.MessageHandling.Test.MessageHandling
         }
         
         [Test]
-        public void EventHandlerFactoryTest()
+        public void EventHandlerResolverTest()
         {
             //ARRANGE
             var dependencyResolver = new DependencyResolverMock();

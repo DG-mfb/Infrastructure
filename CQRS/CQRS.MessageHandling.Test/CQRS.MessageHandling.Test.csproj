@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Invocation\HandlerInvocationTests.cs" />
     <Compile Include="MessageHandling\HandlerFactoryTests.cs" />
     <Compile Include="MockData\DependencyResolverMock.cs" />
     <Compile Include="MockData\MessageHandling\HandlerFactorySettings.cs" />

@@ -9,9 +9,9 @@ namespace CQRS.MessageDistpacher
 {
     public class CommandDistpacher : IMessageDispatcher<Command>
     {
-        private readonly ITranspontHandler _transpontHandler;
+        private readonly ITranspontDispatcher _transpontHandler;
 
-        public CommandDistpacher(ITranspontHandler transpontHandler)
+        public CommandDistpacher(ITranspontDispatcher transpontHandler)
         {
             this._transpontHandler = transpontHandler;
         }
@@ -21,7 +21,7 @@ namespace CQRS.MessageDistpacher
             {
                 try
                 {
-                    await _transpontHandler.SentMessage(message);
+                    await _transpontHandler.SendMessage(message);
                 }
                 catch (Exception e)
                 {

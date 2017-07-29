@@ -42,8 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InMemoryTransport.cs" />
+    <Compile Include="MessageListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransportHandler.cs" />
+    <Compile Include="TransportDispatcher.cs" />
     <Compile Include="TransportManager.cs" />
   </ItemGroup>
   <ItemGroup>

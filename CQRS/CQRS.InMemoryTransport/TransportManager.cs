@@ -10,7 +10,15 @@ namespace CQRS.InMemoryTransport
         public TransportManager(InMemoryTransport transport)
         {
             this._transport = transport;
+            transport.RegisterManager(this);
         }
+
+        public Task<bool> EnqueueMessage(byte[] message)
+        {
+            var result = this._transport.Enque(message);
+            return Task.FromResult(result);
+        }
+
         public Task Initialise()
         {
             return this._transport.Initialise();

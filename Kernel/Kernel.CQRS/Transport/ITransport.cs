@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
-using Kernel.CQRS.Messaging;
 
 namespace Kernel.CQRS.Transport
 {
-    public interface ITransportManager
+    public interface ITransport
     {
+        ITransportManager Manager { get; }
         Task Initialise();
         Task Start();
         Task Stop();
-        Task<bool> EnqueueMessage(byte[] message);
     }
 }

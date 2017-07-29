@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DBE9A282-F646-41C9-896D-00ABDC5B9AAD}</ProjectGuid>
+    <ProjectGuid>{1D9FF31C-5F7D-458D-9BDE-A931E9BF8163}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kernel.CQRS</RootNamespace>
-    <AssemblyName>Kernel.CQRS</AssemblyName>
+    <RootNamespace>CQRS.InMemoryTransportTests</RootNamespace>
+    <AssemblyName>CQRS.InMemoryTransportTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -41,25 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageHandling\IMessageHandler.cs" />
-    <Compile Include="Command\IMessageProcessor.cs" />
-    <Compile Include="Dispatching\IMessageDispatcher%271.cs" />
-    <Compile Include="Dispatching\IMessageDispatcher.cs" />
-    <Compile Include="MessageHandling\IHandlerResolver.cs" />
-    <Compile Include="MessageHandling\IHandlerResolverSettings.cs" />
-    <Compile Include="MessageHandling\IHandlerInvoker.cs" />
-    <Compile Include="Messaging\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transport\IMessageListener.cs" />
-    <Compile Include="Transport\ITranspontDispatcher.cs" />
-    <Compile Include="Transport\ITransport.cs" />
-    <Compile Include="Transport\ITransportManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kernel\Kernel.csproj">
-      <Project>{e198c691-91a6-4082-9976-f5f006f24960}</Project>
-      <Name>Kernel</Name>
-    </ProjectReference>
+    <Folder Include="InMemoryTransport\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,10 +8,11 @@ using Kernel.CQRS.Transport;
 
 namespace CQRS.InMemoryTransport
 {
-    internal class InMemoryTransport
+    internal class InMemoryTransport : ITransport
     {
         private ConcurrentQueue<byte[]> _queue;
         private bool _isStarted;
+        private ITransportManager _manager;
 
         public bool IsEmpty
         {
@@ -21,9 +22,21 @@ namespace CQRS.InMemoryTransport
             }
         }
 
+        public ITransportManager Manager
+        {
+            get
+            {
+                return this._manager;
+            }
+        }
+
         public InMemoryTransport()
         {
             this._queue = new ConcurrentQueue<byte[]>();
+        }
+        internal void RegisterManager(ITransportManager manager)
+        {
+            this._manager = manager;
         }
 
         public Task Initialise()
