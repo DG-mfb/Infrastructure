@@ -47,6 +47,7 @@
     <Compile Include="InMemoryTransportTests\ListenerTests.cs" />
     <Compile Include="InMemoryTransportTests\ManagerTests.cs" />
     <Compile Include="InMemoryTransportTests\InMemoryTransportTests.cs" />
+    <Compile Include="MockData\Listeners\MessageListener2.cs" />
     <Compile Include="MockData\Listeners\MessageListener1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

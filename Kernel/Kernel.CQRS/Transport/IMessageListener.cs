@@ -7,6 +7,6 @@ namespace Kernel.CQRS.Transport
         Task<bool> Start();
         Task<bool> Stop();
         Task<bool> AttachTo(ITransportManager transportManager);
-        Task RecieveMessage(byte[] message);
+        Task ReceiveMessage(byte[] message);
     }
 }

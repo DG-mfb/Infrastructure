@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Initialisation\InMemoryTransportInitialiser.cs" />
     <Compile Include="InMemoryQueueTransport.cs" />
     <Compile Include="MessageListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -48,6 +49,10 @@
     <Compile Include="TransportManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Shared\Shared.csproj">
+      <Project>{FA2CD1BF-A890-4306-9EDB-A1B10042E57E}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel.CQRS\Kernel.CQRS.csproj">
       <Project>{dbe9a282-f646-41c9-896d-00abdc5b9aad}</Project>
       <Name>Kernel.CQRS</Name>

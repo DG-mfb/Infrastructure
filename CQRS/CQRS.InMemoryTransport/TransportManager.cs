@@ -26,7 +26,7 @@ namespace CQRS.InMemoryTransport
 
         public Task RegisterListener(IMessageListener listener)
         {
-            this._transport.MessageListeners.Add(listener.RecieveMessage);
+            this._transport.MessageListeners.Add(listener.ReceiveMessage);
             return Task.CompletedTask;
         }
 

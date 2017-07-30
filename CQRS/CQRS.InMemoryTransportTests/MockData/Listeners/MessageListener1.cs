@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Kernel.CQRS.Transport;
 
@@ -21,7 +18,7 @@ namespace CQRS.InMemoryTransportTests.MockData.Listeners
             return Task.FromResult(true);
         }
 
-        public Task RecieveMessage(byte[] message)
+        public Task ReceiveMessage(byte[] message)
         {
             this._action(message);
             return Task.CompletedTask;
