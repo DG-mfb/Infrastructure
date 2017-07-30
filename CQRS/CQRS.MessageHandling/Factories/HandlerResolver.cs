@@ -13,11 +13,7 @@ namespace CQRS.MessageHandling.Factories
     {
         private readonly IDependencyResolver _resolver;
         private readonly IHandlerResolverSettings _factorySettings;
-
-        //internal static readonly Func<Type, IMessageDispatcherSettings, bool> _normalisedHandlerCondition = new Func<Type, IMessageDispatcherSettings, bool>((t, s) => t.Assembly.GetName().Name == s.NormalisedAssemblyName);
-        //internal static readonly Func<Type, IMessageDispatcherSettings, bool> _subscriberHandlerCondition = new Func<Type, IMessageDispatcherSettings, bool>((t, s) =>
-        //s.LimitAssembliesTo.Any(x => x.Equals(t.Assembly.GetName().Name, StringComparison.Ordinal)) && !_normalisedHandlerCondition(t, s));
-
+        
         public HandlerResolver(IDependencyResolver resolver, IHandlerResolverSettings factorySettings)
         {
             _resolver = resolver;
