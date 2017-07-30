@@ -34,7 +34,6 @@ namespace CQRS.InMemoryTransport
         {
             this._queue = new ConcurrentQueue<byte[]>();
             this.MessageListeners = new List<Func<byte[], Task>>();
-            this._timer = new Timer(new TimerCallback(o => this.EmptyQueue()));
         }
         internal void RegisterManager(ITransportManager manager)
         {
@@ -49,14 +48,16 @@ namespace CQRS.InMemoryTransport
 
         public Task Start()
         {
+            this._timer = new Timer(new TimerCallback(o => this.EmptyQueue(o)), this._queue, 0, 100);
             this._isStarted = true;
             return Task.CompletedTask;
         }
 
         public Task Stop()
         {
+            this._timer.Dispose();
             this._isStarted = false;
-            this.EmptyQueue();
+            this.EmptyQueue(this._queue);
             return Task.CompletedTask;
         }
 
@@ -74,7 +75,7 @@ namespace CQRS.InMemoryTransport
             return this._queue.TryDequeue(out message);   
         }
 
-        public Task EmptyQueue()
+        public Task EmptyQueue(object queue)
         {
             while (!this._queue.IsEmpty)
             {
