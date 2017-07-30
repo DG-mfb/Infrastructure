@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Data.Importing.Tests.ContextTests
 {
     [TestClass]
+    [Ignore]
     public class SourceContextTests
     {
         [TestMethod]

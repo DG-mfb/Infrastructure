@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
-using Kernel.Extensions;
+using Kernel.Reflection.Extensions;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 

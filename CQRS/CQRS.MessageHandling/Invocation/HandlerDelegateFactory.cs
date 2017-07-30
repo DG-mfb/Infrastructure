@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
-using Kernel.Extensions;
+using Kernel.Reflection.Extensions;
 
 namespace CQRS.MessageHandling.Invocation
 {

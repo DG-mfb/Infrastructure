@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Data.Importing.Infrastructure;
 using Data.Importing.Infrastructure.Validation;
 using Data.Importing.Infrastructure.Validation.Rules;
 using Kernel.DependancyResolver;
-using Kernel.Extensions;
-using Kernel.Reflection;
 using Kernel.Validation;
 
 namespace Data.Importing.Validation

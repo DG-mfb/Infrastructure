@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Kernel.CQRS.Transport;
 
@@ -8,6 +9,7 @@ namespace CQRS.InMemoryTransport
 {
     internal class InMemoryQueueTransport : ITransport
     {
+        private Timer _timer;
         private ConcurrentQueue<byte[]> _queue;
         private bool _isStarted;
         private ITransportManager _manager;
@@ -32,6 +34,7 @@ namespace CQRS.InMemoryTransport
         {
             this._queue = new ConcurrentQueue<byte[]>();
             this.MessageListeners = new List<Func<byte[], Task>>();
+            this._timer = new Timer(new TimerCallback(o => this.EmptyQueue()));
         }
         internal void RegisterManager(ITransportManager manager)
         {
@@ -53,6 +56,7 @@ namespace CQRS.InMemoryTransport
         public Task Stop()
         {
             this._isStarted = false;
+            this.EmptyQueue();
             return Task.CompletedTask;
         }
 
@@ -62,7 +66,6 @@ namespace CQRS.InMemoryTransport
                 return false;
 
             this._queue.Enqueue(message);
-            this.EmptyQueue();
             return true;
         }
 

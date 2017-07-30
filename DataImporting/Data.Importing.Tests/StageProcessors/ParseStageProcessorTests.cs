@@ -21,6 +21,7 @@ namespace Data.Importing.Tests.StageProcessors
     {
 
         [TestMethod]
+        [Ignore]
         public void TestMethod1()
         {
             throw new NotImplementedException();

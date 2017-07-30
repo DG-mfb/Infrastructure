@@ -47,13 +47,6 @@
     <Compile Include="Cache\ICacheItemPolicy.cs" />
     <Compile Include="Cache\ICachePopulator.cs" />
     <Compile Include="Cache\ICacheProvider.cs" />
-    <Compile Include="Configuration\AbstractConfigurationElement.cs" />
-    <Compile Include="Configuration\AbstractConfigurationElementCollection.cs" />
-    <Compile Include="Configuration\AbstractConfigurationSection.cs" />
-    <Compile Include="Configuration\AppSettingsConfigurationManager.cs" />
-    <Compile Include="Configuration\ConfigurationEntityNotFoundException.cs" />
-    <Compile Include="Configuration\ConfigurationSectionBase.cs" />
-    <Compile Include="Configuration\ConfigurationSectionNotFoundException.cs" />
     <Compile Include="Data\Connection\IConnectionDefinitionParser.cs" />
     <Compile Include="Data\Connection\IConnectionStringProvider.cs" />
     <Compile Include="Data\Connection\IDbConnectionDefinition.cs" />
@@ -90,10 +83,6 @@
     <Compile Include="Notification\ISmptServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providerss\IIdentitytProvider.cs" />
-    <Compile Include="Reflection\AssemblyScanner.cs" />
-    <Compile Include="Reflection\CompilationMode.cs" />
-    <Compile Include="Reflection\Image.cs" />
-    <Compile Include="Reflection\ReflectionHelper.cs" />
     <Compile Include="Serialisation\ISerialisationSettingsProvider.cs" />
     <Compile Include="Serialisation\ISerializer.cs" />
     <Compile Include="Serialisation\SerialisationSettings.cs" />

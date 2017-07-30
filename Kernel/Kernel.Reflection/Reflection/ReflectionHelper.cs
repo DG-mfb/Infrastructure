@@ -1,13 +1,13 @@
 ﻿namespace Kernel.Reflection
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Linq.Expressions;
-	using System.Reflection;
-	using Kernel.Extensions;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using Kernel.Reflection.Extensions;
 
-	public class ReflectionHelper
+    public class ReflectionHelper
 	{
 		private static Func<Type, bool> _whereFuncDefault = t => true;
 
