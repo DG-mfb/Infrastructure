@@ -91,6 +91,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.Data", "Kernel\Kerne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.Validation", "Kernel\Kernel.Validation\Kernel.Validation.csproj", "{7BDF6D7A-5FF9-469B-9881-4E89779AC789}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.Cryptography", "Kernel\Kernel.Cryptography\Kernel.Cryptography.csproj", "{857217F2-B265-4154-883F-568285643238}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -229,6 +231,10 @@ Global
 		{7BDF6D7A-5FF9-469B-9881-4E89779AC789}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BDF6D7A-5FF9-469B-9881-4E89779AC789}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BDF6D7A-5FF9-469B-9881-4E89779AC789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{857217F2-B265-4154-883F-568285643238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{857217F2-B265-4154-883F-568285643238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{857217F2-B265-4154-883F-568285643238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{857217F2-B265-4154-883F-568285643238}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -267,5 +273,6 @@ Global
 		{E8E682DD-6662-4996-96E3-CE2BDE8C5D97} = {B659F5BF-19B6-48C7-885A-1CA767049A8C}
 		{58F76882-5E21-452F-A070-76D468D6E27C} = {B659F5BF-19B6-48C7-885A-1CA767049A8C}
 		{7BDF6D7A-5FF9-469B-9881-4E89779AC789} = {B659F5BF-19B6-48C7-885A-1CA767049A8C}
+		{857217F2-B265-4154-883F-568285643238} = {B659F5BF-19B6-48C7-885A-1CA767049A8C}
 	EndGlobalSection
 EndGlobal
