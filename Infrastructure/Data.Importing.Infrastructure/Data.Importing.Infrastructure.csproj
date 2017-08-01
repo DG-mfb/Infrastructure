@@ -79,6 +79,10 @@
       <Project>{58f76882-5e21-452f-a070-76d468d6e27c}</Project>
       <Name>Kernel.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kernel\Kernel.Validation\Kernel.Validation.csproj">
+      <Project>{7bdf6d7a-5ff9-469b-9881-4e89779ac789}</Project>
+      <Name>Kernel.Validation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel\Kernel.csproj">
       <Project>{e198c691-91a6-4082-9976-f5f006f24960}</Project>
       <Name>Kernel</Name>

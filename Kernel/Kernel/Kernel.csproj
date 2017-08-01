@@ -73,14 +73,10 @@
     <Compile Include="Serialisation\ISerialisationSettingsProvider.cs" />
     <Compile Include="Serialisation\ISerializer.cs" />
     <Compile Include="Serialisation\SerialisationSettings.cs" />
-    <Compile Include="Validation\IValidationRule.cs" />
-    <Compile Include="Validation\IValidationRuleFactory.cs" />
-    <Compile Include="Validation\IValidator.cs" />
-    <Compile Include="Validation\ValidationContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Messaging\Request\" />
+    <Folder Include="Validation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
