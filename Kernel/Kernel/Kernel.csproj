@@ -48,16 +48,6 @@
     <Compile Include="Cache\ICacheItemPolicy.cs" />
     <Compile Include="Cache\ICachePopulator.cs" />
     <Compile Include="Cache\ICacheProvider.cs" />
-    <Compile Include="Data\Connection\IConnectionDefinitionParser.cs" />
-    <Compile Include="Data\Connection\IConnectionStringProvider.cs" />
-    <Compile Include="Data\Connection\IDbConnectionDefinition.cs" />
-    <Compile Include="Data\DataRepository\IReadOnlyRepository.cs" />
-    <Compile Include="Data\DataRepository\IRepository%271.cs" />
-    <Compile Include="Data\DataRepository\IRepository.cs" />
-    <Compile Include="Data\IHasID.cs" />
-    <Compile Include="Data\ORM\IDbContext.cs" />
-    <Compile Include="Data\ORM\IDbRepository%271.cs" />
-    <Compile Include="Data\ORM\IDbRepository.cs" />
     <Compile Include="DependancyResolver\IDependancyResolver.cs" />
     <Compile Include="DependancyResolver\IRepositoryResolver.cs" />
     <Compile Include="DependancyResolver\Lifetime.cs" />
@@ -89,8 +79,8 @@
     <Compile Include="Validation\ValidationContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data\" />
     <Folder Include="Messaging\Request\" />
-    <Folder Include="Notification\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

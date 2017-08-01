@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using DataModels;
-using Kernel.Data;
 using Kernel.Data.DataRepository;
 using Kernel.Data.ORM;
-using Kernel.Initialisation;
 using Kernel.Providerss;
 
-namespace Shared.Data.Repository
+namespace Kernel.Data.Repository
 {
-    public class DbRepository<TEntity> : IDbRepository<TEntity>, IAutoRegisterAsTransient
+    public class DbRepository<TEntity> : IDbRepository<TEntity>
 		where TEntity : BaseModel, new()
 	{
 		#region fields

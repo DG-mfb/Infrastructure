@@ -1,7 +1,7 @@
 ﻿using System;
 using Kernel.Data;
 
-namespace DataModels
+namespace Kernel.Data
 {
 	public abstract class BaseModel : IHasID<Guid>, IEquatable<BaseModel>
 	{

@@ -71,6 +71,10 @@
       <Project>{f775de3c-9003-4e80-9d2c-48d590d9501d}</Project>
       <Name>Data.Importing.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kernel\Kernel.Data\Kernel.Data.csproj">
+      <Project>{58f76882-5e21-452f-a070-76d468d6e27c}</Project>
+      <Name>Kernel.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel.Reflection\Kernel.Reflection.csproj">
       <Project>{2a6ba5fb-dbaa-457a-9cb3-9ba74a96551b}</Project>
       <Name>Kernel.Reflection</Name>

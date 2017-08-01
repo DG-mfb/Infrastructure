@@ -1,4 +1,6 @@
 ﻿
+using Kernel.Data;
+
 namespace DataModels
 {
 	public abstract class Asset : BaseModel

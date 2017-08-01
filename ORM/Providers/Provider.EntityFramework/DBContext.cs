@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using DataModels;
+using Kernel.Data;
 using Kernel.Data.Connection;
 using Kernel.Data.ORM;
 using Kernel.Reflection;

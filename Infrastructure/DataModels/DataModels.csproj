@@ -47,9 +47,12 @@
     <Compile Include="MaterialType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />
-    <Compile Include="_BaseModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Kernel\Kernel.Data\Kernel.Data.csproj">
+      <Project>{58f76882-5e21-452f-a070-76d468d6e27c}</Project>
+      <Name>Kernel.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel\Kernel.csproj">
       <Project>{e198c691-91a6-4082-9976-f5f006f24960}</Project>
       <Name>Kernel</Name>

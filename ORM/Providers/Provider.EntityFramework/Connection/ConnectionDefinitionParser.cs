@@ -1,16 +1,16 @@
 ﻿namespace Provider.EntityFramework.Connection
 {
-	using System;
-	using System.Collections.Specialized;
-	using System.Linq;
-	using System.Reflection;
-	using Kernel.Data.Connection;
-	using Kernel.Initialisation;
+    using System;
+    using System.Collections.Specialized;
+    using System.Linq;
+    using System.Reflection;
+    using Kernel.Data.Connection;
+    using Kernel.Initialisation;
 
-	/// <summary>
-	/// Parses a configuration section and builds an IDbConnectionDefinition.
-	/// </summary>
-	internal class ConnectionDefinitionParser : IConnectionDefinitionParser, IAutoRegisterAsTransient
+    /// <summary>
+    /// Parses a configuration section and builds an IDbConnectionDefinition.
+    /// </summary>
+    internal class ConnectionDefinitionParser : IConnectionDefinitionParser, IAutoRegisterAsTransient
 	{
 		#region fields
 
