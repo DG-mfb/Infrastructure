@@ -83,6 +83,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.Reflection", "Kernel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.Configuration", "Kernel\Kernel.Configuration\Kernel.Configuration.csproj", "{B78BEABA-813A-4C65-BA17-2207E5F37B66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.Logging", "Kernel\Kernel.Logging\Kernel.Logging.csproj", "{7DA939D6-5443-498F-AAA1-3CE3134BC3EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.Notification", "Kernel\Kernel.Notification\Kernel.Notification.csproj", "{E8E682DD-6662-4996-96E3-CE2BDE8C5D97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -205,6 +209,14 @@ Global
 		{B78BEABA-813A-4C65-BA17-2207E5F37B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B78BEABA-813A-4C65-BA17-2207E5F37B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B78BEABA-813A-4C65-BA17-2207E5F37B66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DA939D6-5443-498F-AAA1-3CE3134BC3EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DA939D6-5443-498F-AAA1-3CE3134BC3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DA939D6-5443-498F-AAA1-3CE3134BC3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DA939D6-5443-498F-AAA1-3CE3134BC3EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8E682DD-6662-4996-96E3-CE2BDE8C5D97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8E682DD-6662-4996-96E3-CE2BDE8C5D97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8E682DD-6662-4996-96E3-CE2BDE8C5D97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E682DD-6662-4996-96E3-CE2BDE8C5D97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -239,5 +251,7 @@ Global
 		{1D9FF31C-5F7D-458D-9BDE-A931E9BF8163} = {6F7E98F2-61E8-45CE-9828-30E3B35C8BC6}
 		{2A6BA5FB-DBAA-457A-9CB3-9BA74A96551B} = {B659F5BF-19B6-48C7-885A-1CA767049A8C}
 		{B78BEABA-813A-4C65-BA17-2207E5F37B66} = {B659F5BF-19B6-48C7-885A-1CA767049A8C}
+		{7DA939D6-5443-498F-AAA1-3CE3134BC3EB} = {B659F5BF-19B6-48C7-885A-1CA767049A8C}
+		{E8E682DD-6662-4996-96E3-CE2BDE8C5D97} = {B659F5BF-19B6-48C7-885A-1CA767049A8C}
 	EndGlobalSection
 EndGlobal

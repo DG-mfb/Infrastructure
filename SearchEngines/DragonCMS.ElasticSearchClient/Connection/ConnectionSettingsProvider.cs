@@ -6,7 +6,6 @@ using ElasticSearchClient.Connection.Modifiers;
 using Kernel.Initialisation;
 using Kernel.Reflection;
 using Nest;
-using Shared.Configuration;
 
 namespace ElasticSearchClient.Connection
 {

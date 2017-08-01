@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Authentication\ICredentialsProvider.cs" />
     <Compile Include="Authentication\ICredentialsProvider%271.cs" />
+    <Compile Include="Authentication\IdentityContext.cs" />
     <Compile Include="Cache\ICacheItemPolicy.cs" />
     <Compile Include="Cache\ICachePopulator.cs" />
     <Compile Include="Cache\ICacheProvider.cs" />
@@ -60,16 +61,16 @@
     <Compile Include="DependancyResolver\IDependancyResolver.cs" />
     <Compile Include="DependancyResolver\IRepositoryResolver.cs" />
     <Compile Include="DependancyResolver\Lifetime.cs" />
+    <Compile Include="Exceptions\BaseException.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Initialisation\ApplicationConfiguration.cs" />
     <Compile Include="Initialisation\IAutoRegister.cs" />
     <Compile Include="Initialisation\IAutoRegisterAsSingleton.cs" />
     <Compile Include="Initialisation\IAutoRegisterAsTransient.cs" />
-    <Compile Include="Logging\ICustomLogger.cs" />
-    <Compile Include="Logging\ILogProvider.cs" />
-    <Compile Include="Logging\ILogWriter.cs" />
+    <Compile Include="Initialisation\IServerInitialiser.cs" />
     <Compile Include="Messaging\Response\AbstractResponse.cs" />
     <Compile Include="Messaging\Response\ResponseDataStatuses.cs" />
     <Compile Include="Messaging\Response\ResponseMessage.cs" />
@@ -77,10 +78,6 @@
     <Compile Include="Messaging\Response\ResponseMessageTypes.cs" />
     <Compile Include="Messaging\Response\ResponseMetrics.cs" />
     <Compile Include="Messaging\Response\ResponseStatuses.cs" />
-    <Compile Include="Notification\IDestinationTargetProvider.cs" />
-    <Compile Include="Notification\INotificationSender.cs" />
-    <Compile Include="Notification\INotifier.cs" />
-    <Compile Include="Notification\ISmptServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providerss\IIdentitytProvider.cs" />
     <Compile Include="Serialisation\ISerialisationSettingsProvider.cs" />
@@ -93,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Messaging\Request\" />
+    <Folder Include="Notification\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

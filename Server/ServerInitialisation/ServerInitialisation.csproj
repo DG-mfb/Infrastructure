@@ -48,6 +48,10 @@
       <Project>{fa2cd1bf-a890-4306-9edb-a1b10042e57e}</Project>
       <Name>Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kernel\Kernel.Logging\Kernel.Logging.csproj">
+      <Project>{7DA939D6-5443-498F-AAA1-3CE3134BC3EB}</Project>
+      <Name>Kernel.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel.Reflection\Kernel.Reflection.csproj">
       <Project>{2a6ba5fb-dbaa-457a-9cb3-9ba74a96551b}</Project>
       <Name>Kernel.Reflection</Name>

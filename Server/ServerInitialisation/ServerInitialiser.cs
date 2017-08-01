@@ -6,13 +6,13 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Kernel.DependancyResolver;
 using Kernel.Initialisation;
+using Kernel.Logging;
 using Kernel.Reflection;
 using Shared.Initialisation;
-using Shared.Logging;
 
 namespace ServerInitialisation
 {
-	public class ServerInitialiser : IServerInitialiser
+    public class ServerInitialiser : IServerInitialiser
 	{
         private IEnumerable<Assembly> AssemblyToAdd
         {

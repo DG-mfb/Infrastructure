@@ -44,34 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ApplicationConfiguration.cs" />
     <Compile Include="Data\Repository\DbRepository.cs" />
-    <Compile Include="Initialisation\ApplicationSettingProvider.cs" />
     <Compile Include="Initialisation\Initialiser.cs" />
-    <Compile Include="Initialisation\IServerInitialiser.cs" />
-    <Compile Include="Initialisation\SettingsProviderBase.cs" />
-    <Compile Include="Logging\AbstractLogger.cs" />
-    <Compile Include="Logging\AbstractLogWriter.cs" />
-    <Compile Include="Logging\ConfigurationSections\ExceptionNotificationSettingsCollection.cs" />
-    <Compile Include="Logging\ConfigurationSections\ExceptionNotificationSettingsConfigurationElement.cs" />
-    <Compile Include="Logging\ConfigurationSections\ExceptionNotificationSettingsSection.cs" />
-    <Compile Include="Logging\ExceptionIdentityContext.cs" />
-    <Compile Include="Logging\ExceptionNotificationSettings.cs" />
-    <Compile Include="Logging\ExceptionNotificationSettingsProvider.cs" />
-    <Compile Include="Logging\ExceptionStatistics.cs" />
-    <Compile Include="Logging\Exceptions\PAS3BaseException.cs" />
-    <Compile Include="Logging\InformationLogEventWriter.cs" />
-    <Compile Include="Logging\LogErrorCommand.cs" />
-    <Compile Include="Logging\LogEventSourceProvider.cs" />
-    <Compile Include="Logging\LogExceptionCommand.cs" />
-    <Compile Include="Logging\LoggerManager.cs" />
-    <Compile Include="Logging\WarningLogEventWriter.cs" />
-    <Compile Include="Notification\ConfigurationSections\EmailConfigurationElement.cs" />
-    <Compile Include="Notification\ConfigurationSections\SmptProviderSettingsSection.cs" />
-    <Compile Include="Notification\ConfigurationSections\SmptSettingsCollections.cs" />
-    <Compile Include="Notification\ConfigurationSections\SmtpConfigurationElement.cs" />
-    <Compile Include="Notification\EmailMessage.cs" />
-    <Compile Include="Notification\NotificationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Command\ICommandService.cs" />
     <Compile Include="Services\Query\Assets\IAssetQueryService.cs" />
@@ -87,7 +61,10 @@
     <Compile Include="Services\Responses\ResponseMessageCollection.cs" />
     <Compile Include="Services\Responses\ResponseMessageTypes.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+    <Folder Include="Logging\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kernel\Kernel.Configuration\Kernel.Configuration.csproj">
       <Project>{b78beaba-813a-4c65-ba17-2207e5f37b66}</Project>

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Kernel.Initialisation;
 using SearchEngine.Infrastructure.Query;
-using Shared.Configuration;
 
 namespace ElasticSearchClient.SearchAPI
 {

@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationSettingProvider.cs" />
     <Compile Include="Configuration\AbstractConfigurationElement.cs" />
     <Compile Include="Configuration\AbstractConfigurationElementCollection.cs" />
     <Compile Include="Configuration\AbstractConfigurationSection.cs" />
@@ -49,7 +51,15 @@
     <Compile Include="Configuration\ConfigurationEntityNotFoundException.cs" />
     <Compile Include="Configuration\ConfigurationSectionBase.cs" />
     <Compile Include="Configuration\ConfigurationSectionNotFoundException.cs" />
+    <Compile Include="Notification\ExceptionNotificationSettingsCollection.cs" />
+    <Compile Include="Notification\ExceptionNotificationSettingsConfigurationElement.cs" />
+    <Compile Include="Notification\ExceptionNotificationSettingsSection.cs" />
+    <Compile Include="Notification\EmailConfigurationElement.cs" />
+    <Compile Include="Notification\SmptProviderSettingsSection.cs" />
+    <Compile Include="Notification\SmptSettingsCollections.cs" />
+    <Compile Include="Notification\SmtpConfigurationElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsProviderBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kernel.Reflection\Kernel.Reflection.csproj">
@@ -61,5 +71,6 @@
       <Name>Kernel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
