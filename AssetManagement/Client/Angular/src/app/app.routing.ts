@@ -2,7 +2,7 @@
 export const AppRoutes = [
 	{ path: 'login', component: LoginComponent, data: { title: 'Login' } },
 	{
-		path: 'client/angular/src',
+		path: '',
 		redirectTo: '/login',
 		pathMatch: 'full'
 	},

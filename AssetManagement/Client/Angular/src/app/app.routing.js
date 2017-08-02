@@ -4,7 +4,7 @@ var login_component_1 = require("./login/login.component");
 exports.AppRoutes = [
     { path: 'login', component: login_component_1.LoginComponent, data: { title: 'Login' } },
     {
-        path: 'client/angular/src',
+        path: '',
         redirectTo: '/login',
         pathMatch: 'full'
     },
