@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Kernel.Cache;
 using Kernel.DependancyResolver;
 
 namespace Kernel.Initialisation
@@ -37,9 +36,9 @@ namespace Kernel.Initialisation
 		/// Registers the cache provider.
 		/// </summary>
 		/// <param name="provider">The provider.</param>
-		public static void RegisterCacheProvider(ICacheProvider provider)
+		public static void RegisterService<TService>(TService provider, Lifetime lifeTime)
 		{
-			ApplicationConfiguration.Instance.DependencyResolver.RegisterInstance<ICacheProvider>(provider, Lifetime.Singleton);
+			ApplicationConfiguration.Instance.DependencyResolver.RegisterType<TService>(lifeTime);
 		}
 
 		/// <summary>

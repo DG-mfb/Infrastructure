@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using CQRS.Infrastructure.Messaging;
-    using Kernel.Authentication;
+    using Kernel.Logging;
 
     [Serializable]
 	public class LogExceptionCommand : Command

@@ -1,12 +1,11 @@
 ﻿namespace Kernel.Cache
 {
-	using System;
-	using Kernel.Initialisation;
+    using System;
 
-	/// <summary>
-	/// Interface ICachePopulator
-	/// </summary>
-	public interface ICachePopulator : IAutoRegisterAsTransient, IDisposable
+    /// <summary>
+    /// Interface ICachePopulator
+    /// </summary>
+    public interface ICachePopulator : IDisposable
 	{
 		/// <summary>
 		/// Gets the cache key.

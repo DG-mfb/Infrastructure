@@ -1,4 +1,4 @@
-﻿namespace Kernel.Authentication
+﻿namespace Kernel.Logging
 {
 	using System;
 

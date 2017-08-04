@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Kernel.Data.DataRepository;
 using Kernel.Data.ORM;
-using Kernel.Providerss;
+using Kernel.Providers;
 
 namespace Kernel.Data.Repository
 {

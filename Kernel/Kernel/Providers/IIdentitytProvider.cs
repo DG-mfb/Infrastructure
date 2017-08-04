@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Kernel.Providerss
+namespace Kernel.Providers
 {
 	public interface IIdentitytProvider<T> where T : struct
 	{
