@@ -50,12 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurtion\CustomDbConfiguration.cs" />
     <Compile Include="Connection\ConnectionDefinitionParser.cs" />
     <Compile Include="Connection\DbConnectionDefinition.cs" />
     <Compile Include="Connection\SQLServerConnectionStringBuilder.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="Initialisation\DbInitialiser.cs" />
+    <Compile Include="Interseptors\LoggingInterseptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resolvers\TypeProviderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -83,6 +86,7 @@
       <Name>Kernel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
