@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{857217F2-B265-4154-883F-568285643238}</ProjectGuid>
+    <ProjectGuid>{9492C7B7-6584-4FFF-A68F-8F0AEFD8077E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kernel.Cryptography</RootNamespace>
-    <AssemblyName>Kernel.Cryptography</AssemblyName>
+    <RootNamespace>Kernel.Authentication</RootNamespace>
+    <AssemblyName>Kernel.Authentication</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -33,7 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,17 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataProtection\DataProtector.cs" />
-    <Compile Include="DataProtection\IDataProtector.cs" />
-    <Compile Include="DPAPIEncryption.cs" />
-    <Compile Include="HashBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Kernel\Kernel.csproj">
-      <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
-      <Name>Kernel</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
