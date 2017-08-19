@@ -115,6 +115,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.Authentication", "Ke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.AspNet.Identity.Owin.Provider", "AuthenticationProviders\Microsoft.AspNet.Identity.Owin.Provider\Microsoft.AspNet.Identity.Owin.Provider.csproj", "{2D6AD899-DDCF-4457-97B4-27ACC61929AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.AspNet.Identity.Owin.Provider.Tests", "AuthenticationProviders\Microsoft.AspNet.Identity.Owin.Provider.Tests\Microsoft.AspNet.Identity.Owin.Provider.Tests.csproj", "{B52944DB-9943-407D-9656-B488370BD204}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -289,6 +291,10 @@ Global
 		{2D6AD899-DDCF-4457-97B4-27ACC61929AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D6AD899-DDCF-4457-97B4-27ACC61929AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D6AD899-DDCF-4457-97B4-27ACC61929AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B52944DB-9943-407D-9656-B488370BD204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B52944DB-9943-407D-9656-B488370BD204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B52944DB-9943-407D-9656-B488370BD204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B52944DB-9943-407D-9656-B488370BD204}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -337,5 +343,6 @@ Global
 		{F246D541-91B2-4BF2-9F4F-9BD2944F5926} = {DE755566-692B-4D01-B7B9-0525130288FF}
 		{9492C7B7-6584-4FFF-A68F-8F0AEFD8077E} = {B659F5BF-19B6-48C7-885A-1CA767049A8C}
 		{2D6AD899-DDCF-4457-97B4-27ACC61929AF} = {DE755566-692B-4D01-B7B9-0525130288FF}
+		{B52944DB-9943-407D-9656-B488370BD204} = {DE755566-692B-4D01-B7B9-0525130288FF}
 	EndGlobalSection
 EndGlobal

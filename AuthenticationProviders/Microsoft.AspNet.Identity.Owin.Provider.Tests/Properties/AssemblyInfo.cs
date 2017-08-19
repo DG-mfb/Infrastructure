@@ -5,15 +5,14 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Microsoft.AspNet.Identity.Owin.Provider")]
+[assembly: AssemblyTitle("Microsoft.AspNet.Identity.Owin.Provider.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Microsoft.AspNet.Identity.Owin.Provider")]
+[assembly: AssemblyProduct("Microsoft.AspNet.Identity.Owin.Provider.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly : InternalsVisibleTo("Microsoft.AspNet.Identity.Owin.Provider.Tests")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -21,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2d6ad899-ddcf-4457-97b4-27acc61929af")]
+[assembly: Guid("b52944db-9943-407d-9656-b488370bd204")]
 
 // Version information for an assembly consists of the following four values:
 //
