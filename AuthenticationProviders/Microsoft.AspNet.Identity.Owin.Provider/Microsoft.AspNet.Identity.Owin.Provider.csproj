@@ -67,7 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factories\UserTokenProviderFactory.cs" />
-    <Compile Include="Initialisation\IdentityInitialiser.cs" />
+    <Compile Include="Initialisation\OwinIdentityInitialiser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

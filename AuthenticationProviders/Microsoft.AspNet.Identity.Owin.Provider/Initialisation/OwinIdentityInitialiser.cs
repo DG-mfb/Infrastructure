@@ -1,13 +1,12 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Kernel.DependancyResolver;
+using Microsoft.AspNet.Identity.Owin.Provider.Factories;
 using Microsoft.Owin.Security.DataProtection;
 using Shared.Initialisation;
 
 namespace Microsoft.AspNet.Identity.Owin.Provider.Initialisation
 {
-    public class IdentityInitialiser : Initialiser
+    public class OwinIdentityInitialiser : Initialiser
     {
         public override byte Order
         {
@@ -18,14 +17,11 @@ namespace Microsoft.AspNet.Identity.Owin.Provider.Initialisation
         {
             dependencyResolver.RegisterFactory(typeof(IUserTokenProvider<,>), t =>
             {
-                var targetType = typeof(DataProtectorTokenProvider<,>)
-                .MakeGenericType(t, typeof(string));
+                var genParam = t.GetGenericArguments();
                 var dataProtector = new DpapiDataProtectionProvider().Create("OwinIdentity");
-                var ctr = targetType.GetConstructor(new Type[] { typeof(IDataProtector) });
-                var par = Expression.Parameter(typeof(IDataProtector));
-                var newExp = Expression.New(ctr, par);
-                var lambda = Expression.Lambda(newExp, par).Compile();
-                return lambda.DynamicInvoke(dataProtector);
+                var del = UserTokenProviderFactory.GetTokenProviderDelegate(genParam[0]);
+                var tokenProvider = del(dataProtector);
+                return tokenProvider;
             }, Lifetime.Transient);
 
             return Task.CompletedTask;
