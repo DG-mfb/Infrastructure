@@ -70,9 +70,9 @@ namespace Kernel.Data.Repository
 				throw new ArgumentNullException("identityProvider");
 
 			var result = this.context.Add(item);
-			result.ID = this.IdentityProvider.GetId();
+			result.Id = this.IdentityProvider.GetId();
 
-			return Task.FromResult<Guid?>(result.ID);
+			return Task.FromResult<Guid?>(result.Id);
 		}
 
 		/// <summary>
@@ -96,7 +96,7 @@ namespace Kernel.Data.Repository
 		{
 			return await Task.Run(() =>
 			{
-				return this.Read().FirstOrDefault(x => ID == x.ID);
+				return this.Read().FirstOrDefault(x => ID == x.Id);
 			});
 		}
 

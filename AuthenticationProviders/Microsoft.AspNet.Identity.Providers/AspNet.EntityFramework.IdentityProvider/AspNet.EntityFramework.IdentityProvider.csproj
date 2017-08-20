@@ -70,6 +70,10 @@
       <Project>{FA2CD1BF-A890-4306-9EDB-A1B10042E57E}</Project>
       <Name>Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Kernel\Kernel.Data\Kernel.Data.csproj">
+      <Project>{58F76882-5E21-452F-A070-76D468D6E27C}</Project>
+      <Name>Kernel.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Kernel\Kernel\Kernel.csproj">
       <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
       <Name>Kernel</Name>

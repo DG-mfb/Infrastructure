@@ -36,7 +36,7 @@ namespace Data.Importing.Repositories
         public IQueryable<ImportedEntry> ReadBatch(IQueryable<ImportedEntry> query, int offset, int batchSize)
         {
             return this._entries.AsQueryable()
-                .OrderBy(x => x.ID)
+                .OrderBy(x => x.Id)
                 .Skip(offset)
                 .Take(batchSize);
         }

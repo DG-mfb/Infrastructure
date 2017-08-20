@@ -11,11 +11,11 @@ namespace Data.Importing.Infrastructure
         }
         public ImportedEntry(Guid id, object value)
         {
-            this.ID = id;
+            this.Id = id;
             this.Value = value;
         }
 
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
         public object Value { get; private set; }
         public Type Type
         {

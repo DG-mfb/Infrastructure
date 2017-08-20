@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using AspNet.EntityFramework.IdentityProvider.Managers;
 using AspNet.EntityFramework.IdentityProvider.Models;
 using Microsoft.AspNet.Identity;
@@ -14,6 +11,7 @@ using NUnit.Framework;
 namespace AspNet.EntityFramework.IdentityProvider.Tests
 {
     [TestFixture]
+    [Ignore("Infrastruture test")]
     public class ManagerTests
     {
         [Test]

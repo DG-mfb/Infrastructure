@@ -45,7 +45,7 @@ namespace Kernel.Data
 		protected BaseModel()
 		{
 			this.Created = DateTimeOffset.Now;
-			this.ID = Guid.NewGuid();
+			this.Id = Guid.NewGuid();
 			this.IsDeleted = false;
 		}
 
@@ -67,7 +67,7 @@ namespace Kernel.Data
 		/// <value>
 		///     The identifier.
 		/// </value>
-		public Guid ID { get; set; }
+		public Guid Id { get; set; }
 
 		/// <summary>
 		///     Gets or sets a value indicating whether this instance is deleted.
@@ -107,7 +107,7 @@ namespace Kernel.Data
 			if (other == null)
 				return false;
 
-			return this.ID == other.ID;
+			return this.Id == other.Id;
 		}
 
 		/// <summary>
@@ -133,7 +133,7 @@ namespace Kernel.Data
 		/// <returns></returns>
 		public override int GetHashCode()
 		{
-			return this.ID.GetHashCode();
+			return this.Id.GetHashCode();
 		}
 
 		#endregion

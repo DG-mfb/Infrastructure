@@ -1,17 +1,16 @@
-﻿namespace AssetManagement.AuthProviders
+﻿namespace OAuthAuthorisationService
 {
-	using System.Security.Claims;
-	using System.Threading.Tasks;
-	using Kernel.DependancyResolver;
-	using Microsoft.Owin.Security.OAuth;
-	using Shared.Services.Query.Authentication;
-	using Shared.Services.Requests.Query;
-	using Shared.Services.Responses.Query;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using Kernel.Authentication;
+    using Kernel.Authentication.Services;
+    using Kernel.DependancyResolver;
+    using Microsoft.Owin.Security.OAuth;
 
-	/// <summary>
-	/// OAuth provider
-	/// </summary>
-	public class UserOAuthProvider : OAuthAuthorizationServerProvider
+    /// <summary>
+    /// OAuth provider
+    /// </summary>
+    public class UserOAuthProvider : OAuthAuthorizationServerProvider
 	{
 		private readonly IDependencyResolver dependencyResolver;
 
@@ -40,11 +39,11 @@
 		/// </returns>
 		public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
 		{
-			var authenticationService = this.dependencyResolver.Resolve<IAuthenticationQueryService>();
+			var authenticationService = this.dependencyResolver.Resolve<IIndentityService>();
+            var psw = context.Password;
+			var result = await authenticationService.AuthenticateUser(new IdentityAuthenicationContext(context.UserName, string.Empty, ref psw));
 
-			var result = await authenticationService.AuthenticateUser(new AuthenticateUserRequest { Password = context.Password, Username = context.UserName });
-
-			switch (result.SignInResult)
+			switch (result.Result)
 			{
 				case AuthenticationResults.Success:
 					{

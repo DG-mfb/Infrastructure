@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{58F76882-5E21-452F-A070-76D468D6E27C}</ProjectGuid>
+    <ProjectGuid>{B0D92407-E135-4CE6-8250-51AC8846ED0C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kernel.Data</RootNamespace>
-    <AssemblyName>Kernel.Data</AssemblyName>
+    <RootNamespace>OAuthAuthorisationService</RootNamespace>
+    <AssemblyName>OAuthAuthorisationService</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,6 +31,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Security.3.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,24 +57,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\IConnectionDefinitionParser.cs" />
-    <Compile Include="Connection\IConnectionStringProvider.cs" />
-    <Compile Include="Connection\IDbConnectionDefinition.cs" />
-    <Compile Include="DataRepository\IReadOnlyRepository.cs" />
-    <Compile Include="DataRepository\IRepository%271.cs" />
-    <Compile Include="DataRepository\IRepository.cs" />
-    <Compile Include="DataRepository\DbRepository.cs" />
-    <Compile Include="IHasID.cs" />
-    <Compile Include="IHasID%271.cs" />
-    <Compile Include="ORM\IDbContext.cs" />
-    <Compile Include="ORM\IDbRepository%271.cs" />
-    <Compile Include="ORM\IDbRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_BaseModel.cs" />
+    <Compile Include="UserOAuthProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kernel\Kernel.csproj">
-      <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Kernel\Kernel.Authentication\Kernel.Authentication.csproj">
+      <Project>{9492C7B7-6584-4FFF-A68F-8F0AEFD8077E}</Project>
+      <Name>Kernel.Authentication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kernel\Kernel\Kernel.csproj">
+      <Project>{e198c691-91a6-4082-9976-f5f006f24960}</Project>
       <Name>Kernel</Name>
     </ProjectReference>
   </ItemGroup>

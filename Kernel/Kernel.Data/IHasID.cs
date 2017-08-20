@@ -1,8 +1,7 @@
 ﻿
 namespace Kernel.Data
 {
-	public interface IHasID<TID>
+	public interface IHasID
 	{
-		TID ID { get; }
 	}
 }

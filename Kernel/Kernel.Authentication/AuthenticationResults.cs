@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shared.Services.Responses.Query
+﻿namespace Kernel.Authentication
 {
-	public enum AuthenticationResults
+    public enum AuthenticationResults
 	{
 		// all good
 		Success,
