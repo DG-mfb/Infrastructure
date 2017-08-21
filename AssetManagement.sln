@@ -121,6 +121,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authorization", "Authorizat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuthAuthorisationService", "Authorization\OAuthAuthorisationService\OAuthAuthorisationService.csproj", "{B0D92407-E135-4CE6-8250-51AC8846ED0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.Authorisation", "Kernel\Kernel.Authorisation\Kernel.Authorisation.csproj", "{4D83CD86-3A8E-4501-B8A7-7989CD71EDF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -303,6 +305,10 @@ Global
 		{B0D92407-E135-4CE6-8250-51AC8846ED0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0D92407-E135-4CE6-8250-51AC8846ED0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0D92407-E135-4CE6-8250-51AC8846ED0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D83CD86-3A8E-4501-B8A7-7989CD71EDF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D83CD86-3A8E-4501-B8A7-7989CD71EDF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D83CD86-3A8E-4501-B8A7-7989CD71EDF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D83CD86-3A8E-4501-B8A7-7989CD71EDF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -353,5 +359,6 @@ Global
 		{2D6AD899-DDCF-4457-97B4-27ACC61929AF} = {DE755566-692B-4D01-B7B9-0525130288FF}
 		{B52944DB-9943-407D-9656-B488370BD204} = {DE755566-692B-4D01-B7B9-0525130288FF}
 		{B0D92407-E135-4CE6-8250-51AC8846ED0C} = {BABF9089-5262-4707-A312-FFD1B904F68B}
+		{4D83CD86-3A8E-4501-B8A7-7989CD71EDF1} = {B659F5BF-19B6-48C7-885A-1CA767049A8C}
 	EndGlobalSection
 EndGlobal

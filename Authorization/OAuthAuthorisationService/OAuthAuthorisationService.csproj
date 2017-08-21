@@ -57,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Initialisation\OAuthAuthorisationServiceInitialiser.cs" />
+    <Compile Include="OAuthAuthorizationServerOptionsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserOAuthProvider.cs" />
   </ItemGroup>
@@ -64,9 +66,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Shared\Shared.csproj">
+      <Project>{fa2cd1bf-a890-4306-9edb-a1b10042e57e}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel.Authentication\Kernel.Authentication.csproj">
       <Project>{9492C7B7-6584-4FFF-A68F-8F0AEFD8077E}</Project>
       <Name>Kernel.Authentication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kernel\Kernel.Authorisation\Kernel.Authorisation.csproj">
+      <Project>{4D83CD86-3A8E-4501-B8A7-7989CD71EDF1}</Project>
+      <Name>Kernel.Authorisation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel\Kernel.csproj">
       <Project>{e198c691-91a6-4082-9976-f5f006f24960}</Project>

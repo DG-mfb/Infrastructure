@@ -52,6 +52,10 @@
       <Project>{b7bb0207-1471-4a4f-a939-9addb99f8249}</Project>
       <Name>AspNet.EntityFramework.IdentityProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Authorization\OAuthAuthorisationService\OAuthAuthorisationService.csproj">
+      <Project>{b0d92407-e135-4ce6-8250-51ac8846ed0c}</Project>
+      <Name>OAuthAuthorisationService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\Shared\Shared.csproj">
       <Project>{fa2cd1bf-a890-4306-9edb-a1b10042e57e}</Project>
       <Name>Shared</Name>

@@ -10,8 +10,8 @@
     /// <summary>
     /// OAuth provider
     /// </summary>
-    public class UserOAuthProvider : OAuthAuthorizationServerProvider
-	{
+    internal class UserOAuthProvider : OAuthAuthorizationServerProvider
+    {
 		private readonly IDependencyResolver dependencyResolver;
 
 		/// <summary>

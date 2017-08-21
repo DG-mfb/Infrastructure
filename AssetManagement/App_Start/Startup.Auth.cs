@@ -1,5 +1,6 @@
 ﻿using System;
 using AssetManagement.Models;
+using Kernel.Authorisation;
 using Kernel.Initialisation;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
@@ -30,16 +31,10 @@ namespace AssetManagement
 
             // Configure the application for OAuth based flow
             PublicClientId = "self";
-            OAuthOptions = new OAuthAuthorizationServerOptions
-            {
-                TokenEndpointPath = new PathString("/Token"),
-				Provider = new UserOAuthProvider(ApplicationConfiguration.Instance.DependencyResolver),//new ApplicationOAuthProvider(PublicClientId),
-                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-                // In production mode set AllowInsecureHttp = false
-                AllowInsecureHttp = true
-            };
-
+            var resolver = ApplicationConfiguration.Instance.DependencyResolver;
+            var optionProvider = resolver.Resolve<IAuthorizationServerOptionsProvider<OAuthAuthorizationServerOptions>>();
+            OAuthOptions = optionProvider.GetOptions();
+   
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
 

@@ -326,6 +326,10 @@
       <Project>{fa2cd1bf-a890-4306-9edb-a1b10042e57e}</Project>
       <Name>Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kernel\Kernel.Authorisation\Kernel.Authorisation.csproj">
+      <Project>{4D83CD86-3A8E-4501-B8A7-7989CD71EDF1}</Project>
+      <Name>Kernel.Authorisation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kernel\Kernel.CQRS\Kernel.CQRS.csproj">
       <Project>{DBE9A282-F646-41C9-896D-00ABDC5B9AAD}</Project>
       <Name>Kernel.CQRS</Name>
