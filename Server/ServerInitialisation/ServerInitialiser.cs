@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AspNet.EntityFramework.IdentityProvider.Initialisation;
 using AspNet.EntityFramework.IdentityProvider.Managers;
 using Kernel.DependancyResolver;
 using Kernel.Initialisation;
@@ -20,7 +21,7 @@ namespace ServerInitialisation
         {
             get
             {
-                yield return typeof(ApplicationUserManager).Assembly;
+                yield return typeof(IdentityInitialiser).Assembly;
                 yield return typeof(OwinIdentityInitialiser).Assembly;
                 //return Enumerable.Empty<Assembly>();
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AspNet.EntityFramework.IdentityProvider.Claims;
 using AspNet.EntityFramework.IdentityProvider.Managers;
 using AspNet.EntityFramework.IdentityProvider.Models;
 using Kernel.DependancyResolver;
@@ -20,6 +21,7 @@ namespace AspNet.EntityFramework.IdentityProvider.Initialisation
         {
             dependencyResolver.RegisterType<ApplicationUserManager>(Lifetime.Transient);
             dependencyResolver.RegisterType<IdentityProviderService>(Lifetime.Transient);
+            dependencyResolver.RegisterType<UserClaimsProvider>(Lifetime.Transient);
 
             dependencyResolver.RegisterFactory<IIdentityValidator<string>>(() =>
             new PasswordValidator

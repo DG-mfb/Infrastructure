@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Claims\UserClaimsProvider.cs" />
     <Compile Include="IdentityProviderService.cs" />
     <Compile Include="Initialisation\IdentityInitialiser.cs" />
     <Compile Include="Managers\ApplicationUserManager.cs" />

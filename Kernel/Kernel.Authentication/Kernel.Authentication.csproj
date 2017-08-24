@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationResults.cs" />
+    <Compile Include="Claims\IUserClaimsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IdentityAuthenicationContext.cs" />
     <Compile Include="Services\AuthenticationResult.cs" />

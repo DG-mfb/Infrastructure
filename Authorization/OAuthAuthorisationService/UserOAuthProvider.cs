@@ -1,10 +1,12 @@
 ﻿namespace OAuthAuthorisationService
 {
-    using System.Security.Claims;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Kernel.Authentication;
     using Kernel.Authentication.Services;
     using Kernel.DependancyResolver;
+    using Microsoft.Owin.Security;
+    using Microsoft.Owin.Security.Cookies;
     using Microsoft.Owin.Security.OAuth;
 
     /// <summary>
@@ -41,33 +43,20 @@
 		{
 			var authenticationService = this.dependencyResolver.Resolve<IIdentityProviderService>();
             var psw = context.Password;
-			var result = await authenticationService.AuthenticateUser(new IdentityAuthenicationContext(context.UserName, string.Empty, ref psw));
+			var result = await authenticationService.AuthenticateUser(new IdentityAuthenicationContext(context.UserName, string.Empty, ref psw, new[] { context.Options.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType }));
 
 			switch (result.Result)
 			{
 				case AuthenticationResults.Success:
 					{
-						//issue a simple default ticket. if more info is needed, add it as claims
-						//var claims = new List<Claim>();
+                        AuthenticationProperties properties = this.CreateProperties(context.UserName);
+                        var identity = result.Identities[context.Options.AuthenticationType];
+                        var cookiesIdentity = result.Identities[CookieAuthenticationDefaults.AuthenticationType];
+                        AuthenticationTicket ticket = new AuthenticationTicket(identity, properties);
+                        context.Validated(ticket);
+                        context.Request.Context.Authentication.SignIn(cookiesIdentity);
 
-						//claims.Add(new Claim(ClaimTypes.Name, context.UserName));
-
-						//var oAuthId = new ClaimsIdentity(claims, context.Options.AuthenticationType);
-						var oAuthId = new ClaimsIdentity(context.Options.AuthenticationType);
-						//var data = new Dictionary<string, string>
-						//{
-						//	{ "userName", context.UserName },
-						//};
-
-						//var properties = new AuthenticationProperties(data);
-
-						//var ticket = new AuthenticationTicket(oAuthId, properties);
-
-						context.Validated(oAuthId);
-						//context.Validated(ticket);
-
-						//context.Request.Context.Authentication.SignIn(oAuthId);
-						break;
+                        break;
 					}
 				case AuthenticationResults.FailInvalidCredentials:
 				case AuthenticationResults.FailInvalidUsername:
@@ -102,5 +91,19 @@
 
 			 return Task.FromResult<object>(null);
 		 }
-	}
+
+        public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
+        {
+            return base.ValidateClientRedirectUri(context);
+        }
+
+        private  AuthenticationProperties CreateProperties(string userName)
+        {
+            IDictionary<string, string> data = new Dictionary<string, string>
+            {
+                { "userName", userName }
+            };
+            return new AuthenticationProperties(data);
+        }
+    }
 }
