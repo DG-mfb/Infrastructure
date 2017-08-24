@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Security;
+using System.Threading.Tasks;
 using AspNet.EntityFramework.IdentityProvider.Models;
+using Kernel.Extensions;
 using Microsoft.AspNet.Identity;
 
 namespace AspNet.EntityFramework.IdentityProvider.Managers
@@ -18,6 +21,13 @@ namespace AspNet.EntityFramework.IdentityProvider.Managers
             base.UserTokenProvider = tokenProvider;
             base.PasswordValidator = passwordValidator;
             base.UserValidator = userValidatorFactory(this);
+        }
+
+        public Task<ApplicationUser> FindAsync(string userName, SecureString password)
+        {
+            var psw = StringExtensions.ToInsecureString(password);
+            var user =  base.FindAsync(userName, psw);
+            return user;
         }
     }
 }

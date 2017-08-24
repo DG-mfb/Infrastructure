@@ -39,7 +39,7 @@
 		/// </returns>
 		public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
 		{
-			var authenticationService = this.dependencyResolver.Resolve<IIndentityService>();
+			var authenticationService = this.dependencyResolver.Resolve<IIdentityProviderService>();
             var psw = context.Password;
 			var result = await authenticationService.AuthenticateUser(new IdentityAuthenicationContext(context.UserName, string.Empty, ref psw));
 

@@ -2,7 +2,7 @@
 
 namespace Kernel.Authentication.Services
 {
-    public interface IIndentityService
+    public interface IIdentityProviderService
     {
         Task<AuthenticationResult> AuthenticateUser(IdentityAuthenicationContext context);
     }

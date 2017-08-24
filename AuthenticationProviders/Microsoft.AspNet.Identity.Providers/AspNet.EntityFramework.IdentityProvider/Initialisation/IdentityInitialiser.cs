@@ -19,6 +19,7 @@ namespace AspNet.EntityFramework.IdentityProvider.Initialisation
         protected override Task InitialiseInternal(IDependencyResolver dependencyResolver)
         {
             dependencyResolver.RegisterType<ApplicationUserManager>(Lifetime.Transient);
+            dependencyResolver.RegisterType<IdentityProviderService>(Lifetime.Transient);
 
             dependencyResolver.RegisterFactory<IIdentityValidator<string>>(() =>
             new PasswordValidator
