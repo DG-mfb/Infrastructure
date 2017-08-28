@@ -1,12 +1,9 @@
-﻿using System;
-using AssetManagement.Models;
+﻿using AssetManagement.Models;
 using Kernel.Authorisation;
 using Kernel.Initialisation;
 using Microsoft.AspNet.Identity;
-using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using OAuthAuthorisationService;
 using Owin;
 
 namespace AssetManagement

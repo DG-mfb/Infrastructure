@@ -43,7 +43,7 @@
 		{
 			var authenticationService = this.dependencyResolver.Resolve<IIdentityProviderService>();
             var psw = context.Password;
-			var result = await authenticationService.AuthenticateUser(new IdentityAuthenicationContext(context.UserName, string.Empty, ref psw, new[] { context.Options.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType }));
+			var result = await authenticationService.AuthenticateUser(new AuthenticationTypesContext(context.UserName, string.Empty, ref psw, new[] { context.Options.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType }));
 
 			switch (result.Result)
 			{

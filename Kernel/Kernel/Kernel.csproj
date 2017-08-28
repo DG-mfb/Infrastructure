@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\AuthenicationContext.cs" />
     <Compile Include="Authentication\ICredentialsProvider.cs" />
     <Compile Include="Authentication\ICredentialsProvider%271.cs" />
     <Compile Include="DependancyResolver\IDependancyResolver.cs" />

@@ -19,7 +19,7 @@ namespace AspNet.EntityFramework.IdentityProvider
             this._manager = manager;
             this._claimsProvider = claimsProvider;
         }
-        public async Task<AuthenticationResult> AuthenticateUser(IdentityAuthenicationContext context)
+        public async Task<AuthenticationResult> AuthenticateUser(AuthenticationTypesContext context)
         {
             IDictionary<string, ClaimsIdentity> identity = new Dictionary<string, ClaimsIdentity>();
             AuthenticationResults authenticationResult = AuthenticationResults.FailInvalidCredentials;

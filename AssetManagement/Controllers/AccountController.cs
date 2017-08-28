@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using AssetManagement.Models;
 using AssetManagement.Providers;
 using AssetManagement.Results;
+using System.Security.Principal;
 
 namespace AssetManagement.Controllers
 {
@@ -50,7 +51,19 @@ namespace AssetManagement.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
-
+        [Route("Test")]
+        //[AllowAnonymous]
+        [HttpGet]
+        public async Task<IHttpActionResult> Test()
+        {
+            var d = Request.GetOwinContext().Get<Func<string[], Action<IIdentity, IDictionary<string, string>, IDictionary<string, object>, object>, object, Task>>("security.Authenticate");
+            await d(new[] { "Bearer" }, (_, __, ___, ____) => 
+            {
+            }, null);
+            var at = this.Authentication.GetAuthenticationTypes();
+            var r = await this.Authentication.AuthenticateAsync(new string[] { "Bearer" });
+            return base.Ok();
+        }
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]

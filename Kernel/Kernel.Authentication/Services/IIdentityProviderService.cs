@@ -4,6 +4,6 @@ namespace Kernel.Authentication.Services
 {
     public interface IIdentityProviderService
     {
-        Task<AuthenticationResult> AuthenticateUser(IdentityAuthenicationContext context);
+        Task<AuthenticationResult> AuthenticateUser(AuthenticationTypesContext context);
     }
 }
