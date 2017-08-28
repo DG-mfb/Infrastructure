@@ -13,8 +13,8 @@ namespace AssetManagement.Results
     {
         public ChallengeResult(string loginProvider, ApiController controller)
         {
-            LoginProvider = loginProvider;
-            Request = controller.Request;
+            this.LoginProvider = loginProvider;
+            this.Request = controller.Request;
         }
 
         public string LoginProvider { get; set; }
