@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5647CA93-FE6C-4247-93C6-5617D16BE29B}</ProjectGuid>
+    <ProjectGuid>{47FE8E9F-CCF6-46B7-BA75-CBA1D1F56D7A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MemoryCacheProvider</RootNamespace>
-    <AssemblyName>MemoryCacheProvider</AssemblyName>
+    <RootNamespace>Kernel.Federation</RootNamespace>
+    <AssemblyName>Kernel.Federation</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -33,7 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,16 +41,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dependencies\DependencyController.cs" />
-    <Compile Include="Dependencies\HostFileChangeMonitor.cs" />
-    <Compile Include="MemoryCacheItemPolicy.cs" />
-    <Compile Include="MemoryCacheRuntimeImplementor.cs" />
+    <Compile Include="Audience\AudienceUriMode.cs" />
+    <Compile Include="Exceptions\AudienceRestrictionException.cs" />
+    <Compile Include="Exceptions\FederationException.cs" />
+    <Compile Include="Exceptions\TimeRestrictionViolationException.cs" />
+    <Compile Include="FederationConfiguration\IAllowedAudienceConfiguration.cs" />
+    <Compile Include="FederationConfiguration\IConfiguration.cs" />
+    <Compile Include="IRelayState.cs" />
+    <Compile Include="MetaData\ICertificateContext.cs" />
+    <Compile Include="MetaData\IConsumerServiceContext.cs" />
+    <Compile Include="MetaData\IIdpSSOMetadataConfiguration.cs" />
+    <Compile Include="MetaData\IMetadataConfiguration.cs" />
+    <Compile Include="MetaData\IMetadataGenerator.cs" />
+    <Compile Include="MetaData\ISingleSignOnServiceContext.cs" />
+    <Compile Include="MetaData\ISPSSOMetadataConfiguration.cs" />
+    <Compile Include="MetaData\IFederationMetadataWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CertificateProvider\ICertificateProvider.cs" />
+    <Compile Include="CertificateProvider\ICertificateCachePopulator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Kernel\Kernel.Cache\Kernel.Cache.csproj">
-      <Project>{5a1d47f4-b15f-4f42-8eaf-24f1474fe503}</Project>
+    <ProjectReference Include="..\Kernel.Cache\Kernel.Cache.csproj">
+      <Project>{5A1D47F4-B15F-4F42-8EAF-24F1474FE503}</Project>
       <Name>Kernel.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kernel\Kernel.csproj">
+      <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
+      <Name>Kernel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\ICacheDependencyController.cs" />
     <Compile Include="Cache\ICacheItemPolicy.cs" />
+    <Compile Include="Cache\ICachePopulator%271.cs" />
     <Compile Include="Cache\ICachePopulator.cs" />
     <Compile Include="Cache\ICacheProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

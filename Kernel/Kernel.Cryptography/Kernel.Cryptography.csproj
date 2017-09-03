@@ -42,11 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertificateManagement\ICertificateManager.cs" />
     <Compile Include="DataProtection\DataProtector.cs" />
     <Compile Include="DataProtection\IDataProtector.cs" />
     <Compile Include="DPAPIEncryption.cs" />
     <Compile Include="HashBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Signing.Xml\IXmlSignatureManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kernel\Kernel.csproj">
