@@ -6,6 +6,6 @@ namespace Kernel.Federation.MetaData
     {
         bool AuthnRequestsSigned { get; set; }
 
-        IEnumerable<IConsumerServiceContext> ConcumerServices { get; set; }
+        IEnumerable<IConsumerServiceContext> ConsumerServices { get; set; }
     }
 }

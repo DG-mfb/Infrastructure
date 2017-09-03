@@ -7,6 +7,6 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Metadata
     {
         public bool AuthnRequestsSigned { get; set; }
 
-        public IEnumerable<IConsumerServiceContext> ConcumerServices { get; set; }
+        public IEnumerable<IConsumerServiceContext> ConsumerServices { get; set; }
     }    
 }

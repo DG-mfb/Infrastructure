@@ -7,6 +7,6 @@ namespace WsFederationMetadataProvider.Metadata
     {
         public bool AuthnRequestsSigned { get; set; }
 
-        public IEnumerable<IConsumerServiceContext> ConcumerServices { get; set; }
+        public IEnumerable<IConsumerServiceContext> ConsumerServices { get; set; }
     }    
 }

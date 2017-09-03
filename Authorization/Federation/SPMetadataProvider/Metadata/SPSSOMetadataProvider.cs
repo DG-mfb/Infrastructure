@@ -21,12 +21,12 @@ namespace WsFederationMetadataProvider.Metadata
 
             var descriptor = new ServiceProviderSingleSignOnDescriptor
             {
-                //ID = configuration.DescriptorId,
+                 //= configuration.DescriptorId,
                 //AuthnRequestsSigned = spConfiguration.AuthnRequestsSigned,
                 //ProtocolSupportEnumeration = spConfiguration.ProtocolSupport
             };
 
-            foreach (var cs in spConfiguration.ConcumerServices)
+            foreach (var cs in spConfiguration.ConsumerServices)
             {
                 var consumerService = new IndexedProtocolEndpoint(cs.Index, new Uri(cs.Binding), new Uri(cs.Location));
                 

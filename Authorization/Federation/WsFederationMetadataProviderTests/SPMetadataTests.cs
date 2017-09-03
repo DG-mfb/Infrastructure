@@ -31,7 +31,7 @@ namespace WsFederationMetadataProviderTests
                 MetadatFilePathDestination = @"D:\SPSSOMetadata.xml",
                 ProtocolSupport = "urn:oasis:names:tc:SAML:2.0:protocol",
                 SignMetadata = true,
-                ConcumerServices = new ConsumerServiceContext[]{new ConsumerServiceContext
+                ConsumerServices = new ConsumerServiceContext[]{new ConsumerServiceContext
                 {
                     Index = 0,
                     IsDefault = true,

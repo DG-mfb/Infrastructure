@@ -26,7 +26,7 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Metadata
                 ProtocolSupportEnumeration = spConfiguration.ProtocolSupport
             };
 
-            foreach (var cs in spConfiguration.ConcumerServices)
+            foreach (var cs in spConfiguration.ConsumerServices)
             {
                 var consumerService = new AssertionConsumerService();
                 consumerService.Index = cs.Index;
