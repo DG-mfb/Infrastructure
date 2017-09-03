@@ -5,6 +5,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using SSOShibbolethOwinMiddleware;
+using SSOShibbolethOwinMiddleware.Extensions;
 
 namespace AssetManagement
 {
@@ -35,6 +37,7 @@ namespace AssetManagement
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
 
+            ShibbolethAuthenticationExtensions.UseShibbolethAuthentication(app, new ShibbolethAuthenticationOptions());
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",

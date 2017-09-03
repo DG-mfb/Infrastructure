@@ -310,6 +310,10 @@
       <Project>{B0D92407-E135-4CE6-8250-51AC8846ED0C}</Project>
       <Name>OAuthAuthorisationService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Authorization\SSOShibbolethOwinMiddleware\SSOShibbolethOwinMiddleware.csproj">
+      <Project>{11CD60DA-6FBB-4A76-96B3-841DC2E67EFA}</Project>
+      <Name>SSOShibbolethOwinMiddleware</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DependancyResolvers\UnityResolver\UnityResolver.csproj">
       <Project>{681bb5e0-8db0-44fa-8950-eef3adc42745}</Project>
       <Name>UnityResolver</Name>
