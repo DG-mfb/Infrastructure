@@ -53,6 +53,7 @@
     <Compile Include="MetaData\IIdpSSOMetadataConfiguration.cs" />
     <Compile Include="MetaData\IMetadataConfiguration.cs" />
     <Compile Include="MetaData\IMetadataGenerator.cs" />
+    <Compile Include="MetaData\IMetadataSerialiser.cs" />
     <Compile Include="MetaData\ISingleSignOnServiceContext.cs" />
     <Compile Include="MetaData\ISPSSOMetadataConfiguration.cs" />
     <Compile Include="MetaData\IFederationMetadataWriter.cs" />

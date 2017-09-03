@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="CertificateProviderImplementation\CertificateProvider.cs" />
     <Compile Include="CertificateProviderImplementation\SertificateCachePopulator.cs" />
-    <Compile Include="Extensions\EntityDescriptorExtensions.cs" />
     <Compile Include="Metadata\CertificateContext.cs" />
     <Compile Include="Metadata\ConsumerServiceContext.cs" />
     <Compile Include="Metadata\IdpSSOMetadataConfiguration.cs" />
@@ -61,6 +60,7 @@
     <Compile Include="Metadata\SPSSOMetadataProvider.cs" />
     <Compile Include="Metadata\SSOMetadataFileWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialisation\FederationMetadataSerialiser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -82,6 +82,9 @@
       <Project>{47FE8E9F-CCF6-46B7-BA75-CBA1D1F56D7A}</Project>
       <Name>Kernel.Federation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

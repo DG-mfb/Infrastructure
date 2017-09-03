@@ -25,7 +25,7 @@ namespace WsFederationMetadataProvider.Metadata
                 //AuthnRequestsSigned = spConfiguration.AuthnRequestsSigned,
                 //ProtocolSupportEnumeration = spConfiguration.ProtocolSupport
             };
-
+            descriptor.ProtocolsSupported.Add(new Uri("http://docs.oasis-open.org/wsfed/federation/200706"));
             foreach (var cs in spConfiguration.ConsumerServices)
             {
                 var consumerService = new IndexedProtocolEndpoint(cs.Index, new Uri(cs.Binding), new Uri(cs.Location));

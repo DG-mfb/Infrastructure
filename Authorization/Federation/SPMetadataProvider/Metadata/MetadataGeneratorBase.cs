@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IdentityModel.Tokens;
 using System.Linq;
+using System.Text;
 using System.Xml;
 using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
 using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
-using WsFederationMetadataProvider.Extensions;
+using WsFederationMetadataProvider.Serialisation;
 
 namespace WsFederationMetadataProvider.Metadata
 {
@@ -36,11 +37,20 @@ namespace WsFederationMetadataProvider.Metadata
 
                 var entityDescriptor = BuildEntityDesciptor(configuration, descriptor);
 
-                var metadata = EntityDescriptorExtensions.ToXml(entityDescriptor);
+                var ser = new FederationMetadataSerialiser();
+                var sb = new StringBuilder();
+                
+                using (var xmlWriter = XmlWriter.Create(sb))
+                {
+                    ser.WriteMetadata(xmlWriter, entityDescriptor);
+                }
+                
+                var metadata = new XmlDocument();
+                metadata.LoadXml(sb.ToString());
 
-                SignMetadata(configuration, metadata);
+                SignMetadata(configuration, metadata.DocumentElement);
 
-                _federationMetadataWriter.Write(metadata, configuration);
+                _federationMetadataWriter.Write(metadata.DocumentElement, configuration);
             }
             catch (Exception ex)
             {
@@ -63,10 +73,7 @@ namespace WsFederationMetadataProvider.Metadata
 
                 keyDescriptor.Use = keyType;
 
-                var keyInfo = this._xmlSignatureManager.CreateKeyInfo(certificate);
-
-                //ToDo:
-                keyDescriptor.KeyInfo = new SecurityKeyIdentifier();
+                keyDescriptor.KeyInfo = new SecurityKeyIdentifier(new X509IssuerSerialKeyIdentifierClause(certificate));
 
                 Descriptor.Keys.Add(keyDescriptor);
             }
