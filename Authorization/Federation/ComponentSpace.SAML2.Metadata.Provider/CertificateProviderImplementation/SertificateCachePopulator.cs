@@ -6,24 +6,19 @@ using Kernel.Federation.CertificateProvider;
 using Kernel.Federation.FederationConfiguration;
 using MemoryCacheProvider.Dependencies;
 
-namespace SPMetadataProvider.CertificateProviderImplementation
+namespace ComponentSpace.SAML2.Metadata.Provider.CertificateProviderImplementation
 {
     public class SertificateCachePopulator : FileDependencyController, ICertificateCachePopulator
     {
-        IConfiguration _configuration;
+        IConfiguration _iSAMLConfiguration;
 
         ICacheProvider _cache;
 
-        public SertificateCachePopulator(ICacheProvider cache, IConfiguration configuration)
+        public SertificateCachePopulator(ICacheProvider cache, IConfiguration iSAMLConfiguration)
         {
             _cache = cache;
 
-            _configuration = configuration;
-        }
-
-        protected override IList<string> FilePaths
-        {
-            get { return new List<string> { _configuration.SertificatePath }; }
+            _iSAMLConfiguration = iSAMLConfiguration;
         }
 
         public string CacheKey
@@ -33,9 +28,9 @@ namespace SPMetadataProvider.CertificateProviderImplementation
 
         public X509Certificate2 PopulateCache()
         {
-            var policy = RegisterDependency(_configuration.RegisterFileDepenencyMonitor);
+            var policy = RegisterDependency(_iSAMLConfiguration.RegisterFileDepenencyMonitor);
 
-            var cert = new X509Certificate2(_configuration.SertificatePath, _configuration.SertificatePassword, X509KeyStorageFlags.MachineKeySet);
+            var cert = new X509Certificate2(_iSAMLConfiguration.SertificatePath, _iSAMLConfiguration.SertificatePassword, X509KeyStorageFlags.MachineKeySet);
 
             _cache.Post(CacheKey, cert, policy);
 
@@ -47,26 +42,29 @@ namespace SPMetadataProvider.CertificateProviderImplementation
             throw new NotImplementedException();
         }
 
-       
-
-        public bool TryGetEntryFromCache(out X509Certificate2 entry)
+        public void Populate()
         {
-            entry = _cache.Get<X509Certificate2>(CacheKey);
-
-            if (entry == null)
-                entry = PopulateCache();
-
-            return entry != null;
+            this.PopulateCache();
         }
-        
+
         public X509Certificate2 Refresh(ICacheItemPolicy policy)
         {
             throw new NotImplementedException();
         }
 
-        public void Populate()
+        public bool TryGetEntryFromCache(out X509Certificate2 entry)
         {
-            this.PopulateCache();
+            entry = _cache.Get<X509Certificate2>(this.CacheKey);
+
+            if (entry == null)
+                entry = this.PopulateCache();
+
+            return entry != null;
+        }
+        
+        protected override IList<string> FilePaths
+        {
+            get { return new List<string> { _iSAMLConfiguration.SertificatePath }; }
         }
 
         public void Dispose()
