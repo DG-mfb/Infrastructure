@@ -218,7 +218,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CertificateProviderImplementation\CertificateManager.cs" />
     <Compile Include="CertificateProviderImplementation\CertificateProvider.cs" />
     <Compile Include="CertificateProviderImplementation\SertificateCachePopulator.cs" />
     <Compile Include="Metadata\CertificateContext.cs" />

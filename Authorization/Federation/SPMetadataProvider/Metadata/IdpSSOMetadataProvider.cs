@@ -4,7 +4,7 @@ using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
 using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 
-namespace SPMetadataProvider.Metadata
+namespace WsFederationMetadataProvider.Metadata
 {
     public class IdpSSOMetadataProvider : MetadataGeneratorBase<IdentityProviderSingleSignOnDescriptor>
     {

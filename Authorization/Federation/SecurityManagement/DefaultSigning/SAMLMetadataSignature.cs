@@ -13,6 +13,10 @@ namespace SecurityManagement.DefaultSigning
         private static string GetID(XmlElement xmlElement)
         {
             string str = xmlElement.GetAttribute("ID").Trim();
+            if (!string.IsNullOrEmpty(str))
+                return str;
+
+            str = xmlElement.GetAttribute("entityID").Trim();
             if (string.IsNullOrEmpty(str))
                 throw new SamlSignatureException("The ID is missing.");
             return str;

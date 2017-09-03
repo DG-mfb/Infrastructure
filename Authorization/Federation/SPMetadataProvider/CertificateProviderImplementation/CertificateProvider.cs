@@ -2,7 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 using Kernel.Federation.CertificateProvider;
 
-namespace SPMetadataProvider.CertificateProviderImplementation
+namespace WsFederationMetadataProvider.CertificateProviderImplementation
 {
     public class CertificateProvider : ICertificateProvider
     {

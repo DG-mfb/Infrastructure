@@ -1,12 +1,11 @@
 ﻿using System;
-using ComponentSpace.SAML2.Metadata.Provider.CertificateProviderImplementation;
-using ComponentSpace.SAML2.Metadata.Provider.Metadata;
-using ComponentSpace.SAML2.Metadata.Provider.Tests.Mock;
 using Kernel.Extensions;
 using NUnit.Framework;
 using SecurityManagement;
+using WsFederationMetadataProvider.Metadata;
+using WsFederationMetadataProviderTests.Mock;
 
-namespace ComponentSpace.SAML2.Metadata.Provider.Tests
+namespace WsFederationMetadataProviderTests
 {
     [TestFixture]
     public class SPMetadataTests
@@ -43,7 +42,7 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Tests
                 {
                     SertificateFilePath = @"D:\Dan\Software\SGWI\ThirdParty\devCertsPackage\employeeportaldev.safeguardworld.com.pfx",
                     CertificatePassword = StringExtensions.ToSecureString("$Password1!"),
-                    Usage = "signing",
+                    Usage = "Signing",
                     DefaultForMetadataSigning = true
                 }}
             };

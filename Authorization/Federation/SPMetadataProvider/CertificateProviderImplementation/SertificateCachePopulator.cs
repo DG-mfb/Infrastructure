@@ -6,7 +6,7 @@ using Kernel.Federation.CertificateProvider;
 using Kernel.Federation.FederationConfiguration;
 using MemoryCacheProvider.Dependencies;
 
-namespace SPMetadataProvider.CertificateProviderImplementation
+namespace WsFederationMetadataProvider.CertificateProviderImplementation
 {
     public class SertificateCachePopulator : FileDependencyController, ICertificateCachePopulator
     {

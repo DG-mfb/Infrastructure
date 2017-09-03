@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Kernel.Federation.MetaData;
 
-namespace SPMetadataProvider.Metadata
+namespace WsFederationMetadataProvider.Metadata
 {
     public class MetadataConfiguration : IMetadataConfiguration
     {

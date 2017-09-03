@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F194D759-AE81-488C-8230-EF63836B44C9}</ProjectGuid>
+    <ProjectGuid>{220407EA-E1E1-4BC6-BEC3-3ABFE5070DF5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SecurityManagement</RootNamespace>
-    <AssemblyName>SecurityManagement</AssemblyName>
+    <RootNamespace>WsFederationMetadataProvider</RootNamespace>
+    <AssemblyName>WsFederationMetadataProvider</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,8 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.IdentityModel.6.1.7600.16394\lib\net35\Microsoft.IdentityModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,22 +47,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CertificateManager.cs" />
-    <Compile Include="DefaultSigning\SAMLMetadataSignature.cs" />
-    <Compile Include="DefaultSigning\SignedMetadata.cs" />
-    <Compile Include="DefaultSigning\XmlSignature.cs" />
-    <Compile Include="Exceptions\SamlSignatureException.cs" />
-    <Compile Include="XmlSignatureManager.cs" />
+    <Compile Include="CertificateProviderImplementation\CertificateProvider.cs" />
+    <Compile Include="CertificateProviderImplementation\SertificateCachePopulator.cs" />
+    <Compile Include="Extensions\EntityDescriptorExtensions.cs" />
+    <Compile Include="Metadata\CertificateContext.cs" />
+    <Compile Include="Metadata\ConsumerServiceContext.cs" />
+    <Compile Include="Metadata\IdpSSOMetadataConfiguration.cs" />
+    <Compile Include="Metadata\IdpSSOMetadataProvider.cs" />
+    <Compile Include="Metadata\MetadataConfiguration.cs" />
+    <Compile Include="Metadata\MetadataGeneratorBase.cs" />
+    <Compile Include="Metadata\SingleSignOnServiceContext.cs" />
+    <Compile Include="Metadata\SPSSOMetadataConfiguration.cs" />
+    <Compile Include="Metadata\SPSSOMetadataProvider.cs" />
+    <Compile Include="Metadata\SSOMetadataFileWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Cache\MemoryCacheProvider\MemoryCacheProvider.csproj">
+      <Project>{5647CA93-FE6C-4247-93C6-5617D16BE29B}</Project>
+      <Name>MemoryCacheProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kernel\Kernel.Cache\Kernel.Cache.csproj">
+      <Project>{5A1D47F4-B15F-4F42-8EAF-24F1474FE503}</Project>
+      <Name>Kernel.Cache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Kernel\Kernel.Cryptography\Kernel.Cryptography.csproj">
       <Project>{857217F2-B265-4154-883F-568285643238}</Project>
       <Name>Kernel.Cryptography</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kernel\Kernel\Kernel.csproj">
-      <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
-      <Name>Kernel</Name>
+    <ProjectReference Include="..\..\..\Kernel\Kernel.Federation\Kernel.Federation.csproj">
+      <Project>{47FE8E9F-CCF6-46B7-BA75-CBA1D1F56D7A}</Project>
+      <Name>Kernel.Federation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,9 +6,9 @@ using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
 using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
-using SPMetadataProvider.Extensions;
+using WsFederationMetadataProvider.Extensions;
 
-namespace SPMetadataProvider.Metadata
+namespace WsFederationMetadataProvider.Metadata
 {
     public abstract class MetadataGeneratorBase<T> : IMetadataGenerator where T : RoleDescriptor
     {
@@ -74,15 +74,15 @@ namespace SPMetadataProvider.Metadata
 
         protected void SignMetadata(IMetadataConfiguration configuration, XmlElement xml)
         {
-            var signMetadataKey = configuration.Keys.Where(k => k.DefaultForMetadataSigning)
-                    .FirstOrDefault();
+        var signMetadataKey = configuration.Keys.Where(k => k.DefaultForMetadataSigning)
+                .FirstOrDefault();
 
-                if (signMetadataKey == null)
-                    throw new Exception("No default certificate found");
+            if (signMetadataKey == null)
+                throw new Exception("No default certificate found");
 
-                var certificate = this._certificateManager.GetCertificate(signMetadataKey.SertificateFilePath, signMetadataKey.CertificatePassword);
+            var certificate = this._certificateManager.GetCertificate(signMetadataKey.SertificateFilePath, signMetadataKey.CertificatePassword);
 
-            throw new NotImplementedException();
+            this._xmlSignatureManager.Generate(xml, certificate.PrivateKey, null, certificate, null, null, null);
         }
 
         protected virtual EntityDescriptor BuildEntityDesciptor(IMetadataConfiguration configuration, RoleDescriptor descriptor)

@@ -1,17 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\packages\NUnit3TestAdapter.3.8.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\..\..\packages\NUnit3TestAdapter.3.8.0\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{220407EA-E1E1-4BC6-BEC3-3ABFE5070DF5}</ProjectGuid>
+    <ProjectGuid>{85EDB9FC-3769-4421-9AB6-5EA4117A72F7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SPMetadataProvider</RootNamespace>
-    <AssemblyName>SPMetadataProvider</AssemblyName>
+    <RootNamespace>WsFederationMetadataProviderTests</RootNamespace>
+    <AssemblyName>WsFederationMetadataProviderTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,10 +38,11 @@
       <HintPath>..\..\..\packages\Microsoft.IdentityModel.6.1.7600.16394\lib\net35\Microsoft.IdentityModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NUnit.3.8.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IdentityModel" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,33 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CertificateProviderImplementation\CertificateProvider.cs" />
-    <Compile Include="CertificateProviderImplementation\SertificateCachePopulator.cs" />
-    <Compile Include="Extensions\EntityDescriptorExtensions.cs" />
-    <Compile Include="Metadata\CertificateContext.cs" />
-    <Compile Include="Metadata\ConsumerServiceContext.cs" />
-    <Compile Include="Metadata\IdpSSOMetadataConfiguration.cs" />
-    <Compile Include="Metadata\IdpSSOMetadataProvider.cs" />
-    <Compile Include="Metadata\MetadataConfiguration.cs" />
-    <Compile Include="Metadata\MetadataGeneratorBase.cs" />
-    <Compile Include="Metadata\SingleSignOnServiceContext.cs" />
-    <Compile Include="Metadata\SPSSOMetadataConfiguration.cs" />
-    <Compile Include="Metadata\SPSSOMetadataProvider.cs" />
-    <Compile Include="Metadata\SSOMetadataFileWriter.cs" />
+    <Compile Include="Mock\TestMetadatWriter.cs" />
+    <Compile Include="SPMetadataTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Cache\MemoryCacheProvider\MemoryCacheProvider.csproj">
-      <Project>{5647CA93-FE6C-4247-93C6-5617D16BE29B}</Project>
-      <Name>MemoryCacheProvider</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Kernel\Kernel.Cache\Kernel.Cache.csproj">
-      <Project>{5A1D47F4-B15F-4F42-8EAF-24F1474FE503}</Project>
-      <Name>Kernel.Cache</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Kernel\Kernel.Cryptography\Kernel.Cryptography.csproj">
       <Project>{857217F2-B265-4154-883F-568285643238}</Project>
       <Name>Kernel.Cryptography</Name>
@@ -82,6 +64,30 @@
       <Project>{47FE8E9F-CCF6-46B7-BA75-CBA1D1F56D7A}</Project>
       <Name>Kernel.Federation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Kernel\Kernel\Kernel.csproj">
+      <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
+      <Name>Kernel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SecurityManagement\SecurityManagement.csproj">
+      <Project>{F194D759-AE81-488C-8230-EF63836B44C9}</Project>
+      <Name>SecurityManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPMetadataProvider\WsFederationMetadataProvider.csproj">
+      <Project>{220407EA-E1E1-4BC6-BEC3-3ABFE5070DF5}</Project>
+      <Name>WsFederationMetadataProvider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\packages\NUnit3TestAdapter.3.8.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\NUnit3TestAdapter.3.8.0\build\net35\NUnit3TestAdapter.props'))" />
+  </Target>
 </Project>

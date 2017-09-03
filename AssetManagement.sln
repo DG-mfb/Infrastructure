@@ -131,13 +131,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.Federation", "Kernel
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Federation", "Federation", "{59620518-6260-4F87-87AF-3142CEE75C35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPMetadataProvider", "Authorization\Federation\SPMetadataProvider\SPMetadataProvider.csproj", "{220407EA-E1E1-4BC6-BEC3-3ABFE5070DF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WsFederationMetadataProvider", "Authorization\Federation\SPMetadataProvider\WsFederationMetadataProvider.csproj", "{220407EA-E1E1-4BC6-BEC3-3ABFE5070DF5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentSpace.SAML2.Metadata.Provider", "Authorization\Federation\ComponentSpace.SAML2.Metadata.Provider\ComponentSpace.SAML2.Metadata.Provider.csproj", "{0C3E17B4-B55F-4F84-A37E-4D8205C089D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentSpace.SAML2.Metadata.Provider.Tests", "Authorization\Federation\ComponentSpace.SAML2.Metadata.Provider.Tests\ComponentSpace.SAML2.Metadata.Provider.Tests.csproj", "{F67786E9-0BD0-4E7E-B70D-DCCD36AA2EE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityManagement", "Authorization\Federation\SecurityManagement\SecurityManagement.csproj", "{F194D759-AE81-488C-8230-EF63836B44C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WsFederationMetadataProviderTests", "Authorization\Federation\WsFederationMetadataProviderTests\WsFederationMetadataProviderTests.csproj", "{85EDB9FC-3769-4421-9AB6-5EA4117A72F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -353,6 +355,10 @@ Global
 		{F194D759-AE81-488C-8230-EF63836B44C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F194D759-AE81-488C-8230-EF63836B44C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F194D759-AE81-488C-8230-EF63836B44C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85EDB9FC-3769-4421-9AB6-5EA4117A72F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85EDB9FC-3769-4421-9AB6-5EA4117A72F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85EDB9FC-3769-4421-9AB6-5EA4117A72F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85EDB9FC-3769-4421-9AB6-5EA4117A72F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -412,5 +418,6 @@ Global
 		{0C3E17B4-B55F-4F84-A37E-4D8205C089D8} = {59620518-6260-4F87-87AF-3142CEE75C35}
 		{F67786E9-0BD0-4E7E-B70D-DCCD36AA2EE5} = {59620518-6260-4F87-87AF-3142CEE75C35}
 		{F194D759-AE81-488C-8230-EF63836B44C9} = {59620518-6260-4F87-87AF-3142CEE75C35}
+		{85EDB9FC-3769-4421-9AB6-5EA4117A72F7} = {59620518-6260-4F87-87AF-3142CEE75C35}
 	EndGlobalSection
 EndGlobal
