@@ -1,15 +1,15 @@
 ﻿using System;
 using ComponentSpace.SAML2.Metadata.Provider.CertificateProviderImplementation;
 using ComponentSpace.SAML2.Metadata.Provider.Metadata;
-using ComponentSpace.SAML2.Metadata.Provider.Signing;
 using ComponentSpace.SAML2.Metadata.Provider.Tests.Mock;
 using Kernel.Extensions;
 using NUnit.Framework;
+using SecurityManagement;
 
 namespace ComponentSpace.SAML2.Metadata.Provider.Tests
 {
     [TestFixture]
-    public class Class1
+    public class SPMetadataTests
     {
         [Test]
         public void SPMetadataProviderTest()

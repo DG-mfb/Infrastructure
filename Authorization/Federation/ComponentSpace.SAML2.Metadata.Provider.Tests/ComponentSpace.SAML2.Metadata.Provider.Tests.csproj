@@ -224,7 +224,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="SPMetadataTests.cs" />
     <Compile Include="Mock\TestMetadatWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -244,6 +244,10 @@
     <ProjectReference Include="..\ComponentSpace.SAML2.Metadata.Provider\ComponentSpace.SAML2.Metadata.Provider.csproj">
       <Project>{0C3E17B4-B55F-4F84-A37E-4D8205C089D8}</Project>
       <Name>ComponentSpace.SAML2.Metadata.Provider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SecurityManagement\SecurityManagement.csproj">
+      <Project>{F194D759-AE81-488C-8230-EF63836B44C9}</Project>
+      <Name>SecurityManagement</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

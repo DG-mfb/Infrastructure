@@ -1,11 +1,11 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Xml;
 using Kernel.Cryptography.Signing.Xml;
+using SecurityManagement.DefaultSigning;
 
-namespace ComponentSpace.SAML2.Metadata.Provider.Signing
+namespace SecurityManagement
 {
     public class XmlSignatureManager : IXmlSignatureManager
     {
@@ -27,9 +27,9 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Signing
             return keyInfo; ;
         }
 
-        public void Generate(XmlElement xmlElement, AsymmetricAlgorithm signingKey, KeyInfo keyInfo, string inclusiveNamespacesPrefixList, string digestMethod, string signatureMethod)
+        public void Generate(XmlElement xmlElement, AsymmetricAlgorithm signingKey, KeyInfo keyInfo, X509Certificate2 x509Certificate, string inclusiveNamespacesPrefixList, string digestMethod, string signatureMethod)
         {
-            throw new NotImplementedException();
+            SAMLMetadataSignature.Generate(xmlElement, signingKey, x509Certificate);
         }
     }
 }

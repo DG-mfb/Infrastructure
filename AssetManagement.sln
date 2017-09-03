@@ -137,6 +137,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentSpace.SAML2.Metada
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentSpace.SAML2.Metadata.Provider.Tests", "Authorization\Federation\ComponentSpace.SAML2.Metadata.Provider.Tests\ComponentSpace.SAML2.Metadata.Provider.Tests.csproj", "{F67786E9-0BD0-4E7E-B70D-DCCD36AA2EE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityManagement", "Authorization\Federation\SecurityManagement\SecurityManagement.csproj", "{F194D759-AE81-488C-8230-EF63836B44C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -347,6 +349,10 @@ Global
 		{F67786E9-0BD0-4E7E-B70D-DCCD36AA2EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F67786E9-0BD0-4E7E-B70D-DCCD36AA2EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F67786E9-0BD0-4E7E-B70D-DCCD36AA2EE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F194D759-AE81-488C-8230-EF63836B44C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F194D759-AE81-488C-8230-EF63836B44C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F194D759-AE81-488C-8230-EF63836B44C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F194D759-AE81-488C-8230-EF63836B44C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -405,5 +411,6 @@ Global
 		{220407EA-E1E1-4BC6-BEC3-3ABFE5070DF5} = {59620518-6260-4F87-87AF-3142CEE75C35}
 		{0C3E17B4-B55F-4F84-A37E-4D8205C089D8} = {59620518-6260-4F87-87AF-3142CEE75C35}
 		{F67786E9-0BD0-4E7E-B70D-DCCD36AA2EE5} = {59620518-6260-4F87-87AF-3142CEE75C35}
+		{F194D759-AE81-488C-8230-EF63836B44C9} = {59620518-6260-4F87-87AF-3142CEE75C35}
 	EndGlobalSection
 EndGlobal

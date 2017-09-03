@@ -3,7 +3,6 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using ComponentSpace.Saml2.Metadata;
-using ComponentSpace.SAML2.Metadata.Provider.Signing;
 using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
@@ -78,7 +77,7 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Metadata
 
             var certificate = _certificateManager.GetCertificate(signMetadataKey.SertificateFilePath, signMetadataKey.CertificatePassword);
     
-            SAMLMetadataSignature.Generate(xml, certificate.PrivateKey, certificate);
+            this._xmlSignatureManager.Generate(xml, certificate.PrivateKey, null, certificate, null, null, null);
         }
 
         protected virtual EntityDescriptor BuildEntityDesciptor(IMetadataConfiguration configuration, RoleDescriptorType descriptor)
