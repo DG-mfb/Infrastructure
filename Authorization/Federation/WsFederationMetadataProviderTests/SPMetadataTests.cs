@@ -26,9 +26,7 @@ namespace WsFederationMetadataProviderTests
                 }
 
             });
-
-            //var metadataWriter = new SSOMetadataFileWriter();
-
+            
             var ssoCryptoProvider = new CertificateManager();
             var xmlSignatureManager = new XmlSignatureManager();
 
@@ -78,9 +76,7 @@ namespace WsFederationMetadataProviderTests
                 }
 
             });
-
-            //var metadataWriter = new SSOMetadataFileWriter();
-
+            
             var ssoCryptoProvider = new CertificateManager();
             var xmlSignatureManager = new XmlSignatureManager();
 
@@ -111,6 +107,5 @@ namespace WsFederationMetadataProviderTests
             idpSOMetadataProvider.CreateMetadata(configuration);
             Assert.IsFalse(String.IsNullOrWhiteSpace(result));
         }
-
     }
 }
