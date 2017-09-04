@@ -113,8 +113,8 @@ namespace SecurityManagement.DefaultSigning
                 if (!string.IsNullOrEmpty(digestMethod))
                     reference.DigestMethod = digestMethod;
                 XmlDsigExcC14NTransform excC14Ntransform = new XmlDsigExcC14NTransform();
-                if (!string.IsNullOrEmpty(inclusiveNamespacesPrefixList))
-                    excC14Ntransform.InclusiveNamespacesPrefixList = inclusiveNamespacesPrefixList;
+                //if (!string.IsNullOrEmpty(inclusiveNamespacesPrefixList))
+                //    excC14Ntransform.InclusiveNamespacesPrefixList = inclusiveNamespacesPrefixList;
                 reference.AddTransform((Transform)excC14Ntransform);
                 signedXml.AddReference(reference);
                 signedXml.KeyInfo = keyInfo;

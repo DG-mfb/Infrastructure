@@ -19,13 +19,10 @@ namespace WsFederationMetadataProvider.Metadata
             if (spConfiguration == null)
                 throw new InvalidCastException(string.Format("Expected type: {0} but was: {1}", typeof(SPSSOMetadataConfiguration).Name, configuration.GetType().Name));
 
-            var descriptor = new ServiceProviderSingleSignOnDescriptor
-            {
-                 //= configuration.DescriptorId,
-                //AuthnRequestsSigned = spConfiguration.AuthnRequestsSigned,
-                //ProtocolSupportEnumeration = spConfiguration.ProtocolSupport
-            };
+            var descriptor = new ServiceProviderSingleSignOnDescriptor();
+
             descriptor.ProtocolsSupported.Add(new Uri("http://docs.oasis-open.org/wsfed/federation/200706"));
+
             foreach (var cs in spConfiguration.ConsumerServices)
             {
                 var consumerService = new IndexedProtocolEndpoint(cs.Index, new Uri(cs.Binding), new Uri(cs.Location));
