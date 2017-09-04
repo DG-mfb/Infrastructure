@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,7 @@ namespace WsFederationMetadataProvider.Metadata
 
         protected ICertificateManager _certificateManager;
         protected IXmlSignatureManager _xmlSignatureManager;
-
-        protected abstract Action<EntityDescriptor, T> AssignmentAction { get; }
-
+        
         public MetadataGeneratorBase(IFederationMetadataWriter federationMetadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager)
         {
             this._federationMetadataWriter = federationMetadataWriter;
@@ -31,11 +30,12 @@ namespace WsFederationMetadataProvider.Metadata
         {
             try
             {
-                var descriptor = GetDescriptor(configuration);
-
-                ProcessKeys(configuration, descriptor);
-
-                var entityDescriptor = BuildEntityDesciptor(configuration, descriptor);
+                var descriptors = GetDescriptors(configuration);
+                foreach (var descriptor in descriptors)
+                {
+                    ProcessKeys(configuration, descriptor);
+                }
+                var entityDescriptor = BuildEntityDesciptor(configuration, descriptors);
 
                 var ser = new FederationMetadataSerialiser();
                 var sb = new StringBuilder();
@@ -44,7 +44,7 @@ namespace WsFederationMetadataProvider.Metadata
                 {
                     ser.WriteMetadata(xmlWriter, entityDescriptor);
                 }
-                
+
                 var metadata = new XmlDocument();
                 metadata.LoadXml(sb.ToString());
 
@@ -92,7 +92,7 @@ namespace WsFederationMetadataProvider.Metadata
             this._xmlSignatureManager.Generate(xml, certificate.PrivateKey, null, certificate, null, null, null);
         }
 
-        protected virtual EntityDescriptor BuildEntityDesciptor(IMetadataConfiguration configuration, RoleDescriptor descriptor)
+        protected virtual EntityDescriptor BuildEntityDesciptor(IMetadataConfiguration configuration, IEnumerable<RoleDescriptor> descriptors)
         {
             var entityDescriptor = new EntityDescriptor()
             {
@@ -100,11 +100,19 @@ namespace WsFederationMetadataProvider.Metadata
                 FederationId = "84CCAA9F05EE4BA1B13F8943FDF1D320"
             };
 
-            AssignmentAction(entityDescriptor, (T)descriptor);
+            descriptors.Aggregate(entityDescriptor, (ed, next) =>
+            {
+                Assignment()(entityDescriptor, next);
+                return ed;
+            });
 
             return entityDescriptor;
         }
 
-        protected abstract RoleDescriptor GetDescriptor(IMetadataConfiguration configuration);
+        protected virtual Action<EntityDescriptor, RoleDescriptor> Assignment()
+        {
+            return (ed, rd) => ed.RoleDescriptors.Add(rd);
+        }
+        protected abstract IEnumerable<RoleDescriptor> GetDescriptors(IMetadataConfiguration configuration);
     }
 }

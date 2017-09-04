@@ -39,6 +39,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,7 @@
     <Compile Include="CertificateProviderImplementation\SertificateCachePopulator.cs" />
     <Compile Include="Metadata\CertificateContext.cs" />
     <Compile Include="Metadata\ConsumerServiceContext.cs" />
+    <Compile Include="Metadata\DescriptorBuilders\DescriptorBuilderBase.cs" />
     <Compile Include="Metadata\IdpSSOMetadataConfiguration.cs" />
     <Compile Include="Metadata\IdpSSOMetadataProvider.cs" />
     <Compile Include="Metadata\MetadataConfiguration.cs" />

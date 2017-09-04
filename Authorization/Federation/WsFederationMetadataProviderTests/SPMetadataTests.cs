@@ -76,7 +76,7 @@ namespace WsFederationMetadataProviderTests
                 }
 
             });
-            
+
             var ssoCryptoProvider = new CertificateManager();
             var xmlSignatureManager = new XmlSignatureManager();
 

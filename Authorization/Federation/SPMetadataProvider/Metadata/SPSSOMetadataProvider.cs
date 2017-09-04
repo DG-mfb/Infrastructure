@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
@@ -12,7 +13,7 @@ namespace WsFederationMetadataProvider.Metadata
             :base(metadataWriter, certificateManager, xmlSignatureManager)
         { }
 
-        protected override RoleDescriptor GetDescriptor(IMetadataConfiguration configuration)
+        protected override IEnumerable<RoleDescriptor> GetDescriptors(IMetadataConfiguration configuration)
         {
             var spConfiguration = configuration as ISPSSOMetadataConfiguration;
 
@@ -30,15 +31,7 @@ namespace WsFederationMetadataProvider.Metadata
                 descriptor.AssertionConsumerService.Add(cs.Index, consumerService);
             }
 
-            return descriptor;
-        }
-
-        protected override Action<EntityDescriptor, ServiceProviderSingleSignOnDescriptor> AssignmentAction
-        {
-            get
-            {
-                return (ed, d) => ed.RoleDescriptors.Add(d);
-            }
+            return new[] { descriptor };
         }
     }
 }

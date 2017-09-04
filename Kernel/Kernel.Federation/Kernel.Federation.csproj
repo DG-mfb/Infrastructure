@@ -50,6 +50,7 @@
     <Compile Include="IRelayState.cs" />
     <Compile Include="MetaData\ICertificateContext.cs" />
     <Compile Include="MetaData\IConsumerServiceContext.cs" />
+    <Compile Include="MetaData\IDescriptorBuilder.cs" />
     <Compile Include="MetaData\IIdpSSOMetadataConfiguration.cs" />
     <Compile Include="MetaData\IMetadataConfiguration.cs" />
     <Compile Include="MetaData\IMetadataGenerator.cs" />
