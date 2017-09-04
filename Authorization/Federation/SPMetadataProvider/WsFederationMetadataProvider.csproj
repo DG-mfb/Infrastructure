@@ -52,6 +52,7 @@
     <Compile Include="CertificateProviderImplementation\SertificateCachePopulator.cs" />
     <Compile Include="Metadata\CertificateContext.cs" />
     <Compile Include="Metadata\ConsumerServiceContext.cs" />
+    <Compile Include="Metadata\DescriptorBuilders\DescriptorBuildersHelper.cs" />
     <Compile Include="Metadata\DescriptorBuilders\SecurityTokenServiceDescriptorBuilder.cs" />
     <Compile Include="Metadata\DescriptorBuilders\ApplicationServiceDescriptorBuilder.cs" />
     <Compile Include="Metadata\DescriptorBuilders\IdentityProviderSingleSignOnDescriptorBuilder.cs" />
@@ -87,6 +88,10 @@
     <ProjectReference Include="..\..\..\Kernel\Kernel.Federation\Kernel.Federation.csproj">
       <Project>{47FE8E9F-CCF6-46B7-BA75-CBA1D1F56D7A}</Project>
       <Name>Kernel.Federation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kernel\Kernel.Reflection\Kernel.Reflection.csproj">
+      <Project>{2A6BA5FB-DBAA-457A-9CB3-9BA74A96551B}</Project>
+      <Name>Kernel.Reflection</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

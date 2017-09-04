@@ -5,6 +5,7 @@ using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
 using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
+using WsFederationMetadataProvider.Metadata.DescriptorBuilders;
 
 namespace WsFederationMetadataProvider.Metadata
 {
@@ -18,6 +19,7 @@ namespace WsFederationMetadataProvider.Metadata
 
         protected override IEnumerable<RoleDescriptor> GetDescriptors(IMetadataConfiguration configuration)
         {
+            var idDescRole = DescriptorBuildersHelper.ResolveAndBuild(typeof(IdentityProviderSingleSignOnDescriptor), configuration);
             var appDescriptor = this.GetApplicationDescriptor(configuration);
             var idpDescriptor = this.GetIdPDescriptor(configuration);
             var tokenDescriptor = this.GetTokenServiceDescriptor(configuration);
