@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ComponentSpace.Saml2.Metadata;
 using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
@@ -25,7 +26,7 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Metadata
             {
                 ID = configuration.DescriptorId,
                 WantAuthnRequestsSigned = idpConfiguration.WantAuthnRequestsSigned,
-                ProtocolSupportEnumeration = idpConfiguration.ProtocolSupport
+                ProtocolSupportEnumeration = idpConfiguration.SupportedProtocols.ToArray()[0]
             };
 
             

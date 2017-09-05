@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ComponentSpace.Saml2.Metadata;
 using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
@@ -23,7 +24,7 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Metadata
             {
                 ID = configuration.DescriptorId,
                 AuthnRequestsSigned = spConfiguration.AuthnRequestsSigned,
-                ProtocolSupportEnumeration = spConfiguration.ProtocolSupport
+                ProtocolSupportEnumeration = spConfiguration.SupportedProtocols.ToArray()[0]
             };
 
             foreach (var cs in spConfiguration.ConsumerServices)

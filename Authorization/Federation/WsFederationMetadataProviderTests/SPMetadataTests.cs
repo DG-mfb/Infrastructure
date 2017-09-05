@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Xml;
 using Kernel.Extensions;
+using Kernel.Federation.MetaData;
+using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 using NUnit.Framework;
 using SecurityManagement;
 using WsFederationMetadataProvider.Metadata;
@@ -16,16 +18,16 @@ namespace WsFederationMetadataProviderTests
         {
             //ARRANGE
             var result = String.Empty;
-            //var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
-            var metadataWriter = new TestMetadatWriter(el =>
-            {
-                using (var writer = XmlWriter.Create(@"d:\test.xml"))
-                {
-                    el.WriteTo(writer);
-                    writer.Flush();
-                }
+            var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
+            //var metadataWriter = new TestMetadatWriter(el =>
+            //{
+            //    using (var writer = XmlWriter.Create(@"d:\test.xml"))
+            //    {
+            //        el.WriteTo(writer);
+            //        writer.Flush();
+            //    }
 
-            });
+            //});
             
             var ssoCryptoProvider = new CertificateManager();
             var xmlSignatureManager = new XmlSignatureManager();
@@ -38,7 +40,7 @@ namespace WsFederationMetadataProviderTests
                 DescriptorId = "Idp1",
                 EntityId = new Uri("http://localhost:64247/sso/saml2/post/AssertionConsumerService.aspx"),
                 MetadatFilePathDestination = @"D:\SPSSOMetadata.xml",
-                ProtocolSupport = "urn:oasis:names:tc:SAML:2.0:protocol",
+                SupportedProtocols = new[] { "urn:oasis:names:tc:SAML:2.0:protocol" },
                 SignMetadata = true,
                 ConsumerServices = new ConsumerServiceContext[]{new ConsumerServiceContext
                 {
@@ -54,6 +56,11 @@ namespace WsFederationMetadataProviderTests
                     Usage = "Signing",
                     DefaultForMetadataSigning = true
                 }}
+            };
+
+            configuration.Descriptors = new DescriptorContext[]
+            {
+                new DescriptorContext(typeof(ServiceProviderSingleSignOnDescriptor))
             };
 
             //ACT
@@ -88,7 +95,7 @@ namespace WsFederationMetadataProviderTests
                 DescriptorId = "Idp1",
                 EntityId = new Uri("http://localhost:63337/sso/Login.aspx"),
                 MetadatFilePathDestination = @"D:\SPSSOMetadata.xml",
-                ProtocolSupport = "urn:oasis:names:tc:SAML:2.0:protocol",
+                SupportedProtocols =  new[] { "urn:oasis:names:tc:SAML:2.0:protocol" },
                 SignMetadata = true,
                 SingleSignOnServices = new SingleSignOnServiceContext[]{new SingleSignOnServiceContext
                 {
@@ -103,7 +110,13 @@ namespace WsFederationMetadataProviderTests
                     DefaultForMetadataSigning = true
                 }}
             };
+            configuration.Descriptors = new DescriptorContext[] 
+            {
+                new DescriptorContext(typeof(IdentityProviderSingleSignOnDescriptor)),
+                new DescriptorContext(typeof(ApplicationServiceDescriptor)),
+                new DescriptorContext(typeof(SecurityTokenServiceDescriptor)),
 
+            };
             idpSOMetadataProvider.CreateMetadata(configuration);
             Assert.IsFalse(String.IsNullOrWhiteSpace(result));
         }

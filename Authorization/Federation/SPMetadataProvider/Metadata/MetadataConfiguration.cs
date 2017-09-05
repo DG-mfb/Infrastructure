@@ -14,8 +14,10 @@ namespace WsFederationMetadataProvider.Metadata
 
         public string DescriptorId { get; set; }
 
-        public string ProtocolSupport { get; set; }
+        public IEnumerable<string> SupportedProtocols { get; set; }
 
         public IEnumerable<ICertificateContext> Keys { get; set; }
+
+        public virtual IEnumerable<DescriptorContext> Descriptors { get;  set; }
     }
 }

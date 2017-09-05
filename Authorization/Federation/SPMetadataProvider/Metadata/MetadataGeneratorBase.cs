@@ -8,11 +8,12 @@ using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
 using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
+using WsFederationMetadataProvider.Metadata.DescriptorBuilders;
 using WsFederationMetadataProvider.Serialisation;
 
 namespace WsFederationMetadataProvider.Metadata
 {
-    public abstract class MetadataGeneratorBase<T> : IMetadataGenerator where T : RoleDescriptor
+    public abstract class MetadataGeneratorBase
     {
         protected IFederationMetadataWriter _federationMetadataWriter;
 
@@ -30,7 +31,7 @@ namespace WsFederationMetadataProvider.Metadata
         {
             try
             {
-                var descriptors = GetDescriptors(configuration);
+                var descriptors = this.GetDescriptors(configuration);
                 foreach (var descriptor in descriptors)
                 {
                     ProcessKeys(configuration, descriptor);
@@ -113,6 +114,20 @@ namespace WsFederationMetadataProvider.Metadata
         {
             return (ed, rd) => ed.RoleDescriptors.Add(rd);
         }
-        protected abstract IEnumerable<RoleDescriptor> GetDescriptors(IMetadataConfiguration configuration);
+        protected virtual IEnumerable<RoleDescriptor> GetDescriptors(IMetadataConfiguration configuration)
+        {
+            if (configuration.Descriptors == null || configuration.Descriptors.Count() == 0)
+            {
+                throw new InvalidOperationException("No sescriptors provided.");
+            }
+            var descriptors = new List<RoleDescriptor>();
+            configuration.Descriptors.Aggregate(descriptors, (agg, next) =>
+            {
+                var descriptor = DescriptorBuildersHelper.ResolveAndBuild(next.DescriptorType, configuration);
+                agg.Add(descriptor);
+                return agg;
+            });
+            return descriptors;
+        }
     }
 }

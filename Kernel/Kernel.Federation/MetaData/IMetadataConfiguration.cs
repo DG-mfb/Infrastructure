@@ -13,7 +13,9 @@ namespace Kernel.Federation.MetaData
 
         string DescriptorId { get; set; }
 
-        string ProtocolSupport { get; set; }
+        IEnumerable<DescriptorContext> Descriptors { get; }
+
+        IEnumerable<string> SupportedProtocols{ get; set; }
 
         IEnumerable<ICertificateContext> Keys { get; set; }
     }
