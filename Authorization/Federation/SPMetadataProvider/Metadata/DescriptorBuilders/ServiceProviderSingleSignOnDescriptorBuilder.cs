@@ -15,7 +15,10 @@ namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
 
             var descriptor = new ServiceProviderSingleSignOnDescriptor();
 
-            descriptor.ProtocolsSupported.Add(new Uri("http://docs.oasis-open.org/wsfed/federation/200706"));
+            foreach(var protocol in configuration.SupportedProtocols)
+            {
+                descriptor.ProtocolsSupported.Add(new Uri(protocol));
+            }
 
             foreach (var cs in spConfiguration.ConsumerServices)
             {
