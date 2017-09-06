@@ -15,12 +15,12 @@ namespace SSOShibbolethOwinMiddleware.Extensions
             return app;
         }
 
-        public static IAppBuilder UseShibbolethAuthentication(this IAppBuilder app, string clientId, string clientSecret)
+        public static IAppBuilder UseShibbolethAuthentication(this IAppBuilder app, string wtrealm, string metadataAddress)
         {
             return app.UseShibbolethAuthentication(new ShibbolethAuthenticationOptions()
             {
-                ClientId = clientId,
-                ClientSecret = clientSecret
+                Wtrealm = wtrealm,
+                MetadataAddress = metadataAddress
             });
         }
     }
