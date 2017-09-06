@@ -12,9 +12,9 @@ namespace SSOShibbolethOwinMiddleware
     {
         public ICertificateValidator BackchannelCertificateValidator { get; set; }
 
-        private ICollection<Microsoft.IdentityModel.Tokens.ISecurityTokenValidator> _securityTokenHandlers = new List<Microsoft.IdentityModel.Tokens.ISecurityTokenValidator>()
+        private ICollection<ISecurityTokenValidator> _securityTokenHandlers = new List<ISecurityTokenValidator>()
         {
-            //(Microsoft.IdentityModel.Tokens.ISecurityTokenValidator)new Microsoft.IdentityModel.Tokens.Saml2SecurityTokenHandler(),
+            (ISecurityTokenValidator)new Microsoft.IdentityModel.Tokens.Saml2SecurityTokenHandler(),
             //(Microsoft.IdentityModel.Tokens.ISecurityTokenValidator) new Microsoft.IdentityModel.Tokens.SamlSecurityTokenHandler(),
             //(Microsoft.IdentityModel.Tokens.ISecurityTokenValidator) new JwtSecurityTokenHandler()
         };
@@ -47,7 +47,7 @@ namespace SSOShibbolethOwinMiddleware
 
         //public WsFederationAuthenticationNotifications Notifications { get; set; }
 
-        public ICollection<Microsoft.IdentityModel.Tokens.ISecurityTokenValidator> SecurityTokenHandlers
+        public ICollection<ISecurityTokenValidator> SecurityTokenHandlers
         {
             get
             {
