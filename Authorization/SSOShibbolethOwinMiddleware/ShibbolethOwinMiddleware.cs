@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net.Security;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin;
+using Microsoft.Owin.Logging;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler;
 using Microsoft.Owin.Security.DataProtection;
@@ -14,11 +15,11 @@ namespace SSOShibbolethOwinMiddleware
 {
     internal class ShibbolethOwinMiddleware : AuthenticationMiddleware<ShibbolethAuthenticationOptions>
     {
-        private readonly IAppBuilder _app;
+        private readonly ILogger _logger;
         public ShibbolethOwinMiddleware(OwinMiddleware next, IAppBuilder app, ShibbolethAuthenticationOptions options)
             : base(next, options)
         {
-            //this._logger = app.CreateLogger<WsFederationAuthenticationMiddleware>();
+            this._logger = app.CreateLogger<ShibbolethOwinMiddleware>();
             if (string.IsNullOrWhiteSpace(this.Options.TokenValidationParameters.AuthenticationType))
                 this.Options.TokenValidationParameters.AuthenticationType = app.GetDefaultSignInAsAuthenticationType();
             if (this.Options.StateDataFormat == null)
@@ -42,7 +43,7 @@ namespace SSOShibbolethOwinMiddleware
         
         protected override AuthenticationHandler<ShibbolethAuthenticationOptions> CreateHandler()
         {
-            return new ShibbolethAccountAuthenticationHandler();
+            return new ShibbolethAccountAuthenticationHandler(this._logger);
         }
 
         private static HttpMessageHandler ResolveHttpMessageHandler(ShibbolethAuthenticationOptions options)

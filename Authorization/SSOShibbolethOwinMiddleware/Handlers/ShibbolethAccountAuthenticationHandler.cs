@@ -12,6 +12,11 @@ namespace SSOShibbolethOwinMiddleware.Handlers
         private readonly ILogger _logger;
         private object _configuration;
 
+        public ShibbolethAccountAuthenticationHandler(ILogger logger)
+        {
+            this._logger = logger;
+        }
+
         public override Task<bool> InvokeAsync()
         {
             return base.InvokeAsync();
