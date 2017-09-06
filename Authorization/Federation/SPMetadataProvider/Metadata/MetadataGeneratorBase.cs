@@ -9,7 +9,7 @@ using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
 using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 using WsFederationMetadataProvider.Metadata.DescriptorBuilders;
-using WsFederationMetadataProvider.Serialisation;
+using WsMetadataSerialisation.Serialisation;
 
 namespace WsFederationMetadataProvider.Metadata
 {
@@ -43,7 +43,7 @@ namespace WsFederationMetadataProvider.Metadata
                 
                 using (var xmlWriter = XmlWriter.Create(sb))
                 {
-                    ser.WriteMetadata(xmlWriter, entityDescriptor);
+                    ser.Serialise(xmlWriter, entityDescriptor);
                 }
 
                 var metadata = new XmlDocument();

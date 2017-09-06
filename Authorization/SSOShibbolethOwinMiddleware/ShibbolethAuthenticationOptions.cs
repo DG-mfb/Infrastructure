@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.IdentityModel.Tokens;
 using System.Net.Http;
 using Microsoft.IdentityModel.Protocols;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.IdentityModel.Tokens.Saml2;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
@@ -14,13 +12,13 @@ namespace SSOShibbolethOwinMiddleware
     {
         public ICertificateValidator BackchannelCertificateValidator { get; set; }
 
-        private ICollection<ISecurityTokenValidator> _securityTokenHandlers = (ICollection<ISecurityTokenValidator>)new Collection<ISecurityTokenValidator>()
-    {
-      (ISecurityTokenValidator) new Saml2SecurityTokenHandler(),
-      //(ISecurityTokenValidator) new SamlSecurityTokenHandler(),
-      //(ISecurityTokenValidator) new JwtSecurityTokenHandler()
-    };
-        private TokenValidationParameters _tokenValidationParameters;
+        private ICollection<Microsoft.IdentityModel.Tokens.ISecurityTokenValidator> _securityTokenHandlers = new List<Microsoft.IdentityModel.Tokens.ISecurityTokenValidator>()
+        {
+            //(Microsoft.IdentityModel.Tokens.ISecurityTokenValidator)new Microsoft.IdentityModel.Tokens.Saml2SecurityTokenHandler(),
+            //(Microsoft.IdentityModel.Tokens.ISecurityTokenValidator) new Microsoft.IdentityModel.Tokens.SamlSecurityTokenHandler(),
+            //(Microsoft.IdentityModel.Tokens.ISecurityTokenValidator) new JwtSecurityTokenHandler()
+        };
+        private Microsoft.IdentityModel.Tokens.TokenValidationParameters _tokenValidationParameters;
 
 
         public HttpMessageHandler BackchannelHttpHandler { get; set; }
@@ -49,7 +47,7 @@ namespace SSOShibbolethOwinMiddleware
 
         //public WsFederationAuthenticationNotifications Notifications { get; set; }
 
-        public ICollection<ISecurityTokenValidator> SecurityTokenHandlers
+        public ICollection<Microsoft.IdentityModel.Tokens.ISecurityTokenValidator> SecurityTokenHandlers
         {
             get
             {
@@ -77,7 +75,7 @@ namespace SSOShibbolethOwinMiddleware
 
         public ISecureDataFormat<AuthenticationProperties> StateDataFormat { get; set; }
 
-        public TokenValidationParameters TokenValidationParameters
+        public Microsoft.IdentityModel.Tokens.TokenValidationParameters TokenValidationParameters
         {
             get
             {
@@ -106,7 +104,7 @@ namespace SSOShibbolethOwinMiddleware
     {
             this.Caption = "Shibboleth";
             this.AuthenticationMode = AuthenticationMode.Active;
-            this._tokenValidationParameters = new TokenValidationParameters();
+            this._tokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters();
             this.BackchannelTimeout = TimeSpan.FromMinutes(1.0);
             this.UseTokenLifetime = true;
             this.RefreshOnIssuerKeyNotFound = true;
