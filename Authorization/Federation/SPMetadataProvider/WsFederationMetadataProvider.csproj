@@ -85,10 +85,6 @@
       <Project>{2A6BA5FB-DBAA-457A-9CB3-9BA74A96551B}</Project>
       <Name>Kernel.Reflection</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WsMetadataSerialisation\WsMetadataSerialisation.csproj">
-      <Project>{B7449B0A-CF6A-4245-BD2F-350F91F43232}</Project>
-      <Name>WsMetadataSerialisation</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />

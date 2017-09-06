@@ -9,7 +9,6 @@ using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
 using WsFederationMetadataProvider.Metadata.DescriptorBuilders;
-using WsMetadataSerialisation.Serialisation;
 
 namespace WsFederationMetadataProvider.Metadata
 {
@@ -17,14 +16,15 @@ namespace WsFederationMetadataProvider.Metadata
     {
         protected IFederationMetadataWriter _federationMetadataWriter;
 
-        protected ICertificateManager _certificateManager;
-        protected IXmlSignatureManager _xmlSignatureManager;
-        
-        public MetadataGeneratorBase(IFederationMetadataWriter federationMetadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager)
+        protected readonly ICertificateManager _certificateManager;
+        protected readonly IXmlSignatureManager _xmlSignatureManager;
+        protected readonly IMetadataSerialiser<MetadataBase> _serialiser;
+        public MetadataGeneratorBase(IFederationMetadataWriter federationMetadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager, IMetadataSerialiser<MetadataBase> serialiser)
         {
             this._federationMetadataWriter = federationMetadataWriter;
             this._certificateManager = certificateManager;
             this._xmlSignatureManager = xmlSignatureManager;
+            this._serialiser = serialiser;
         }
 
         public void CreateMetadata(IMetadataConfiguration configuration)
@@ -37,13 +37,12 @@ namespace WsFederationMetadataProvider.Metadata
                     ProcessKeys(configuration, descriptor);
                 }
                 var entityDescriptor = BuildEntityDesciptor(configuration, descriptors);
-
-                var ser = new FederationMetadataSerialiser();
+                
                 var sb = new StringBuilder();
                 
                 using (var xmlWriter = XmlWriter.Create(sb))
                 {
-                    ser.Serialise(xmlWriter, entityDescriptor);
+                    this._serialiser.Serialise(xmlWriter, entityDescriptor);
                 }
 
                 var metadata = new XmlDocument();

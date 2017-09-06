@@ -1,12 +1,13 @@
 ﻿using System;
+using System.IdentityModel.Metadata;
 using System.Xml;
 using Kernel.Extensions;
 using Kernel.Federation.MetaData;
-using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 using NUnit.Framework;
 using SecurityManagement;
 using WsFederationMetadataProvider.Metadata;
 using WsFederationMetadataProviderTests.Mock;
+using WsMetadataSerialisation.Serialisation;
 
 namespace WsFederationMetadataProviderTests
 {
@@ -31,8 +32,8 @@ namespace WsFederationMetadataProviderTests
             
             var ssoCryptoProvider = new CertificateManager();
             var xmlSignatureManager = new XmlSignatureManager();
-
-            var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager);
+            var metadataSerialiser = new FederationMetadataSerialiser();
+            var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser);
 
             var configuration = new SPSSOMetadataConfiguration
             {
@@ -73,21 +74,22 @@ namespace WsFederationMetadataProviderTests
         public void IdMetadataProviderTest()
         {
             var result = String.Empty;
-            //var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
-            var metadataWriter = new TestMetadatWriter(el =>
-            {
-                using (var writer = XmlWriter.Create(@"d:\test.xml"))
-                {
-                    el.WriteTo(writer);
-                    writer.Flush();
-                }
+            var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
+            //var metadataWriter = new TestMetadatWriter(el =>
+            //{
+            //    using (var writer = XmlWriter.Create(@"d:\test.xml"))
+            //    {
+            //        el.WriteTo(writer);
+            //        writer.Flush();
+            //    }
 
-            });
+            //});
 
             var ssoCryptoProvider = new CertificateManager();
             var xmlSignatureManager = new XmlSignatureManager();
+            var metadataSerialiser = new FederationMetadataSerialiser();
 
-            var idpSOMetadataProvider = new IdpSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager);
+            var idpSOMetadataProvider = new IdpSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser);
 
             var configuration = new IdpSSOMetadataConfiguration
             {
