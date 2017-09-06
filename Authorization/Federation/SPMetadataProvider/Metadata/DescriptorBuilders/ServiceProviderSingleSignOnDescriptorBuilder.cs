@@ -1,6 +1,6 @@
 ﻿using System;
+using System.IdentityModel.Metadata;
 using Kernel.Federation.MetaData;
-using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 
 namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
 {
@@ -21,7 +21,7 @@ namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
             {
                 var consumerService = new IndexedProtocolEndpoint(cs.Index, new Uri(cs.Binding), new Uri(cs.Location));
 
-                descriptor.AssertionConsumerService.Add(cs.Index, consumerService);
+                descriptor.AssertionConsumerServices.Add(cs.Index, consumerService);
             }
 
             return descriptor;

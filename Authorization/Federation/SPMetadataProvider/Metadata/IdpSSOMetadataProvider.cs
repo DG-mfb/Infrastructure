@@ -11,10 +11,5 @@ namespace WsFederationMetadataProvider.Metadata
         {
            
         }
-
-        //protected override IEnumerable<RoleDescriptor> GetDescriptors(IMetadataConfiguration configuration)
-        //{
-           
-        //}
     }
 }

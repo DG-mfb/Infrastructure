@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Metadata;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,6 @@ using System.Xml;
 using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
-using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 using WsFederationMetadataProvider.Metadata.DescriptorBuilders;
 using WsMetadataSerialisation.Serialisation;
 
@@ -65,7 +65,7 @@ namespace WsFederationMetadataProvider.Metadata
             {
                 var certificate = this._certificateManager.GetCertificate(key.SertificateFilePath, key.CertificatePassword);
 
-                var keyDescriptor = new Microsoft.IdentityModel.Protocols.WSFederation.Metadata.KeyDescriptor();
+                var keyDescriptor = new KeyDescriptor();
                 KeyType keyType;
                 if (!Enum.TryParse<KeyType>(key.Usage, out keyType))
                 {

@@ -1,5 +1,5 @@
-﻿using Kernel.Federation.MetaData;
-using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
+﻿using System.IdentityModel.Metadata;
+using Kernel.Federation.MetaData;
 
 namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
 {

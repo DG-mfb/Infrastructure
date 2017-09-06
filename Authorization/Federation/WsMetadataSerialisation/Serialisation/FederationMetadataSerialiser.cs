@@ -1,8 +1,7 @@
-﻿using System;
+﻿using System.IdentityModel.Metadata;
 using System.IO;
 using System.Xml;
 using Kernel.Federation.MetaData;
-using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 
 namespace WsMetadataSerialisation.Serialisation
 {

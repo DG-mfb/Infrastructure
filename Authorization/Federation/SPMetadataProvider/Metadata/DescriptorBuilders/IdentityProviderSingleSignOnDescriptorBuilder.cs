@@ -1,6 +1,6 @@
 ﻿using System;
+using System.IdentityModel.Metadata;
 using Kernel.Federation.MetaData;
-using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 
 namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
 {

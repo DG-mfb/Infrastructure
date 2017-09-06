@@ -9,10 +9,5 @@ namespace WsFederationMetadataProvider.Metadata
         public SPSSOMetadataProvider(IFederationMetadataWriter metadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager)
             :base(metadataWriter, certificateManager, xmlSignatureManager)
         { }
-
-        //protected override IEnumerable<RoleDescriptor> GetDescriptors(IMetadataConfiguration configuration)
-        //{
-           
-        //}
     }
 }

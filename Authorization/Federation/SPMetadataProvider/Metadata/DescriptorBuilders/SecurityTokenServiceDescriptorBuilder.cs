@@ -1,7 +1,7 @@
 ﻿using System;
-using System.ServiceModel;
+using System.IdentityModel.Metadata;
+using System.IdentityModel.Protocols.WSTrust;
 using Kernel.Federation.MetaData;
-using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 
 namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
 {
@@ -35,7 +35,7 @@ namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
             //if (ConfigurationRepository.WSTrust.Enabled && ConfigurationRepository.WSTrust.EnableMixedModeSecurity)
             //{
             //    var addressMixedUserName = new EndpointAddress(_endpoints.WSTrustMixedUserName, null, null, CreateMetadataReader(_endpoints.WSTrustMex), null);
-            tokenService.SecurityTokenServiceEndpoints.Add(new EndpointAddress("http://localhost:8080/idp/status"));
+            tokenService.SecurityTokenServiceEndpoints.Add(new EndpointReference("http://localhost:8080/idp/status"));
 
             //    if (ConfigurationRepository.WSTrust.EnableClientCertificateAuthentication)
             //    {

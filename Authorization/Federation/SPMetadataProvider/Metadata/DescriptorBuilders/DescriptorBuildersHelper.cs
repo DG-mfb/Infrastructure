@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IdentityModel.Metadata;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using Kernel.Federation.MetaData;
 using Kernel.Reflection;
-using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 
 namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
 {
