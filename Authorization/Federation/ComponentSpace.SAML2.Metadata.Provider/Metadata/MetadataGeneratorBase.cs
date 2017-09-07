@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using ComponentSpace.Saml2.Metadata;
@@ -25,7 +26,7 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Metadata
             this._xmlSignatureManager = xmlSignatureManager;
         }
 
-        public void CreateMetadata(IMetadataConfiguration configuration)
+        public Task CreateMetadata(IMetadataConfiguration configuration)
         {
             try
             {
@@ -42,6 +43,7 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Metadata
                 SignMetadata(configuration, metadata);
 
                 _federationMetadataWriter.Write(metadata, configuration);
+                return Task.CompletedTask;
             }
             catch (Exception ex)
             {
@@ -95,7 +97,7 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Metadata
 
         protected abstract RoleDescriptorType GetDescriptor(IMetadataConfiguration configuration);
 
-        public void CreateMetadata()
+        public Task CreateMetadata()
         {
             throw new NotImplementedException();
         }

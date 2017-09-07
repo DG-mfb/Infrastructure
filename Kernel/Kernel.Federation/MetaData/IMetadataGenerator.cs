@@ -1,8 +1,10 @@
-﻿namespace Kernel.Federation.MetaData
+﻿using System.Threading.Tasks;
+
+namespace Kernel.Federation.MetaData
 {
     public interface IMetadataGenerator
     {
-        void CreateMetadata(IMetadataConfiguration configuration);
-        void CreateMetadata();
+        Task CreateMetadata(IMetadataConfiguration configuration);
+        Task CreateMetadata();
     }
 }

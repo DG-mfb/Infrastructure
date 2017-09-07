@@ -4,6 +4,7 @@ using System.IdentityModel.Metadata;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml;
 using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
@@ -29,13 +30,13 @@ namespace WsFederationMetadataProvider.Metadata
             this._configuration = configuration;
         }
 
-        public void CreateMetadata()
+        public Task CreateMetadata()
         {
             var configuration = this._configuration(this);
-            ((IMetadataGenerator)this).CreateMetadata(configuration);
+            return ((IMetadataGenerator)this).CreateMetadata(configuration);
         }
 
-        void IMetadataGenerator.CreateMetadata(IMetadataConfiguration configuration)
+        Task IMetadataGenerator.CreateMetadata(IMetadataConfiguration configuration)
         {
             try
             {
@@ -59,6 +60,7 @@ namespace WsFederationMetadataProvider.Metadata
                 SignMetadata(configuration, metadata.DocumentElement);
 
                 _federationMetadataWriter.Write(metadata.DocumentElement, configuration);
+                return Task.CompletedTask;
             }
             catch (Exception ex)
             {
@@ -125,7 +127,7 @@ namespace WsFederationMetadataProvider.Metadata
         {
             if (configuration.Descriptors == null || configuration.Descriptors.Count() == 0)
             {
-                throw new InvalidOperationException("No sescriptors provided.");
+                throw new InvalidOperationException("No descriptors provided.");
             }
             var descriptors = new List<RoleDescriptor>();
             configuration.Descriptors.Aggregate(descriptors, (agg, next) =>

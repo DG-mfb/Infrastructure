@@ -53,18 +53,16 @@ namespace WsFederationMetadataProviderTests
                 }}
             };
 
-            var ssoCryptoProvider = new CertificateManager();
-            var xmlSignatureManager = new XmlSignatureManager();
-            var metadataSerialiser = new FederationMetadataSerialiser();
-            var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser, g => configuration);
-
-            
-
             configuration.Descriptors = new DescriptorContext[]
             {
                 new DescriptorContext(typeof(ServiceProviderSingleSignOnDescriptor))
             };
 
+            var ssoCryptoProvider = new CertificateManager();
+            var xmlSignatureManager = new XmlSignatureManager();
+            var metadataSerialiser = new FederationMetadataSerialiser();
+            var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser, g => configuration);
+            
             //ACT
             sPSSOMetadataProvider.CreateMetadata();
             //ASSERT

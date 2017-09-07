@@ -43,8 +43,12 @@ namespace AssetManagement
             ShibbolethAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://www.testshib.org/metadata/testshib-providers.xml");
             app.Map(new PathString("/sp/metadata"), a =>
             {
-                var metadataGenerator = resolver.Resolve<ISPMetadataGenerator>();
-                metadataGenerator.CreateMetadata();
+                a.Run(c =>
+                {
+                    var metadataGenerator = resolver.Resolve<ISPMetadataGenerator>();
+                    return metadataGenerator.CreateMetadata();
+
+                });
             });
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
