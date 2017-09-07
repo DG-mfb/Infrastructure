@@ -5,7 +5,7 @@ using Kernel.Federation.MetaData;
 
 namespace WsFederationMetadataProvider.Metadata
 {
-    public class IdpSSOMetadataProvider : MetadataGeneratorBase
+    public class IdpSSOMetadataProvider : MetadataGeneratorBase, IIdMetadataGenerator
     {
         public IdpSSOMetadataProvider(IFederationMetadataWriter metadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager, IMetadataSerialiser<MetadataBase> serialiser)
             : base(metadataWriter, certificateManager, xmlSignatureManager, serialiser)

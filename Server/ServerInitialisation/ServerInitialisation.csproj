@@ -52,6 +52,18 @@
       <Project>{b7bb0207-1471-4a4f-a939-9addb99f8249}</Project>
       <Name>AspNet.EntityFramework.IdentityProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Authorization\Federation\SecurityManagement\SecurityManagement.csproj">
+      <Project>{F194D759-AE81-488C-8230-EF63836B44C9}</Project>
+      <Name>SecurityManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Authorization\Federation\SPMetadataProvider\WsFederationMetadataProvider.csproj">
+      <Project>{220407EA-E1E1-4BC6-BEC3-3ABFE5070DF5}</Project>
+      <Name>WsFederationMetadataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Authorization\Federation\WebClientMetadataWriter\WebClientMetadataWriter.csproj">
+      <Project>{D9CD2A65-E454-403C-A36D-1BEEB4FB047B}</Project>
+      <Name>WebClientMetadataWriter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Authorization\OAuthAuthorisationService\OAuthAuthorisationService.csproj">
       <Project>{b0d92407-e135-4ce6-8250-51ac8846ed0c}</Project>
       <Name>OAuthAuthorisationService</Name>

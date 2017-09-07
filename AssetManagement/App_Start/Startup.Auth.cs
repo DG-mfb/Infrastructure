@@ -1,7 +1,9 @@
 ﻿using AssetManagement.Models;
 using Kernel.Authorisation;
+using Kernel.Federation.MetaData;
 using Kernel.Initialisation;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
@@ -39,7 +41,11 @@ namespace AssetManagement
 
             //Shibboleth middleware
             ShibbolethAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://www.testshib.org/metadata/testshib-providers.xml");
-            
+            app.Map(new PathString("/sp/metadata"), a =>
+            {
+                var metadataGenerator = resolver.Resolve<ISPMetadataGenerator>();
+                metadataGenerator.CreateMetadata(null);
+            });
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",

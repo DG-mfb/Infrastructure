@@ -11,7 +11,10 @@ using Kernel.Initialisation;
 using Kernel.Logging;
 using Kernel.Reflection;
 using Microsoft.AspNet.Identity.Owin.Provider.Initialisation;
+using SecurityManagement.Initialisation;
 using Shared.Initialisation;
+using WebClientMetadataWriter.Initialisation;
+using WsFederationMetadataProvider.Initialisation;
 
 namespace ServerInitialisation
 {
@@ -23,6 +26,9 @@ namespace ServerInitialisation
             {
                 yield return typeof(IdentityInitialiser).Assembly;
                 yield return typeof(OwinIdentityInitialiser).Assembly;
+                yield return typeof(SecurityInitialiser).Assembly;
+                yield return typeof(WsFederationMetadataProviderInitialiser).Assembly;
+                yield return typeof(WebClientMetadataWriterInitialiser).Assembly;
                 //return Enumerable.Empty<Assembly>();
             }
         }

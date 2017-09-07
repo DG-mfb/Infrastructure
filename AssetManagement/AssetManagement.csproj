@@ -338,6 +338,10 @@
       <Project>{DBE9A282-F646-41C9-896D-00ABDC5B9AAD}</Project>
       <Name>Kernel.CQRS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kernel\Kernel.Federation\Kernel.Federation.csproj">
+      <Project>{47FE8E9F-CCF6-46B7-BA75-CBA1D1F56D7A}</Project>
+      <Name>Kernel.Federation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kernel\Kernel.Logging\Kernel.Logging.csproj">
       <Project>{7DA939D6-5443-498F-AAA1-3CE3134BC3EB}</Project>
       <Name>Kernel.Logging</Name>
