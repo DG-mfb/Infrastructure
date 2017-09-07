@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Web;
 using System.Xml;
 using Kernel.Federation.MetaData;
@@ -18,7 +17,7 @@ namespace WebClientMetadataWriter
             {
                 xml.WriteTo(w);
             }
-            HttpContext.Current.Response.Headers["Content-Encoding"] = Encoding.Unicode.ToString();
+
             HttpContext.Current.Response.ContentType = "text/xml";
             HttpContext.Current.Response.Write(sb.ToString());
         }
