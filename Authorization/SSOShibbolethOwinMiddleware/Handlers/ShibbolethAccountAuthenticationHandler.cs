@@ -60,12 +60,25 @@ namespace SSOShibbolethOwinMiddleware.Handlers
                 var ser = new FederationMetadataSerialiser();
                 metadata = ser.Deserialise(reader);
             }
+            string signInUrl = null;
 
             var entitiesDescriptors = metadata as EntitiesDescriptor;
-            var idDescpritor = entitiesDescriptors.ChildEntities.SelectMany(x => x.RoleDescriptors)
-                .First(x => x.GetType() == typeof(IdentityProviderSingleSignOnDescriptor)) as IdentityProviderSingleSignOnDescriptor;
-            var signInUrl = idDescpritor.SingleSignOnServices.FirstOrDefault(x => x.Binding == new Uri("urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"))
-                .Location.AbsoluteUri;
+            if (entitiesDescriptors != null)
+            {
+                var idDescpritor = entitiesDescriptors.ChildEntities.SelectMany(x => x.RoleDescriptors)
+                    .First(x => x.GetType() == typeof(IdentityProviderSingleSignOnDescriptor)) as IdentityProviderSingleSignOnDescriptor;
+                signInUrl = idDescpritor.SingleSignOnServices.FirstOrDefault(x => x.Binding == new Uri("urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"))
+                    .Location.AbsoluteUri;
+            }
+
+            var entitityDescriptor = metadata as EntityDescriptor;
+            if (entitityDescriptor != null)
+            {
+                var idDescpritor = entitityDescriptor.RoleDescriptors.Select(x => x)
+                    .First(x => x.GetType() == typeof(IdentityProviderSingleSignOnDescriptor)) as IdentityProviderSingleSignOnDescriptor;
+                signInUrl = idDescpritor.SingleSignOnServices.FirstOrDefault(x => x.Binding == new Uri("urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"))
+                    .Location.AbsoluteUri;
+            }
             //if (this._configuration == null)
             //    this._configuration = await this.Options.ConfigurationManager.GetConfigurationAsync(this.Context.Request.CallCancelled);
             //string baseUri = this.Request.Scheme + Uri.SchemeDelimiter + (object)this.Request.Host + (object)this.Request.PathBase;

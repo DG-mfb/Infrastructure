@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IdentityModel.Metadata;
+using System.Xml;
 using Kernel.Extensions;
 using Kernel.Federation.MetaData;
 using NUnit.Framework;
@@ -18,16 +19,16 @@ namespace WsFederationMetadataProviderTests
         {
             //ARRANGE
             var result = String.Empty;
-            var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
-            //var metadataWriter = new TestMetadatWriter(el =>
-            //{
-            //    using (var writer = XmlWriter.Create(@"d:\test.xml"))
-            //    {
-            //        el.WriteTo(writer);
-            //        writer.Flush();
-            //    }
+            //var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
+            var metadataWriter = new TestMetadatWriter(el =>
+            {
+                using (var writer = XmlWriter.Create(@"d:\test.xml"))
+                {
+                    el.WriteTo(writer);
+                    writer.Flush();
+                }
 
-            //});
+            });
 
             var configuration = new SPSSOMetadataConfiguration
             {
