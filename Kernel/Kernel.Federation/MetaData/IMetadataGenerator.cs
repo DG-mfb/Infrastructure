@@ -3,5 +3,6 @@
     public interface IMetadataGenerator
     {
         void CreateMetadata(IMetadataConfiguration configuration);
+        void CreateMetadata();
     }
 }

@@ -29,11 +29,6 @@ namespace WsFederationMetadataProviderTests
             //    }
 
             //});
-            
-            var ssoCryptoProvider = new CertificateManager();
-            var xmlSignatureManager = new XmlSignatureManager();
-            var metadataSerialiser = new FederationMetadataSerialiser();
-            var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser);
 
             var configuration = new SPSSOMetadataConfiguration
             {
@@ -59,13 +54,20 @@ namespace WsFederationMetadataProviderTests
                 }}
             };
 
+            var ssoCryptoProvider = new CertificateManager();
+            var xmlSignatureManager = new XmlSignatureManager();
+            var metadataSerialiser = new FederationMetadataSerialiser();
+            var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser, g => configuration);
+
+            
+
             configuration.Descriptors = new DescriptorContext[]
             {
                 new DescriptorContext(typeof(ServiceProviderSingleSignOnDescriptor))
             };
 
             //ACT
-            sPSSOMetadataProvider.CreateMetadata(configuration);
+            sPSSOMetadataProvider.CreateMetadata();
             //ASSERT
             Assert.IsFalse(String.IsNullOrWhiteSpace(result));
         }
@@ -89,15 +91,13 @@ namespace WsFederationMetadataProviderTests
             var xmlSignatureManager = new XmlSignatureManager();
             var metadataSerialiser = new FederationMetadataSerialiser();
 
-            var idpSOMetadataProvider = new IdpSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser);
-
             var configuration = new IdpSSOMetadataConfiguration
             {
                 WantAuthnRequestsSigned = true,
                 DescriptorId = "Idp1",
                 EntityId = new Uri("http://localhost:63337/sso/Login.aspx"),
                 MetadatFilePathDestination = @"D:\SPSSOMetadata.xml",
-                SupportedProtocols =  new[] { "urn:oasis:names:tc:SAML:2.0:protocol" },
+                SupportedProtocols = new[] { "urn:oasis:names:tc:SAML:2.0:protocol" },
                 SignMetadata = true,
                 SingleSignOnServices = new SingleSignOnServiceContext[]{new SingleSignOnServiceContext
                 {
@@ -112,14 +112,20 @@ namespace WsFederationMetadataProviderTests
                     DefaultForMetadataSigning = true
                 }}
             };
-            configuration.Descriptors = new DescriptorContext[] 
+
+            configuration.Descriptors = new DescriptorContext[]
             {
                 new DescriptorContext(typeof(IdentityProviderSingleSignOnDescriptor)),
                 new DescriptorContext(typeof(ApplicationServiceDescriptor)),
                 new DescriptorContext(typeof(SecurityTokenServiceDescriptor)),
 
             };
-            idpSOMetadataProvider.CreateMetadata(configuration);
+
+            var idpSOMetadataProvider = new IdpSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser, _ => configuration);
+
+            
+            
+            idpSOMetadataProvider.CreateMetadata();
             Assert.IsFalse(String.IsNullOrWhiteSpace(result));
         }
     }

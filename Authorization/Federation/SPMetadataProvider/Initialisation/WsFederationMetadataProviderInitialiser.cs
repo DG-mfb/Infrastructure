@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Kernel.DependancyResolver;
+using Kernel.Federation.MetaData;
 using Shared.Initialisation;
 using WsFederationMetadataProvider.Metadata;
 
@@ -16,7 +18,10 @@ namespace WsFederationMetadataProvider.Initialisation
         {
             dependencyResolver.RegisterType<SPSSOMetadataProvider>(Lifetime.Transient);
             dependencyResolver.RegisterType<IdpSSOMetadataProvider>(Lifetime.Transient);
-            
+            dependencyResolver.RegisterFactory<Func<IMetadataGenerator, IMetadataConfiguration>>(t =>
+            {
+                throw new NotImplementedException();
+            }, Lifetime.Singleton);
             return Task.CompletedTask;
         }
     }

@@ -94,5 +94,10 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Metadata
         }
 
         protected abstract RoleDescriptorType GetDescriptor(IMetadataConfiguration configuration);
+
+        public void CreateMetadata()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

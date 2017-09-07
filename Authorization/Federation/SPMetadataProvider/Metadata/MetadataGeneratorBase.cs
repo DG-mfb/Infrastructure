@@ -12,22 +12,30 @@ using WsFederationMetadataProvider.Metadata.DescriptorBuilders;
 
 namespace WsFederationMetadataProvider.Metadata
 {
-    public abstract class MetadataGeneratorBase
+    public abstract class MetadataGeneratorBase : IMetadataGenerator
     {
         protected IFederationMetadataWriter _federationMetadataWriter;
 
         protected readonly ICertificateManager _certificateManager;
         protected readonly IXmlSignatureManager _xmlSignatureManager;
         protected readonly IMetadataSerialiser<MetadataBase> _serialiser;
-        public MetadataGeneratorBase(IFederationMetadataWriter federationMetadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager, IMetadataSerialiser<MetadataBase> serialiser)
+        protected readonly Func<IMetadataGenerator, IMetadataConfiguration> _configuration;
+        public MetadataGeneratorBase(IFederationMetadataWriter federationMetadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager, IMetadataSerialiser<MetadataBase> serialiser, Func<IMetadataGenerator, IMetadataConfiguration> configuration)
         {
             this._federationMetadataWriter = federationMetadataWriter;
             this._certificateManager = certificateManager;
             this._xmlSignatureManager = xmlSignatureManager;
             this._serialiser = serialiser;
+            this._configuration = configuration;
         }
 
-        public void CreateMetadata(IMetadataConfiguration configuration)
+        public void CreateMetadata()
+        {
+            var configuration = this._configuration(this);
+            ((IMetadataGenerator)this).CreateMetadata(configuration);
+        }
+
+        void IMetadataGenerator.CreateMetadata(IMetadataConfiguration configuration)
         {
             try
             {
