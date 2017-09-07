@@ -18,6 +18,8 @@ namespace WebClientMetadataWriter
             {
                 xml.WriteTo(w);
             }
+            HttpContext.Current.Response.Headers["Content-Encoding"] = Encoding.Unicode.ToString();
+            HttpContext.Current.Response.ContentType = "text/xml";
             HttpContext.Current.Response.Write(sb.ToString());
         }
     }

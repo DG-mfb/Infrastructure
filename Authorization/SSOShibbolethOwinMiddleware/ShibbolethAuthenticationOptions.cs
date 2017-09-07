@@ -99,6 +99,8 @@ namespace SSOShibbolethOwinMiddleware
 
         public bool UseTokenLifetime { get; set; }
 
+        public PathString SPMetadataPath { get; set; }
+
         public ShibbolethAuthenticationOptions()
       : base("Shibboleth")
     {
@@ -108,6 +110,7 @@ namespace SSOShibbolethOwinMiddleware
             this.BackchannelTimeout = TimeSpan.FromMinutes(1.0);
             this.UseTokenLifetime = true;
             this.RefreshOnIssuerKeyNotFound = true;
+            this.SPMetadataPath = new PathString("/sp/metadata");
         }
     }
 }
