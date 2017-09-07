@@ -43,6 +43,7 @@ namespace SSOShibbolethOwinMiddleware.Handlers
             var request = System.Net.WebRequest.Create(base.Options.MetadataAddress);
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.ServerCertificateValidationCallback = (_, __, ___, ____) => true;
             // It may be more efficient to pass the stream directly, but
             // it's likely a bit safer to pull the data off the response
             // stream and create a new memorystream with the data
@@ -79,6 +80,7 @@ namespace SSOShibbolethOwinMiddleware.Handlers
                 signInUrl = idDescpritor.SingleSignOnServices.FirstOrDefault(x => x.Binding == new Uri("urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"))
                     .Location.AbsoluteUri;
             }
+
             //if (this._configuration == null)
             //    this._configuration = await this.Options.ConfigurationManager.GetConfigurationAsync(this.Context.Request.CallCancelled);
             //string baseUri = this.Request.Scheme + Uri.SchemeDelimiter + (object)this.Request.Host + (object)this.Request.PathBase;
