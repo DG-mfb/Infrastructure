@@ -82,8 +82,8 @@
       <Project>{4D83CD86-3A8E-4501-B8A7-7989CD71EDF1}</Project>
       <Name>Kernel.Authorisation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Federation\WsMetadataSerialisation\WsMetadataSerialisation.csproj">
-      <Project>{B7449B0A-CF6A-4245-BD2F-350F91F43232}</Project>
+    <ProjectReference Include="..\..\Serialisation\WsMetadataSerialisation\WsMetadataSerialisation.csproj">
+      <Project>{D63B92B8-863B-493D-8117-0960DB06B554}</Project>
       <Name>WsMetadataSerialisation</Name>
     </ProjectReference>
   </ItemGroup>

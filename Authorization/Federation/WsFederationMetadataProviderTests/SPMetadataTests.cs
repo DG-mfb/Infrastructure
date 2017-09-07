@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IdentityModel.Metadata;
-using System.Xml;
 using Kernel.Extensions;
 using Kernel.Federation.MetaData;
 using NUnit.Framework;

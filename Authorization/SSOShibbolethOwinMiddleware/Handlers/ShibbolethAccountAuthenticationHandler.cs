@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Linq;
+using System.IdentityModel.Metadata;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml;
@@ -8,7 +9,6 @@ using Microsoft.Owin.Logging;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Infrastructure;
 using WsMetadataSerialisation.Serialisation;
-using System.IdentityModel.Metadata;
 
 namespace SSOShibbolethOwinMiddleware.Handlers
 {

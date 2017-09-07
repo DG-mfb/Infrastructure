@@ -15,6 +15,7 @@ using SecurityManagement.Initialisation;
 using Shared.Initialisation;
 using WebClientMetadataWriter.Initialisation;
 using WsFederationMetadataProvider.Initialisation;
+using WsMetadataSerialisation.Initialisation;
 
 namespace ServerInitialisation
 {
@@ -29,6 +30,7 @@ namespace ServerInitialisation
                 yield return typeof(SecurityInitialiser).Assembly;
                 yield return typeof(WsFederationMetadataProviderInitialiser).Assembly;
                 yield return typeof(WebClientMetadataWriterInitialiser).Assembly;
+                yield return typeof(MetadataSerialisationInitialiser).Assembly;
                 //return Enumerable.Empty<Assembly>();
             }
         }

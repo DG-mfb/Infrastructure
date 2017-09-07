@@ -20,7 +20,10 @@ namespace WsFederationMetadataProvider.Initialisation
             dependencyResolver.RegisterType<IdpSSOMetadataProvider>(Lifetime.Transient);
             dependencyResolver.RegisterFactory<Func<IMetadataGenerator, IMetadataConfiguration>>(t =>
             {
-                throw new NotImplementedException();
+                return _ =>
+                {
+                    throw new NotImplementedException();
+                };
             }, Lifetime.Singleton);
             return Task.CompletedTask;
         }
