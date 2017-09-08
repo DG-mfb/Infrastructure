@@ -57,9 +57,9 @@ namespace WsFederationMetadataProvider.Metadata
                 var metadata = new XmlDocument();
                 metadata.LoadXml(sb.ToString());
 
-                SignMetadata(configuration, metadata.DocumentElement);
+                this.SignMetadata(configuration, metadata.DocumentElement);
 
-                _federationMetadataWriter.Write(metadata.DocumentElement, configuration);
+                this._federationMetadataWriter.Write(metadata.DocumentElement, configuration);
                 return Task.CompletedTask;
             }
             catch (Exception ex)
