@@ -15,7 +15,7 @@ namespace SecurityManagement.Initialisation
         {
             dependencyResolver.RegisterType<CertificateManager>(Lifetime.Transient);
             dependencyResolver.RegisterType<XmlSignatureManager>(Lifetime.Transient);
-            
+            dependencyResolver.RegisterType<CertificateValidator>(Lifetime.Transient);
             return Task.CompletedTask;
         }
     }

@@ -40,6 +40,8 @@ namespace SSOShibbolethOwinMiddleware.Handlers
             AuthenticationResponseChallenge challenge = this.Helper.LookupChallenge(this.Options.AuthenticationType, this.Options.AuthenticationMode);
             if (challenge == null)
                 return;
+            
+            var configuration = await this.Options.ConfigurationManager.GetConfigurationAsync(new System.Threading.CancellationToken());
             //ToDo:
             //Quick hack to make sure it will redirect to shibboleth and deserialise the metadata
             var request = System.Net.WebRequest.Create(base.Options.MetadataAddress);

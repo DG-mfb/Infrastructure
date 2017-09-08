@@ -1,7 +1,6 @@
 ﻿using System;
 using Kernel.Federation.MetaData;
 using Kernel.Initialisation;
-using Microsoft.Owin;
 using Owin;
 
 namespace SSOShibbolethOwinMiddleware.Extensions
@@ -14,7 +13,8 @@ namespace SSOShibbolethOwinMiddleware.Extensions
                 throw new ArgumentNullException("app");
             if (options == null)
                 throw new ArgumentNullException("options");
-            app.Use((object)typeof(ShibbolethOwinMiddleware), (object)app, (object)options);
+            var resolver = ApplicationConfiguration.Instance.DependencyResolver;
+            app.Use((object)typeof(ShibbolethOwinMiddleware), (object)app, (object)options, resolver);
 
             app.Map(options.SPMetadataPath, a =>
             {

@@ -49,6 +49,7 @@
     <Compile Include="DependancyResolver\IRepositoryResolver.cs" />
     <Compile Include="DependancyResolver\Lifetime.cs" />
     <Compile Include="Exceptions\BaseException.cs" />
+    <Compile Include="Extensions\DataTimeExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />

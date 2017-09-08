@@ -98,6 +98,10 @@
       <Project>{33862A55-E53A-45EF-85C4-A9E1DEF4181C}</Project>
       <Name>Federation.Protocols</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Federation\SPMetadataProvider\WsFederationMetadataProvider.csproj">
+      <Project>{220407EA-E1E1-4BC6-BEC3-3ABFE5070DF5}</Project>
+      <Name>WsFederationMetadataProvider</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

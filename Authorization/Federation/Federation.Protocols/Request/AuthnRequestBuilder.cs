@@ -12,7 +12,13 @@ namespace Federation.Protocols.Request
     {
         public Uri BuildRedirectUri(AuthnRequestContext authnRequestContext)
         {
-            var authnRequest = new AuthnRequest { Id = Guid.NewGuid().ToString(), IsPassive = true, Destination = authnRequestContext.Destination.AbsoluteUri, Version = "2.0" };
+            var configuration = authnRequestContext.Configuration;
+            var authnRequest = new AuthnRequest
+            {
+                Id = Guid.NewGuid().ToString(),
+                IsPassive = true,
+                Destination = authnRequestContext.Destination.AbsoluteUri, Version = "2.0"
+            };
             authnRequest.Issuer = new NameId { Value = "http://localhost" };
             var audienceRestrictions = new List<ConditionAbstract>();
             var audienceRestriction = new AudienceRestriction { Audience = new List<string>() { "http://localhost" } };

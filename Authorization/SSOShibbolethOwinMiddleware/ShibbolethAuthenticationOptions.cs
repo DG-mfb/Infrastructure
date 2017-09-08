@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Metadata;
 using System.IdentityModel.Tokens;
 using System.Net.Http;
-using Microsoft.IdentityModel.Protocols;
+using Kernel.Federation.Protocols;
+//using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
@@ -10,7 +12,7 @@ namespace SSOShibbolethOwinMiddleware
 {
     public class ShibbolethAuthenticationOptions : AuthenticationOptions
     {
-        public ICertificateValidator BackchannelCertificateValidator { get; set; }
+        public Kernel.Federation.CertificateProvider.ICertificateValidator BackchannelCertificateValidator { get; set; }
 
         private ICollection<ISecurityTokenValidator> _securityTokenHandlers = new List<ISecurityTokenValidator>()
         {
@@ -18,6 +20,7 @@ namespace SSOShibbolethOwinMiddleware
             //(Microsoft.IdentityModel.Tokens.ISecurityTokenValidator) new Microsoft.IdentityModel.Tokens.SamlSecurityTokenHandler(),
             //(Microsoft.IdentityModel.Tokens.ISecurityTokenValidator) new JwtSecurityTokenHandler()
         };
+
         private Microsoft.IdentityModel.Tokens.TokenValidationParameters _tokenValidationParameters;
 
 
@@ -37,11 +40,11 @@ namespace SSOShibbolethOwinMiddleware
             }
         }
 
-        public object Configuration { get; set; }
+        public MetadataBase Configuration { get; set; }
 
         public string MetadataAddress { get; set; }
 
-        public IConfigurationManager<object> ConfigurationManager { get; set; }
+        public IConfigurationManager<MetadataBase> ConfigurationManager { get; set; }
 
         public bool RefreshOnIssuerKeyNotFound { get; set; }
 

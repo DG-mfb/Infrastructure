@@ -47,6 +47,7 @@
     <Compile Include="DefaultSigning\SignedMetadata.cs" />
     <Compile Include="DefaultSigning\XmlSignature.cs" />
     <Compile Include="Exceptions\SamlSignatureException.cs" />
+    <Compile Include="CertificateValidator.cs" />
     <Compile Include="Initialisation\SecurityInitialiser.cs" />
     <Compile Include="XmlSignatureManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +60,10 @@
     <ProjectReference Include="..\..\..\Kernel\Kernel.Cryptography\Kernel.Cryptography.csproj">
       <Project>{857217F2-B265-4154-883F-568285643238}</Project>
       <Name>Kernel.Cryptography</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kernel\Kernel.Federation\Kernel.Federation.csproj">
+      <Project>{47FE8E9F-CCF6-46B7-BA75-CBA1D1F56D7A}</Project>
+      <Name>Kernel.Federation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Kernel\Kernel\Kernel.csproj">
       <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>

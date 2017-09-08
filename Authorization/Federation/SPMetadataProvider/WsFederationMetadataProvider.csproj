@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="CertificateProviderImplementation\CertificateProvider.cs" />
     <Compile Include="CertificateProviderImplementation\SertificateCachePopulator.cs" />
+    <Compile Include="Configuration\WsFederationConfigurationRetriever.cs" />
     <Compile Include="Initialisation\WsFederationMetadataProviderInitialiser.cs" />
     <Compile Include="Metadata\CertificateContext.cs" />
     <Compile Include="Metadata\ConsumerServiceContext.cs" />
@@ -93,6 +94,14 @@
     <ProjectReference Include="..\..\..\Kernel\Kernel\Kernel.csproj">
       <Project>{e198c691-91a6-4082-9976-f5f006f24960}</Project>
       <Name>Kernel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Serialisation\WsMetadataSerialisation\WsMetadataSerialisation.csproj">
+      <Project>{D63B92B8-863B-493D-8117-0960DB06B554}</Project>
+      <Name>WsMetadataSerialisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Federation.Protocols\Federation.Protocols.csproj">
+      <Project>{33862A55-E53A-45EF-85C4-A9E1DEF4181C}</Project>
+      <Name>Federation.Protocols</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
