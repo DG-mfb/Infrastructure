@@ -145,7 +145,7 @@ namespace WsFederationMetadataProviderTests
             audienceRestrictions.Add(audienceRestriction);
 
             authnRequest.Conditions = new Conditions { Items = audienceRestrictions };
-
+            var requestBuilder = new AuthnRequestBuilder();
             var serialiser = new XMLSerialiser();
             var ms = new MemoryStream();
             var sb = new StringBuilder();
@@ -159,22 +159,10 @@ namespace WsFederationMetadataProviderTests
                 var streamReader = new StreamReader(ms);
                 var xmlString = streamReader.ReadToEnd();
                 ms.Position = 0;
-                var encoded = DeflateEncode(xmlString);// Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length, Base64FormattingOptions.None);
+                var encoded = requestBuilder.DeflateEncode(xmlString);// Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length, Base64FormattingOptions.None);
                 var result = "https://dg-mfb/idp/profile/SAML2/Redirect/SSO?" + "SAMLRequest=" + Uri.EscapeDataString(encoded);
             }
             //ASSERT
-        }
-
-        public static string DeflateEncode(string val)
-        {
-            var memoryStream = new MemoryStream();
-            using (var writer = new StreamWriter(new DeflateStream(memoryStream, CompressionMode.Compress, true), new UTF8Encoding(false)))
-            {
-                writer.Write(val);
-                writer.Close();
-
-                return Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length, Base64FormattingOptions.None);
-            }
         }
     }
 }

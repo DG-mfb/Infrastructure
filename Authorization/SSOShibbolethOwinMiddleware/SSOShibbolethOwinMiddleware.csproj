@@ -94,6 +94,10 @@
       <Project>{D63B92B8-863B-493D-8117-0960DB06B554}</Project>
       <Name>WsMetadataSerialisation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Federation\Federation.Protocols\Federation.Protocols.csproj">
+      <Project>{33862A55-E53A-45EF-85C4-A9E1DEF4181C}</Project>
+      <Name>Federation.Protocols</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

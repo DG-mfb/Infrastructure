@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml;
+using Federation.Protocols.Request;
+using Kernel.Federation.Protocols;
 using Microsoft.Owin.Logging;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Infrastructure;
@@ -61,7 +63,7 @@ namespace SSOShibbolethOwinMiddleware.Handlers
                 var ser = new FederationMetadataSerialiser();
                 metadata = ser.Deserialise(reader);
             }
-            string signInUrl = null;
+            Uri signInUrl = null;
 
             var entitiesDescriptors = metadata as EntitiesDescriptor;
             if (entitiesDescriptors != null)
@@ -69,7 +71,7 @@ namespace SSOShibbolethOwinMiddleware.Handlers
                 var idDescpritor = entitiesDescriptors.ChildEntities.SelectMany(x => x.RoleDescriptors)
                     .First(x => x.GetType() == typeof(IdentityProviderSingleSignOnDescriptor)) as IdentityProviderSingleSignOnDescriptor;
                 signInUrl = idDescpritor.SingleSignOnServices.FirstOrDefault(x => x.Binding == new Uri("urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"))
-                    .Location.AbsoluteUri;
+                    .Location;
             }
 
             var entitityDescriptor = metadata as EntityDescriptor;
@@ -78,9 +80,12 @@ namespace SSOShibbolethOwinMiddleware.Handlers
                 var idDescpritor = entitityDescriptor.RoleDescriptors.Select(x => x)
                     .First(x => x.GetType() == typeof(IdentityProviderSingleSignOnDescriptor)) as IdentityProviderSingleSignOnDescriptor;
                 signInUrl = idDescpritor.SingleSignOnServices.FirstOrDefault(x => x.Binding == new Uri("urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"))
-                    .Location.AbsoluteUri;
+                    .Location;
             }
 
+            var requestContext = new AuthnRequestContext(null, signInUrl);
+            var redirectUriBuilder = new AuthnRequestBuilder();
+            var redirectUri = redirectUriBuilder.BuildRedirectUri(requestContext);
             //if (this._configuration == null)
             //    this._configuration = await this.Options.ConfigurationManager.GetConfigurationAsync(this.Context.Request.CallCancelled);
             //string baseUri = this.Request.Scheme + Uri.SchemeDelimiter + (object)this.Request.Host + (object)this.Request.PathBase;
@@ -106,7 +111,7 @@ namespace SSOShibbolethOwinMiddleware.Handlers
             //string signInUrl = notification.ProtocolMessage.CreateSignInUrl();
             //if (!Uri.IsWellFormedUriString(signInUrl, UriKind.Absolute))
             //    this._logger.WriteWarning("The sign-in redirect URI is malformed: " + signInUrl);
-            this.Response.Redirect(signInUrl);
+            this.Response.Redirect(redirectUri.AbsoluteUri);
         }
 
     }
