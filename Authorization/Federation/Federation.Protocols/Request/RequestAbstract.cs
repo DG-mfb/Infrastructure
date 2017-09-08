@@ -102,8 +102,8 @@ namespace Federation.Protocols.Request
         /// Identifies the entity that generated the request message.
         /// </summary>
         /// <value>The issuer.</value>
-        //[XmlElement("Issuer", Namespace = Saml20Constants.Assertion, Order = 1)]
-        //public NameId Issuer { get; set; }
+        [XmlElement("Issuer", Namespace = Saml20Constants.Assertion, Order = 1)]
+        public NameId Issuer { get; set; }
 
         /// <summary>
         /// Gets or sets the signature.

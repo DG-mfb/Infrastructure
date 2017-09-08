@@ -8,6 +8,18 @@ namespace Serialisation.Xml
 {
     public class XMLSerialiser : IXmlSerialiser
     {
+        public XMLSerialiser()
+        {
+            this.XmlNamespaces = new XmlSerializerNamespaces();
+            
+        }
+
+        /// <summary>
+        /// Gets the instance of XmlSerializerNamespaces that is used by this class.
+        /// </summary>
+        /// <value>The XmlSerializerNamespaces instance.</value>
+        public XmlSerializerNamespaces XmlNamespaces { get; private set; }
+
         public T Deserialise<T>(XmlReader reader)
         {
             throw new NotImplementedException();
@@ -45,8 +57,8 @@ namespace Serialisation.Xml
            
             var type = obj.GetType();
             
-            var xmlSerialzer = new XmlSerializer(type);
-            xmlSerialzer.Serialize(stream, obj);
+            var xmlSerializer = new XmlSerializer(type);
+            xmlSerializer.Serialize(stream, obj, this.XmlNamespaces);
         }
 
         public string Serialize(object o)

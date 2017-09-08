@@ -186,8 +186,8 @@ namespace Federation.Protocols.Request
         /// conditions on the use of the request itself.
         /// </summary>
         /// <value>The conditions.</value>
-        //[XmlElement("Conditions", Namespace = Saml20Constants.Assertion, Order = 3)]
-        //public Conditions Conditions { get; set; }
+        [XmlElement("Conditions", Namespace = Saml20Constants.Assertion, Order = 3)]
+        public Conditions Conditions { get; set; }
 
         /// <summary>
         /// Gets or sets the name ID policy.

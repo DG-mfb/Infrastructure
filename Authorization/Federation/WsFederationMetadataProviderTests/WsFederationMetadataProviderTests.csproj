@@ -65,9 +65,17 @@
       <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
       <Name>Kernel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Serialisation\Serialisation.Xml\Serialisation.Xml.csproj">
+      <Project>{CAAA3B30-55E9-4F50-8F09-89CA54DF9614}</Project>
+      <Name>Serialisation.Xml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Serialisation\WsMetadataSerialisation\WsMetadataSerialisation.csproj">
       <Project>{D63B92B8-863B-493D-8117-0960DB06B554}</Project>
       <Name>WsMetadataSerialisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Federation.Protocols\Federation.Protocols.csproj">
+      <Project>{33862A55-E53A-45EF-85C4-A9E1DEF4181C}</Project>
+      <Name>Federation.Protocols</Name>
     </ProjectReference>
     <ProjectReference Include="..\SecurityManagement\SecurityManagement.csproj">
       <Project>{F194D759-AE81-488C-8230-EF63836B44C9}</Project>
