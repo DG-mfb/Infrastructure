@@ -15,31 +15,32 @@ namespace Federation.Protocols.Request
             var configuration = authnRequestContext.Configuration;
             var authnRequest = new AuthnRequest
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = "appId",
                 IsPassive = true,
-                Destination = authnRequestContext.Destination.AbsoluteUri, Version = "2.0"
+                Destination = authnRequestContext.Destination.AbsoluteUri,
+                Version = "2.0"
             };
-            authnRequest.Issuer = new NameId { Value = "http://localhost" };
+            authnRequest.Issuer = new NameId { Value = "http://localhost:60879/" };
             var audienceRestrictions = new List<ConditionAbstract>();
-            var audienceRestriction = new AudienceRestriction { Audience = new List<string>() { "http://localhost" } };
+            var audienceRestriction = new AudienceRestriction { Audience = new List<string>() { "http://localhost:60879/" } };
             audienceRestrictions.Add(audienceRestriction);
 
             authnRequest.Conditions = new Conditions { Items = audienceRestrictions };
             var requestBuilder = new AuthnRequestBuilder();
             var serialiser = new XMLSerialiser();
-            var ms = new MemoryStream();
-            var sb = new StringBuilder();
+            
+            //ToDo:
             serialiser.XmlNamespaces.Add("samlp", Saml20Constants.Protocol);
             serialiser.XmlNamespaces.Add("saml", Saml20Constants.Assertion);
-            //ACT
-            using (ms)
+            
+            using (var ms = new MemoryStream())
             {
                 serialiser.Serialize(ms, new[] { authnRequest });
                 ms.Position = 0;
                 var streamReader = new StreamReader(ms);
                 var xmlString = streamReader.ReadToEnd();
                 ms.Position = 0;
-                var encoded = requestBuilder.DeflateEncode(xmlString);// Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length, Base64FormattingOptions.None);
+                var encoded = requestBuilder.DeflateEncode(xmlString);
                 var result = authnRequest.Destination + "?SAMLRequest=" + Uri.EscapeDataString(encoded);
                 return new Uri(result);
             }
