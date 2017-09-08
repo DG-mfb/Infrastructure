@@ -5,13 +5,13 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AspNet.EntityFramework.IdentityProvider.Initialisation;
-using AspNet.EntityFramework.IdentityProvider.Managers;
 using Kernel.DependancyResolver;
 using Kernel.Initialisation;
 using Kernel.Logging;
 using Kernel.Reflection;
 using Microsoft.AspNet.Identity.Owin.Provider.Initialisation;
 using SecurityManagement.Initialisation;
+using Serialisation.Xml.Initialisation;
 using Shared.Initialisation;
 using WebClientMetadataWriter.Initialisation;
 using WsFederationMetadataProvider.Initialisation;
@@ -31,6 +31,7 @@ namespace ServerInitialisation
                 yield return typeof(WsFederationMetadataProviderInitialiser).Assembly;
                 yield return typeof(WebClientMetadataWriterInitialiser).Assembly;
                 yield return typeof(MetadataSerialisationInitialiser).Assembly;
+                yield return typeof(XmlSerializerInitialiser).Assembly;
                 //return Enumerable.Empty<Assembly>();
             }
         }

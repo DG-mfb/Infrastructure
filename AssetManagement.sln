@@ -145,6 +145,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClientMetadataWriter", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WsMetadataSerialisation", "Serialisation\WsMetadataSerialisation\WsMetadataSerialisation.csproj", "{D63B92B8-863B-493D-8117-0960DB06B554}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Federation.Protocols", "Authorization\Federation\Federation.Protocols\Federation.Protocols.csproj", "{33862A55-E53A-45EF-85C4-A9E1DEF4181C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialisation.Xml", "Serialisation\Serialisation.Xml\Serialisation.Xml.csproj", "{CAAA3B30-55E9-4F50-8F09-89CA54DF9614}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -371,6 +375,14 @@ Global
 		{D63B92B8-863B-493D-8117-0960DB06B554}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D63B92B8-863B-493D-8117-0960DB06B554}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D63B92B8-863B-493D-8117-0960DB06B554}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33862A55-E53A-45EF-85C4-A9E1DEF4181C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33862A55-E53A-45EF-85C4-A9E1DEF4181C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33862A55-E53A-45EF-85C4-A9E1DEF4181C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33862A55-E53A-45EF-85C4-A9E1DEF4181C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAAA3B30-55E9-4F50-8F09-89CA54DF9614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAAA3B30-55E9-4F50-8F09-89CA54DF9614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAAA3B30-55E9-4F50-8F09-89CA54DF9614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAAA3B30-55E9-4F50-8F09-89CA54DF9614}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -433,5 +445,7 @@ Global
 		{85EDB9FC-3769-4421-9AB6-5EA4117A72F7} = {59620518-6260-4F87-87AF-3142CEE75C35}
 		{D9CD2A65-E454-403C-A36D-1BEEB4FB047B} = {59620518-6260-4F87-87AF-3142CEE75C35}
 		{D63B92B8-863B-493D-8117-0960DB06B554} = {0AFE6D2B-E3B2-455F-9776-70D5C39629A4}
+		{33862A55-E53A-45EF-85C4-A9E1DEF4181C} = {59620518-6260-4F87-87AF-3142CEE75C35}
+		{CAAA3B30-55E9-4F50-8F09-89CA54DF9614} = {0AFE6D2B-E3B2-455F-9776-70D5C39629A4}
 	EndGlobalSection
 EndGlobal
