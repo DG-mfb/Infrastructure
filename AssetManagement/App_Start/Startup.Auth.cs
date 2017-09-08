@@ -43,7 +43,7 @@ namespace AssetManagement
             //ShibbolethAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://www.testshib.org/metadata/testshib-providers.xml");
 
             //Shibboleth middleware, localhost metadata metadata
-            ShibbolethAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "http://localhost:8080/idp/shibboleth");
+            ShibbolethAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://dg-mfb/idp/shibboleth");
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
