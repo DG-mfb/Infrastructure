@@ -18,7 +18,7 @@ namespace SSOShibbolethOwinMiddleware.Handlers
     {
         private const string HandledResponse = "HandledResponse";
         private readonly ILogger _logger;
-        private object _configuration;
+        private MetadataBase _configuration;
 
         public ShibbolethAccountAuthenticationHandler(ILogger logger)
         {
@@ -41,33 +41,12 @@ namespace SSOShibbolethOwinMiddleware.Handlers
             if (challenge == null)
                 return;
             
-            var configuration = await this.Options.ConfigurationManager.GetConfigurationAsync(new System.Threading.CancellationToken());
-            //ToDo:
-            //Quick hack to make sure it will redirect to shibboleth and deserialise the metadata
-            var request = System.Net.WebRequest.Create(base.Options.MetadataAddress);
-            ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            ServicePointManager.ServerCertificateValidationCallback = (_, __, ___, ____) => true;
-            // It may be more efficient to pass the stream directly, but
-            // it's likely a bit safer to pull the data off the response
-            // stream and create a new memorystream with the data
-            MetadataBase metadata;
-            using (var ms = new MemoryStream())
-            {
-                using (var response = request.GetResponse().GetResponseStream())
-                {
-                    response.CopyTo(ms);
-                    response.Close();
-                }
-                ms.Seek(0, SeekOrigin.Begin); // Rewind memorystream back to the beginning
-                                              // We want to allow exceptions to bubble up in this case
-                XmlReader reader = XmlReader.Create(ms);
-                var ser = new FederationMetadataSerialiser();
-                metadata = ser.Deserialise(reader);
-            }
+            if(this._configuration == null)
+                this._configuration = await this.Options.ConfigurationManager.GetConfigurationAsync(new System.Threading.CancellationToken());
+            
             Uri signInUrl = null;
 
-            var entitiesDescriptors = metadata as EntitiesDescriptor;
+            var entitiesDescriptors = this._configuration as EntitiesDescriptor;
             if (entitiesDescriptors != null)
             {
                 var idDescpritor = entitiesDescriptors.ChildEntities.SelectMany(x => x.RoleDescriptors)
@@ -76,7 +55,7 @@ namespace SSOShibbolethOwinMiddleware.Handlers
                     .Location;
             }
 
-            var entitityDescriptor = metadata as EntityDescriptor;
+            var entitityDescriptor = this._configuration as EntityDescriptor;
             if (entitityDescriptor != null)
             {
                 var idDescpritor = entitityDescriptor.RoleDescriptors.Select(x => x)
@@ -88,8 +67,7 @@ namespace SSOShibbolethOwinMiddleware.Handlers
             var requestContext = new AuthnRequestContext(null, signInUrl);
             var redirectUriBuilder = new AuthnRequestBuilder();
             var redirectUri = redirectUriBuilder.BuildRedirectUri(requestContext);
-            //if (this._configuration == null)
-            //    this._configuration = await this.Options.ConfigurationManager.GetConfigurationAsync(this.Context.Request.CallCancelled);
+            
             //string baseUri = this.Request.Scheme + Uri.SchemeDelimiter + (object)this.Request.Host + (object)this.Request.PathBase;
             //string currentUri = baseUri + (object)this.Request.Path + (object)this.Request.QueryString;
             //AuthenticationProperties properties = challenge.Properties;
