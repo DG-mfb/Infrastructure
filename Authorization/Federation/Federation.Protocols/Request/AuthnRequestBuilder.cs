@@ -12,7 +12,7 @@ namespace Federation.Protocols.Request
     {
         public Uri BuildRedirectUri(AuthnRequestContext authnRequestContext)
         {
-            var authnRequest = new AuthnRequest { Id = Guid.NewGuid().ToString(), IsPassive = true, Destination = authnRequestContext.Destination.AbsolutePath, Version = "2.0" };
+            var authnRequest = new AuthnRequest { Id = Guid.NewGuid().ToString(), IsPassive = true, Destination = authnRequestContext.Destination.AbsoluteUri, Version = "2.0" };
             authnRequest.Issuer = new NameId { Value = "http://localhost" };
             var audienceRestrictions = new List<ConditionAbstract>();
             var audienceRestriction = new AudienceRestriction { Audience = new List<string>() { "http://localhost" } };
@@ -34,12 +34,12 @@ namespace Federation.Protocols.Request
                 var xmlString = streamReader.ReadToEnd();
                 ms.Position = 0;
                 var encoded = requestBuilder.DeflateEncode(xmlString);// Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length, Base64FormattingOptions.None);
-                var result = authnRequest.Destination + "SAMLRequest=" + Uri.EscapeDataString(encoded);
+                var result = authnRequest.Destination + "?SAMLRequest=" + Uri.EscapeDataString(encoded);
                 return new Uri(result);
             }
         }
 
-        public string DeflateEncode(string val)
+        private string DeflateEncode(string val)
         {
             using (var memoryStream = new MemoryStream())
             {

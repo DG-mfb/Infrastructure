@@ -8,6 +8,7 @@ using System.Xml;
 using Federation.Protocols.Request;
 using Kernel.Extensions;
 using Kernel.Federation.MetaData;
+using Kernel.Federation.Protocols;
 using NUnit.Framework;
 using SecurityManagement;
 using Serialisation.Xml;
@@ -138,30 +139,9 @@ namespace WsFederationMetadataProviderTests
         public void RedirectUriBuildTest()
         {
             //ARRANGE
-            var authnRequest = new AuthnRequest { Id = Guid.NewGuid().ToString(), IsPassive = true, Destination = "http://localhost", Version = "2.0" };
-            authnRequest.Issuer = new NameId { Value = "http://localhost" };
-            var audienceRestrictions = new List<ConditionAbstract>();
-            var audienceRestriction = new AudienceRestriction { Audience = new List<string>() { "http://localhost" } };
-            audienceRestrictions.Add(audienceRestriction);
-
-            authnRequest.Conditions = new Conditions { Items = audienceRestrictions };
+            var requestContext = new AuthnRequestContext(null, new Uri("https://dg-mfb/idp/profile/SAML2/Redirect/SSO"));
             var requestBuilder = new AuthnRequestBuilder();
-            var serialiser = new XMLSerialiser();
-            var ms = new MemoryStream();
-            var sb = new StringBuilder();
-            serialiser.XmlNamespaces.Add("samlp", Saml20Constants.Protocol);
-            serialiser.XmlNamespaces.Add("saml", Saml20Constants.Assertion);
-            //ACT
-            using (ms)
-            {
-                serialiser.Serialize(ms, new[] { authnRequest });
-                ms.Position = 0;
-                var streamReader = new StreamReader(ms);
-                var xmlString = streamReader.ReadToEnd();
-                ms.Position = 0;
-                var encoded = requestBuilder.DeflateEncode(xmlString);// Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length, Base64FormattingOptions.None);
-                var result = "https://dg-mfb/idp/profile/SAML2/Redirect/SSO?" + "SAMLRequest=" + Uri.EscapeDataString(encoded);
-            }
+            var uri = requestBuilder.BuildRedirectUri(requestContext);
             //ASSERT
         }
     }
