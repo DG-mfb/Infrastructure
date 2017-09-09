@@ -59,7 +59,7 @@ namespace SSOShibbolethOwinMiddleware
 
         private static HttpMessageHandler ResolveHttpMessageHandler(ShibbolethAuthenticationOptions options)
         {
-            HttpMessageHandler httpMessageHandler = options.BackchannelHttpHandler ?? (HttpMessageHandler)new WebRequestHandler();
+            HttpMessageHandler httpMessageHandler = options.BackchannelHttpHandler ?? new WebRequestHandler();
             if (options.BackchannelCertificateValidator != null)
             {
                 WebRequestHandler webRequestHandler = httpMessageHandler as WebRequestHandler;

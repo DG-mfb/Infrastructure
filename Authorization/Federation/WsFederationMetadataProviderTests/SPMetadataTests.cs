@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Metadata;
-using System.IO;
-using System.IO.Compression;
-using System.Text;
 using System.Xml;
 using Federation.Protocols.Request;
 using Kernel.Extensions;
@@ -11,7 +7,6 @@ using Kernel.Federation.MetaData;
 using Kernel.Federation.Protocols;
 using NUnit.Framework;
 using SecurityManagement;
-using Serialisation.Xml;
 using WsFederationMetadataProvider.Metadata;
 using WsFederationMetadataProviderTests.Mock;
 using WsMetadataSerialisation.Serialisation;
@@ -26,22 +21,22 @@ namespace WsFederationMetadataProviderTests
         {
             //ARRANGE
             var result = String.Empty;
-            var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
-            //var metadataWriter = new TestMetadatWriter(el =>
-            //{
-            //    using (var writer = XmlWriter.Create(@"d:\test.xml"))
-            //    {
-            //        el.WriteTo(writer);
-            //        writer.Flush();
-            //    }
+            //var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
+            var metadataWriter = new TestMetadatWriter(el =>
+            {
+                using (var writer = XmlWriter.Create(@"d:\SPMetadataTest.xml"))
+                {
+                    el.WriteTo(writer);
+                    writer.Flush();
+                }
 
-            //});
+            });
 
             var configuration = new SPSSOMetadataConfiguration
             {
                 AuthnRequestsSigned = true,
                 DescriptorId = "Idp1",
-                EntityId = new Uri("http://localhost:64247/sso/saml2/post/AssertionConsumerService.aspx"),
+                EntityId = new Uri("http://localhost:60879/sp/metadata"),
                 MetadatFilePathDestination = @"D:\SPSSOMetadata.xml",
                 SupportedProtocols = new[] { "urn:oasis:names:tc:SAML:2.0:protocol" },
                 SignMetadata = true,
@@ -50,7 +45,7 @@ namespace WsFederationMetadataProviderTests
                     Index = 0,
                     IsDefault = true,
                     Binding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST",
-                    Location = "http://localhost:64247/sso/saml2/post/AssertionConsumerService.aspx"
+                    Location = "http://localhost:60879/ssologon"
                 }},
                 Keys = new CertificateContext[] { new CertificateContext
                 {

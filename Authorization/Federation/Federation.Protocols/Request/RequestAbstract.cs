@@ -26,8 +26,9 @@ namespace Federation.Protocols.Request
         /// The time instant of issue of the request.
         /// </summary>
         /// <value>The issue instant.</value>
-        [XmlIgnore]
-        public DateTime? IssueInstant { get; set; }
+        //[XmlIgnore]
+        [XmlAttribute("IssueInstant", DataType = "dateTime")]
+        public DateTime IssueInstant { get; set; }
 
         #region Attributes
 

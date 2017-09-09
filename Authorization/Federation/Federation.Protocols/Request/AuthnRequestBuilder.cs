@@ -15,12 +15,13 @@ namespace Federation.Protocols.Request
             var configuration = authnRequestContext.Configuration;
             var authnRequest = new AuthnRequest
             {
-                Id = "appId",
-                IsPassive = true,
+                Id = "http://localhost:60879/sp/metadata",
+                IsPassive = false,
                 Destination = authnRequestContext.Destination.AbsoluteUri,
-                Version = "2.0"
+                Version = "2.0",
+                IssueInstant = DateTime.UtcNow
             };
-            authnRequest.Issuer = new NameId { Value = "http://localhost:60879/" };
+            authnRequest.Issuer = new NameId { Value = "http://localhost:60879/sp/metadata" };
             var audienceRestrictions = new List<ConditionAbstract>();
             var audienceRestriction = new AudienceRestriction { Audience = new List<string>() { "http://localhost:60879/" } };
             audienceRestrictions.Add(audienceRestriction);
@@ -29,7 +30,6 @@ namespace Federation.Protocols.Request
             var requestBuilder = new AuthnRequestBuilder();
             var serialiser = new XMLSerialiser();
             
-            //ToDo:
             serialiser.XmlNamespaces.Add("samlp", Saml20Constants.Protocol);
             serialiser.XmlNamespaces.Add("saml", Saml20Constants.Assertion);
             
