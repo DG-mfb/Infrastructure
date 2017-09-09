@@ -83,7 +83,7 @@ namespace WsFederationMetadataProvider.Metadata
 
                 keyDescriptor.Use = keyType;
 
-                keyDescriptor.KeyInfo = new SecurityKeyIdentifier(new X509IssuerSerialKeyIdentifierClause(certificate));
+                keyDescriptor.KeyInfo = new SecurityKeyIdentifier(new X509RawDataKeyIdentifierClause(certificate));
 
                 Descriptor.Keys.Add(keyDescriptor);
             }
