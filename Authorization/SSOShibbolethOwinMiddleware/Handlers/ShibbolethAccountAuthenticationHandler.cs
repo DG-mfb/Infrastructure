@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Metadata;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Federation.Protocols.Request;
 using Kernel.DependancyResolver;
@@ -39,8 +40,10 @@ namespace SSOShibbolethOwinMiddleware.Handlers
             AuthenticationResponseChallenge challenge = this.Helper.LookupChallenge(this.Options.AuthenticationType, this.Options.AuthenticationMode);
             if (challenge == null)
                 return;
-            
-            if(this._configuration == null)
+            //ToDo: shoudn't need those. The tests don't so probably reletated to IIS express etc
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            if (this._configuration == null)
                 this._configuration = await this.Options.ConfigurationManager.GetConfigurationAsync(new System.Threading.CancellationToken());
             
             Uri signInUrl = null;

@@ -53,26 +53,50 @@ namespace Federation.Protocols.Request
                 var xmlString = streamReader.ReadToEnd();
                 ms.Position = 0;
                 var encoded = this.DeflateEncode(xmlString);
-                var encodedEscaped = Uri.EscapeDataString(encoded);
+                var encodedEscaped = Uri.EscapeDataString(this.UpperCaseUrlEncode(encoded));
+                sb.Append("SAMLRequest=");
                 sb.Append(encodedEscaped);
-                var signed = this.SignRequest(sb);
-                var result = authnRequest.Destination + "?SAMLRequest=" + sb.ToString();
+                this.SignRequest(sb);
+                var result = authnRequest.Destination + "?" + sb.ToString();
                 return new Uri(result);
             }
         }
 
-        private string SignRequest(StringBuilder sb)
+        private void SignRequest(StringBuilder sb)
         {
             //ToDo:
-            var cert = this._certificateManager.GetCertificate(@"D:\Dan\Software\SGWI\ThirdParty\devCertsPackage\employeeportaldev.safeguardworld.com.pfx", StringExtensions.ToSecureString("$Password1!"));
             sb.AppendFormat("&{0}={1}", HttpRedirectBindingConstants.SigAlg, Uri.EscapeDataString(SignedXml.XmlDsigRSASHA1Url));
-            var signed = RSADataProtection.SignDataSHA1((RSA)cert.PrivateKey, Encoding.UTF8.GetBytes(sb.ToString()));
-            //var isValid = RSADataProtection.VerifyDataSHA1Signed((RSA)cert.PrivateKey, Encoding.UTF8.GetBytes(sb.ToString()), signed);
-            var base64 = Convert.ToBase64String(signed);
-            var escaped = Uri.EscapeDataString(base64);
-            sb.AppendFormat("&{0}={1}", HttpRedirectBindingConstants.Signature, escaped);
-            return sb.ToString();
+            this.SignData(sb);
         }
+        private StringBuilder SignData(StringBuilder sb)
+        {
+            //Todo: use configuration
+            var cert = this._certificateManager.GetCertificate(@"D:\Dan\Software\SGWI\ThirdParty\devCertsPackage\employeeportaldev.safeguardworld.com.pfx", StringExtensions.ToSecureString("$Password1!"));
+            var dataToSign = Encoding.UTF8.GetBytes(sb.ToString());
+           
+            var signed = RSADataProtection.SignDataSHA1((RSA)cert.PrivateKey, dataToSign);
+            
+            var base64 = Convert.ToBase64String(signed);
+            var escaped = Uri.EscapeDataString(this.UpperCaseUrlEncode(base64));
+            sb.AppendFormat("&{0}={1}", HttpRedirectBindingConstants.Signature, escaped);
+            return sb;
+        }
+
+        private string UpperCaseUrlEncode(string value)
+        {
+            var result = new StringBuilder(value);
+            for (var i = 0; i < result.Length; i++)
+            {
+                if (result[i] == '%')
+                {
+                    result[++i] = char.ToUpper(result[i]);
+                    result[++i] = char.ToUpper(result[i]);
+                }
+            }
+
+            return result.ToString();
+        }
+
         private string DeflateEncode(string val)
         {
             using (var memoryStream = new MemoryStream())

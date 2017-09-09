@@ -23,7 +23,9 @@ namespace WsFederationMetadataProviderTests
             var documentRetrieer = new HttpDocumentRetriever(httpClient);
 
             //ACT
-            var document = await documentRetrieer.GetDocumentAsync("https://dg-mfb/idp/shibboleth", new CancellationToken());
+            
+            //var document = await documentRetrieer.GetDocumentAsync("https://dg-mfb/idp/shibboleth", new CancellationToken());
+            var document = await documentRetrieer.GetDocumentAsync("https://www.testshib.org/metadata/testshib-providers.xml", new CancellationToken());
             //ASSERT
             Assert.IsFalse(String.IsNullOrWhiteSpace(document));
         }
@@ -38,7 +40,8 @@ namespace WsFederationMetadataProviderTests
             var documentRetrieer = new HttpDocumentRetriever(httpClient);
 
             //ACT
-            var baseMetadata = await WsFederationConfigurationRetriever.GetAsync("https://dg-mfb/idp/shibboleth", documentRetrieer, new CancellationToken());
+            //var baseMetadata = await WsFederationConfigurationRetriever.GetAsync("https://dg-mfb/idp/shibboleth", documentRetrieer, new CancellationToken());
+            var baseMetadata = await WsFederationConfigurationRetriever.GetAsync("https://www.testshib.org/metadata/testshib-providers.xml", documentRetrieer, new CancellationToken());
             var metadata = baseMetadata as EntityDescriptor;
             //ASSERT
             Assert.IsTrue(metadata != null);
