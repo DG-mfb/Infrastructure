@@ -45,7 +45,7 @@ namespace WsFederationMetadataProviderTests
                     Index = 0,
                     IsDefault = true,
                     Binding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST",
-                    Location = "http://localhost:60879/ssologon"
+                    Location = "http://localhost:60879/api/Account/SSOLogon"
                 }},
                 Keys = new CertificateContext[] { new CertificateContext
                 {

@@ -66,6 +66,12 @@ namespace AssetManagement.Controllers
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
         }
+        
+        [Route("SSOLogon")]
+        public IHttpActionResult SSOLogon()
+        {
+            return Ok("User authenticated by Shibboleth");
+        }
 
         // POST api/Account/Logout
         [Route("Logout")]
