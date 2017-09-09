@@ -45,6 +45,7 @@
     <Compile Include="CertificateManagement\ICertificateManager.cs" />
     <Compile Include="DataProtection\DataProtector.cs" />
     <Compile Include="DataProtection\IDataProtector.cs" />
+    <Compile Include="DataProtection\RSADataProtection.cs" />
     <Compile Include="DPAPIEncryption.cs" />
     <Compile Include="HashBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,16 +1,13 @@
 ﻿using System;
 using System.IdentityModel.Metadata;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using System.Xml;
 using Federation.Protocols.Request;
+using Kernel.DependancyResolver;
 using Kernel.Federation.Protocols;
 using Microsoft.Owin.Logging;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Infrastructure;
-using WsMetadataSerialisation.Serialisation;
 
 namespace SSOShibbolethOwinMiddleware.Handlers
 {
@@ -19,9 +16,11 @@ namespace SSOShibbolethOwinMiddleware.Handlers
         private const string HandledResponse = "HandledResponse";
         private readonly ILogger _logger;
         private MetadataBase _configuration;
+        private readonly IDependencyResolver _resolver;
 
-        public ShibbolethAccountAuthenticationHandler(ILogger logger)
+        public ShibbolethAccountAuthenticationHandler(ILogger logger, IDependencyResolver resolver)
         {
+            this._resolver = resolver;
             this._logger = logger;
         }
 
@@ -65,7 +64,7 @@ namespace SSOShibbolethOwinMiddleware.Handlers
             }
 
             var requestContext = new AuthnRequestContext(null, signInUrl);
-            var redirectUriBuilder = new AuthnRequestBuilder();
+            var redirectUriBuilder = this._resolver.Resolve<AuthnRequestBuilder>();
             var redirectUri = redirectUriBuilder.BuildRedirectUri(requestContext);
             
             //string baseUri = this.Request.Scheme + Uri.SchemeDelimiter + (object)this.Request.Host + (object)this.Request.PathBase;

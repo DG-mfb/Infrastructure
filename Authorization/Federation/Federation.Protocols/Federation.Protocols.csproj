@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,11 +50,16 @@
     <Compile Include="Request\AuthnRequestBuilder.cs" />
     <Compile Include="Request\ConditionAbstract.cs" />
     <Compile Include="Request\Conditions.cs" />
+    <Compile Include="Request\HttpRedirectBindingConstants.cs" />
     <Compile Include="Request\NameId.cs" />
     <Compile Include="Request\RequestAbstract.cs" />
     <Compile Include="Request\Saml20Constants.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Kernel\Kernel.Cryptography\Kernel.Cryptography.csproj">
+      <Project>{857217F2-B265-4154-883F-568285643238}</Project>
+      <Name>Kernel.Cryptography</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Kernel\Kernel.Federation\Kernel.Federation.csproj">
       <Project>{47FE8E9F-CCF6-46B7-BA75-CBA1D1F56D7A}</Project>
       <Name>Kernel.Federation</Name>

@@ -54,7 +54,7 @@ namespace SSOShibbolethOwinMiddleware
         
         protected override AuthenticationHandler<ShibbolethAuthenticationOptions> CreateHandler()
         {
-            return new ShibbolethAccountAuthenticationHandler(this._logger);
+            return new ShibbolethAccountAuthenticationHandler(this._logger, this._resolver);
         }
 
         private static HttpMessageHandler ResolveHttpMessageHandler(ShibbolethAuthenticationOptions options)
