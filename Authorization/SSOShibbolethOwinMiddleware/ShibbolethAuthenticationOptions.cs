@@ -104,6 +104,8 @@ namespace SSOShibbolethOwinMiddleware
 
         public PathString SPMetadataPath { get; set; }
 
+        public PathString SSOPath { get; set; }
+
         public ShibbolethAuthenticationOptions()
       : base("Shibboleth")
     {
@@ -114,6 +116,7 @@ namespace SSOShibbolethOwinMiddleware
             this.UseTokenLifetime = true;
             this.RefreshOnIssuerKeyNotFound = true;
             this.SPMetadataPath = new PathString("/sp/metadata");
+            this.SSOPath = new PathString("/account/sso");
         }
     }
 }

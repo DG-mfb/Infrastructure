@@ -6,17 +6,15 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
+using AssetManagement.Models;
+using AssetManagement.Providers;
+using AssetManagement.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using AssetManagement.Models;
-using AssetManagement.Providers;
-using AssetManagement.Results;
-using System.Security.Principal;
 
 namespace AssetManagement.Controllers
 {
@@ -72,7 +70,7 @@ namespace AssetManagement.Controllers
         {
             return Ok("User authenticated by Shibboleth");
         }
-
+        
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()

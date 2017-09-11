@@ -27,7 +27,11 @@ namespace SSOShibbolethOwinMiddleware.Handlers
 
         public override Task<bool> InvokeAsync()
         {
-            return base.InvokeAsync();
+            if (!this.Options.SSOPath.HasValue || base.Request.Path != this.Options.SSOPath)
+                return base.InvokeAsync();
+            Context.Authentication.Challenge("Shibboleth");
+            return Task.FromResult(true);
+            
         }
         protected override Task<AuthenticationTicket> AuthenticateCoreAsync()
         {
@@ -37,9 +41,14 @@ namespace SSOShibbolethOwinMiddleware.Handlers
         {
             if (this.Response.StatusCode != 401)
                 return;
-            AuthenticationResponseChallenge challenge = this.Helper.LookupChallenge(this.Options.AuthenticationType, this.Options.AuthenticationMode);
+
+            var challenge = this.Helper.LookupChallenge(this.Options.AuthenticationType, this.Options.AuthenticationMode);
             if (challenge == null)
                 return;
+
+            if (!this.Options.SSOPath.HasValue || base.Request.Path != this.Options.SSOPath)
+                return;
+
             //ToDo: shoudn't need those. The tests don't so probably reletated to IIS express etc
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
