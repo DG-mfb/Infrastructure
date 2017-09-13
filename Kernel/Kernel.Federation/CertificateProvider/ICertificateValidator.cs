@@ -31,5 +31,7 @@ namespace Kernel.Federation.CertificateProvider
         //     A Boolean value that determines whether the specified certificate is accepted
         //     for authentication.
         bool Validate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors);
+
+        void Validate(X509Certificate2 certificate);
     }
 }
