@@ -6,11 +6,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Federation.Protocols;
+using Kernel.Federation.CertificateProvider;
 using Kernel.Federation.Protocols;
+using Kernel.Initialisation;
 using WsMetadataSerialisation.Serialisation;
 
 namespace WsFederationMetadataProvider.Configuration
 {
+    //ToDo: refactor all statics. Use DI
     public class WsFederationConfigurationRetriever : IConfigurationRetriever<MetadataBase>
     {
         private static readonly XmlReaderSettings SafeSettings = new XmlReaderSettings()
@@ -35,6 +38,7 @@ namespace WsFederationMetadataProvider.Configuration
 
         public static async Task<MetadataBase> GetAsync(string address, IDocumentRetriever retriever, CancellationToken cancel)
         {
+            var validator = ApplicationConfiguration.Instance.DependencyResolver.Resolve<ICertificateValidator>();
             if (string.IsNullOrWhiteSpace(address))
                 throw new ArgumentNullException("address");
             if (retriever == null)
@@ -44,7 +48,7 @@ namespace WsFederationMetadataProvider.Configuration
             str = (string)null;
             MetadataBase federationConfiguration;
             using (XmlReader reader = XmlReader.Create((TextReader)new StringReader(document), WsFederationConfigurationRetriever.SafeSettings))
-                federationConfiguration = new FederationMetadataSerialiser().ReadMetadata(reader);
+                federationConfiguration = new FederationMetadataSerialiser(validator).ReadMetadata(reader);
             return federationConfiguration;
         }
     }

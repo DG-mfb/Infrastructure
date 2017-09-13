@@ -20,6 +20,7 @@ namespace WsFederationMetadataProviderTests
         public void SPMetadataProviderTest()
         {
             //ARRANGE
+            var certificateValidator = new CertificateValidator();
             var result = String.Empty;
             //var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
             var metadataWriter = new TestMetadatWriter(el =>
@@ -63,7 +64,7 @@ namespace WsFederationMetadataProviderTests
 
             var ssoCryptoProvider = new CertificateManager();
             var xmlSignatureManager = new XmlSignatureManager();
-            var metadataSerialiser = new FederationMetadataSerialiser();
+            var metadataSerialiser = new FederationMetadataSerialiser(certificateValidator);
             var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser, g => configuration);
             
             //ACT
@@ -86,10 +87,10 @@ namespace WsFederationMetadataProviderTests
             //    }
 
             //});
-
+            var certificateValidator = new CertificateValidator();
             var ssoCryptoProvider = new CertificateManager();
             var xmlSignatureManager = new XmlSignatureManager();
-            var metadataSerialiser = new FederationMetadataSerialiser();
+            var metadataSerialiser = new FederationMetadataSerialiser(certificateValidator);
 
             var configuration = new IdpSSOMetadataConfiguration
             {
