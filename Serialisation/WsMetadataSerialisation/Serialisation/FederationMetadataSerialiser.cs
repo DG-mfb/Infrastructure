@@ -1,12 +1,22 @@
 ﻿using System.IdentityModel.Metadata;
+using System.IdentityModel.Selectors;
 using System.IO;
 using System.Xml;
+using Kernel.Federation.CertificateProvider;
 using Kernel.Federation.MetaData;
 
 namespace WsMetadataSerialisation.Serialisation
 {
     public class FederationMetadataSerialiser : MetadataSerializer, IMetadataSerialiser<MetadataBase>
     {
+        //ToDo: resolve validator from conficuration.
+        //ICertificateValidator _certificateValidator;
+        //Needs certifikate configuration
+        //inject base class or introduce other interface
+        public FederationMetadataSerialiser(ICertificateValidator certificateValidator)
+        {
+            base.CertificateValidator = (X509CertificateValidator)certificateValidator;
+        }
         public void Serialise(XmlWriter writer, MetadataBase metadata)
         {
             base.WriteMetadata(writer, metadata);

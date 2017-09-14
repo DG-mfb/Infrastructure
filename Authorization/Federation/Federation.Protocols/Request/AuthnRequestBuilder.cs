@@ -71,7 +71,7 @@ namespace Federation.Protocols.Request
         private StringBuilder SignData(StringBuilder sb)
         {
             //Todo: use configuration
-            var cert = this._certificateManager.GetCertificate(@"D:\Dan\Software\SGWI\ThirdParty\devCertsPackage\employeeportaldev.safeguardworld.com.pfx", StringExtensions.ToSecureString("$Password1!"));
+            var cert = this._certificateManager.GetCertificate(@"D:\Dan\Software\Apira\Certificates\TestCertificates\ApiraTestCert.pfx", StringExtensions.ToSecureString("Password1"));
             var dataToSign = Encoding.UTF8.GetBytes(sb.ToString());
            
             var signed = RSADataProtection.SignDataSHA1((RSA)cert.PrivateKey, dataToSign);

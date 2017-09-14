@@ -51,8 +51,10 @@ namespace WsFederationMetadataProvider.Initialisation
                 }},
                 Keys = new CertificateContext[] { new CertificateContext
                 {
-                    SertificateFilePath = @"D:\Dan\Software\SGWI\ThirdParty\devCertsPackage\employeeportaldev.safeguardworld.com.pfx",
-                    CertificatePassword = StringExtensions.ToSecureString("$Password1!"),
+                    SertificateFilePath = @"D:\Dan\Software\Apira\Certificates\TestCertificates\ApiraTestCert.pfx",
+                    CertificatePassword = StringExtensions.ToSecureString("Password1"),
+                    //SertificateFilePath = @"D:\Dan\Software\SGWI\ThirdParty\devCertsPackage\employeeportaldev.safeguardworld.com.pfx",
+                    //CertificatePassword = StringExtensions.ToSecureString("$Password1!"),
                     Usage = "Signing",
                     DefaultForMetadataSigning = true
                 }}
