@@ -31,5 +31,10 @@ namespace WsMetadataSerialisation.Serialisation
         {
             return base.ReadMetadata(xmlReader);
         }
+
+        protected override bool ReadCustomElement<T>(XmlReader reader, T target)
+        {
+            return base.ReadCustomElement(reader, target);
+        }
     }
 }

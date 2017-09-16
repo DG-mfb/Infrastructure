@@ -45,6 +45,9 @@ namespace AssetManagement
             //Shibboleth middleware, localhost metadata metadata
             ShibbolethAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://dg-mfb/idp/shibboleth");
 
+            //imperial.ac.uk
+            //ShibbolethAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://shibboleth.imperial.ac.uk/idp/shibboleth");
+            
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
