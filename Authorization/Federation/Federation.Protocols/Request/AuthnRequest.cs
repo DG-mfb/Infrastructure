@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Federation.Protocols.Request.Elements;
+using System;
 using System.Xml.Serialization;
 
 namespace Federation.Protocols.Request
@@ -199,8 +200,8 @@ namespace Federation.Protocols.Request
         /// <remarks>
         /// This is here for a reason. Some SAML implementations require that NameIDPolicy is the first element following issuer.
         /// </remarks>
-        //[XmlElement("NameIDPolicy", Order = 2)]
-        //public NameIdPolicy NameIdPolicy { get; set; }
+        [XmlElement("NameIDPolicy", Order = 2)]
+        public NameIdPolicy NameIdPolicy { get; set; }
 
         /// <summary>
         /// Gets or sets the requested authentication context.
@@ -209,8 +210,8 @@ namespace Federation.Protocols.Request
         /// regarding this element.
         /// </summary>
         /// <value>The requested authentication context.</value>
-        //[XmlElement("RequestedAuthnContext", Order = 4)]
-        //public RequestedAuthnContext RequestedAuthnContext { get; set; }
+        [XmlElement("RequestedAuthnContext", Order = 4)]
+        public RequestedAuthnContext RequestedAuthnContext { get; set; }
 
         /// <summary>
         /// Gets or sets the scoping.
@@ -219,8 +220,8 @@ namespace Federation.Protocols.Request
         /// providers by the responder
         /// </summary>
         /// <value>The scoping.</value>
-        //[XmlElement("Scoping", Order = 5)]
-        //public Scoping Scoping { get; set; }
+        [XmlElement("Scoping", Order = 5)]
+        public Scoping Scoping { get; set; }
 
         /// <summary>
         /// Gets or sets the subject.
@@ -229,8 +230,8 @@ namespace Federation.Protocols.Request
         /// can be confirmed.
         /// </summary>
         /// <value>The subject.</value>
-        //[XmlElement("Subject", Namespace = Saml20Constants.Assertion, Order = 1)]
-        //public Subject Subject { get; set; }
+        [XmlElement("Subject", Namespace = Saml20Constants.Assertion, Order = 1)]
+        public Subject Subject { get; set; }
 
         #endregion
     }
