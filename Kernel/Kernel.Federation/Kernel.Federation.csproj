@@ -49,6 +49,20 @@
     <Compile Include="FederationConfiguration\IAllowedAudienceConfiguration.cs" />
     <Compile Include="FederationConfiguration\IConfiguration.cs" />
     <Compile Include="IRelayState.cs" />
+    <Compile Include="MetaData\Configuration\Cryptography\KeyDescriptorConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\Cryptography\KeyUsage.cs" />
+    <Compile Include="MetaData\Configuration\EndPoint\EndPointConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\EndPoint\IndexedEndPointConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\Organisation\ContactConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\Organisation\ContactType.cs" />
+    <Compile Include="MetaData\Configuration\EntityDescriptors\EntityDesriptorConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\MetadataConfigurationEntry.cs" />
+    <Compile Include="MetaData\Configuration\Organisation\OrganisationConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\Miscellaneous\OtherName.cs" />
+    <Compile Include="MetaData\Configuration\Organisation\ContactPerson.cs" />
+    <Compile Include="MetaData\Configuration\RoleDescriptors\RoleDescriptorConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\RoleDescriptors\SPSSODescriptorConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\RoleDescriptors\SSODescriptorConfiguration.cs" />
     <Compile Include="MetaData\DescriptorContext.cs" />
     <Compile Include="MetaData\ICertificateContext.cs" />
     <Compile Include="MetaData\IConsumerServiceContext.cs" />
@@ -76,10 +90,15 @@
       <Project>{5A1D47F4-B15F-4F42-8EAF-24F1474FE503}</Project>
       <Name>Kernel.Cache</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kernel.Data\Kernel.Data.csproj">
+      <Project>{58F76882-5E21-452F-A070-76D468D6E27C}</Project>
+      <Name>Kernel.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kernel\Kernel.csproj">
       <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
       <Name>Kernel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
