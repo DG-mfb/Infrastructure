@@ -21,7 +21,7 @@ namespace SSOShibbolethOwinMiddleware.Extensions
                 a.Run(c =>
                 {
                     var metadataGenerator = ShibbolethAuthenticationExtensions.ResolveMetadataGenerator<ISPMetadataGenerator>();
-                    return metadataGenerator.CreateMetadata();
+                    return metadataGenerator.CreateMetadata(MetadataType.SP);
 
                 });
             });

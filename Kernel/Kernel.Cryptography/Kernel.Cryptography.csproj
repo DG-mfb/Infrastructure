@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertificateManagement\CertificateStore.cs" />
+    <Compile Include="CertificateManagement\CertificateStore%271.cs" />
     <Compile Include="CertificateManagement\ICertificateManager.cs" />
     <Compile Include="DataProtection\DataProtector.cs" />
     <Compile Include="DataProtection\IDataProtector.cs" />

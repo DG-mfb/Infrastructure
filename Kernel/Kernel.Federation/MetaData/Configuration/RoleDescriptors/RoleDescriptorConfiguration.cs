@@ -8,6 +8,7 @@ namespace Kernel.Federation.MetaData.Configuration.RoleDescriptors
 {
     public class RoleDescriptorConfiguration : IHasID<string>
     {
+        public Type RoleDescriptorType { get; set; }
         public string Id { get; }
         public DateTimeOffset ValidUntil { get; set; }
         public TimeSpan CacheDuration { get; set; }

@@ -12,7 +12,7 @@ namespace ComponentSpace.SAML2.Metadata.Provider.Tests.Mock
             this._action = action;
         }
 
-        public void Write(XmlElement xml, IMetadataConfiguration configuration)
+        public void Write(XmlElement xml)
         {
               this._action(xml);
         }

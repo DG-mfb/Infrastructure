@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Metadata;
-using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +8,9 @@ using System.Xml;
 using Kernel.Cryptography.CertificateManagement;
 using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
+using Kernel.Federation.MetaData.Configuration.Cryptography;
+using Kernel.Federation.MetaData.Configuration.EntityDescriptors;
+using Kernel.Federation.MetaData.Configuration.RoleDescriptors;
 using WsFederationMetadataProvider.Metadata.DescriptorBuilders;
 
 namespace WsFederationMetadataProvider.Metadata
@@ -20,8 +22,8 @@ namespace WsFederationMetadataProvider.Metadata
         protected readonly ICertificateManager _certificateManager;
         protected readonly IXmlSignatureManager _xmlSignatureManager;
         protected readonly IMetadataSerialiser<MetadataBase> _serialiser;
-        protected readonly Func<IMetadataGenerator, IMetadataConfiguration> _configuration;
-        public MetadataGeneratorBase(IFederationMetadataWriter federationMetadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager, IMetadataSerialiser<MetadataBase> serialiser, Func<IMetadataGenerator, IMetadataConfiguration> configuration)
+        protected readonly Func<MetadataType , EntityDesriptorConfiguration> _configuration;
+        public MetadataGeneratorBase(IFederationMetadataWriter federationMetadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager, IMetadataSerialiser<MetadataBase> serialiser, Func<MetadataType, EntityDesriptorConfiguration> configuration)
         {
             this._federationMetadataWriter = federationMetadataWriter;
             this._certificateManager = certificateManager;
@@ -30,21 +32,18 @@ namespace WsFederationMetadataProvider.Metadata
             this._configuration = configuration;
         }
 
-        public Task CreateMetadata()
+        public Task CreateMetadata(MetadataType metadataType)
         {
-            var configuration = this._configuration(this);
+            var configuration = this._configuration(metadataType);
             return ((IMetadataGenerator)this).CreateMetadata(configuration);
         }
 
-        Task IMetadataGenerator.CreateMetadata(IMetadataConfiguration configuration)
+        Task IMetadataGenerator.CreateMetadata(EntityDesriptorConfiguration configuration)
         {
             try
             {
-                var descriptors = this.GetDescriptors(configuration);
-                foreach (var descriptor in descriptors)
-                {
-                    ProcessKeys(configuration, descriptor);
-                }
+                var descriptors = this.GetDescriptors(configuration.SPSSODescriptors);
+                
                 var entityDescriptor = BuildEntityDesciptor(configuration, descriptors);
                 
                 var sb = new StringBuilder();
@@ -59,7 +58,7 @@ namespace WsFederationMetadataProvider.Metadata
 
                 this.SignMetadata(configuration, metadata.DocumentElement);
 
-                this._federationMetadataWriter.Write(metadata.DocumentElement, configuration);
+                this._federationMetadataWriter.Write(metadata.DocumentElement);
                 return Task.CompletedTask;
             }
             catch (Exception ex)
@@ -67,47 +66,26 @@ namespace WsFederationMetadataProvider.Metadata
                 throw ex;
             }
         }
-
-        protected void ProcessKeys(IMetadataConfiguration configuration, RoleDescriptor Descriptor)
+        
+        protected void SignMetadata(EntityDesriptorConfiguration configuration, XmlElement xml)
         {
-            foreach (var key in configuration.Keys)
-            {
-                var certificate = this._certificateManager.GetCertificate(key.SertificateFilePath, key.CertificatePassword);
-
-                var keyDescriptor = new KeyDescriptor();
-                KeyType keyType;
-                if (!Enum.TryParse<KeyType>(key.Usage, out keyType))
-                {
-                    throw new InvalidCastException(String.Format("Parsing to type{0} failed. Value having been tried:{1}", typeof(KeyType), key.Usage));
-                }
-
-                keyDescriptor.Use = keyType;
-
-                keyDescriptor.KeyInfo = new SecurityKeyIdentifier(new X509RawDataKeyIdentifierClause(certificate));
-
-                Descriptor.Keys.Add(keyDescriptor);
-            }
-        }
-
-        protected void SignMetadata(IMetadataConfiguration configuration, XmlElement xml)
-        {
-        var signMetadataKey = configuration.Keys.Where(k => k.DefaultForMetadataSigning)
+        var signMetadataKey = configuration.KeyDescriptors.Where(k => k.IsDefault && (k.KeyTarget & KeyTarget.MetaData) == KeyTarget.MetaData)
                 .FirstOrDefault();
 
             if (signMetadataKey == null)
                 throw new Exception("No default certificate found");
 
-            var certificate = this._certificateManager.GetCertificate(signMetadataKey.SertificateFilePath, signMetadataKey.CertificatePassword);
+            var certificate = this._certificateManager.GetCertificate(signMetadataKey.KeyInfo);
 
             this._xmlSignatureManager.Generate(xml, certificate.PrivateKey, null, certificate, null, null, null);
         }
 
-        protected virtual EntityDescriptor BuildEntityDesciptor(IMetadataConfiguration configuration, IEnumerable<RoleDescriptor> descriptors)
+        protected virtual EntityDescriptor BuildEntityDesciptor(EntityDesriptorConfiguration configuration, IEnumerable<RoleDescriptor> descriptors)
         {
             var entityDescriptor = new EntityDescriptor()
             {
-                EntityId = new EntityId(configuration.EntityId.AbsoluteUri),
-                FederationId = "84CCAA9F05EE4BA1B13F8943FDF1D320"
+                EntityId = new EntityId(configuration.EntityId),
+                FederationId = configuration.Id
             };
 
             descriptors.Aggregate(entityDescriptor, (ed, next) =>
@@ -123,16 +101,16 @@ namespace WsFederationMetadataProvider.Metadata
         {
             return (ed, rd) => ed.RoleDescriptors.Add(rd);
         }
-        protected virtual IEnumerable<RoleDescriptor> GetDescriptors(IMetadataConfiguration configuration)
+        protected virtual IEnumerable<RoleDescriptor> GetDescriptors(IEnumerable<RoleDescriptorConfiguration> configurations)
         {
-            if (configuration.Descriptors == null || configuration.Descriptors.Count() == 0)
+            if (configurations == null || configurations.Count() == 0)
             {
                 throw new InvalidOperationException("No descriptors provided.");
             }
             var descriptors = new List<RoleDescriptor>();
-            configuration.Descriptors.Aggregate(descriptors, (agg, next) =>
+            configurations.Aggregate(descriptors, (agg, next) =>
             {
-                var descriptor = DescriptorBuildersHelper.ResolveAndBuild(next.DescriptorType, configuration);
+                var descriptor = DescriptorBuildersHelper.ResolveAndBuild(next);
                 agg.Add(descriptor);
                 return agg;
             });

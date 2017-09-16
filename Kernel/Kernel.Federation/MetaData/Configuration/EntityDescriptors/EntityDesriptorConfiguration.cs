@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kernel.Data;
+using Kernel.Federation.MetaData.Configuration.Cryptography;
 using Kernel.Federation.MetaData.Configuration.Organisation;
 using Kernel.Federation.MetaData.Configuration.RoleDescriptors;
 
@@ -15,6 +16,7 @@ namespace Kernel.Federation.MetaData.Configuration.EntityDescriptors
         public TimeSpan CacheDuration { get; set; }
         public OrganisationConfiguration Organisation { get; set; }
         public ICollection<RoleDescriptorConfiguration> RoleDescriptors { get; }
+        public ICollection<KeyDescriptorConfiguration> KeyDescriptors { get; }
         public ICollection<SPSSODescriptorConfiguration> SPSSODescriptors
         {
             get
@@ -25,6 +27,7 @@ namespace Kernel.Federation.MetaData.Configuration.EntityDescriptors
         }
         public EntityDesriptorConfiguration()
         {
+            this.KeyDescriptors = new List<KeyDescriptorConfiguration>();
             this.RoleDescriptors = new List<RoleDescriptorConfiguration>();
         }
     }

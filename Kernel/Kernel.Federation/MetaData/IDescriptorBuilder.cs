@@ -1,7 +1,9 @@
-﻿namespace Kernel.Federation.MetaData
+﻿using Kernel.Federation.MetaData.Configuration.RoleDescriptors;
+
+namespace Kernel.Federation.MetaData
 {
     public interface IDescriptorBuilder<T> where T : class
     {
-        T BuildDescriptor(IMetadataConfiguration configuration);
+        T BuildDescriptor(RoleDescriptorConfiguration configuration);
     }
 }

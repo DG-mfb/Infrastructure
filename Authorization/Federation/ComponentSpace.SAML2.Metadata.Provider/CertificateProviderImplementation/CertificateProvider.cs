@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
+using Kernel.Cryptography.CertificateManagement;
 using Kernel.Federation.CertificateProvider;
 
 namespace ComponentSpace.SAML2.Metadata.Provider.CertificateProviderImplementation
 {
-    public class CertificateProvider : ICertificateProvider
+    public class CertificateProvider : ICertificateStore
     {
         ICertificateCachePopulator _certificateCachePopulator;
 

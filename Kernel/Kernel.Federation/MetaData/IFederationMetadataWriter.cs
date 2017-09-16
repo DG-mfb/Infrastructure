@@ -4,6 +4,6 @@ namespace Kernel.Federation.MetaData
 {
     public interface IFederationMetadataWriter
     {
-        void Write(XmlElement xml, IMetadataConfiguration configuration);
+        void Write(XmlElement xml);
     }
 }

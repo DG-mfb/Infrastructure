@@ -1,8 +1,9 @@
-﻿namespace Kernel.Federation.MetaData.Configuration.Cryptography
+﻿using Kernel.Cryptography.CertificateManagement;
+
+namespace Kernel.Federation.MetaData.Configuration.Cryptography
 {
-    class FileStoreCertificateConfiguration : CertificateConfiguration<FileSystemStore>
+    public class FileStoreCertificateConfiguration : CertificateStore<FileSystemStore>
     {
-        string _certName;
         public FileStoreCertificateConfiguration(FileSystemStore store) : base(store)
         {
         }

@@ -1,8 +1,9 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using Kernel.Cryptography.CertificateManagement;
 
 namespace Kernel.Federation.MetaData.Configuration.Cryptography
 {
-    class X509StoreCertificateConfiguration : CertificateConfiguration<X509Store>
+    class X509StoreCertificateConfiguration : CertificateStore<X509Store>
     {
         string _certName;
         public X509StoreCertificateConfiguration(X509Store store, string certName) : base(store)

@@ -51,13 +51,9 @@
     <Compile Include="Metadata\CertificateContext.cs" />
     <Compile Include="Metadata\ConsumerServiceContext.cs" />
     <Compile Include="Metadata\DescriptorBuilders\DescriptorBuildersHelper.cs" />
-    <Compile Include="Metadata\DescriptorBuilders\SecurityTokenServiceDescriptorBuilder.cs" />
-    <Compile Include="Metadata\DescriptorBuilders\ApplicationServiceDescriptorBuilder.cs" />
-    <Compile Include="Metadata\DescriptorBuilders\IdentityProviderSingleSignOnDescriptorBuilder.cs" />
     <Compile Include="Metadata\DescriptorBuilders\ServiceProviderSingleSignOnDescriptorBuilder.cs" />
     <Compile Include="Metadata\DescriptorBuilders\DescriptorBuilderBase.cs" />
     <Compile Include="Metadata\IdpSSOMetadataConfiguration.cs" />
-    <Compile Include="Metadata\IdpSSOMetadataProvider.cs" />
     <Compile Include="Metadata\MetadataConfiguration.cs" />
     <Compile Include="Metadata\MetadataGeneratorBase.cs" />
     <Compile Include="Metadata\SingleSignOnServiceContext.cs" />

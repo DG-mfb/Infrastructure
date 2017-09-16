@@ -7,7 +7,7 @@ namespace WebClientMetadataWriter
 {
     internal class SSOMetadataFileWriter : IFederationMetadataWriter
     {
-        public void Write(XmlElement xml, IMetadataConfiguration configuration)
+        public void Write(XmlElement xml)
         {
             if (HttpContext.Current == null || HttpContext.Current.Response == null)
                 return;

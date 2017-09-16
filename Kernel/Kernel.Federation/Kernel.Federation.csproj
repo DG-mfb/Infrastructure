@@ -49,10 +49,9 @@
     <Compile Include="FederationConfiguration\IAllowedAudienceConfiguration.cs" />
     <Compile Include="FederationConfiguration\IConfiguration.cs" />
     <Compile Include="IRelayState.cs" />
-    <Compile Include="MetaData\Configuration\Cryptography\CertificateConfiguration%271.cs" />
-    <Compile Include="MetaData\Configuration\Cryptography\CertificateConfiguration.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\FileSystemStore.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\KeyDescriptorConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\Cryptography\KeyTarget.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\KeyUsage.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\FileStoreCertificateConfiguration.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\X509StoreCertificateConfiguration.cs" />
@@ -81,8 +80,8 @@
     <Compile Include="MetaData\ISingleSignOnServiceContext.cs" />
     <Compile Include="MetaData\ISPSSOMetadataConfiguration.cs" />
     <Compile Include="MetaData\IFederationMetadataWriter.cs" />
+    <Compile Include="MetaData\MetadataType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CertificateProvider\ICertificateProvider.cs" />
     <Compile Include="CertificateProvider\ICertificateCachePopulator.cs" />
     <Compile Include="Protocols\AuthnRequestContext.cs" />
     <Compile Include="Protocols\IAuthnRequestBuilder.cs" />
@@ -95,6 +94,10 @@
       <Project>{5A1D47F4-B15F-4F42-8EAF-24F1474FE503}</Project>
       <Name>Kernel.Cache</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kernel.Cryptography\Kernel.Cryptography.csproj">
+      <Project>{857217F2-B265-4154-883F-568285643238}</Project>
+      <Name>Kernel.Cryptography</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kernel.Data\Kernel.Data.csproj">
       <Project>{58F76882-5E21-452F-A070-76D468D6E27C}</Project>
       <Name>Kernel.Data</Name>
@@ -104,6 +107,8 @@
       <Name>Kernel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MetaData\Configuration\Discovery\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

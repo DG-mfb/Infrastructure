@@ -12,7 +12,7 @@ namespace WsFederationMetadataProviderTests.Mock
             this._action = action;
         }
 
-        public void Write(XmlElement xml, IMetadataConfiguration configuration)
+        public void Write(XmlElement xml)
         {
               this._action(xml);
         }

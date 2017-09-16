@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IdentityModel.Metadata;
 using Kernel.Federation.MetaData;
+using Kernel.Federation.MetaData.Configuration.RoleDescriptors;
 
 namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
 {
     internal class ApplicationServiceDescriptorBuilder : DescriptorBuilderBase<ApplicationServiceDescriptor>
     {
-        protected override ApplicationServiceDescriptor BuildDescriptorInternal(IMetadataConfiguration configuration)
+        protected override ApplicationServiceDescriptor BuildDescriptorInternal(RoleDescriptorConfiguration configuration)
         {
             var idpConfiguration = configuration as IIdpSSOMetadataConfiguration;
 
