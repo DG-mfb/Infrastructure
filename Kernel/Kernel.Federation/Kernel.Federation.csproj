@@ -49,8 +49,13 @@
     <Compile Include="FederationConfiguration\IAllowedAudienceConfiguration.cs" />
     <Compile Include="FederationConfiguration\IConfiguration.cs" />
     <Compile Include="IRelayState.cs" />
+    <Compile Include="MetaData\Configuration\Cryptography\CertificateConfiguration%271.cs" />
+    <Compile Include="MetaData\Configuration\Cryptography\CertificateConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\Cryptography\FileSystemStore.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\KeyDescriptorConfiguration.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\KeyUsage.cs" />
+    <Compile Include="MetaData\Configuration\Cryptography\FileStoreCertificateConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\Cryptography\X509StoreCertificateConfiguration.cs" />
     <Compile Include="MetaData\Configuration\EndPoint\EndPointConfiguration.cs" />
     <Compile Include="MetaData\Configuration\EndPoint\IndexedEndPointConfiguration.cs" />
     <Compile Include="MetaData\Configuration\Organisation\ContactConfiguration.cs" />
