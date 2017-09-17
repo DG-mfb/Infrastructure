@@ -26,16 +26,16 @@ namespace WsFederationMetadataProviderTests
             ////ARRANGE
            
             var result = String.Empty;
-            //var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
-            var metadataWriter = new TestMetadatWriter(el =>
-            {
-                using (var writer = XmlWriter.Create(@"d:\SPMetadataTest.xml"))
-                {
-                    el.WriteTo(writer);
-                    writer.Flush();
-                }
+            var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
+            //var metadataWriter = new TestMetadatWriter(el =>
+            //{
+            //    using (var writer = XmlWriter.Create(@"d:\SPMetadataTest.xml"))
+            //    {
+            //        el.WriteTo(writer);
+            //        writer.Flush();
+            //    }
 
-            });
+            //});
             
             var entityDescriptorConfiguration = MetadataHelper.BuildEntityDesriptorConfiguration();
             

@@ -14,7 +14,9 @@ namespace SecurityManagement
 
         public X509Certificate2 GetCertificate(ICertificateStore store)
         {
-            throw new NotImplementedException();
+            if (store == null)
+                throw new ArgumentNullException("store");
+            return store.GetX509Certificate2();
         }
     }
 }

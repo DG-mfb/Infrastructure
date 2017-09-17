@@ -12,7 +12,7 @@ namespace Kernel.Cryptography.CertificateManagement
             this.Store = store;
         }
 
-        public X509Certificate2 GetX509Certificate2()
+        public virtual X509Certificate2 GetX509Certificate2()
         {
             throw new NotImplementedException();
         }

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IdentityModel.Metadata;
 using System.Threading.Tasks;
 using Kernel.DependancyResolver;
-using Kernel.Extensions;
 using Kernel.Federation.MetaData;
 using Kernel.Federation.MetaData.Configuration.EntityDescriptors;
 using Shared.Initialisation;

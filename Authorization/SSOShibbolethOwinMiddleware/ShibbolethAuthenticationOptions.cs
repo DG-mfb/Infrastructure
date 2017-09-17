@@ -4,7 +4,6 @@ using System.IdentityModel.Metadata;
 using System.IdentityModel.Tokens;
 using System.Net.Http;
 using Kernel.Federation.Protocols;
-//using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
@@ -12,7 +11,7 @@ namespace SSOShibbolethOwinMiddleware
 {
     public class ShibbolethAuthenticationOptions : AuthenticationOptions
     {
-        public Kernel.Federation.CertificateProvider.ICertificateValidator BackchannelCertificateValidator { get; set; }
+        public Kernel.Cryptography.Validation.ICertificateValidator BackchannelCertificateValidator { get; set; }
 
         private ICollection<ISecurityTokenValidator> _securityTokenHandlers = new List<ISecurityTokenValidator>()
         {

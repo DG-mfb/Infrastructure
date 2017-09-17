@@ -28,7 +28,7 @@ namespace SSOShibbolethOwinMiddleware
             this._logger = app.CreateLogger<ShibbolethOwinMiddleware>();
             if (base.Options.BackchannelCertificateValidator == null)
             {
-                base.Options.BackchannelCertificateValidator = this._resolver.Resolve<Kernel.Federation.CertificateProvider.ICertificateValidator>();
+                base.Options.BackchannelCertificateValidator = this._resolver.Resolve<Kernel.Cryptography.Validation.ICertificateValidator>();
             }
 
             if (string.IsNullOrWhiteSpace(this.Options.TokenValidationParameters.AuthenticationType))

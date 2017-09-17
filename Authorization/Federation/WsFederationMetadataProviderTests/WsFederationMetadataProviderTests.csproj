@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertificateStoreTests.cs" />
+    <Compile Include="DescriptorBuildersTests.cs" />
     <Compile Include="Mock\MetadataHelper.cs" />
     <Compile Include="Mock\TestMetadatWriter.cs" />
     <Compile Include="MetadataRetrieverMetadataTests.cs" />
