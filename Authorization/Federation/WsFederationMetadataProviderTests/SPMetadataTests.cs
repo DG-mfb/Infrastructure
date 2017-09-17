@@ -1,9 +1,13 @@
 ﻿using System;
 using System.IdentityModel.Metadata;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using Federation.Protocols.Request;
 using Kernel.Extensions;
 using Kernel.Federation.MetaData;
+using Kernel.Federation.MetaData.Configuration.Cryptography;
+using Kernel.Federation.MetaData.Configuration.EntityDescriptors;
+using Kernel.Federation.MetaData.Configuration.Organisation;
 using Kernel.Federation.Protocols;
 using NUnit.Framework;
 using SecurityManagement;
@@ -19,21 +23,27 @@ namespace WsFederationMetadataProviderTests
         [Test]
         public void SPMetadataProviderTest()
         {
-            throw new NotImplementedException();
             ////ARRANGE
-            //var certificateValidator = new CertificateValidator();
-            //var result = String.Empty;
-            ////var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
-            //var metadataWriter = new TestMetadatWriter(el =>
-            //{
-            //    using (var writer = XmlWriter.Create(@"d:\SPMetadataTest.xml"))
-            //    {
-            //        el.WriteTo(writer);
-            //        writer.Flush();
-            //    }
+           
+            var result = String.Empty;
+            //var metadataWriter = new TestMetadatWriter(el => result = el.OuterXml);
+            var metadataWriter = new TestMetadatWriter(el =>
+            {
+                using (var writer = XmlWriter.Create(@"d:\SPMetadataTest.xml"))
+                {
+                    el.WriteTo(writer);
+                    writer.Flush();
+                }
 
-            //});
+            });
+            
+            var entityDescriptorConfiguration = MetadataHelper.BuildEntityDesriptorConfiguration();
+            
+            var keyDescriptorConfiguration = MetadataHelper.BuildKeyDescriptorConfiguration();
+            entityDescriptorConfiguration.KeyDescriptors.Add(keyDescriptorConfiguration);
 
+            var spDescriptorConfigurtion = MetadataHelper.BuildSPSSODescriptorConfiguration();
+            entityDescriptorConfiguration.RoleDescriptors.Add(spDescriptorConfigurtion);
             //var configuration = new SPSSOMetadataConfiguration
             //{
             //    AuthnRequestsSigned = true,
@@ -64,16 +74,16 @@ namespace WsFederationMetadataProviderTests
             //{
             //    new DescriptorContext(typeof(ServiceProviderSingleSignOnDescriptor))
             //};
+            var certificateValidator = new CertificateValidator();
+            var ssoCryptoProvider = new CertificateManager();
+            var xmlSignatureManager = new XmlSignatureManager();
+            var metadataSerialiser = new FederationMetadataSerialiser(certificateValidator);
+            var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser, g => entityDescriptorConfiguration);
 
-            //var ssoCryptoProvider = new CertificateManager();
-            //var xmlSignatureManager = new XmlSignatureManager();
-            //var metadataSerialiser = new FederationMetadataSerialiser(certificateValidator);
-            //var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser, g => configuration);
-            
-            ////ACT
-            //sPSSOMetadataProvider.CreateMetadata();
-            ////ASSERT
-            //Assert.IsFalse(String.IsNullOrWhiteSpace(result));
+            //ACT
+            sPSSOMetadataProvider.CreateMetadata(MetadataType.SP);
+            //ASSERT
+            Assert.IsFalse(String.IsNullOrWhiteSpace(result));
         }
 
         

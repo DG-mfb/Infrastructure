@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Audience\AudienceUriMode.cs" />
-    <Compile Include="CertificateProvider\ICertificateValidator.cs" />
     <Compile Include="Exceptions\AudienceRestrictionException.cs" />
     <Compile Include="Exceptions\FederationException.cs" />
     <Compile Include="Exceptions\TimeRestrictionViolationException.cs" />

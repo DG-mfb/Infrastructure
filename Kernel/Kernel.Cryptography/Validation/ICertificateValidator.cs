@@ -1,7 +1,7 @@
 ﻿using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Kernel.Federation.CertificateProvider
+namespace Kernel.Cryptography.Validation
 {
     //
     // Summary:

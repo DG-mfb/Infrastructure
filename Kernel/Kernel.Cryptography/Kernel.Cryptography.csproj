@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CertificateManagement\CertificateStore.cs" />
+    <Compile Include="CertificateManagement\ICertificateStore.cs" />
     <Compile Include="CertificateManagement\CertificateStore%271.cs" />
     <Compile Include="CertificateManagement\ICertificateManager.cs" />
     <Compile Include="DataProtection\DataProtector.cs" />
@@ -52,6 +52,7 @@
     <Compile Include="HashBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Signing.Xml\IXmlSignatureManager.cs" />
+    <Compile Include="Validation\ICertificateValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kernel\Kernel.csproj">

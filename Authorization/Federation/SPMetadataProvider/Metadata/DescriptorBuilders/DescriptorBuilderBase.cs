@@ -10,7 +10,9 @@ namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
     {
         public TRole BuildDescriptor(RoleDescriptorConfiguration configuration)
         {
-            return this.BuildDescriptorInternal(configuration);
+            var descriptor = this.BuildDescriptorInternal(configuration);
+            this.BuildKeys(configuration, descriptor);
+            return descriptor;
         }
 
         protected virtual void BuildKeys(RoleDescriptorConfiguration configuration, TRole descriptor)

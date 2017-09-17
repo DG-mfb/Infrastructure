@@ -13,7 +13,12 @@ namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
             if (spConfiguration == null)
                 throw new InvalidCastException(string.Format("Expected type: {0} but was: {1}", typeof(SPSSOMetadataConfiguration).Name, configuration.GetType().Name));
 
-            var descriptor = new ServiceProviderSingleSignOnDescriptor();
+            var descriptor = new ServiceProviderSingleSignOnDescriptor
+            {
+                WantAssertionsSigned = spConfiguration.WantAssertionsSigned,
+                ValidUntil = spConfiguration.ValidUntil.DateTime,
+                AuthenticationRequestsSigned = spConfiguration.AuthenticationRequestsSigned
+            };
 
             foreach(var protocol in configuration.ProtocolSupported)
             {

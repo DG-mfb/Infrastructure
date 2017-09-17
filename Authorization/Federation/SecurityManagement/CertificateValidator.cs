@@ -2,7 +2,7 @@
 using System.IdentityModel.Selectors;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
-using Kernel.Federation.CertificateProvider;
+using Kernel.Cryptography.Validation;
 
 namespace SecurityManagement
 {

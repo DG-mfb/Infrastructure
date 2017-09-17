@@ -2,7 +2,7 @@
 using System.IdentityModel.Selectors;
 using System.IO;
 using System.Xml;
-using Kernel.Federation.CertificateProvider;
+using Kernel.Cryptography.Validation;
 using Kernel.Federation.MetaData;
 
 namespace WsMetadataSerialisation.Serialisation

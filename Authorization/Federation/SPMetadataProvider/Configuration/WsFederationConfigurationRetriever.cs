@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Federation.Protocols;
-using Kernel.Federation.CertificateProvider;
+using Kernel.Cryptography.Validation;
 using Kernel.Federation.Protocols;
 using Kernel.Initialisation;
 using WsMetadataSerialisation.Serialisation;
