@@ -230,8 +230,8 @@ namespace Federation.Protocols.Request
         /// can be confirmed.
         /// </summary>
         /// <value>The subject.</value>
-        [XmlElement("Subject", Namespace = Saml20Constants.Assertion, Order = 1)]
-        public Subject Subject { get; set; }
+        //[XmlElement("Subject", Namespace = Saml20Constants.Assertion, Order = 1)]
+        //public Subject Subject { get; set; }
 
         #endregion
     }
