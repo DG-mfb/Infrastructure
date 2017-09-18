@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AspNet.EntityFramework.IdentityProvider.Initialisation;
+using InlineMetadataContextProvider.Initialisation;
 using Kernel.DependancyResolver;
 using Kernel.Initialisation;
 using Kernel.Logging;
@@ -32,6 +33,7 @@ namespace ServerInitialisation
                 yield return typeof(WebClientMetadataWriterInitialiser).Assembly;
                 yield return typeof(MetadataSerialisationInitialiser).Assembly;
                 yield return typeof(XmlSerializerInitialiser).Assembly;
+                yield return typeof(InlineMetadaContextProviderInitialiser).Assembly;
                 //return Enumerable.Empty<Assembly>();
             }
         }

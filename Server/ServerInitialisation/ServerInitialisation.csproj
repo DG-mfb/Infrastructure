@@ -52,6 +52,10 @@
       <Project>{b7bb0207-1471-4a4f-a939-9addb99f8249}</Project>
       <Name>AspNet.EntityFramework.IdentityProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Authorization\Federation\ClassLibrary1\InlineMetadataContextProvider.csproj">
+      <Project>{E111A891-B47D-4BDC-8BC2-62C2605FC9B8}</Project>
+      <Name>InlineMetadataContextProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Authorization\Federation\SecurityManagement\SecurityManagement.csproj">
       <Project>{F194D759-AE81-488C-8230-EF63836B44C9}</Project>
       <Name>SecurityManagement</Name>
