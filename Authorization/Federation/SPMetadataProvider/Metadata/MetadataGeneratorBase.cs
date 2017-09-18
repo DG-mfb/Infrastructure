@@ -23,19 +23,19 @@ namespace WsFederationMetadataProvider.Metadata
         protected readonly ICertificateManager _certificateManager;
         protected readonly IXmlSignatureManager _xmlSignatureManager;
         protected readonly IMetadataSerialiser<MetadataBase> _serialiser;
-        protected readonly Func<MetadataType , MetadataContext> _configuration;
-        public MetadataGeneratorBase(IFederationMetadataWriter federationMetadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager, IMetadataSerialiser<MetadataBase> serialiser, Func<MetadataType, MetadataContext> configuration)
+        protected readonly Func<MetadataType , MetadataContext> _contextFactory;
+        public MetadataGeneratorBase(IFederationMetadataWriter federationMetadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager, IMetadataSerialiser<MetadataBase> serialiser, Func<MetadataType, MetadataContext> contextFactory)
         {
             this._federationMetadataWriter = federationMetadataWriter;
             this._certificateManager = certificateManager;
             this._xmlSignatureManager = xmlSignatureManager;
             this._serialiser = serialiser;
-            this._configuration = configuration;
+            this._contextFactory = contextFactory;
         }
 
         public Task CreateMetadata(MetadataType metadataType)
         {
-            var configuration = this._configuration(metadataType);
+            var configuration = this._contextFactory(metadataType);
             return ((IMetadataGenerator)this).CreateMetadata(configuration);
         }
 
