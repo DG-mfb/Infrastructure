@@ -6,32 +6,29 @@ namespace Kernel.Federation.MetaData.Configuration.Cryptography
 {
     public class X509StoreCertificateConfiguration : CertificateStore<X509Store>
     {
-        private readonly object _searchCriteria;
-        private readonly bool _validOnly;
-        private readonly X509FindType _searchCriteriaType;
+        private readonly CertificateContext _certificateContext;
 
-        public X509StoreCertificateConfiguration(string storeName, object searchCriteria, X509FindType searchCriteriaType, StoreLocation storeLocation, bool validOnly)
-            :this(new X509Store(storeName, storeLocation), searchCriteria, searchCriteriaType, validOnly)
+        public X509StoreCertificateConfiguration(CertificateContext certificateContext)
+            :base(new X509Store(certificateContext.StoreName, certificateContext.StoreLocation))
         {
-        }
+            if (certificateContext == null)
+                throw new ArgumentNullException("certificateContext");
 
-        public X509StoreCertificateConfiguration(X509Store store, object searchCriteria, X509FindType searchCriteriaType, bool validOnly) 
-            : base(store)
-        {
-            this._searchCriteria = searchCriteria;
-            this._validOnly = validOnly;
-            this._searchCriteriaType = searchCriteriaType;
+            this._certificateContext = certificateContext;
         }
 
         public override X509Certificate2 GetX509Certificate2()
         {
+            if (this._certificateContext == null)
+                throw new ArgumentNullException("certificateContext");
+
             using (base.Store)
             {
                 base.Store.Open(OpenFlags.ReadOnly);
                 var certificates = base.Store.Certificates;
-                var cert = certificates.Find(this._searchCriteriaType, this._searchCriteria, this._validOnly);
+                var cert = certificates.Find(this._certificateContext.SearchCriteriaType, this._certificateContext.SearchCriteria, this._certificateContext.ValidOnly);
                 if (cert.Count != 1)
-                    throw new InvalidOperationException(String.Format("There must be one certificate found with search criteria type: {0}. Search criteria: {1}", this._searchCriteriaType, this._searchCriteria));
+                    throw new InvalidOperationException(String.Format("There must be one certificate found with search criteria type: {0}. Search criteria: {1}", this._certificateContext.SearchCriteriaType, this._certificateContext.SearchCriteria));
 
                 return cert[0];
             }

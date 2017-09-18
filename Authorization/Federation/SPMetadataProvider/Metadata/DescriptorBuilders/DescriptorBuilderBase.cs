@@ -2,6 +2,7 @@
 using System.IdentityModel.Metadata;
 using System.IdentityModel.Tokens;
 using Kernel.Federation.MetaData;
+using Kernel.Federation.MetaData.Configuration.Cryptography;
 using Kernel.Federation.MetaData.Configuration.RoleDescriptors;
 
 namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
@@ -19,7 +20,8 @@ namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
         {
             foreach (var key in configuration.KeyDescriptors)
             {
-                var certificate = key.KeyInfo.GetX509Certificate2();
+                var certConfiguration = new X509StoreCertificateConfiguration(key.CertificateContext);
+                var certificate = certConfiguration.GetX509Certificate2();
 
                 var keyDescriptor = new KeyDescriptor();
                 KeyType keyType;

@@ -9,6 +9,6 @@ namespace Kernel.Federation.MetaData.Configuration.Cryptography
         public KeyTarget KeyTarget { get; set; }
         public Uri Algorithm { get; }
         public bool IsDefault { get; set; }
-        public ICertificateStore KeyInfo { get; set; }
+        public CertificateContext CertificateContext { get; set; }
     }
 }

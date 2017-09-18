@@ -80,8 +80,8 @@ namespace WsFederationMetadataProvider.Metadata
 
             if (signMetadataKey == null)
                 throw new Exception("No default certificate found");
-
-            var certificate = this._certificateManager.GetCertificate(signMetadataKey.KeyInfo);
+            var certConfiguration = new X509StoreCertificateConfiguration(signMetadataKey.CertificateContext);
+            var certificate = this._certificateManager.GetCertificate(certConfiguration);
 
             this._xmlSignatureManager.Generate(xml, certificate.PrivateKey, null, certificate, null, null, null);
         }

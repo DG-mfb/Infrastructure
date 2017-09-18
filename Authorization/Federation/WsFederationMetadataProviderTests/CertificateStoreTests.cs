@@ -12,7 +12,15 @@ namespace WsFederationMetadataProviderTests
         public void X509CertStoreConfigurationTestTest_should_pass_subject_localMachine_invalid_included()
         {
             //ARRANGE
-            var certConfiguration = new X509StoreCertificateConfiguration("TestCertStore", "ApiraTestCertificate", X509FindType.FindBySubjectName, StoreLocation.LocalMachine, false);
+            var certificateContext = new CertificateContext
+            {
+                StoreName = "TestCertStore",
+                SearchCriteria = "ApiraTestCertificate",
+                ValidOnly = false,
+                SearchCriteriaType = X509FindType.FindBySubjectName,
+                StoreLocation = StoreLocation.LocalMachine
+            };
+            var certConfiguration = new X509StoreCertificateConfiguration(certificateContext);
             //ACT
             X509Certificate2 cert = null;
             //ASSERT
@@ -24,7 +32,15 @@ namespace WsFederationMetadataProviderTests
         public void X509CertStoreConfigurationTestTest_should_pass_subject_current_user_invalid_included()
         {
             //ARRANGE
-            var certConfiguration = new X509StoreCertificateConfiguration("TestCertStore", "ApiraTestCertificate", X509FindType.FindBySubjectName, StoreLocation.CurrentUser, false);
+            var certificateContext = new CertificateContext
+            {
+                StoreName = "TestCertStore",
+                SearchCriteria = "ApiraTestCertificate",
+                ValidOnly = false,
+                SearchCriteriaType = X509FindType.FindBySubjectName,
+                StoreLocation = StoreLocation.CurrentUser
+            };
+            var certConfiguration = new X509StoreCertificateConfiguration(certificateContext);
             //ACT
             X509Certificate2 cert = null;
             //ASSERT
@@ -36,7 +52,15 @@ namespace WsFederationMetadataProviderTests
         public void X509CertStoreConfigurationTestTest_should_fail_subject_localMachine_valid_only()
         {
             //ARRANGE
-            var certConfiguration = new X509StoreCertificateConfiguration("TestCertStore", "ApiraTestCertificate", X509FindType.FindBySubjectName, StoreLocation.LocalMachine, true);
+            var certificateContext = new CertificateContext
+            {
+                StoreName = "TestCertStore",
+                SearchCriteria = "ApiraTestCertificate",
+                ValidOnly = true,
+                SearchCriteriaType = X509FindType.FindBySubjectName,
+                StoreLocation = StoreLocation.LocalMachine
+            };
+            var certConfiguration = new X509StoreCertificateConfiguration(certificateContext);
             //ACT
             X509Certificate2 cert = null;
             //ASSERT

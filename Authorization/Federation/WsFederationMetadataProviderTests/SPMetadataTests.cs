@@ -5,6 +5,8 @@ using Kernel.Federation.MetaData.Configuration;
 using Kernel.Federation.Protocols;
 using NUnit.Framework;
 using SecurityManagement;
+using Serialisation.JSON;
+using Serialisation.JSON.SettingsProviders;
 using WsFederationMetadataProvider.Metadata;
 using WsFederationMetadataProviderTests.Mock;
 using WsMetadataSerialisation.Serialisation;
@@ -48,9 +50,12 @@ namespace WsFederationMetadataProviderTests
                 EntityDesriptorConfiguration = entityDescriptorConfiguration,
                 SignMetadata = true
             };
+            
             context.KeyDescriptors.Add(keyDescriptorConfiguration);
             var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser, g => context);
-            
+
+            var ser = new NSJsonSerializer(new DefaultSettingsProvider());
+            var serContext = ser.Serialize(context);
             //ACT
             sPSSOMetadataProvider.CreateMetadata(MetadataType.SP);
             //ASSERT

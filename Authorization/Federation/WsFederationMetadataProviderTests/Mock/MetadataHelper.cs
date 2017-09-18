@@ -36,14 +36,21 @@ namespace WsFederationMetadataProviderTests.Mock
         }
         public static KeyDescriptorConfiguration BuildKeyDescriptorConfiguration()
         {
-            var store = new X509Store("TestCertStore", StoreLocation.LocalMachine);
-
+            var certificateContext = new CertificateContext
+            {
+                StoreName = "TestCertStore",
+                SearchCriteria = "ApiraTestCertificate",
+                ValidOnly = false,
+                SearchCriteriaType = X509FindType.FindBySubjectName,
+                StoreLocation = StoreLocation.LocalMachine
+            };
+            
             var keyDescriptorConfiguration = new KeyDescriptorConfiguration
             {
                 IsDefault = true,
                 Use = KeyUsage.Signing,
                 KeyTarget = KeyTarget.MetaData | KeyTarget.Request,
-                KeyInfo = new X509StoreCertificateConfiguration(store, "ApiraTestCertificate", X509FindType.FindBySubjectName, false)
+                CertificateContext = certificateContext
             };
             return keyDescriptorConfiguration;
         }
