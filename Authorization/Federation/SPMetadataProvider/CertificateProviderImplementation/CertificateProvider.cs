@@ -14,6 +14,8 @@ namespace WsFederationMetadataProvider.CertificateProviderImplementation
             _certificateCachePopulator = certificateCachePopulator;
         }
 
+        public StoreLocation StoreLocation => throw new NotImplementedException();
+
         public X509Certificate2 GetX509Certificate2()
         {
             X509Certificate2 cert;

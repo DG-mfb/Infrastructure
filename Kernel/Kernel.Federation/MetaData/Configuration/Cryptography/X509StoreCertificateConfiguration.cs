@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Kernel.Cryptography.CertificateManagement;
 
@@ -7,15 +6,21 @@ namespace Kernel.Federation.MetaData.Configuration.Cryptography
 {
     public class X509StoreCertificateConfiguration : CertificateStore<X509Store>
     {
-        string _certName;
-        public X509StoreCertificateConfiguration(string storeName, string certName)
-            :this(new X509Store(storeName, StoreLocation.LocalMachine), certName)
+        private readonly object _searchCriteria;
+        private readonly bool _validOnly;
+        private readonly X509FindType _searchCriteriaType;
+
+        public X509StoreCertificateConfiguration(string storeName, object searchCriteria, X509FindType searchCriteriaType, StoreLocation storeLocation, bool validOnly)
+            :this(new X509Store(storeName, storeLocation), searchCriteria, searchCriteriaType, validOnly)
         {
         }
 
-        public X509StoreCertificateConfiguration(X509Store store, string certName) : base(store)
+        public X509StoreCertificateConfiguration(X509Store store, object searchCriteria, X509FindType searchCriteriaType, bool validOnly) 
+            : base(store)
         {
-            this._certName = certName;
+            this._searchCriteria = searchCriteria;
+            this._validOnly = validOnly;
+            this._searchCriteriaType = searchCriteriaType;
         }
 
         public override X509Certificate2 GetX509Certificate2()
@@ -24,9 +29,10 @@ namespace Kernel.Federation.MetaData.Configuration.Cryptography
             {
                 base.Store.Open(OpenFlags.ReadOnly);
                 var certificates = base.Store.Certificates;
-                var cert = certificates.Find(X509FindType.FindByIssuerName, this._certName, false);
+                var cert = certificates.Find(this._searchCriteriaType, this._searchCriteria, this._validOnly);
                 if (cert.Count != 1)
-                    throw new InvalidOperationException(String.Format("There must be one certificate by isser:{0}", this._certName));
+                    throw new InvalidOperationException(String.Format("There must be one certificate found with search criteria type: {0}. Search criteria: {1}", this._searchCriteriaType, this._searchCriteria));
+
                 return cert[0];
             }
         }

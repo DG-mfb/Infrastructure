@@ -47,7 +47,7 @@ namespace WsFederationMetadataProviderTests.Mock
                 IsDefault = true,
                 Use = KeyUsage.Signing,
                 KeyTarget = KeyTarget.MetaData | KeyTarget.Request,
-                KeyInfo = new X509StoreCertificateConfiguration(store, "ApiraTestCertificate")
+                KeyInfo = new X509StoreCertificateConfiguration(store, "ApiraTestCertificate", X509FindType.FindBySubjectName, false)
             };
             return keyDescriptorConfiguration;
         }

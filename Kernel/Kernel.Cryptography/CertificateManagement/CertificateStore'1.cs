@@ -1,20 +1,19 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Security.Cryptography.X509Certificates;
 
 namespace Kernel.Cryptography.CertificateManagement
 {
-    public class CertificateStore<TStore> : ICertificateStore
+    public abstract class CertificateStore<TStore> : ICertificateStore
     {
         public TStore Store { get; }
+
+        public StoreLocation StoreLocation { get; protected set; }
 
         public CertificateStore(TStore store)
         {
             this.Store = store;
+            this.StoreLocation = StoreLocation.CurrentUser;
         }
 
-        public virtual X509Certificate2 GetX509Certificate2()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract X509Certificate2 GetX509Certificate2();
     }
 }
