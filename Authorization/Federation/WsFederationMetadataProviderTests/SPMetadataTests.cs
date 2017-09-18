@@ -30,27 +30,15 @@ namespace WsFederationMetadataProviderTests
 
             //});
 
-                //var entityDescriptorConfiguration = MetadataHelper.BuildEntityDesriptorConfiguration();
 
-                //var keyDescriptorConfiguration = MetadataHelper.BuildKeyDescriptorConfiguration();
-                //entityDescriptorConfiguration.KeyDescriptors.Add(keyDescriptorConfiguration);
-
-                //var spDescriptorConfigurtion = MetadataHelper.BuildSPSSODescriptorConfiguration();
-                //entityDescriptorConfiguration.RoleDescriptors.Add(spDescriptorConfigurtion);
-                var contextBuilder = new InlineMetadataContextBuilder();
+            var contextBuilder = new InlineMetadataContextBuilder();
             var context = contextBuilder.BuildContext();
 
             var certificateValidator = new CertificateValidator();
             var ssoCryptoProvider = new CertificateManager();
             var xmlSignatureManager = new XmlSignatureManager();
             var metadataSerialiser = new FederationMetadataSerialiser(certificateValidator);
-            //var context = new MetadataContext
-            //{
-            //    EntityDesriptorConfiguration = entityDescriptorConfiguration,
-            //    SignMetadata = true
-            //};
-            
-            //context.KeyDescriptors.Add(keyDescriptorConfiguration);
+           
             var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser, g => context);
             
             //ACT
