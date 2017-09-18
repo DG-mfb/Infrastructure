@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Kernel.Federation.MetaData.Configuration.Cryptography;
 using NUnit.Framework;
-using WsFederationMetadataProvider.Metadata.DescriptorBuilders;
-using WsFederationMetadataProviderTests.Mock;
 
 namespace WsFederationMetadataProviderTests
 {

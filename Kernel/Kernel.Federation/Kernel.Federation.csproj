@@ -56,6 +56,7 @@
     <Compile Include="MetaData\Configuration\Cryptography\X509StoreCertificateConfiguration.cs" />
     <Compile Include="MetaData\Configuration\EndPoint\EndPointConfiguration.cs" />
     <Compile Include="MetaData\Configuration\EndPoint\IndexedEndPointConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\MetadataContext.cs" />
     <Compile Include="MetaData\Configuration\Organisation\ContactConfiguration.cs" />
     <Compile Include="MetaData\Configuration\Organisation\ContactType.cs" />
     <Compile Include="MetaData\Configuration\EntityDescriptors\EntityDesriptorConfiguration.cs" />
@@ -66,7 +67,6 @@
     <Compile Include="MetaData\Configuration\RoleDescriptors\RoleDescriptorConfiguration.cs" />
     <Compile Include="MetaData\Configuration\RoleDescriptors\SPSSODescriptorConfiguration.cs" />
     <Compile Include="MetaData\Configuration\RoleDescriptors\SSODescriptorConfiguration.cs" />
-    <Compile Include="MetaData\DescriptorContext.cs" />
     <Compile Include="MetaData\IDescriptorBuilder.cs" />
     <Compile Include="MetaData\IMetadataGenerator.cs" />
     <Compile Include="MetaData\IIdMetadataGenerator.cs" />
