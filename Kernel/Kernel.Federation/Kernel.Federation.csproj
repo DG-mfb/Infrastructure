@@ -67,17 +67,11 @@
     <Compile Include="MetaData\Configuration\RoleDescriptors\SPSSODescriptorConfiguration.cs" />
     <Compile Include="MetaData\Configuration\RoleDescriptors\SSODescriptorConfiguration.cs" />
     <Compile Include="MetaData\DescriptorContext.cs" />
-    <Compile Include="MetaData\ICertificateContext.cs" />
-    <Compile Include="MetaData\IConsumerServiceContext.cs" />
     <Compile Include="MetaData\IDescriptorBuilder.cs" />
-    <Compile Include="MetaData\IIdpSSOMetadataConfiguration.cs" />
-    <Compile Include="MetaData\IMetadataConfiguration.cs" />
     <Compile Include="MetaData\IMetadataGenerator.cs" />
     <Compile Include="MetaData\IIdMetadataGenerator.cs" />
     <Compile Include="MetaData\ISPMetadataGenerator.cs" />
     <Compile Include="MetaData\IMetadataSerialiser.cs" />
-    <Compile Include="MetaData\ISingleSignOnServiceContext.cs" />
-    <Compile Include="MetaData\ISPSSOMetadataConfiguration.cs" />
     <Compile Include="MetaData\IFederationMetadataWriter.cs" />
     <Compile Include="MetaData\MetadataType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
