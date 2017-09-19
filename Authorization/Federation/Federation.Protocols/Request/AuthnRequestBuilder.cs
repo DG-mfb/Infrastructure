@@ -27,15 +27,15 @@ namespace Federation.Protocols.Request
             var configuration = authnRequestContext.Configuration;
             var authnRequest = new AuthnRequest
             {
-                Id = "http://localhost:60879/sp/metadata",
+                Id = "Imperial.flowz.co.uk",
                 IsPassive = false,
                 Destination = authnRequestContext.Destination.AbsoluteUri,
                 Version = "2.0",
                 IssueInstant = DateTime.UtcNow
             };
-            authnRequest.Issuer = new NameId { Value = "http://localhost:60879/sp/metadata" };
+            authnRequest.Issuer = new NameId { Value = "Imperial.flowz.co.uk" };
             var audienceRestrictions = new List<ConditionAbstract>();
-            var audienceRestriction = new AudienceRestriction { Audience = new List<string>() { "http://localhost:60879/sp/metadata" } };
+            var audienceRestriction = new AudienceRestriction { Audience = new List<string>() { "Imperial.flowz.co.uk" } };
             audienceRestrictions.Add(audienceRestriction);
 
             authnRequest.Conditions = new Conditions { Items = audienceRestrictions };

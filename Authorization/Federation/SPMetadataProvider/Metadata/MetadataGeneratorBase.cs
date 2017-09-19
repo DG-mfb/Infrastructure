@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Metadata;
+using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Kernel.Cryptography.CertificateManagement;
-using Kernel.Cryptography.Signing.Xml;
 using Kernel.Federation.MetaData;
 using Kernel.Federation.MetaData.Configuration;
 using Kernel.Federation.MetaData.Configuration.Cryptography;
@@ -21,14 +21,12 @@ namespace WsFederationMetadataProvider.Metadata
         protected IFederationMetadataWriter _federationMetadataWriter;
 
         protected readonly ICertificateManager _certificateManager;
-        protected readonly IXmlSignatureManager _xmlSignatureManager;
         protected readonly IMetadataSerialiser<MetadataBase> _serialiser;
         protected readonly Func<MetadataType , MetadataContext> _contextFactory;
-        public MetadataGeneratorBase(IFederationMetadataWriter federationMetadataWriter, ICertificateManager certificateManager, IXmlSignatureManager xmlSignatureManager, IMetadataSerialiser<MetadataBase> serialiser, Func<MetadataType, MetadataContext> contextFactory)
+        public MetadataGeneratorBase(IFederationMetadataWriter federationMetadataWriter, ICertificateManager certificateManager, IMetadataSerialiser<MetadataBase> serialiser, Func<MetadataType, MetadataContext> contextFactory)
         {
             this._federationMetadataWriter = federationMetadataWriter;
             this._certificateManager = certificateManager;
-            this._xmlSignatureManager = xmlSignatureManager;
             this._serialiser = serialiser;
             this._contextFactory = contextFactory;
         }
@@ -48,7 +46,7 @@ namespace WsFederationMetadataProvider.Metadata
                 var descriptors = this.GetDescriptors(configuration.SPSSODescriptors);
                 
                 var entityDescriptor = BuildEntityDesciptor(configuration, descriptors);
-                
+                this.SignMetadata(metadataContext, entityDescriptor);
                 var sb = new StringBuilder();
                 
                 using (var xmlWriter = XmlWriter.Create(sb))
@@ -59,8 +57,6 @@ namespace WsFederationMetadataProvider.Metadata
                 var metadata = new XmlDocument();
                 metadata.LoadXml(sb.ToString());
 
-                this.SignMetadata(metadataContext, metadata.DocumentElement);
-
                 this._federationMetadataWriter.Write(metadata.DocumentElement);
                 return Task.CompletedTask;
             }
@@ -70,11 +66,10 @@ namespace WsFederationMetadataProvider.Metadata
             }
         }
 
-        protected void SignMetadata(MetadataContext context, XmlElement xml)
+        protected void SignMetadata(MetadataContext context, MetadataBase metadata)
         {
             if (!context.SignMetadata)
                 return;
-
             var signMetadataKey = context.KeyDescriptors.Where(k => k.IsDefault && (k.KeyTarget & KeyTarget.MetaData) == KeyTarget.MetaData)
                     .FirstOrDefault();
 
@@ -82,8 +77,8 @@ namespace WsFederationMetadataProvider.Metadata
                 throw new Exception("No default certificate found");
             var certConfiguration = new X509StoreCertificateConfiguration(signMetadataKey.CertificateContext);
             var certificate = this._certificateManager.GetCertificate(certConfiguration);
-
-            this._xmlSignatureManager.Generate(xml, certificate.PrivateKey, null, certificate, null, null, null);
+            var signingCredentials = new SigningCredentials(new X509AsymmetricSecurityKey(certificate), SecurityAlgorithms.RsaSha1Signature, SecurityAlgorithms.Sha1Digest, new SecurityKeyIdentifier(new X509RawDataKeyIdentifierClause(certificate)));
+            metadata.SigningCredentials = signingCredentials;
         }
 
         protected virtual EntityDescriptor BuildEntityDesciptor(EntityDesriptorConfiguration configuration, IEnumerable<RoleDescriptor> descriptors)

@@ -31,15 +31,15 @@ namespace WsFederationMetadataProviderTests
             //});
 
 
-            var contextBuilder = new InlineMetadataContextBuilder();
+                var contextBuilder = new InlineMetadataContextBuilder();
             var context = contextBuilder.BuildContext();
 
             var certificateValidator = new CertificateValidator();
             var ssoCryptoProvider = new CertificateManager();
-            var xmlSignatureManager = new XmlSignatureManager();
+            
             var metadataSerialiser = new FederationMetadataSerialiser(certificateValidator);
            
-            var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, xmlSignatureManager, metadataSerialiser, g => context);
+            var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, metadataSerialiser, g => context);
             
             //ACT
             sPSSOMetadataProvider.CreateMetadata(MetadataType.SP);
