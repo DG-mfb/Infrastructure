@@ -2,7 +2,7 @@
 
 namespace Kernel.Federation.MetaData.Configuration.Organisation
 {
-    public class ContactConfiguration : MetadataConfigurationEntry
+    public class ContactConfiguration : LocalizedConfigurationEntry
     {
         public ICollection<ContactPerson> PersonContact { get; set; }
     }

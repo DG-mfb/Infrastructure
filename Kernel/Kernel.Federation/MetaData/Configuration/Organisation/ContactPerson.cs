@@ -3,7 +3,7 @@ using Kernel.Federation.MetaData.Configuration.Miscellaneous;
 
 namespace Kernel.Federation.MetaData.Configuration.Organisation
 {
-    public class ContactPerson : MetadataConfigurationEntry
+    public class ContactPerson : LocalizedConfigurationEntry
     {
         public ContactType ContactType { get; set; }
         public string ForeName { get; set; }

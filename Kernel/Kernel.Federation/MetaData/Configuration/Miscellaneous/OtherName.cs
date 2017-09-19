@@ -1,6 +1,6 @@
 ﻿namespace Kernel.Federation.MetaData.Configuration.Miscellaneous
 {
-    public class OtherName : MetadataConfigurationEntry
+    public class OtherName : LocalizedConfigurationEntry
     {
     }
 }

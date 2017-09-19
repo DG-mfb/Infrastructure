@@ -51,6 +51,7 @@
     <Compile Include="Metadata\DescriptorBuilders\DescriptorBuildersHelper.cs" />
     <Compile Include="Metadata\DescriptorBuilders\ServiceProviderSingleSignOnDescriptorBuilder.cs" />
     <Compile Include="Metadata\DescriptorBuilders\DescriptorBuilderBase.cs" />
+    <Compile Include="Metadata\DescriptorBuilders\SSODescriptorHelper.cs" />
     <Compile Include="Metadata\MetadataGeneratorBase.cs" />
     <Compile Include="Metadata\SPSSOMetadataProvider.cs" />
     <Compile Include="Metadata\SSOMetadataFileWriter.cs" />
