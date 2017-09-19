@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackchannelCertificateValidationRules\BackchannelChainTrustValidationRule.cs" />
+    <Compile Include="BackchannelCertificateValidationRules\BackchannelValidationRule.cs" />
+    <Compile Include="BackchannelCertificateValidationRules\BackchannelNoValidationRule.cs" />
     <Compile Include="CertificateManager.cs" />
     <Compile Include="Exceptions\SamlSignatureException.cs" />
     <Compile Include="CertificateValidator.cs" />
