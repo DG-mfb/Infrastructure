@@ -7,7 +7,8 @@ namespace SecurityManagement.BackchannelCertificateValidationRules
     {
         protected override bool ValidateInternal(BackchannelCertificateValidationContext context)
         {
-            throw new NotImplementedException();
+            context.IsValid = true;
+            return true;
         }
     }
 }

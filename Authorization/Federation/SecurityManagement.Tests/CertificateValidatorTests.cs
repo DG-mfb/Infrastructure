@@ -46,6 +46,7 @@ namespace SecurityManagement.Tests
                 certificateStore.Open(OpenFlags.ReadOnly);
                 var certificate = certificateStore.Certificates.Find(X509FindType.FindBySubjectName, "ApiraTestCertificate", false)[0];
                 var x509Chain = new X509Chain(true);
+                x509Chain.Build(certificate);
                 validationResult = validator.Validate(this, certificate, x509Chain, SslPolicyErrors.None);
             }
             finally

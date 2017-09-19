@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IdentityModel.Selectors;
 using System.Net.Security;
@@ -12,8 +13,12 @@ namespace SecurityManagement
     {
         public bool Validate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
+            var context = new BackchannelCertificateValidationContext();
+            Func<BackchannelCertificateValidationContext, bool> seed = x => x.IsValid;
+
             var rules = this.GetBackchannelCertificateValidationRules();
-            throw new NotImplementedException();
+            var validationDelegate = rules.Aggregate(seed, (f, next) => new Func<BackchannelCertificateValidationContext, bool>(c => next.Validate(c, f)));
+            return validationDelegate(context);
         }
         
         public override void Validate(X509Certificate2 certificate)
