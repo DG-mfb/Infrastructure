@@ -28,12 +28,16 @@ namespace InlineMetadataContextProvider
 
         public static OrganisationConfiguration BuikdOrganisationConfiguration()
         {
-            return new OrganisationConfiguration
+            var orgConfiguration = new OrganisationConfiguration
+            {
+                OrganisationContacts = new ContactConfiguration()
+            };
+            orgConfiguration.Names.Add(new Kernel.Federation.MetaData.Configuration.LocalizedConfigurationEntry
             {
                 Name = "Apira LTD",
                 DisplayName = "Flowz",
-                OrganisationContacts = new ContactConfiguration(),
-            };
+            });
+            return orgConfiguration;
         }
         public static KeyDescriptorConfiguration BuildKeyDescriptorConfiguration()
         {
