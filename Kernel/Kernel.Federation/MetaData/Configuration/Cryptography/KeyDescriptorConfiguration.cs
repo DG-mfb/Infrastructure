@@ -1,4 +1,6 @@
-﻿namespace Kernel.Federation.MetaData.Configuration.Cryptography
+﻿using Kernel.Cryptography.CertificateManagement;
+
+namespace Kernel.Federation.MetaData.Configuration.Cryptography
 {
     public class KeyDescriptorConfiguration
     {

@@ -33,7 +33,7 @@ namespace WsFederationMetadataProviderTests
             //});
 
 
-                var contextBuilder = new InlineMetadataContextBuilder();
+            var contextBuilder = new InlineMetadataContextBuilder();
             var context = contextBuilder.BuildContext();
 
             var certificateValidator = new CertificateValidator();

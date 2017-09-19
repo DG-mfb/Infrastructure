@@ -42,9 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertificateManagement\CertificateContext.cs" />
+    <Compile Include="CertificateManagement\FileCertificateContext.cs" />
     <Compile Include="CertificateManagement\ICertificateStore.cs" />
     <Compile Include="CertificateManagement\CertificateStore%271.cs" />
     <Compile Include="CertificateManagement\ICertificateManager.cs" />
+    <Compile Include="CertificateManagement\X509CertificateContext.cs" />
     <Compile Include="DataProtection\DataProtector.cs" />
     <Compile Include="DataProtection\IDataProtector.cs" />
     <Compile Include="DataProtection\RSADataProtection.cs" />

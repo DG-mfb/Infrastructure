@@ -9,7 +9,7 @@ namespace Kernel.Federation.MetaData.Configuration.Cryptography
         private readonly CertificateContext _certificateContext;
 
         public X509StoreCertificateConfiguration(CertificateContext certificateContext)
-            :base(new X509Store(certificateContext.StoreName, certificateContext.StoreLocation))
+            :base(new X509Store(((X509CertificateContext)certificateContext).StoreName, ((X509CertificateContext)certificateContext).StoreLocation))
         {
             if (certificateContext == null)
                 throw new ArgumentNullException("certificateContext");

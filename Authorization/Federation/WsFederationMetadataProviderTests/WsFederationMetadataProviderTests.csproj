@@ -52,7 +52,6 @@
     <Compile Include="AuthnRequestTests.cs" />
     <Compile Include="CertificateStoreTests.cs" />
     <Compile Include="DescriptorBuildersTests.cs" />
-    <Compile Include="Mock\MetadataHelper.cs" />
     <Compile Include="Mock\TestMetadatWriter.cs" />
     <Compile Include="MetadataRetrieverMetadataTests.cs" />
     <Compile Include="SPMetadataTests.cs" />

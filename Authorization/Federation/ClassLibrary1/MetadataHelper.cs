@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Metadata;
 using System.Security.Cryptography.X509Certificates;
+using Kernel.Cryptography.CertificateManagement;
 using Kernel.Federation.MetaData.Configuration.Cryptography;
 using Kernel.Federation.MetaData.Configuration.EndPoint;
 using Kernel.Federation.MetaData.Configuration.EntityDescriptors;
@@ -36,7 +37,7 @@ namespace InlineMetadataContextProvider
         }
         public static KeyDescriptorConfiguration BuildKeyDescriptorConfiguration()
         {
-            var certificateContext = new CertificateContext
+            var certificateContext = new X509CertificateContext
             {
                 StoreName = "TestCertStore",
                 SearchCriteria = "ApiraTestCertificate",

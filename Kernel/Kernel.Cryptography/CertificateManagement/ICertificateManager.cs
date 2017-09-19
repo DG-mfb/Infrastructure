@@ -7,5 +7,8 @@ namespace Kernel.Cryptography.CertificateManagement
     {
         X509Certificate2 GetCertificate(string path, SecureString password);
         X509Certificate2 GetCertificate(ICertificateStore store);
+
+        ICertificateStore GetStoreFromContext(CertificateContext certContext);
+        X509Certificate2 GetCertificateFromContext(CertificateContext certContext);
     }
 }
