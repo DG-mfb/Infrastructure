@@ -3,24 +3,24 @@ using Kernel.Federation.MetaData;
 using Kernel.Initialisation;
 using Owin;
 
-namespace SSOShibbolethOwinMiddleware.Extensions
+namespace SSOOwinMiddleware.Extensions
 {
-    public static class ShibbolethAuthenticationExtensions
+    public static class SSOAuthenticationExtensions
     {
-        public static IAppBuilder UseShibbolethAuthentication(this IAppBuilder app, ShibbolethAuthenticationOptions options)
+        public static IAppBuilder UseShibbolethAuthentication(this IAppBuilder app, SSOAuthenticationOptions options)
         {
             if (app == null)
                 throw new ArgumentNullException("app");
             if (options == null)
                 throw new ArgumentNullException("options");
             var resolver = ApplicationConfiguration.Instance.DependencyResolver;
-            app.Use((object)typeof(ShibbolethOwinMiddleware), (object)app, (object)options, resolver);
+            app.Use((object)typeof(SSOOwinMiddleware), (object)app, (object)options, resolver);
 
             app.Map(options.SPMetadataPath, a =>
             {
                 a.Run(c =>
                 {
-                    var metadataGenerator = ShibbolethAuthenticationExtensions.ResolveMetadataGenerator<ISPMetadataGenerator>();
+                    var metadataGenerator = SSOAuthenticationExtensions.ResolveMetadataGenerator<ISPMetadataGenerator>();
                     return metadataGenerator.CreateMetadata(MetadataType.SP);
 
                 });
@@ -30,7 +30,7 @@ namespace SSOShibbolethOwinMiddleware.Extensions
 
         public static IAppBuilder UseShibbolethAuthentication(this IAppBuilder app, string wtrealm, string metadataAddress)
         {
-            return app.UseShibbolethAuthentication(new ShibbolethAuthenticationOptions()
+            return app.UseShibbolethAuthentication(new SSOAuthenticationOptions()
             {
                 Wtrealm = wtrealm,
                 MetadataAddress = metadataAddress

@@ -10,16 +10,16 @@ using Microsoft.Owin.Logging;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Infrastructure;
 
-namespace SSOShibbolethOwinMiddleware.Handlers
+namespace SSOOwinMiddleware.Handlers
 {
-    internal class ShibbolethAccountAuthenticationHandler : AuthenticationHandler<ShibbolethAuthenticationOptions>
+    internal class SSOAuthenticationHandler : AuthenticationHandler<SSOAuthenticationOptions>
     {
         private const string HandledResponse = "HandledResponse";
         private readonly ILogger _logger;
         private MetadataBase _configuration;
         private readonly IDependencyResolver _resolver;
 
-        public ShibbolethAccountAuthenticationHandler(ILogger logger, IDependencyResolver resolver)
+        public SSOAuthenticationHandler(ILogger logger, IDependencyResolver resolver)
         {
             this._resolver = resolver;
             this._logger = logger;

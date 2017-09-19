@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Net.Security;
 using Federation.Protocols.Configuration;
 using Kernel.DependancyResolver;
-using Kernel.Federation.Protocols;
 using Microsoft.Owin;
 using Microsoft.Owin.Logging;
 using Microsoft.Owin.Security;
@@ -12,20 +11,20 @@ using Microsoft.Owin.Security.DataHandler;
 using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Infrastructure;
 using Owin;
-using SSOShibbolethOwinMiddleware.Handlers;
+using SSOOwinMiddleware.Handlers;
 using WsFederationMetadataProvider.Configuration;
 
-namespace SSOShibbolethOwinMiddleware
+namespace SSOOwinMiddleware
 {
-    internal class ShibbolethOwinMiddleware : AuthenticationMiddleware<ShibbolethAuthenticationOptions>
+    internal class SSOOwinMiddleware : AuthenticationMiddleware<SSOAuthenticationOptions>
     {
         private readonly ILogger _logger;
         private readonly IDependencyResolver _resolver;
-        public ShibbolethOwinMiddleware(OwinMiddleware next, IAppBuilder app, ShibbolethAuthenticationOptions options, IDependencyResolver resolver)
+        public SSOOwinMiddleware(OwinMiddleware next, IAppBuilder app, SSOAuthenticationOptions options, IDependencyResolver resolver)
             : base(next, options)
         {
             this._resolver = resolver;
-            this._logger = app.CreateLogger<ShibbolethOwinMiddleware>();
+            this._logger = app.CreateLogger<SSOOwinMiddleware>();
             if (base.Options.BackchannelCertificateValidator == null)
             {
                 base.Options.BackchannelCertificateValidator = this._resolver.Resolve<Kernel.Cryptography.Validation.ICertificateValidator>();
@@ -34,7 +33,7 @@ namespace SSOShibbolethOwinMiddleware
             if (string.IsNullOrWhiteSpace(this.Options.TokenValidationParameters.AuthenticationType))
                 this.Options.TokenValidationParameters.AuthenticationType = app.GetDefaultSignInAsAuthenticationType();
             if (this.Options.StateDataFormat == null)
-                this.Options.StateDataFormat = (ISecureDataFormat<AuthenticationProperties>)new PropertiesDataFormat(app.CreateDataProtector(typeof(ShibbolethOwinMiddleware).FullName, this.Options.AuthenticationType, "v1"));
+                this.Options.StateDataFormat = (ISecureDataFormat<AuthenticationProperties>)new PropertiesDataFormat(app.CreateDataProtector(typeof(SSOOwinMiddleware).FullName, this.Options.AuthenticationType, "v1"));
             //if (this.Options.Notifications == null)
             //    this.Options.Notifications = new WsFederationAuthenticationNotifications();
             Uri result;
@@ -45,19 +44,19 @@ namespace SSOShibbolethOwinMiddleware
             if (this.Options.Configuration != null)
             { }//this.Options.ConfigurationManager = (IConfigurationManager<object>)new StaticConfigurationManager<object>(this.Options.Configuration);
             else
-                this.Options.ConfigurationManager = new ConfigurationManager<MetadataBase>(this.Options.MetadataAddress, new WsFederationConfigurationRetriever(), new HttpClient(ShibbolethOwinMiddleware.ResolveHttpMessageHandler(this.Options))
+                this.Options.ConfigurationManager = new ConfigurationManager<MetadataBase>(this.Options.MetadataAddress, new WsFederationConfigurationRetriever(), new HttpClient(SSOOwinMiddleware.ResolveHttpMessageHandler(this.Options))
                 {
                     Timeout = this.Options.BackchannelTimeout,
                     MaxResponseContentBufferSize = 10485760L
                 });
         }
         
-        protected override AuthenticationHandler<ShibbolethAuthenticationOptions> CreateHandler()
+        protected override AuthenticationHandler<SSOAuthenticationOptions> CreateHandler()
         {
-            return new ShibbolethAccountAuthenticationHandler(this._logger, this._resolver);
+            return new SSOAuthenticationHandler(this._logger, this._resolver);
         }
 
-        private static HttpMessageHandler ResolveHttpMessageHandler(ShibbolethAuthenticationOptions options)
+        private static HttpMessageHandler ResolveHttpMessageHandler(SSOAuthenticationOptions options)
         {
             HttpMessageHandler httpMessageHandler = options.BackchannelHttpHandler ?? new WebRequestHandler();
             if (options.BackchannelCertificateValidator != null)

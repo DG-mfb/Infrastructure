@@ -7,8 +7,8 @@
     <ProjectGuid>{11CD60DA-6FBB-4A76-96B3-841DC2E67EFA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SSOShibbolethOwinMiddleware</RootNamespace>
-    <AssemblyName>SSOShibbolethOwinMiddleware</AssemblyName>
+    <RootNamespace>SSOOwinMiddleware</RootNamespace>
+    <AssemblyName>SSOOwinMiddleware</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -67,11 +67,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\ShibbolethAuthenticationExtensions.cs" />
-    <Compile Include="Handlers\ShibbolethAccountAuthenticationHandler.cs" />
-    <Compile Include="ShibbolethOwinMiddleware.cs" />
+    <Compile Include="Extensions\SSOAuthenticationExtensions.cs" />
+    <Compile Include="Handlers\SSOAuthenticationHandler.cs" />
+    <Compile Include="SSOOwinMiddleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShibbolethAuthenticationOptions.cs" />
+    <Compile Include="SSOAuthenticationOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

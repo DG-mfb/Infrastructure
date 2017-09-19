@@ -1,14 +1,11 @@
 ﻿using AssetManagement.Models;
 using Kernel.Authorisation;
-using Kernel.Federation.MetaData;
 using Kernel.Initialisation;
 using Microsoft.AspNet.Identity;
-using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using SSOShibbolethOwinMiddleware;
-using SSOShibbolethOwinMiddleware.Extensions;
+using SSOOwinMiddleware.Extensions;
 
 namespace AssetManagement
 {
@@ -40,14 +37,14 @@ namespace AssetManagement
             app.UseOAuthBearerTokens(OAuthOptions);
 
             //Shibboleth middleware, test metadata
-            //ShibbolethAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://www.testshib.org/metadata/testshib-providers.xml");
+            //SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://www.testshib.org/metadata/testshib-providers.xml");
 
             //Shibboleth middleware, localhost metadata metadata
-            ShibbolethAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://dg-mfb/idp/shibboleth");
+            SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://dg-mfb/idp/shibboleth");
 
             //imperial.ac.uk
-            //ShibbolethAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://shibboleth.imperial.ac.uk/idp/shibboleth");
-            
+            //SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://shibboleth.imperial.ac.uk/idp/shibboleth");
+
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",

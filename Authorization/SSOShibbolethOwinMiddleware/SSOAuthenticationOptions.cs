@@ -7,9 +7,9 @@ using Kernel.Federation.Protocols;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
-namespace SSOShibbolethOwinMiddleware
+namespace SSOOwinMiddleware
 {
-    public class ShibbolethAuthenticationOptions : AuthenticationOptions
+    public class SSOAuthenticationOptions : AuthenticationOptions
     {
         public Kernel.Cryptography.Validation.ICertificateValidator BackchannelCertificateValidator { get; set; }
 
@@ -105,7 +105,7 @@ namespace SSOShibbolethOwinMiddleware
 
         public PathString SSOPath { get; set; }
 
-        public ShibbolethAuthenticationOptions()
+        public SSOAuthenticationOptions()
       : base("Shibboleth")
     {
             this.Caption = "Shibboleth";
