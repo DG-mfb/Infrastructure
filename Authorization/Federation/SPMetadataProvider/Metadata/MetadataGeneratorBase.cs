@@ -70,14 +70,19 @@ namespace WsFederationMetadataProvider.Metadata
         {
             if (!context.SignMetadata)
                 return;
-            var signMetadataKey = context.KeyDescriptors.Where(k => k.IsDefault && (k.KeyTarget & KeyTarget.MetaData) == KeyTarget.MetaData)
+            if (context.MetadataSigningContext == null)
+                throw new ArgumentNullException("metadataSigningContext");
+
+            var signMetadataKey = context.MetadataSigningContext.KeyDescriptors.Where(k => k.IsDefault)
                     .FirstOrDefault();
 
             if (signMetadataKey == null)
                 throw new Exception("No default certificate found");
+
+            //ToDo Resolve certificate store from configuration
             var certConfiguration = new X509StoreCertificateConfiguration(signMetadataKey.CertificateContext);
             var certificate = this._certificateManager.GetCertificate(certConfiguration);
-            var signingCredentials = new SigningCredentials(new X509AsymmetricSecurityKey(certificate), SecurityAlgorithms.RsaSha1Signature, SecurityAlgorithms.Sha1Digest, new SecurityKeyIdentifier(new X509RawDataKeyIdentifierClause(certificate)));
+            var signingCredentials = new SigningCredentials(new X509AsymmetricSecurityKey(certificate), context.MetadataSigningContext.SignatureAlgorithm, context.MetadataSigningContext.DigestAlgorithm, new SecurityKeyIdentifier(new X509RawDataKeyIdentifierClause(certificate)));
             metadata.SigningCredentials = signingCredentials;
         }
 

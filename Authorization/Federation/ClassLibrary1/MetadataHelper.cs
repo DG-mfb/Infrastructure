@@ -49,7 +49,6 @@ namespace InlineMetadataContextProvider
             {
                 IsDefault = true,
                 Use = KeyUsage.Signing,
-                KeyTarget = KeyTarget.MetaData | KeyTarget.Request,
                 CertificateContext = certificateContext
             };
             return keyDescriptorConfiguration;

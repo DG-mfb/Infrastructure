@@ -54,6 +54,7 @@
     <Compile Include="MetaData\Configuration\Cryptography\KeyTarget.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\KeyUsage.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\FileStoreCertificateConfiguration.cs" />
+    <Compile Include="MetaData\Configuration\Cryptography\MetadataSigningContext.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\X509StoreCertificateConfiguration.cs" />
     <Compile Include="MetaData\Configuration\EndPoint\EndPointConfiguration.cs" />
     <Compile Include="MetaData\Configuration\EndPoint\IndexedEndPointConfiguration.cs" />

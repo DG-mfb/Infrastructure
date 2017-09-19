@@ -50,6 +50,44 @@ namespace WsFederationMetadataProviderTests
         }
 
         [Test]
+        [Ignore("Create file")]
+        public void SPMetadataGeneration_create_file()
+        {
+            ////ARRANGE
+
+            var result = false;
+            var path = @"D:\Dan\Software\Apira\SPMetadata\SPMetadata.xml";
+            var metadataWriter = new TestMetadatWriter(el =>
+            {
+                if (File.Exists(path))
+                    File.Delete(path);
+
+                using (var writer = XmlWriter.Create(path))
+                {
+                    el.WriteTo(writer);
+                    writer.Flush();
+                }
+                result = true;
+            });
+
+
+            var contextBuilder = new InlineMetadataContextBuilder();
+            var context = contextBuilder.BuildContext();
+
+            var certificateValidator = new CertificateValidator();
+            var ssoCryptoProvider = new CertificateManager();
+
+            var metadataSerialiser = new FederationMetadataSerialiser(certificateValidator);
+
+            var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, metadataSerialiser, g => context);
+
+            //ACT
+            sPSSOMetadataProvider.CreateMetadata(MetadataType.SP);
+            //ASSERT
+            Assert.IsTrue(result);
+        }
+
+        [Test]
         public void SPMetadata_serialise_deserialise_Test()
         {
             ////ARRANGE
