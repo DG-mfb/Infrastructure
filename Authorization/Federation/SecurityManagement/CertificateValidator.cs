@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.IdentityModel.Selectors;
+using System.Linq;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using Kernel.Cryptography.Validation;
 using SecurityManagement.BackchannelCertificateValidationRules;
 
@@ -13,12 +14,14 @@ namespace SecurityManagement
     {
         public bool Validate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-            var context = new BackchannelCertificateValidationContext();
-            Func<BackchannelCertificateValidationContext, bool> seed = x => x.IsValid;
+            var context = new BackchannelCertificateValidationContext(certificate, chain, sslPolicyErrors);
+            Func<BackchannelCertificateValidationContext, Task> seed = x => Task.CompletedTask;
 
             var rules = this.GetBackchannelCertificateValidationRules();
-            var validationDelegate = rules.Aggregate(seed, (f, next) => new Func<BackchannelCertificateValidationContext, bool>(c => next.Validate(c, f)));
-            return validationDelegate(context);
+            var validationDelegate = rules.Aggregate(seed, (f, next) => new Func<BackchannelCertificateValidationContext, Task>(c => next.Validate(c, f)));
+            var task = validationDelegate(context);
+            task.Wait();
+            return context.IsValid;
         }
         
         public override void Validate(X509Certificate2 certificate)

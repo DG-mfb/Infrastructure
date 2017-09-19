@@ -1,5 +1,4 @@
-﻿using System;
-using Kernel.Cryptography.Validation;
+﻿using Kernel.Cryptography.Validation;
 
 namespace SecurityManagement.BackchannelCertificateValidationRules
 {
@@ -7,7 +6,7 @@ namespace SecurityManagement.BackchannelCertificateValidationRules
     {
         protected override bool ValidateInternal(BackchannelCertificateValidationContext context)
         {
-            context.IsValid = true;
+            context.Validated();
             return true;
         }
     }
