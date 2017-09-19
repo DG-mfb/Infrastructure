@@ -2,8 +2,12 @@
 
 namespace Kernel.Federation.MetaData.Configuration.Organisation
 {
-    public class ContactConfiguration : LocalizedConfigurationEntry
+    public class ContactConfiguration
     {
         public ICollection<ContactPerson> PersonContact { get; set; }
+        public ContactConfiguration()
+        {
+            this.PersonContact = new List<ContactPerson>();
+        }
     }
 }

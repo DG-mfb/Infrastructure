@@ -2,6 +2,7 @@
 using System.IdentityModel.Metadata;
 using System.Security.Cryptography.X509Certificates;
 using Kernel.Cryptography.CertificateManagement;
+using Kernel.Federation.MetaData.Configuration;
 using Kernel.Federation.MetaData.Configuration.Cryptography;
 using Kernel.Federation.MetaData.Configuration.EndPoint;
 using Kernel.Federation.MetaData.Configuration.EntityDescriptors;
@@ -32,11 +33,23 @@ namespace InlineMetadataContextProvider
             {
                 OrganisationContacts = new ContactConfiguration()
             };
-            orgConfiguration.Names.Add(new Kernel.Federation.MetaData.Configuration.LocalizedConfigurationEntry
+            orgConfiguration.Names.Add(new LocalizedConfigurationEntry
             {
                 Name = "Apira LTD",
                 DisplayName = "Flowz",
             });
+            orgConfiguration.Urls.Add(new Uri("https://apira.co.uk/"));
+
+            var contact = new Kernel.Federation.MetaData.Configuration.Organisation.ContactPerson
+            {
+                ContactType = Kernel.Federation.MetaData.Configuration.Organisation.ContactType.Technical,
+                ForeName = "John",
+                SurName = "Murphy",
+
+            };
+            contact.Emails.Add("john.murphy@flowz.co.uk");
+            
+            orgConfiguration.OrganisationContacts.PersonContact.Add(contact);
             return orgConfiguration;
         }
         public static KeyDescriptorConfiguration BuildKeyDescriptorConfiguration()

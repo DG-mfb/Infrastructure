@@ -11,5 +11,10 @@ namespace Kernel.Federation.MetaData.Configuration.Organisation
         public ICollection<OtherName> OtherNames { get; }
         public ICollection<string> Emails { get; }
         public ICollection<string> PhoneNumbers { get; }
+        public ContactPerson()
+        {
+            this.Emails = new List<string>();
+            this.PhoneNumbers = new List<string>();
+        }
     }
 }

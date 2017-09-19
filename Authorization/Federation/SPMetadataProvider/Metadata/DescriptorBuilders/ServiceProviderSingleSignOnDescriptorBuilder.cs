@@ -31,7 +31,7 @@ namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
 
                 descriptor.AssertionConsumerServices.Add(cs.Index, consumerService);
             }
-
+            SSODescriptorHelper.BuildOrganisationAndContacts(descriptor, configuration);
             return descriptor;
         }
     }
