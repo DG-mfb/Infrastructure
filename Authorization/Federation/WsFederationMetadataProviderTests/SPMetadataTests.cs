@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IdentityModel.Metadata;
+using System.IO;
 using System.Xml;
 using InlineMetadataContextProvider;
 using Kernel.Federation.MetaData;
@@ -14,7 +16,7 @@ namespace WsFederationMetadataProviderTests
     public class SPMetadataTests
     {
         [Test]
-        public void SPMetadataProviderTest()
+        public void SPMetadataGenerationTest()
         {
             ////ARRANGE
            
@@ -45,6 +47,33 @@ namespace WsFederationMetadataProviderTests
             sPSSOMetadataProvider.CreateMetadata(MetadataType.SP);
             //ASSERT
             Assert.IsFalse(String.IsNullOrWhiteSpace(result));
+        }
+
+        [Test]
+        public void SPMetadata_serialise_deserialise_Test()
+        {
+            ////ARRANGE
+
+            string metadataXml = String.Empty;
+            var metadataWriter = new TestMetadatWriter(el => metadataXml = el.OuterXml);
+            
+            var contextBuilder = new InlineMetadataContextBuilder();
+            var context = contextBuilder.BuildContext();
+
+            var certificateValidator = new CertificateValidator();
+            var ssoCryptoProvider = new CertificateManager();
+
+            var metadataSerialiser = new FederationMetadataSerialiser(certificateValidator);
+
+            var sPSSOMetadataProvider = new SPSSOMetadataProvider(metadataWriter, ssoCryptoProvider, metadataSerialiser, g => context);
+            
+            //ACT
+            sPSSOMetadataProvider.CreateMetadata(MetadataType.SP);
+            var xmlReader = XmlReader.Create(new StringReader(metadataXml));
+            var deserialisedMetadata = metadataSerialiser.ReadMetadata(xmlReader) as EntityDescriptor;
+            //ASSERT
+            Assert.IsFalse(String.IsNullOrWhiteSpace(metadataXml));
+            Assert.AreEqual(1, deserialisedMetadata.RoleDescriptors.Count);
         }
     }
 }

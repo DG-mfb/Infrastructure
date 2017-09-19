@@ -11,7 +11,7 @@ namespace WsMetadataSerialisation.Serialisation
     {
         //ToDo: resolve validator from conficuration.
         //ICertificateValidator _certificateValidator;
-        //Needs certifikate configuration
+        //Needs certificate configuration
         //inject base class or introduce other interface
         public FederationMetadataSerialiser(ICertificateValidator certificateValidator)
         {
