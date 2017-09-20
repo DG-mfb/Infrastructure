@@ -27,11 +27,10 @@ namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
 
             foreach (var cs in spConfiguration.AssertionConsumerServices)
             {
-                var consumerService = new IndexedProtocolEndpoint(cs.Index, cs.Binding, cs.Location);
+                var consumerService = new IndexedProtocolEndpoint(cs.Index, cs.Binding, cs.Location) { IsDefault = cs.IsDefault };
 
                 descriptor.AssertionConsumerServices.Add(cs.Index, consumerService);
             }
-            SSODescriptorHelper.BuildOrganisationAndContacts(descriptor, configuration);
             return descriptor;
         }
     }

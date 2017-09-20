@@ -52,6 +52,7 @@ namespace InlineMetadataContextProvider
             orgConfiguration.OrganisationContacts.PersonContact.Add(contact);
             return orgConfiguration;
         }
+
         public static KeyDescriptorConfiguration BuildKeyDescriptorConfiguration()
         {
             var certificateContext = new X509CertificateContext

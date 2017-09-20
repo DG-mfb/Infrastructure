@@ -20,10 +20,56 @@ namespace WsFederationMetadataProviderTests
             var descriptorBuilder = new ServiceProviderSingleSignOnDescriptorBuilder();
             //ACT
             var descriptor = descriptorBuilder.BuildDescriptor(spDescriptorConfigurtion);
+            var organisation = descriptor.Organization;
+            var protocolsSupported = descriptor.ProtocolsSupported;
+            var assertionServices = descriptor.AssertionConsumerServices;
+            
+            var keys = descriptor.Keys;
+            
             //ASSERT
-            Assert.AreEqual(descriptor.ValidUntil, spDescriptorConfigurtion.ValidUntil);
-            Assert.AreEqual(descriptor.WantAssertionsSigned, spDescriptorConfigurtion.WantAssertionsSigned);
+            //assert sp descriptor attributes
+            
+            Assert.AreEqual(spDescriptorConfigurtion.WantAssertionsSigned, descriptor.WantAssertionsSigned);
+            Assert.AreEqual(spDescriptorConfigurtion.AuthenticationRequestsSigned, descriptor.AuthenticationRequestsSigned);
+            Assert.AreEqual(spDescriptorConfigurtion.AssertionConsumerServices.Count, descriptor.AssertionConsumerServices.Count);
+            foreach(var s in spDescriptorConfigurtion.AssertionConsumerServices)
+            {
+                var descriptorService = assertionServices[s.Index];
+                Assert.AreEqual(s.Index, descriptorService.Index);
+                Assert.AreEqual(s.Location, descriptorService.Location);
+                Assert.AreEqual(s.Binding, descriptorService.Binding);
+                Assert.AreEqual(s.IsDefault, descriptorService.IsDefault);
+            }
+
+            //assert sso descriptor attributes
+            Assert.AreEqual(spDescriptorConfigurtion.ArtifactResolutionServices.Count, descriptor.ArtifactResolutionServices.Count);
+            foreach (var s in spDescriptorConfigurtion.ArtifactResolutionServices)
+            {
+                var descriptorService = descriptor.ArtifactResolutionServices[s.Index];
+                Assert.AreEqual(s.Index, descriptorService.Index);
+                Assert.AreEqual(s.Location, descriptorService.Location);
+                Assert.AreEqual(s.Binding, descriptorService.Binding);
+            }
+            Assert.True(Enumerable.SequenceEqual(descriptor.NameIdentifierFormats, spDescriptorConfigurtion.NameIdentifierFormats));
+            Assert.AreEqual(spDescriptorConfigurtion.SingleLogoutServices.Count, descriptor.SingleLogoutServices.Count);
+            foreach (var s in spDescriptorConfigurtion.SingleLogoutServices)
+            {
+                var descriptorService = descriptor.SingleLogoutServices.Single(x => x.Location == s.Location);
+                Assert.AreEqual(s.ResponseLocation, descriptorService.ResponseLocation);
+                Assert.AreEqual(s.Binding, descriptorService.Binding);
+            }
+
+            //assert role descriptor attributes
+            Assert.AreEqual(spDescriptorConfigurtion.ValidUntil.DateTime, descriptor.ValidUntil);
             Assert.True(Enumerable.SequenceEqual(descriptor.ProtocolsSupported, spDescriptorConfigurtion.ProtocolSupported));
+            Assert.AreEqual(spDescriptorConfigurtion.KeyDescriptors.Count, descriptor.Keys.Count);
+            for (var i = 0; i < spDescriptorConfigurtion.KeyDescriptors.Count; i++)
+            {
+                var descriptorKey = descriptor.Keys.ElementAt(i);
+                var configKey = spDescriptorConfigurtion.KeyDescriptors.ElementAt(i);
+                Assert.AreEqual(configKey.Use.ToString(), descriptorKey.Use.ToString());
+                
+            }
         }
     }
 }

@@ -7,7 +7,13 @@ namespace Kernel.Federation.MetaData.Configuration.RoleDescriptors
     public class SSODescriptorConfiguration : RoleDescriptorConfiguration
     {
         public ICollection<Uri> NameIdentifierFormats { get; }
-        public IndexedEndPointConfiguration ArtifactResolutionServices { get; }
+        public ICollection<IndexedEndPointConfiguration> ArtifactResolutionServices { get; }
         public ICollection<EndPointConfiguration> SingleLogoutServices { get; }
+        public SSODescriptorConfiguration()
+        {
+            this.ArtifactResolutionServices = new List<IndexedEndPointConfiguration>();
+            this.NameIdentifierFormats = new List<Uri>();
+            this.SingleLogoutServices = new List<EndPointConfiguration>();
+        }
     }
 }

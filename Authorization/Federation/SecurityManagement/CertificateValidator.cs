@@ -26,7 +26,7 @@ namespace SecurityManagement
         
         public override void Validate(X509Certificate2 certificate)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         //ToDo: use factory or DI container

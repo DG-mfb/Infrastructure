@@ -16,6 +16,7 @@ namespace WsMetadataSerialisation.Serialisation
         public FederationMetadataSerialiser(ICertificateValidator certificateValidator)
         {
             base.CertificateValidator = (X509CertificateValidator)certificateValidator;
+            base.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.Custom;
         }
         public void Serialise(XmlWriter writer, MetadataBase metadata)
         {
