@@ -56,7 +56,7 @@ namespace WsFederationMetadataProviderTests
             ////ARRANGE
 
             var result = false;
-            var path = @"D:\Dan\Software\Apira\SPMetadata\SPMetadata.xml";
+            var path = @"D:\Dan\Software\Apira\SPMetadata\SPMetadataTest.xml";
             var metadataWriter = new TestMetadatWriter(el =>
             {
                 if (File.Exists(path))

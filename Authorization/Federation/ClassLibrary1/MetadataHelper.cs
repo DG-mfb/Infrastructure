@@ -86,6 +86,13 @@ namespace InlineMetadataContextProvider
                 RoleDescriptorType = typeof(ServiceProviderSingleSignOnDescriptor),
                 ErrorUrl = new Uri("http://localhost:60879/api/Account/Error")
             };
+            sPSSODescriptorConfiguration.NameIdentifierFormats.Add(new Uri("urn:oasis:names:tc:SAML:2.0:nameid-format:transient"));
+            sPSSODescriptorConfiguration.NameIdentifierFormats.Add(new Uri("urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"));
+            sPSSODescriptorConfiguration.SingleLogoutServices.Add(new EndPointConfiguration
+            {
+                Binding = new Uri("urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"),
+                Location = new Uri("http://localhost:60879/api/Account/SSOLogout")
+            });
             //supported protocols
             sPSSODescriptorConfiguration.ProtocolSupported.Add(new Uri("urn:oasis:names:tc:SAML:2.0:protocol"));
             //key descriptors

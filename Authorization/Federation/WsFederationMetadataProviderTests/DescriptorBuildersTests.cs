@@ -49,6 +49,7 @@ namespace WsFederationMetadataProviderTests
                 Assert.AreEqual(s.Binding, descriptorService.Binding);
             }
             Assert.True(Enumerable.SequenceEqual(descriptor.NameIdentifierFormats, spDescriptorConfigurtion.NameIdentifierFormats));
+
             Assert.AreEqual(spDescriptorConfigurtion.SingleLogoutServices.Count, descriptor.SingleLogoutServices.Count);
             foreach (var s in spDescriptorConfigurtion.SingleLogoutServices)
             {
