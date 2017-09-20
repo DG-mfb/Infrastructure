@@ -22,7 +22,7 @@ namespace InlineMetadataContextProvider
                 EntityId = "Imperial.flowz.co.uk",
                 Id = federationId,
                 ValidUntil = new DateTimeOffset(DateTime.Now.AddDays(30)),
-                Organisation = MetadataHelper.BuikdOrganisationConfiguration()
+                Organisation = MetadataHelper.BuikdOrganisationConfiguration(),
             };
             return entityDescriptorConfiguration;
         }
@@ -83,7 +83,8 @@ namespace InlineMetadataContextProvider
                 Organisation = MetadataHelper.BuikdOrganisationConfiguration(),
                 AuthenticationRequestsSigned = true,
                 CacheDuration = TimeSpan.FromDays(100),
-                RoleDescriptorType = typeof(ServiceProviderSingleSignOnDescriptor)
+                RoleDescriptorType = typeof(ServiceProviderSingleSignOnDescriptor),
+                ErrorUrl = new Uri("http://localhost:60879/api/Account/Error")
             };
             //supported protocols
             sPSSODescriptorConfiguration.ProtocolSupported.Add(new Uri("urn:oasis:names:tc:SAML:2.0:protocol"));

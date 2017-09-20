@@ -3,7 +3,6 @@ using InlineMetadataContextProvider;
 using Kernel.Federation.MetaData.Configuration.RoleDescriptors;
 using NUnit.Framework;
 using WsFederationMetadataProvider.Metadata.DescriptorBuilders;
-using WsFederationMetadataProviderTests.Mock;
 
 namespace WsFederationMetadataProviderTests
 {
@@ -59,6 +58,7 @@ namespace WsFederationMetadataProviderTests
             }
 
             //assert role descriptor attributes
+            Assert.AreEqual(spDescriptorConfigurtion.ErrorUrl, descriptor.ErrorUrl);
             Assert.AreEqual(spDescriptorConfigurtion.ValidUntil.DateTime, descriptor.ValidUntil);
             Assert.True(Enumerable.SequenceEqual(descriptor.ProtocolsSupported, spDescriptorConfigurtion.ProtocolSupported));
             Assert.AreEqual(spDescriptorConfigurtion.KeyDescriptors.Count, descriptor.Keys.Count);

@@ -16,15 +16,9 @@ namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
             var descriptor = new ServiceProviderSingleSignOnDescriptor
             {
                 WantAssertionsSigned = spConfiguration.WantAssertionsSigned,
-                ValidUntil = spConfiguration.ValidUntil.DateTime,
                 AuthenticationRequestsSigned = spConfiguration.AuthenticationRequestsSigned
             };
-
-            foreach(var protocol in configuration.ProtocolSupported)
-            {
-                descriptor.ProtocolsSupported.Add(protocol);
-            }
-
+            
             foreach (var cs in spConfiguration.AssertionConsumerServices)
             {
                 var consumerService = new IndexedProtocolEndpoint(cs.Index, cs.Binding, cs.Location) { IsDefault = cs.IsDefault };

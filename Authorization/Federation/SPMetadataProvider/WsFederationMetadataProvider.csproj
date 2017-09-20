@@ -51,6 +51,8 @@
     <Compile Include="Metadata\DescriptorBuilders\DescriptorBuildersHelper.cs" />
     <Compile Include="Metadata\DescriptorBuilders\ServiceProviderSingleSignOnDescriptorBuilder.cs" />
     <Compile Include="Metadata\DescriptorBuilders\DescriptorBuilderBase.cs" />
+    <Compile Include="Metadata\DescriptorBuilders\SSODescriptorMemberBulders\MiscellaneousRoleDescriptorMemberBuilder.cs" />
+    <Compile Include="Metadata\DescriptorBuilders\SSODescriptorMemberBulders\ProtocolsSupportedBuilder.cs" />
     <Compile Include="Metadata\DescriptorBuilders\SSODescriptorMemberBulders\MemberBuilderFactory.cs" />
     <Compile Include="Metadata\DescriptorBuilders\SSODescriptorMemberBulders\PersonContactBuilder.cs" />
     <Compile Include="Metadata\DescriptorBuilders\SSODescriptorMemberBulders\OrganisationBuilder.cs" />
