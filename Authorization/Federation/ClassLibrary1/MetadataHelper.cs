@@ -38,7 +38,7 @@ namespace InlineMetadataContextProvider
                 Name = "Apira LTD",
                 DisplayName = "Flowz",
             });
-            orgConfiguration.Urls.Add(new Uri("https://apira.co.uk/"));
+            orgConfiguration.Urls.Add(new LocalizedUrlEntry { Url = new Uri("https://apira.co.uk/") });
 
             var contact = new Kernel.Federation.MetaData.Configuration.Organisation.ContactPerson
             {
@@ -48,6 +48,7 @@ namespace InlineMetadataContextProvider
 
             };
             contact.Emails.Add("john.murphy@flowz.co.uk");
+            contact.PhoneNumbers.Add("020xxx");
             
             orgConfiguration.OrganisationContacts.PersonContact.Add(contact);
             return orgConfiguration;

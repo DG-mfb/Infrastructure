@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.IdentityModel.Metadata;
 using System.Linq;
 using Kernel.Federation.MetaData.Configuration.RoleDescriptors;
@@ -27,22 +26,8 @@ namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
             });
             organisationConfigration.Urls.Aggregate(roleDescriptor.Organization, (o, next) =>
             {
-                o.Urls.Add(new LocalizedUri(next, CultureInfo.CurrentCulture));
+                o.Urls.Add(new LocalizedUri(next.Url, next.Language));
                 return o;
-            });
-
-            var contacts = roleDescriptorConfiguration.Organisation.OrganisationContacts.PersonContact;
-            contacts.Aggregate(roleDescriptor.Contacts, (c, next) =>
-            {
-                ContactType contactType;
-                if (!Enum.TryParse<ContactType>(next.ContactType.ToString(), out contactType))
-                    throw new InvalidCastException(String.Format("No corespondenting value for Contact type: {0}.", next.ContactType));
-                c.Add(new ContactPerson(contactType)
-                {
-                    Surname = next.SurName,
-                    GivenName = next.ForeName
-                });
-                return c;
             });
         }
         internal static void BuildContacts(RoleDescriptor roleDescriptor, RoleDescriptorConfiguration roleDescriptorConfiguration)
@@ -58,11 +43,14 @@ namespace WsFederationMetadataProvider.Metadata.DescriptorBuilders
                 ContactType contactType;
                 if (!Enum.TryParse<ContactType>(next.ContactType.ToString(), out contactType))
                     throw new InvalidCastException(String.Format("No corespondenting value for Contact type: {0}.", next.ContactType));
-                c.Add(new ContactPerson(contactType)
+                var cp = new ContactPerson(contactType)
                 {
                     Surname = next.SurName,
-                    GivenName = next.ForeName
-                });
+                    GivenName = next.ForeName,
+                };
+                next.Emails.Aggregate(cp.EmailAddresses, (p, nextEmail) => {p.Add(nextEmail); return p; });
+                next.PhoneNumbers.Aggregate(cp.TelephoneNumbers, (p, nextNumber) => { p.Add(nextNumber); return p; });
+                c.Add(cp);
                 return c;
             });
         }

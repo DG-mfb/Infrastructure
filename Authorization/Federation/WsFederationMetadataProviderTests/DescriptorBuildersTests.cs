@@ -23,7 +23,6 @@ namespace WsFederationMetadataProviderTests
             var organisation = descriptor.Organization;
             var protocolsSupported = descriptor.ProtocolsSupported;
             var assertionServices = descriptor.AssertionConsumerServices;
-            
             var keys = descriptor.Keys;
             
             //ASSERT
@@ -68,7 +67,40 @@ namespace WsFederationMetadataProviderTests
                 var descriptorKey = descriptor.Keys.ElementAt(i);
                 var configKey = spDescriptorConfigurtion.KeyDescriptors.ElementAt(i);
                 Assert.AreEqual(configKey.Use.ToString(), descriptorKey.Use.ToString());
-                
+            }
+
+            //organisation
+            Assert.AreEqual(spDescriptorConfigurtion.Organisation.Names.Count, organisation.Names.Count);
+            foreach(var n in spDescriptorConfigurtion.Organisation.Names)
+            {
+                var targetName = organisation.Names[n.Language];
+                Assert.AreEqual(n.Name, targetName.Name);
+            }
+            Assert.AreEqual(spDescriptorConfigurtion.Organisation.Names.Count, organisation.DisplayNames.Count);
+            foreach (var n in spDescriptorConfigurtion.Organisation.Names)
+            {
+                var targetName = organisation.DisplayNames[n.Language];
+                Assert.AreEqual(n.DisplayName, targetName.Name);
+            }
+            Assert.AreEqual(spDescriptorConfigurtion.Organisation.Urls.Count, organisation.Urls.Count);
+            foreach (var n in spDescriptorConfigurtion.Organisation.Urls)
+            {
+                var targetName = organisation.Urls[n.Language];
+                Assert.AreEqual(n.Url, targetName.Uri);
+            }
+
+            //contacts
+            var configContacts = spDescriptorConfigurtion.Organisation.OrganisationContacts;
+            Assert.AreEqual(configContacts.PersonContact.Count, descriptor.Contacts.Count);
+            for(var i = 0; i < configContacts.PersonContact.Count; i++)
+            {
+                var source = configContacts.PersonContact.ElementAt(i);
+                var targer = descriptor.Contacts.ElementAt(i);
+                Assert.AreEqual(source.ContactType.ToString(), targer.Type.ToString());
+                Assert.AreEqual(source.ForeName, targer.GivenName);
+                Assert.AreEqual(source.SurName, targer.Surname);
+                Assert.IsTrue(Enumerable.SequenceEqual(source.Emails, targer.EmailAddresses));
+                Assert.IsTrue(Enumerable.SequenceEqual(source.PhoneNumbers, targer.TelephoneNumbers));
             }
         }
     }
