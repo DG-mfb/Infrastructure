@@ -50,6 +50,8 @@
     <Compile Include="DataRepository\DbRepository.cs" />
     <Compile Include="IHasID.cs" />
     <Compile Include="IHasID%271.cs" />
+    <Compile Include="ORM\IDbCustomConfiguration.cs" />
+    <Compile Include="ORM\ISeeder.cs" />
     <Compile Include="ORM\IDbContext.cs" />
     <Compile Include="ORM\IDbRepository%271.cs" />
     <Compile Include="ORM\IDbRepository.cs" />

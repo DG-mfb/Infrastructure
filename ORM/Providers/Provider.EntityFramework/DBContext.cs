@@ -11,9 +11,11 @@ using Provider.EntityFramework.Initialisation;
 
 namespace Provider.EntityFramework
 {
-    public class DBContext : DbContext, IDbContext
-	{
+    public class DBContext : DbContext, IDbContext, IDbCustomConfiguration
+    {
         public Func<IEnumerable<Type>> ModelsFactory { private get; set; }
+
+        public ICollection<ISeeder> Seeders { get; }
 
         static DBContext()
 		{
@@ -25,7 +27,10 @@ namespace Provider.EntityFramework
 		/// <param name="connectionString"></param>
 		/// <param name="identityProvider"></param>
 		public DBContext(IConnectionStringProvider connectionString)
-			: base(connectionString.GetConnectionString().ConnectionString) { }
+			: base(connectionString.GetConnectionString().ConnectionString)
+        {
+            this.Seeders = new List<ISeeder>();
+        }
 
 		/// <summary>
 		///     This method is called when the model for a derived context has been initialized, but

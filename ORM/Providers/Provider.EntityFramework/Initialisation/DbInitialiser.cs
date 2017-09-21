@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kernel.Data.ORM;
 
 namespace Provider.EntityFramework.Initialisation
 {
@@ -16,16 +17,16 @@ namespace Provider.EntityFramework.Initialisation
 		/// <param name="context"></param>
 		protected override void Seed(DBContext context)
 		{
-			//var client = ConfigurationManager.AppSettings["client"];
-			//if (String.IsNullOrWhiteSpace(client))
-			//	throw new ArgumentException("client");
+            var customConfiguration = context as IDbCustomConfiguration;
+            if (customConfiguration == null)
+                return;
+           
+            var seeders = customConfiguration.Seeders;
 
-			//var seeders = ClientSeeder.GetSeedersFor(client);
-
-			//foreach (var seeder in seeders.OrderBy(x => x.SeedingOrder))
-			//{
-			//	seeder.Seed(context);
-			//}
-		}
+            foreach (var seeder in seeders.OrderBy(x => x.SeedingOrder))
+            {
+                seeder.Seed(context);
+            }
+        }
 	}
 }

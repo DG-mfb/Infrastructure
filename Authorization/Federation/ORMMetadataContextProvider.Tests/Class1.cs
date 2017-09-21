@@ -16,10 +16,13 @@ namespace ORMMetadataContextProvider.Tests
         public void Test1()
         {
             //ARRANGE
+            var seeder = new MockSeeder();
             var connectionStringProvider = new MetadataConnectionStringProviderMock();
             var models = ReflectionHelper.GetAllTypes(new[] {typeof(MetadataContextBuilder).Assembly })
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
             object context = new DBContext(connectionStringProvider) { ModelsFactory = () => models };
+
+            ((IDbCustomConfiguration)context).Seeders.Add(seeder);
             var metadataContextBuilder = new MetadataContextBuilder((IDbContext)context);
             //var metadata = metadataContextBuilder.BuildContext();
             //temp
