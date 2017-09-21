@@ -9,7 +9,6 @@ using System.Xml;
 using Kernel.Cryptography.CertificateManagement;
 using Kernel.Federation.MetaData;
 using Kernel.Federation.MetaData.Configuration;
-using Kernel.Federation.MetaData.Configuration.Cryptography;
 using Kernel.Federation.MetaData.Configuration.EntityDescriptors;
 using Kernel.Federation.MetaData.Configuration.RoleDescriptors;
 using WsFederationMetadataProvider.Metadata.DescriptorBuilders;
