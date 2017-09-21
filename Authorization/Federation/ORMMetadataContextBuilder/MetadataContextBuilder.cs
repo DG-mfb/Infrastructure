@@ -15,7 +15,7 @@ namespace ORMMetadataContextProvider
         }
         public MetadataContext BuildContext()
         {
-            var foo = this._dbContext.Set<SPMetadataSettings>()
+            var foo = this._dbContext.Set<MetadataSettings>()
                 .ToList();
 
             throw new NotImplementedException();
