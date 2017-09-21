@@ -81,9 +81,9 @@
     <Compile Include="CertificateProvider\ICertificateCachePopulator.cs" />
     <Compile Include="Protocols\AuthnRequestContext.cs" />
     <Compile Include="Protocols\IAuthnRequestBuilder.cs" />
-    <Compile Include="Protocols\IConfigurationManager.cs" />
-    <Compile Include="Protocols\IConfigurationRetriever.cs" />
-    <Compile Include="Protocols\IDocumentRetriever.cs" />
+    <Compile Include="MetadataConsumer\IConfigurationManager.cs" />
+    <Compile Include="MetadataConsumer\IConfigurationRetriever.cs" />
+    <Compile Include="MetadataConsumer\IDocumentRetriever.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kernel.Cache\Kernel.Cache.csproj">

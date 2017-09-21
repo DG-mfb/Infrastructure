@@ -98,6 +98,14 @@
       <Project>{D63B92B8-863B-493D-8117-0960DB06B554}</Project>
       <Name>WsMetadataSerialisation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Federation\Federation.Metadata.Consumer\Federation.Metadata.Consumer.csproj">
+      <Project>{EEC53E9A-3970-4EEC-8FFC-6B1AEA371A77}</Project>
+      <Name>Federation.Metadata.Consumer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Federation\Federation.Metadata.HttpRetriever\Federation.Metadata.HttpRetriever.csproj">
+      <Project>{99B877E4-7B04-4490-9163-C7A41FEE0097}</Project>
+      <Name>Federation.Metadata.HttpRetriever</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Federation\Federation.Protocols\Federation.Protocols.csproj">
       <Project>{33862A55-E53A-45EF-85C4-A9E1DEF4181C}</Project>
       <Name>Federation.Protocols</Name>

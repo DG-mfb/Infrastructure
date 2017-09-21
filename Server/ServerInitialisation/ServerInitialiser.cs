@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AspNet.EntityFramework.IdentityProvider.Initialisation;
+using Federation.Metadata.Consumer.Initialisation;
+using Federation.Metadata.HttpRetriever.Initialisation;
 using InlineMetadataContextProvider.Initialisation;
 using Kernel.DependancyResolver;
 using Kernel.Initialisation;
@@ -34,6 +36,8 @@ namespace ServerInitialisation
                 yield return typeof(MetadataSerialisationInitialiser).Assembly;
                 yield return typeof(XmlSerializerInitialiser).Assembly;
                 yield return typeof(InlineMetadaContextProviderInitialiser).Assembly;
+                yield return typeof(HttpDocumentRetrieverInitialiser).Assembly;
+                yield return typeof(MetadataConsumerInitialiser).Assembly;
                 //return Enumerable.Empty<Assembly>();
             }
         }

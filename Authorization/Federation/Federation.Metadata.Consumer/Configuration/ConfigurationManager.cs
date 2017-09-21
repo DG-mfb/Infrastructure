@@ -4,9 +4,9 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Kernel.Extensions;
-using Kernel.Federation.Protocols;
+using Kernel.Federation.MetadataConsumer;
 
-namespace Federation.Protocols.Configuration
+namespace Federation.Metadata.Consumer.Configuration
 {
     public class ConfigurationManager<T> : IConfigurationManager<T> where T : class
     {
@@ -20,7 +20,6 @@ namespace Federation.Protocols.Configuration
         public static readonly TimeSpan MinimumRefreshInterval = new TimeSpan(0, 0, 0, 1);
         private readonly SemaphoreSlim _refreshLock;
         private readonly string _metadataAddress;
-        private readonly IDocumentRetriever _docRetriever;
         private readonly IConfigurationRetriever<T> _configRetriever;
         private T _currentConfiguration;
 
@@ -52,31 +51,29 @@ namespace Federation.Protocols.Configuration
             }
         }
 
-        static ConfigurationManager()
-        {
-            //IdentityModelEventSource.Logger.WriteVerbose("Assembly version info: " + typeof(ConfigurationManager<T>).AssemblyQualifiedName);
-        }
+        //static ConfigurationManager()
+        //{
+        //    //IdentityModelEventSource.Logger.WriteVerbose("Assembly version info: " + typeof(ConfigurationManager<T>).AssemblyQualifiedName);
+        //}
+
+        //public ConfigurationManager(string metadataAddress, IConfigurationRetriever<T> configRetriever)
+        //  : this(metadataAddress, configRetriever, (IDocumentRetriever)new HttpDocumentRetriever())
+        //{
+        //}
+
+        //public ConfigurationManager(string metadataAddress, IConfigurationRetriever<T> configRetriever, HttpClient httpClient)
+        //  : this(metadataAddress, configRetriever, (IDocumentRetriever)new HttpDocumentRetriever(httpClient))
+        //{
+        //}
 
         public ConfigurationManager(string metadataAddress, IConfigurationRetriever<T> configRetriever)
-          : this(metadataAddress, configRetriever, (IDocumentRetriever)new HttpDocumentRetriever())
-        {
-        }
-
-        public ConfigurationManager(string metadataAddress, IConfigurationRetriever<T> configRetriever, HttpClient httpClient)
-          : this(metadataAddress, configRetriever, (IDocumentRetriever)new HttpDocumentRetriever(httpClient))
-        {
-        }
-
-        public ConfigurationManager(string metadataAddress, IConfigurationRetriever<T> configRetriever, IDocumentRetriever docRetriever)
         {
             if (string.IsNullOrWhiteSpace(metadataAddress))
                 throw new ArgumentNullException("metadataAddress");
             if (configRetriever == null)
                 throw new ArgumentNullException("configRetriever");
-            if (docRetriever == null)
-                throw new ArgumentNullException("docRetriever");
+            
             this._metadataAddress = metadataAddress;
-            this._docRetriever = docRetriever;
             this._configRetriever = configRetriever;
             this._refreshLock = new SemaphoreSlim(1);
         }
@@ -102,7 +99,7 @@ namespace Federation.Protocols.Configuration
                     {
                         ConfigurationManager<T> configurationManager = this;
                         T currentConfiguration = configurationManager._currentConfiguration;
-                        T obj = await this._configRetriever.GetConfigurationAsync(this._metadataAddress, this._docRetriever, CancellationToken.None).ConfigureAwait(false);
+                        T obj = await this._configRetriever.GetAsync(this._metadataAddress, CancellationToken.None).ConfigureAwait(false);
                         configurationManager._currentConfiguration = obj;
                         configurationManager = (ConfigurationManager<T>)null;
                         obj = default(T);

@@ -4,11 +4,11 @@ using System.Net.Http;
 using System.Net.Security;
 using System.Threading;
 using System.Threading.Tasks;
-using Federation.Protocols;
+using Federation.Metadata.Consumer.Configuration;
+using Federation.Metadata.HttpRetriever;
 using NUnit.Framework;
-using WsFederationMetadataProvider.Configuration;
 
-namespace WsFederationMetadataProviderTests
+namespace Federation.Metadata.Consumer.Tests
 {
     [TestFixture]
     public class MetadataRetrieverMetadataTests
@@ -38,10 +38,13 @@ namespace WsFederationMetadataProviderTests
             webRequestHandler.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((_, __, ___, ____) => true);
             var httpClient = new HttpClient(webRequestHandler);
             var documentRetrieer = new HttpDocumentRetriever(httpClient);
+            var configurationRetriever = new WsFederationConfigurationRetriever(documentRetrieer);
+           
+            
 
             //ACT
             //var baseMetadata = await WsFederationConfigurationRetriever.GetAsync("https://dg-mfb/idp/shibboleth", documentRetrieer, new CancellationToken());
-            var baseMetadata = await WsFederationConfigurationRetriever.GetAsync("https://www.testshib.org/metadata/testshib-providers.xml", documentRetrieer, new CancellationToken());
+            var baseMetadata = await configurationRetriever.GetAsync("https://www.testshib.org/metadata/testshib-providers.xml", new CancellationToken());
             var metadata = baseMetadata as EntityDescriptor;
             //ASSERT
             Assert.IsTrue(metadata != null);

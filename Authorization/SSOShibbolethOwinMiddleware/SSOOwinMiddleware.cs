@@ -2,7 +2,8 @@
 using System.IdentityModel.Metadata;
 using System.Net.Http;
 using System.Net.Security;
-using Federation.Protocols.Configuration;
+using Federation.Metadata.Consumer.Configuration;
+using Federation.Metadata.HttpRetriever;
 using Kernel.DependancyResolver;
 using Microsoft.Owin;
 using Microsoft.Owin.Logging;
@@ -12,7 +13,6 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Infrastructure;
 using Owin;
 using SSOOwinMiddleware.Handlers;
-using WsFederationMetadataProvider.Configuration;
 
 namespace SSOOwinMiddleware
 {
@@ -44,11 +44,16 @@ namespace SSOOwinMiddleware
             if (this.Options.Configuration != null)
             { }//this.Options.ConfigurationManager = (IConfigurationManager<object>)new StaticConfigurationManager<object>(this.Options.Configuration);
             else
-                this.Options.ConfigurationManager = new ConfigurationManager<MetadataBase>(this.Options.MetadataAddress, new WsFederationConfigurationRetriever(), new HttpClient(SSOOwinMiddleware.ResolveHttpMessageHandler(this.Options))
+            {
+                var httpClient = new HttpClient(SSOOwinMiddleware.ResolveHttpMessageHandler(this.Options))
                 {
                     Timeout = this.Options.BackchannelTimeout,
                     MaxResponseContentBufferSize = 10485760L
-                });
+                };
+                var documentRetriever = new HttpDocumentRetriever(httpClient);
+                var configurationRetriever = new WsFederationConfigurationRetriever(documentRetriever);
+                this.Options.ConfigurationManager = new ConfigurationManager<MetadataBase>(this.Options.MetadataAddress, configurationRetriever);
+            }
         }
         
         protected override AuthenticationHandler<SSOAuthenticationOptions> CreateHandler()

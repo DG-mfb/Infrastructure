@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{85EDB9FC-3769-4421-9AB6-5EA4117A72F7}</ProjectGuid>
+    <ProjectGuid>{40277502-BEE5-4E57-986E-8C6C851A8913}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WsFederationMetadataProviderTests</RootNamespace>
-    <AssemblyName>WsFederationMetadataProviderTests</AssemblyName>
+    <RootNamespace>Federation.Metadata.Consumer.Tests</RootNamespace>
+    <AssemblyName>Federation.Metadata.Consumer.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -49,53 +49,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthnRequestTests.cs" />
-    <Compile Include="CertificateStoreTests.cs" />
-    <Compile Include="DescriptorBuildersTests.cs" />
-    <Compile Include="Mock\TestMetadatWriter.cs" />
-    <Compile Include="SPMetadataTests.cs" />
+    <Compile Include="MetadataRetrieverMetadataTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Kernel\Kernel.Cryptography\Kernel.Cryptography.csproj">
-      <Project>{857217F2-B265-4154-883F-568285643238}</Project>
-      <Name>Kernel.Cryptography</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Kernel\Kernel.Federation\Kernel.Federation.csproj">
       <Project>{47FE8E9F-CCF6-46B7-BA75-CBA1D1F56D7A}</Project>
       <Name>Kernel.Federation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kernel\Kernel\Kernel.csproj">
-      <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
-      <Name>Kernel</Name>
+    <ProjectReference Include="..\Federation.Metadata.Consumer\Federation.Metadata.Consumer.csproj">
+      <Project>{EEC53E9A-3970-4EEC-8FFC-6B1AEA371A77}</Project>
+      <Name>Federation.Metadata.Consumer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Serialisation\Serialisation.Xml\Serialisation.Xml.csproj">
-      <Project>{CAAA3B30-55E9-4F50-8F09-89CA54DF9614}</Project>
-      <Name>Serialisation.Xml</Name>
+    <ProjectReference Include="..\Federation.Metadata.HttpRetriever\Federation.Metadata.HttpRetriever.csproj">
+      <Project>{99B877E4-7B04-4490-9163-C7A41FEE0097}</Project>
+      <Name>Federation.Metadata.HttpRetriever</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Serialisation\WsMetadataSerialisation\WsMetadataSerialisation.csproj">
-      <Project>{D63B92B8-863B-493D-8117-0960DB06B554}</Project>
-      <Name>WsMetadataSerialisation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ClassLibrary1\InlineMetadataContextProvider.csproj">
-      <Project>{E111A891-B47D-4BDC-8BC2-62C2605FC9B8}</Project>
-      <Name>InlineMetadataContextProvider</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Federation.Protocols\Federation.Protocols.csproj">
-      <Project>{33862A55-E53A-45EF-85C4-A9E1DEF4181C}</Project>
-      <Name>Federation.Protocols</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SecurityManagement\SecurityManagement.csproj">
-      <Project>{F194D759-AE81-488C-8230-EF63836B44C9}</Project>
-      <Name>SecurityManagement</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SPMetadataProvider\WsFederationMetadataProvider.csproj">
-      <Project>{220407EA-E1E1-4BC6-BEC3-3ABFE5070DF5}</Project>
-      <Name>WsFederationMetadataProvider</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

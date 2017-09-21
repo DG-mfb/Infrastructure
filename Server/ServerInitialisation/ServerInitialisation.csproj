@@ -56,6 +56,14 @@
       <Project>{E111A891-B47D-4BDC-8BC2-62C2605FC9B8}</Project>
       <Name>InlineMetadataContextProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Authorization\Federation\Federation.Metadata.Consumer\Federation.Metadata.Consumer.csproj">
+      <Project>{EEC53E9A-3970-4EEC-8FFC-6B1AEA371A77}</Project>
+      <Name>Federation.Metadata.Consumer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Authorization\Federation\Federation.Metadata.HttpRetriever\Federation.Metadata.HttpRetriever.csproj">
+      <Project>{99B877E4-7B04-4490-9163-C7A41FEE0097}</Project>
+      <Name>Federation.Metadata.HttpRetriever</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Authorization\Federation\SecurityManagement\SecurityManagement.csproj">
       <Project>{F194D759-AE81-488C-8230-EF63836B44C9}</Project>
       <Name>SecurityManagement</Name>

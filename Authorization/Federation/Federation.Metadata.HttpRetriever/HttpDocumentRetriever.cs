@@ -3,9 +3,9 @@ using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Kernel.Federation.Protocols;
+using Kernel.Federation.MetadataConsumer;
 
-namespace Federation.Protocols
+namespace Federation.Metadata.HttpRetriever
 {
     public class HttpDocumentRetriever : IDocumentRetriever
     {

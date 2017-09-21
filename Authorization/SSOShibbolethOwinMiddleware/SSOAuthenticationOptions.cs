@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Metadata;
 using System.IdentityModel.Tokens;
 using System.Net.Http;
-using Kernel.Federation.Protocols;
+using Kernel.Federation.MetadataConsumer;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
