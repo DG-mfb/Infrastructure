@@ -6,23 +6,29 @@ using ORMMetadataContextProvider.Tests.Mock;
 using Provider.EntityFramework;
 using Kernel.Data;
 using ORMMetadataContextProvider.Models.GlobalConfiguration;
+using ORMMetadataContextProvider.Seeders;
 
 namespace ORMMetadataContextProvider.Tests
 {
     [TestFixture]
-    public class Class1
+    public class CreateAndSeed
     {
         [Test]
         public void Test1()
         {
             //ARRANGE
-            var seeder = new MockSeeder();
+            var protocolSeeder = new ProtocolSeeder();
+            var bindingSeeder = new BindingSeeder();
+            var relyingPartySeeder = new RelyingPartySeeder();
             var connectionStringProvider = new MetadataConnectionStringProviderMock();
             var models = ReflectionHelper.GetAllTypes(new[] {typeof(MetadataContextBuilder).Assembly })
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
             object context = new DBContext(connectionStringProvider) { ModelsFactory = () => models };
 
-            ((IDbCustomConfiguration)context).Seeders.Add(seeder);
+            ((IDbCustomConfiguration)context).Seeders.Add(protocolSeeder);
+            ((IDbCustomConfiguration)context).Seeders.Add(bindingSeeder);
+            ((IDbCustomConfiguration)context).Seeders.Add(relyingPartySeeder);
+
             var metadataContextBuilder = new MetadataContextBuilder((IDbContext)context);
             //var metadata = metadataContextBuilder.BuildContext();
             //temp

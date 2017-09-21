@@ -47,10 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="CreateAndSeed.cs" />
     <Compile Include="Mock\GlobalConnectionStringProviderMock.cs" />
     <Compile Include="Mock\MetadataConnectionStringProviderMock.cs" />
-    <Compile Include="Mock\MockSeeder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

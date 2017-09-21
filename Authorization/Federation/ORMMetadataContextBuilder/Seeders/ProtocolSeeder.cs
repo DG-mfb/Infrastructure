@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Kernel.Data.ORM;
 using ORMMetadataContextProvider.Models;
 
-namespace ORMMetadataContextProvider.Tests.Mock
+namespace ORMMetadataContextProvider.Seeders
 {
-    internal class MockSeeder : ISeeder
+    class ProtocolSeeder : ISeeder
     {
         public string ClientIdentifier { get; }
 
