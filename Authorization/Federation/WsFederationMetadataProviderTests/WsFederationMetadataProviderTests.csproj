@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthnRequestTests.cs" />
-    <Compile Include="CertificateStoreTests.cs" />
     <Compile Include="DescriptorBuildersTests.cs" />
     <Compile Include="Mock\TestMetadatWriter.cs" />
     <Compile Include="SPMetadataTests.cs" />

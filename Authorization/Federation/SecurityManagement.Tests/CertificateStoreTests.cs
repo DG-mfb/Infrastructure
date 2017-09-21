@@ -4,7 +4,7 @@ using Kernel.Cryptography.CertificateManagement;
 using Kernel.Federation.MetaData.Configuration.Cryptography;
 using NUnit.Framework;
 
-namespace WsFederationMetadataProviderTests
+namespace SecurityManagement.Tests
 {
     [TestFixture]
     internal class CertificateStoreTests
