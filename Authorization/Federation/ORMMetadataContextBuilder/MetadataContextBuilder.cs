@@ -1,16 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Kernel.Data.ORM;
 using Kernel.Federation.MetaData.Configuration;
+using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider
 {
-    internal class MetadataContextBuilder : IMetadataContextBuilder
+    public class MetadataContextBuilder : IMetadataContextBuilder
     {
+        private readonly IDbContext _dbContext;
+        public MetadataContextBuilder(IDbContext dbContext)
+        {
+            this._dbContext = dbContext;
+        }
         public MetadataContext BuildContext()
         {
+            var foo = this._dbContext.Set<SPMetadataSettings>()
+                .ToList();
+
             throw new NotImplementedException();
         }
     }

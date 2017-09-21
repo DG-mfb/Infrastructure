@@ -5,15 +5,14 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ORMMetadataContextBuilder")]
+[assembly: AssemblyTitle("ORMMetadataContextProvider.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ORMMetadataContextBuilder")]
+[assembly: AssemblyProduct("ORMMetadataContextProvider.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: InternalsVisibleTo("ORMMetadataContextProvider.Tests")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -21,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3a8df840-5a87-4cd3-915e-07abf10b065a")]
+[assembly: Guid("b3b5d17f-9b2c-4b26-90e5-8ab0c1a3074a")]
 
 // Version information for an assembly consists of the following four values:
 //

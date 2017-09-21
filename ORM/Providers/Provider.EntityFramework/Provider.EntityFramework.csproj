@@ -57,6 +57,7 @@
     <Compile Include="CustomServices\DbModelCacheKey.cs" />
     <Compile Include="CustomServices\DbModelCacheKeyFactory.cs" />
     <Compile Include="DBContext.cs" />
+    <Compile Include="Initialisation\DbContextInitialiser.cs" />
     <Compile Include="Initialisation\DbInitialiser.cs" />
     <Compile Include="Interseptors\LoggingInterseptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
