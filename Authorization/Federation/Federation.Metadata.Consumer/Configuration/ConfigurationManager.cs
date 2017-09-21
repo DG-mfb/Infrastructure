@@ -64,8 +64,8 @@ namespace Federation.Metadata.Consumer.Configuration
 
         public async Task<T> GetConfigurationAsync()
         {
-            T obj = await this.GetConfigurationAsync(CancellationToken.None).ConfigureAwait(false);
-            return obj;
+            T configuration = await this.GetConfigurationAsync(CancellationToken.None).ConfigureAwait(false);
+            return configuration;
         }
 
         public async Task<T> GetConfigurationAsync(CancellationToken cancel)
