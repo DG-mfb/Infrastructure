@@ -56,9 +56,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Kernel\Kernel.Cryptography\Kernel.Cryptography.csproj">
+      <Project>{857217F2-B265-4154-883F-568285643238}</Project>
+      <Name>Kernel.Cryptography</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Kernel\Kernel.Federation\Kernel.Federation.csproj">
       <Project>{47FE8E9F-CCF6-46B7-BA75-CBA1D1F56D7A}</Project>
       <Name>Kernel.Federation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Serialisation\WsMetadataSerialisation\WsMetadataSerialisation.csproj">
+      <Project>{D63B92B8-863B-493D-8117-0960DB06B554}</Project>
+      <Name>WsMetadataSerialisation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Federation.Metadata.Consumer\Federation.Metadata.Consumer.csproj">
       <Project>{EEC53E9A-3970-4EEC-8FFC-6B1AEA371A77}</Project>
@@ -67,6 +75,10 @@
     <ProjectReference Include="..\Federation.Metadata.HttpRetriever\Federation.Metadata.HttpRetriever.csproj">
       <Project>{99B877E4-7B04-4490-9163-C7A41FEE0097}</Project>
       <Name>Federation.Metadata.HttpRetriever</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SecurityManagement\SecurityManagement.csproj">
+      <Project>{F194D759-AE81-488C-8230-EF63836B44C9}</Project>
+      <Name>SecurityManagement</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

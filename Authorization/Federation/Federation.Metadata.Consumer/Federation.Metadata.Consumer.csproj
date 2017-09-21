@@ -64,10 +64,6 @@
       <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
       <Name>Kernel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Serialisation\WsMetadataSerialisation\WsMetadataSerialisation.csproj">
-      <Project>{D63B92B8-863B-493D-8117-0960DB06B554}</Project>
-      <Name>WsMetadataSerialisation</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

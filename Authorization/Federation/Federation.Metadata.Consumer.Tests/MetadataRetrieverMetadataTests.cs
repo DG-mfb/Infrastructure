@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Federation.Metadata.Consumer.Configuration;
 using Federation.Metadata.HttpRetriever;
 using NUnit.Framework;
+using SecurityManagement;
+using WsMetadataSerialisation.Serialisation;
 
 namespace Federation.Metadata.Consumer.Tests
 {
@@ -38,7 +40,9 @@ namespace Federation.Metadata.Consumer.Tests
             webRequestHandler.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((_, __, ___, ____) => true);
             var httpClient = new HttpClient(webRequestHandler);
             var documentRetrieer = new HttpDocumentRetriever(() => httpClient);
-            var configurationRetriever = new WsFederationConfigurationRetriever(documentRetrieer);
+            var certValidator = new CertificateValidator();
+            var serialiser = new FederationMetadataSerialiser(certValidator);
+            var configurationRetriever = new WsFederationConfigurationRetriever(documentRetrieer, serialiser);
            
             
 

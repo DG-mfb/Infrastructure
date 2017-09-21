@@ -13,6 +13,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Infrastructure;
 using Owin;
 using SSOOwinMiddleware.Handlers;
+using WsMetadataSerialisation.Serialisation;
 
 namespace SSOOwinMiddleware
 {
@@ -51,7 +52,9 @@ namespace SSOOwinMiddleware
                     MaxResponseContentBufferSize = 10485760L
                 };
                 var documentRetriever = new HttpDocumentRetriever(() => httpClient);
-                var configurationRetriever = new WsFederationConfigurationRetriever(documentRetriever);
+                var certValidator = this._resolver.Resolve<Kernel.Cryptography.Validation.ICertificateValidator>();
+                var serialiser = new FederationMetadataSerialiser(certValidator);
+                var configurationRetriever = new WsFederationConfigurationRetriever(documentRetriever, serialiser);
                 this.Options.ConfigurationManager = new ConfigurationManager<MetadataBase>(this.Options.MetadataAddress, configurationRetriever);
             }
         }
