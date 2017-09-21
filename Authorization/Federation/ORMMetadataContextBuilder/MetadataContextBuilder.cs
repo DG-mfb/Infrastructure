@@ -18,7 +18,7 @@ namespace ORMMetadataContextProvider
             var foo = this._dbContext.Set<MetadataSettings>()
                 .ToList();
 
-            throw new NotImplementedException();
+            return new MetadataContext();
         }
     }
 }

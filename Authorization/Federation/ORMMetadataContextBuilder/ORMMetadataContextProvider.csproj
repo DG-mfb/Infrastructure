@@ -45,7 +45,9 @@
     <Compile Include="Initialisation\ORMMetadataContextProviderInitialiser.cs" />
     <Compile Include="MetadataContextBuilder.cs" />
     <Compile Include="Models\EndPointSetting.cs" />
+    <Compile Include="Models\GlobalConfiguration\SecuritySettings.cs" />
     <Compile Include="Models\IndexedEndPointSetting.cs" />
+    <Compile Include="Models\RelyingPartySettings.cs" />
     <Compile Include="Models\Protocol.cs" />
     <Compile Include="Models\Binding.cs" />
     <Compile Include="Models\Certificate.cs" />

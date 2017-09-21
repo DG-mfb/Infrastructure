@@ -3,14 +3,14 @@ using Kernel.Data.Connection;
 
 namespace ORMMetadataContextProvider.Tests.Mock
 {
-    internal class ConnectionStringProviderMock : IConnectionStringProvider
+    internal class GlobalConnectionStringProviderMock : IConnectionStringProvider
     {
         public SqlConnectionStringBuilder GetConnectionString()
         {
             return new SqlConnectionStringBuilder
             {
                 DataSource = "DG-MFB\\SQLEXPRESS_2016",
-                InitialCatalog = "SpMetadataTest",
+                InitialCatalog = "SSOConfiguration",
                 IntegratedSecurity = true
             };
         }
