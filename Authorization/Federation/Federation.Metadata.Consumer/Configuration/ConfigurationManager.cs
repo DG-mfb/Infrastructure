@@ -8,30 +8,23 @@ namespace Federation.Metadata.Consumer.Configuration
 {
     public class ConfigurationManager<T> : IConfigurationManager<T> where T : class
     {
-        private TimeSpan _automaticRefreshInterval = ConfigurationManager<T>.DefaultAutomaticRefreshInterval;
-        private TimeSpan _refreshInterval = ConfigurationManager<T>.DefaultRefreshInterval;
+        //private TimeSpan _automaticRefreshInterval = MetadataConsumerContext.DefaultAutomaticRefreshInterval;
+        //private TimeSpan _refreshInterval = MetadataConsumerContext.DefaultRefreshInterval;
         private DateTimeOffset _syncAfter = DateTimeOffset.MinValue;
         private DateTimeOffset _lastRefresh = DateTimeOffset.MinValue;
-        public static readonly TimeSpan DefaultAutomaticRefreshInterval = new TimeSpan(1, 0, 0, 0);
-        public static readonly TimeSpan DefaultRefreshInterval = new TimeSpan(0, 0, 0, 30);
-        public static readonly TimeSpan MinimumAutomaticRefreshInterval = new TimeSpan(0, 0, 5, 0);
-        public static readonly TimeSpan MinimumRefreshInterval = new TimeSpan(0, 0, 0, 1);
+       
         private readonly SemaphoreSlim _refreshLock;
-        private readonly string _metadataAddress;
+        
         private readonly IConfigurationRetriever<T> _configRetriever;
+        private readonly MetadataConsumerContext _context;
         private T _currentConfiguration;
+
 
         public TimeSpan AutomaticRefreshInterval
         {
             get
             {
-                return this._automaticRefreshInterval;
-            }
-            set
-            {
-                if (value < ConfigurationManager<T>.MinimumAutomaticRefreshInterval)
-                    throw new ArgumentOutOfRangeException("value", String.Format("IDX10107: When setting AutomaticRefreshInterval, the value must be greater than MinimumAutomaticRefreshInterval: '{0}'. value: '{1}'.", (object)ConfigurationManager<T>.MinimumAutomaticRefreshInterval, (object)value));
-                this._automaticRefreshInterval = value;
+                return this._context.AutomaticRefreshInterval;
             }
         }
 
@@ -41,31 +34,26 @@ namespace Federation.Metadata.Consumer.Configuration
         {
             get
             {
-                return this._refreshInterval;
-            }
-            set
-            {
-                if (value < ConfigurationManager<T>.MinimumRefreshInterval)
-                    throw new ArgumentOutOfRangeException("value", String.Format("IDX10106: When setting RefreshInterval, the value must be greater than MinimumRefreshInterval: '{0}'. value: '{1}'.", (object)ConfigurationManager<T>.MinimumRefreshInterval, (object)value));
-                this._refreshInterval = value;
+                return this._context.RefreshInterval;
             }
         }
         
-        public ConfigurationManager(string metadataAddress, IConfigurationRetriever<T> configRetriever)
+        public ConfigurationManager(MetadataConsumerContext context, IConfigurationRetriever<T> configRetriever)
         {
-            if (string.IsNullOrWhiteSpace(metadataAddress))
-                throw new ArgumentNullException("metadataAddress");
+            if (context == null)
+                throw new ArgumentNullException("context");
             if (configRetriever == null)
                 throw new ArgumentNullException("configRetriever");
             
-            this._metadataAddress = metadataAddress;
+            this._context = context;
             this._configRetriever = configRetriever;
             this._refreshLock = new SemaphoreSlim(1);
         }
 
         public async Task<T> GetConfigurationAsync()
         {
-            T configuration = await this.GetConfigurationAsync(CancellationToken.None).ConfigureAwait(false);
+            T configuration = await this.GetConfigurationAsync(CancellationToken.None)
+                .ConfigureAwait(false);
             return configuration;
         }
 
@@ -85,24 +73,24 @@ namespace Federation.Metadata.Consumer.Configuration
                     {
                         ConfigurationManager<T> configurationManager = this;
                         T currentConfiguration = configurationManager._currentConfiguration;
-                        T obj = await this._configRetriever.GetAsync(this._metadataAddress, CancellationToken.None).ConfigureAwait(false);
+                        T obj = await this._configRetriever.GetAsync(this._context.MetadataAddress, CancellationToken.None).ConfigureAwait(false);
                         configurationManager._currentConfiguration = obj;
                         configurationManager = null;
                         obj = default(T);
                         
                         this._lastRefresh = now;
-                        this._syncAfter = DataTimeExtensions.Add(now.UtcDateTime, this._automaticRefreshInterval);
+                        this._syncAfter = DataTimeExtensions.Add(now.UtcDateTime, this._context.AutomaticRefreshInterval);
                     }
                     catch (Exception ex)
                     {
-                        this._syncAfter = DataTimeExtensions.Add(now.UtcDateTime, this._automaticRefreshInterval < this._refreshInterval ? this._automaticRefreshInterval : this._refreshInterval);
-                        throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (this._metadataAddress ?? "null")), ex);
+                        this._syncAfter = DataTimeExtensions.Add(now.UtcDateTime, this._context.AutomaticRefreshInterval < this._context.RefreshInterval ? this._context.AutomaticRefreshInterval : this._context.RefreshInterval);
+                        throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (this._context.MetadataAddress ?? "null")), ex);
                     }
                 }
                 if (this._currentConfiguration != null)
                     return this._currentConfiguration;
 
-                throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (object)(this._metadataAddress ?? "null")));
+                throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (this._context.MetadataAddress ?? "null")));
             }
             finally
             {
