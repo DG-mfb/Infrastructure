@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Kernel.Extensions;
@@ -50,22 +49,7 @@ namespace Federation.Metadata.Consumer.Configuration
                 this._refreshInterval = value;
             }
         }
-
-        //static ConfigurationManager()
-        //{
-        //    //IdentityModelEventSource.Logger.WriteVerbose("Assembly version info: " + typeof(ConfigurationManager<T>).AssemblyQualifiedName);
-        //}
-
-        //public ConfigurationManager(string metadataAddress, IConfigurationRetriever<T> configRetriever)
-        //  : this(metadataAddress, configRetriever, (IDocumentRetriever)new HttpDocumentRetriever())
-        //{
-        //}
-
-        //public ConfigurationManager(string metadataAddress, IConfigurationRetriever<T> configRetriever, HttpClient httpClient)
-        //  : this(metadataAddress, configRetriever, (IDocumentRetriever)new HttpDocumentRetriever(httpClient))
-        //{
-        //}
-
+        
         public ConfigurationManager(string metadataAddress, IConfigurationRetriever<T> configRetriever)
         {
             if (string.IsNullOrWhiteSpace(metadataAddress))

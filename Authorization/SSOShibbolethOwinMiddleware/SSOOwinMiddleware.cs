@@ -50,7 +50,7 @@ namespace SSOOwinMiddleware
                     Timeout = this.Options.BackchannelTimeout,
                     MaxResponseContentBufferSize = 10485760L
                 };
-                var documentRetriever = new HttpDocumentRetriever(httpClient);
+                var documentRetriever = new HttpDocumentRetriever(() => httpClient);
                 var configurationRetriever = new WsFederationConfigurationRetriever(documentRetriever);
                 this.Options.ConfigurationManager = new ConfigurationManager<MetadataBase>(this.Options.MetadataAddress, configurationRetriever);
             }

@@ -20,7 +20,7 @@ namespace Federation.Metadata.Consumer.Tests
             var webRequestHandler = new WebRequestHandler();
             webRequestHandler.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((_, __, ___, ____) => true);
             var httpClient = new HttpClient(webRequestHandler);
-            var documentRetrieer = new HttpDocumentRetriever(httpClient);
+            var documentRetrieer = new HttpDocumentRetriever(() => httpClient);
 
             //ACT
             
@@ -37,7 +37,7 @@ namespace Federation.Metadata.Consumer.Tests
             var webRequestHandler = new WebRequestHandler();
             webRequestHandler.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((_, __, ___, ____) => true);
             var httpClient = new HttpClient(webRequestHandler);
-            var documentRetrieer = new HttpDocumentRetriever(httpClient);
+            var documentRetrieer = new HttpDocumentRetriever(() => httpClient);
             var configurationRetriever = new WsFederationConfigurationRetriever(documentRetrieer);
            
             
