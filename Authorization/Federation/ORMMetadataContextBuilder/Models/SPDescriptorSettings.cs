@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Kernel.Data;
+﻿using System.Collections.Generic;
 
 namespace ORMMetadataContextProvider.Models
 {
@@ -11,9 +6,11 @@ namespace ORMMetadataContextProvider.Models
     {
         public SPDescriptorSettings()
         {
-            this.AssertionServices = new List<EndPointSetting>();
+            this.AssertionServices = new List<IndexedEndPointSetting>();
         }
-        public virtual ICollection<EndPointSetting> AssertionServices { get; }
+        public bool RequestSigned { get; set; }
+        public bool WantAssertionsSigned { get; set; }
+        public virtual ICollection<IndexedEndPointSetting> AssertionServices { get; }
         
     }
 }

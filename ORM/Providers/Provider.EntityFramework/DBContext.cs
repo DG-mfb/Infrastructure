@@ -1,8 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Kernel.Data;
 using Kernel.Data.Connection;
 using Kernel.Data.ORM;
+using Kernel.Initialisation;
 using Kernel.Reflection;
 using Provider.EntityFramework.Initialisation;
 
@@ -10,7 +13,9 @@ namespace Provider.EntityFramework
 {
     public class DBContext : DbContext, IDbContext
 	{
-		static DBContext()
+        public Func<IEnumerable<Type>> ModelsFactory { private get; set; }
+
+        static DBContext()
 		{
 			Database.SetInitializer(new DbInitialiser());
 		}
@@ -48,7 +53,7 @@ namespace Provider.EntityFramework
 		/// <param name="modelBuilder"></param>
 		protected virtual void CreateModel(DbModelBuilder modelBuilder)
 		{
-			var models = ReflectionHelper.GetAllTypes()
+            var models = this.ModelsFactory != null ? this.ModelsFactory() : ReflectionHelper.GetAllTypes()
 				.Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
 
 			foreach(var m in models)

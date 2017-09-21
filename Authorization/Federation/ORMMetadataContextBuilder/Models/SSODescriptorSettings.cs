@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Kernel.Data;
+﻿using System.Collections.Generic;
 
 namespace ORMMetadataContextProvider.Models
 {
@@ -14,6 +9,7 @@ namespace ORMMetadataContextProvider.Models
             this.LogoutServices = new List<EndPointSetting>();
         }
         public virtual ICollection<EndPointSetting> LogoutServices { get; }
-        
+        public virtual ICollection<IndexedEndPointSetting> ArtifactServices { get; }
+
     }
 }
