@@ -35,13 +35,13 @@ namespace Federation.Metadata.Consumer.Configuration
                 throw new ArgumentNullException("address");
             if (retriever == null)
                 throw new ArgumentNullException("retriever");
-            string str = await retriever.GetDocumentAsync(address, cancel);
-            string document = str;
-            str = (string)null;
-            MetadataBase federationConfiguration;
-            using (XmlReader reader = XmlReader.Create((TextReader)new StringReader(document), this._safeSettings))
+            var str = await retriever.GetDocumentAsync(address, cancel);
+            var document = str;
+            str = null;
+            
+            using (XmlReader reader = XmlReader.Create(new StringReader(document), this._safeSettings))
             {
-                federationConfiguration =this._metadataSerialiser.Deserialise(reader);
+                var federationConfiguration =this._metadataSerialiser.Deserialise(reader);
                 return federationConfiguration;
             }
         }
