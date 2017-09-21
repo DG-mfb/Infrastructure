@@ -8,8 +8,6 @@ namespace Federation.Metadata.Consumer.Configuration
 {
     public class ConfigurationManager<T> : IConfigurationManager<T> where T : class
     {
-        //private TimeSpan _automaticRefreshInterval = MetadataConsumerContext.DefaultAutomaticRefreshInterval;
-        //private TimeSpan _refreshInterval = MetadataConsumerContext.DefaultRefreshInterval;
         private DateTimeOffset _syncAfter = DateTimeOffset.MinValue;
         private DateTimeOffset _lastRefresh = DateTimeOffset.MinValue;
        
