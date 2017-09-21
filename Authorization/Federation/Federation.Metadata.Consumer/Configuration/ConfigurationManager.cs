@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
 using Kernel.Extensions;
@@ -36,6 +35,8 @@ namespace Federation.Metadata.Consumer.Configuration
             }
         }
 
+        public DateTimeOffset LastRefresh { get { return this._lastRefresh; } }
+
         public TimeSpan RefreshInterval
         {
             get
@@ -70,9 +71,10 @@ namespace Federation.Metadata.Consumer.Configuration
 
         public async Task<T> GetConfigurationAsync(CancellationToken cancel)
         {
-            DateTimeOffset now = DateTimeOffset.UtcNow;
-            if ((object)this._currentConfiguration != null && this._syncAfter > now)
+            var now = DateTimeOffset.UtcNow;
+            if (this._currentConfiguration != null && this._syncAfter > now)
                 return this._currentConfiguration;
+
             await this._refreshLock.WaitAsync(cancel);
             try
             {
@@ -85,20 +87,21 @@ namespace Federation.Metadata.Consumer.Configuration
                         T currentConfiguration = configurationManager._currentConfiguration;
                         T obj = await this._configRetriever.GetAsync(this._metadataAddress, CancellationToken.None).ConfigureAwait(false);
                         configurationManager._currentConfiguration = obj;
-                        configurationManager = (ConfigurationManager<T>)null;
+                        configurationManager = null;
                         obj = default(T);
-                        Contract.Assert((object)this._currentConfiguration != null);
+                        
                         this._lastRefresh = now;
-                        this._syncAfter = (DateTimeOffset)DataTimeExtensions.Add(now.UtcDateTime, this._automaticRefreshInterval);
+                        this._syncAfter = DataTimeExtensions.Add(now.UtcDateTime, this._automaticRefreshInterval);
                     }
                     catch (Exception ex)
                     {
-                        this._syncAfter = (DateTimeOffset)DataTimeExtensions.Add(now.UtcDateTime, this._automaticRefreshInterval < this._refreshInterval ? this._automaticRefreshInterval : this._refreshInterval);
-                        throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (object)(this._metadataAddress ?? "null")), ex);
+                        this._syncAfter = DataTimeExtensions.Add(now.UtcDateTime, this._automaticRefreshInterval < this._refreshInterval ? this._automaticRefreshInterval : this._refreshInterval);
+                        throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (this._metadataAddress ?? "null")), ex);
                     }
                 }
-                if ((object)this._currentConfiguration != null)
+                if (this._currentConfiguration != null)
                     return this._currentConfiguration;
+
                 throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (object)(this._metadataAddress ?? "null")));
             }
             finally
@@ -109,8 +112,8 @@ namespace Federation.Metadata.Consumer.Configuration
 
         public void RequestRefresh()
         {
-            DateTimeOffset utcNow = DateTimeOffset.UtcNow;
-            if (!(utcNow >= (DateTimeOffset)DataTimeExtensions.Add(this._lastRefresh.UtcDateTime, this.RefreshInterval)))
+            var utcNow = DateTimeOffset.UtcNow;
+            if (!(utcNow >= DataTimeExtensions.Add(this._lastRefresh.UtcDateTime, this.RefreshInterval)))
                 return;
             this._syncAfter = utcNow;
         }
