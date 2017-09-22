@@ -1,6 +1,8 @@
-﻿namespace Kernel.Federation.MetaData.Configuration
+﻿using System;
+
+namespace Kernel.Federation.MetaData.Configuration
 {
-    public interface IMetadataContextBuilder
+    public interface IMetadataContextBuilder : IDisposable
     {
         MetadataContext BuildContext();
     }

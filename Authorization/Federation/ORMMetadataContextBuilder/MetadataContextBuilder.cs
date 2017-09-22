@@ -19,5 +19,10 @@ namespace ORMMetadataContextProvider
 
             return new MetadataContext();
         }
+
+        public void Dispose()
+        {
+            this._dbContext.Dispose();
+        }
     }
 }

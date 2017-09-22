@@ -26,5 +26,9 @@ namespace InlineMetadataContextProvider
             context.MetadataSigningContext.KeyDescriptors.Add(keyDescriptorConfiguration);
             return context;
         }
+
+        public void Dispose()
+        {
+        }
     }
 }
