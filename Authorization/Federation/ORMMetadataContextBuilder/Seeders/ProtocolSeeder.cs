@@ -8,7 +8,7 @@ using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider.Seeders
 {
-    class ProtocolSeeder : ISeeder
+    internal class ProtocolSeeder : ISeeder
     {
         public string ClientIdentifier { get; }
 

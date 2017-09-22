@@ -3,7 +3,7 @@ using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider.Seeders
 {
-    class BindingSeeder : ISeeder
+    internal class BindingSeeder : ISeeder
     {
         public string ClientIdentifier { get; }
 

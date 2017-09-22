@@ -2,8 +2,8 @@
 using System.IdentityModel.Metadata;
 using System.Net.Http;
 using System.Net.Security;
-using Federation.Metadata.Consumer.Configuration;
 using Federation.Metadata.HttpRetriever;
+using Federation.Metadata.RelyingParty.Configuration;
 using Kernel.DependancyResolver;
 using Kernel.Federation.MetadataConsumer;
 using Microsoft.Owin;

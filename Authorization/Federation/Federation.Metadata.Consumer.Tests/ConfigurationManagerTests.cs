@@ -1,7 +1,7 @@
 ﻿using System.IdentityModel.Metadata;
 using System.Threading.Tasks;
-using Federation.Metadata.Consumer.Configuration;
 using Federation.Metadata.Consumer.Tests.Mock;
+using Federation.Metadata.RelyingParty.Configuration;
 using Kernel.Federation.MetadataConsumer;
 using NUnit.Framework;
 

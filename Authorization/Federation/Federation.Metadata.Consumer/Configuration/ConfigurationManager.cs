@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Kernel.Extensions;
 using Kernel.Federation.MetadataConsumer;
 
-namespace Federation.Metadata.Consumer.Configuration
+namespace Federation.Metadata.RelyingParty.Configuration
 {
     public class ConfigurationManager<T> : IConfigurationManager<T> where T : class
     {

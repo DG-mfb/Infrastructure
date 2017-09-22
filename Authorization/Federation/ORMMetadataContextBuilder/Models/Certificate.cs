@@ -9,6 +9,7 @@ namespace ORMMetadataContextProvider.Models
         public Certificate()
         {
             this.StoreSearchCriteria = new List<StoreSearchCriterion>();
+            this.SigningCredentials = new List<SigningCredential>();
         }
         public string CertificatePath { get; }
         public string CertificatePKPath { get; set; }

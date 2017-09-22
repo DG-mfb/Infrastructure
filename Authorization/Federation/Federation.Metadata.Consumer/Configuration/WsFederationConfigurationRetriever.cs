@@ -7,7 +7,7 @@ using System.Xml;
 using Kernel.Federation.MetaData;
 using Kernel.Federation.MetadataConsumer;
 
-namespace Federation.Metadata.Consumer.Configuration
+namespace Federation.Metadata.RelyingParty.Configuration
 {
     public class WsFederationConfigurationRetriever : IConfigurationRetriever<MetadataBase>
     {

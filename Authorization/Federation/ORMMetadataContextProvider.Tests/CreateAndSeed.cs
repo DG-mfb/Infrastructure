@@ -31,12 +31,6 @@ namespace ORMMetadataContextProvider.Tests
             
 
             var metadataContextBuilder = new MetadataContextBuilder((IDbContext)context);
-            //var metadata = metadataContextBuilder.BuildContext();
-            //temp
-            //var connectionStringProvider1 = new GlobalConnectionStringProviderMock();
-            //var models1 = new[] { typeof(SecuritySettings) };
-            //object context1 = new DBContext(connectionStringProvider1) { ModelsFactory = () => models1 };
-            //var foo = ((IDbContext)context1).Set<SecuritySettings>().ToList();
             //ACT
             var metadata = metadataContextBuilder.BuildContext();
             //ASSERT

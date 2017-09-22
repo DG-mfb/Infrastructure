@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Federation.Metadata.Consumer.Configuration;
+using Federation.Metadata.RelyingParty.Configuration;
 using Kernel.DependancyResolver;
 using Shared.Initialisation;
 
-namespace Federation.Metadata.Consumer.Initialisation
+namespace Federation.Metadata.RelyingParty.Initialisation
 {
     public class MetadataConsumerInitialiser : Initialiser
     {
