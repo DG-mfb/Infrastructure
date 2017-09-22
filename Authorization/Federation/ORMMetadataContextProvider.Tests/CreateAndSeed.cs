@@ -7,6 +7,7 @@ using Provider.EntityFramework;
 using Kernel.Data;
 using ORMMetadataContextProvider.Models.GlobalConfiguration;
 using ORMMetadataContextProvider.Seeders;
+using System;
 
 namespace ORMMetadataContextProvider.Tests
 {
@@ -17,17 +18,17 @@ namespace ORMMetadataContextProvider.Tests
         public void Test1()
         {
             //ARRANGE
-            var protocolSeeder = new ProtocolSeeder();
-            var bindingSeeder = new BindingSeeder();
-            var relyingPartySeeder = new RelyingPartySeeder();
+            
             var connectionStringProvider = new MetadataConnectionStringProviderMock();
             var models = ReflectionHelper.GetAllTypes(new[] {typeof(MetadataContextBuilder).Assembly })
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
             object context = new DBContext(connectionStringProvider) { ModelsFactory = () => models };
 
-            ((IDbCustomConfiguration)context).Seeders.Add(protocolSeeder);
-            ((IDbCustomConfiguration)context).Seeders.Add(bindingSeeder);
-            ((IDbCustomConfiguration)context).Seeders.Add(relyingPartySeeder);
+            var seeders = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
+                .Where(t => !t.IsAbstract && !t.IsInterface && typeof(ISeeder).IsAssignableFrom(t))
+                .Select(x => (ISeeder)Activator.CreateInstance(x));
+            seeders.Aggregate((IDbCustomConfiguration)context, (c, next) => { c.Seeders.Add(next); return c; });
+            
 
             var metadataContextBuilder = new MetadataContextBuilder((IDbContext)context);
             //var metadata = metadataContextBuilder.BuildContext();
