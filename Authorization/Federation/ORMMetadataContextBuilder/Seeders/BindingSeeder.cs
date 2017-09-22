@@ -11,6 +11,7 @@ namespace ORMMetadataContextProvider.Seeders
             context.Add<Binding>(redirectBinding);
             var postBinding = new Binding { Uri = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST", Name = "HTTP-POST" };
             context.Add<Binding>(postBinding);
+            Seeder._cache.Add(Seeder.BindingsKey, new[] { redirectBinding, postBinding });
         }
     }
 }

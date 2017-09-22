@@ -7,6 +7,9 @@ namespace ORMMetadataContextProvider.Seeders
     {
         internal const string CertificatesKey = "certificates";
         internal const string ProtocolsKey = "protocols";
+        internal const string BindingsKey = "bindings";
+        internal const string SPDescriptorsKey = "spDescriptor";
+
         internal static IDictionary<string, object> _cache = new Dictionary<string, object>();
 
         public virtual string ClientIdentifier { get; }
