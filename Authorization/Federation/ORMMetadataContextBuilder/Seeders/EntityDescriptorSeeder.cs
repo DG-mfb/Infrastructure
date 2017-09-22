@@ -18,7 +18,10 @@ namespace ORMMetadataContextProvider.Seeders
                 ValidUntil = DateTimeOffset.Now.AddDays(90),
             };
 
-            
+            //organisation
+            var organisation = Seeder._cache[Seeder.Organisation] as OrganisationSettings;
+            descriptor.Organisation = organisation;
+
             //sp descriptors
             var spDescriptors = Seeder._cache[Seeder.SPDescriptorsKey] as IEnumerable<SPDescriptorSettings>;
             spDescriptors.Aggregate(descriptor, (d, next) => { d.RoleDescriptors.Add(next); return d; });
