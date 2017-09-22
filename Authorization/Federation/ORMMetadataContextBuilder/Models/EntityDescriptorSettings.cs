@@ -15,6 +15,6 @@ namespace ORMMetadataContextProvider.Models
         public DateTimeOffset ValidUntil { get; set; }
         public int CacheDuration { get; set; }
         public virtual OrganisationSettings Organisation { get; set; }
-        public ICollection<RoleDescriptorSettings> RoleDescriptors { get; }
+        public virtual ICollection<RoleDescriptorSettings> RoleDescriptors { get; }
     }
 }

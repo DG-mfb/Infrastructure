@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Kernel.Data.ORM;
 using Kernel.Federation.MetaData.Configuration;
 using ORMMetadataContextProvider.Models;
@@ -15,8 +14,8 @@ namespace ORMMetadataContextProvider
         }
         public MetadataContext BuildContext()
         {
-            var foo = this._dbContext.Set<MetadataSettings>()
-                .ToList();
+            var foo = this._dbContext.Set<EntityDescriptorSettings>()
+                .First();
 
             return new MetadataContext();
         }
