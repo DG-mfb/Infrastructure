@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Kernel.Data.ORM;
+﻿using Kernel.Data.ORM;
 using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider.Seeders
 {
-    internal class ProtocolSeeder : ISeeder
+    internal class ProtocolSeeder : Seeder
     {
-        public string ClientIdentifier { get; }
-
-        public byte SeedingOrder { get { return 0; } }
-
-        public void Seed(IDbContext context)
+        public override void Seed(IDbContext context)
         {
             var protocol = new Protocol { Uri = "urn:oasis:names:tc:SAML:2.0:protocol" };
             context.Add<Protocol>(protocol);
+            Seeder._cache.Add(Seeder.ProtocolsKey, new[] { protocol });
         }
     }
 }

@@ -10,6 +10,7 @@ namespace ORMMetadataContextProvider.Models
         {
             this.StoreSearchCriteria = new List<StoreSearchCriterion>();
             this.SigningCredentials = new List<SigningCredential>();
+            this.RoleDescriptors = new List<RoleDescriptorSettings>();
         }
         public string CertificatePath { get; }
         public string CertificatePKPath { get; set; }
@@ -20,5 +21,6 @@ namespace ORMMetadataContextProvider.Models
         public bool IsDefault { get; set; }
         public virtual ICollection<StoreSearchCriterion> StoreSearchCriteria { get; }
         public virtual ICollection<SigningCredential> SigningCredentials { get; set; }
+        public virtual ICollection<RoleDescriptorSettings> RoleDescriptors{ get; set; }
     }
 }

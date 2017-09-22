@@ -3,13 +3,9 @@ using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider.Seeders
 {
-    internal class BindingSeeder : ISeeder
+    internal class BindingSeeder : Seeder
     {
-        public string ClientIdentifier { get; }
-
-        public byte SeedingOrder { get { return 0; } }
-
-        public void Seed(IDbContext context)
+        public override void Seed(IDbContext context)
         {
             var redirectBinding = new Binding { Uri = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect", Name = "HTTP-Redirect" };
             context.Add<Binding>(redirectBinding);

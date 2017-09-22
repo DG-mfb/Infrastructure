@@ -4,13 +4,9 @@ using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider.Seeders
 {
-    internal class CertificateSeeder : ISeeder
+    internal class CertificateSeeder : Seeder
     {
-        public string ClientIdentifier { get; }
-
-        public byte SeedingOrder { get { return 0; } }
-
-        public void Seed(IDbContext context)
+        public override void Seed(IDbContext context)
         {
             var certificate = new Certificate
             {
@@ -32,6 +28,7 @@ namespace ORMMetadataContextProvider.Seeders
             signingCritencials.Certificates.Add(certificate);
             certificate.StoreSearchCriteria.Add(storeCriterion);
             context.Add<Certificate>(certificate);
+            Seeder._cache.Add(Seeder.CertificatesKey, new[] { certificate });
         }
     }
 }

@@ -27,7 +27,9 @@ namespace ORMMetadataContextProvider.Tests
             var seeders = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(ISeeder).IsAssignableFrom(t))
                 .Select(x => (ISeeder)Activator.CreateInstance(x));
-            seeders.Aggregate((IDbCustomConfiguration)context, (c, next) => { c.Seeders.Add(next); return c; });
+            seeders
+                .OrderBy(x => x.SeedingOrder)
+                .Aggregate((IDbCustomConfiguration)context, (c, next) => { c.Seeders.Add(next); return c; });
             
 
             var metadataContextBuilder = new MetadataContextBuilder((IDbContext)context);

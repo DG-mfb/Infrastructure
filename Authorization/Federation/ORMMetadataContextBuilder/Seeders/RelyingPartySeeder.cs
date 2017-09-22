@@ -3,13 +3,9 @@ using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider.Seeders
 {
-    internal class RelyingPartySeeder : ISeeder
+    internal class RelyingPartySeeder : Seeder
     {
-        public string ClientIdentifier { get; }
-
-        public byte SeedingOrder { get { return 0; } }
-
-        public void Seed(IDbContext context)
+        public override void Seed(IDbContext context)
         {
             var relyingParty = new RelyingPartySettings
             {
