@@ -29,6 +29,8 @@ namespace ORMMetadataContextProvider
                 ValidUntil = entityDescriptorSettings.ValidUntil,
                 Organisation = organisation,
             };
+            var spDescriptor = MetadataHelper.BuildSPSSODescriptorConfiguration(entityDescriptorSettings.RoleDescriptors.OfType<SPDescriptorSettings>().Single(), organisation);
+            entityDescriptorConfiguration.RoleDescriptors.Add(spDescriptor);
             return entityDescriptorConfiguration;
         }
 
