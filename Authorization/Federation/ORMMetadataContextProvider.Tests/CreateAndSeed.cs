@@ -1,13 +1,11 @@
-﻿using Kernel.Data.ORM;
+﻿using System;
 using System.Linq;
+using Kernel.Data;
+using Kernel.Data.ORM;
 using Kernel.Reflection;
 using NUnit.Framework;
 using ORMMetadataContextProvider.Tests.Mock;
 using Provider.EntityFramework;
-using Kernel.Data;
-using ORMMetadataContextProvider.Models.GlobalConfiguration;
-using ORMMetadataContextProvider.Seeders;
-using System;
 
 namespace ORMMetadataContextProvider.Tests
 {

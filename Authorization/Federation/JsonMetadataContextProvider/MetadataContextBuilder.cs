@@ -20,5 +20,9 @@ namespace JsonMetadataContextProvider
         {
             throw new NotImplementedException();
         }
+
+        public void Dispose()
+        {
+        }
     }
 }
