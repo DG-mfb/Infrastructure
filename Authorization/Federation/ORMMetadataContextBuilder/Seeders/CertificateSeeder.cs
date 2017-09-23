@@ -23,8 +23,8 @@ namespace ORMMetadataContextProvider.Seeders
             };
             var signingCritencials = new SigningCredential
             {
-                DigestAlgorithm = SecurityAlgorithms.RsaSha1Signature,
-                SignatureAlgorithm = SecurityAlgorithms.Sha1Digest,
+                DigestAlgorithm = SecurityAlgorithms.Sha1Digest,
+                SignatureAlgorithm = SecurityAlgorithms.RsaSha1Signature,
             };
             certificate.SigningCredentials.Add(signingCritencials);
             signingCritencials.Certificates.Add(certificate);
