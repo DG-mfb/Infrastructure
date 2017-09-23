@@ -10,7 +10,7 @@ namespace WsFederationMetadataProviderTests
     internal class DescriptorBuildersTests
     {
         [Test]
-        public void ServiceProviderSingleSignOnDescriptorBuilderTest()
+        public void ServiceProviderSingleSignOnDescriptorBuilderTest_inline_contex_provider()
         {
             //ARRANGE
             var contextBuilder = new InlineMetadataContextBuilder();
