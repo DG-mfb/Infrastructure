@@ -16,11 +16,10 @@ namespace SecurityManagement.Tests
             var certificateContext = new X509CertificateContext
             {
                 StoreName = "TestCertStore",
-                SearchCriteria = "ApiraTestCertificate",
                 ValidOnly = false,
-                SearchCriteriaType = X509FindType.FindBySubjectName,
                 StoreLocation = StoreLocation.LocalMachine
             };
+            certificateContext.SearchCriteria.Add(new CertificateSearchCriteria { SearchValue = "ApiraTestCertificate", SearchCriteriaType = X509FindType.FindBySubjectName });
             var certConfiguration = new X509StoreCertificateConfiguration(certificateContext);
             //ACT
             X509Certificate2 cert = null;
@@ -36,11 +35,10 @@ namespace SecurityManagement.Tests
             var certificateContext = new X509CertificateContext
             {
                 StoreName = "TestCertStore",
-                SearchCriteria = "ApiraTestCertificate",
                 ValidOnly = false,
-                SearchCriteriaType = X509FindType.FindBySubjectName,
                 StoreLocation = StoreLocation.CurrentUser
             };
+            certificateContext.SearchCriteria.Add(new CertificateSearchCriteria { SearchValue = "ApiraTestCertificate", SearchCriteriaType = X509FindType.FindBySubjectName });
             var certConfiguration = new X509StoreCertificateConfiguration(certificateContext);
             //ACT
             X509Certificate2 cert = null;
@@ -56,11 +54,12 @@ namespace SecurityManagement.Tests
             var certificateContext = new X509CertificateContext
             {
                 StoreName = "TestCertStore",
-                SearchCriteria = "ApiraTestCertificate",
+               
                 ValidOnly = true,
-                SearchCriteriaType = X509FindType.FindBySubjectName,
+                
                 StoreLocation = StoreLocation.LocalMachine
             };
+            certificateContext.SearchCriteria.Add(new CertificateSearchCriteria { SearchValue = "ApiraTestCertificate", SearchCriteriaType = X509FindType.FindBySubjectName });
             var certConfiguration = new X509StoreCertificateConfiguration(certificateContext);
             //ACT
             X509Certificate2 cert = null;

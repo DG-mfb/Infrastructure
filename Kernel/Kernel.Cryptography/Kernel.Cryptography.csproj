@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertificateManagement\CertificateSearchCriteria.cs" />
     <Compile Include="CertificateManagement\CertificateContext.cs" />
     <Compile Include="CertificateManagement\FileCertificateContext.cs" />
     <Compile Include="CertificateManagement\ICertificateStore.cs" />

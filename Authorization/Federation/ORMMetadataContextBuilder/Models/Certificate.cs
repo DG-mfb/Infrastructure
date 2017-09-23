@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Kernel.Data;
 using Kernel.Federation.MetaData.Configuration.Cryptography;
 
@@ -17,6 +18,7 @@ namespace ORMMetadataContextProvider.Models
         public string CertificatePfxPath { get; set; }
         public string Password { get; set; }
         public string CetrificateStore { get; set; }
+        public StoreLocation StoreLocation { get; set; }
         public KeyUsage Use { get; set; }
         public bool IsDefault { get; set; }
         public virtual ICollection<StoreSearchCriterion> StoreSearchCriteria { get; }

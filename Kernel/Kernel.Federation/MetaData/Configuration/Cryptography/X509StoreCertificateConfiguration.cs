@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Kernel.Cryptography.CertificateManagement;
 
@@ -21,14 +22,14 @@ namespace Kernel.Federation.MetaData.Configuration.Cryptography
         {
             if (this._certificateContext == null)
                 throw new ArgumentNullException("certificateContext");
-
+            var searchCriteria = this._certificateContext.SearchCriteria.First();
             using (base.Store)
             {
                 base.Store.Open(OpenFlags.ReadOnly);
                 var certificates = base.Store.Certificates;
-                var cert = certificates.Find(this._certificateContext.SearchCriteriaType, this._certificateContext.SearchCriteria, this._certificateContext.ValidOnly);
+                var cert = certificates.Find(searchCriteria.SearchCriteriaType, searchCriteria.SearchValue, this._certificateContext.ValidOnly);
                 if (cert.Count != 1)
-                    throw new InvalidOperationException(String.Format("There must be one certificate found with search criteria type: {0}. Search criteria: {1}", this._certificateContext.SearchCriteriaType, this._certificateContext.SearchCriteria));
+                    throw new InvalidOperationException(String.Format("There must be one certificate found with search criteria type: {0}. Search criteria: {1}", searchCriteria.SearchCriteriaType, searchCriteria.SearchValue));
 
                 return cert[0];
             }

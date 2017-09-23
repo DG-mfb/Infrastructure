@@ -59,12 +59,10 @@ namespace InlineMetadataContextProvider
             var certificateContext = new X509CertificateContext
             {
                 StoreName = "TestCertStore",
-                SearchCriteria = "ApiraTestCertificate",
                 ValidOnly = false,
-                SearchCriteriaType = X509FindType.FindBySubjectName,
                 StoreLocation = StoreLocation.LocalMachine
             };
-            
+            certificateContext.SearchCriteria.Add(new CertificateSearchCriteria { SearchValue = "ApiraTestCertificate", SearchCriteriaType = X509FindType.FindBySubjectName });
             var keyDescriptorConfiguration = new KeyDescriptorConfiguration
             {
                 IsDefault = true,

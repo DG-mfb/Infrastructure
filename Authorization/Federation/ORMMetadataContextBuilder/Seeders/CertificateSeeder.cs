@@ -14,12 +14,12 @@ namespace ORMMetadataContextProvider.Seeders
                 IsDefault = true,
                 Use = Kernel.Federation.MetaData.Configuration.Cryptography.KeyUsage.Signing,
                 CetrificateStore = "TestCertStore",
+                StoreLocation = StoreLocation.LocalMachine
             };
             var storeCriterion = new StoreSearchCriterion
             {
                 SearchCriteriaType = System.Security.Cryptography.X509Certificates.X509FindType.FindBySubjectName,
                 SearchCriteria = "ApiraTestCertificate",
-                StoreLocation = StoreLocation.LocalMachine
             };
             var signingCritencials = new SigningCredential
             {

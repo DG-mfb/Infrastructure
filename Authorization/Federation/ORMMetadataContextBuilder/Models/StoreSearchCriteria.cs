@@ -7,6 +7,5 @@ namespace ORMMetadataContextProvider.Models
     {
         public string SearchCriteria { get; set; }
         public X509FindType SearchCriteriaType { get; set; }
-        public StoreLocation StoreLocation { get; set; }
     }
 }

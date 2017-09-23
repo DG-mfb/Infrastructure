@@ -149,15 +149,18 @@ namespace ORMMetadataContextProvider
 
         private static KeyDescriptorConfiguration BuildKeyDescriptorConfiguration(Certificate certificate)
         {
-            var searchCriteria = certificate.StoreSearchCriteria.First();
             var certificateContext = new X509CertificateContext
             {
                 StoreName = certificate.CetrificateStore,
-                SearchCriteria = searchCriteria.SearchCriteria,
                 ValidOnly = false,
-                SearchCriteriaType = searchCriteria.SearchCriteriaType,
-                StoreLocation = searchCriteria.StoreLocation
+                StoreLocation = certificate.StoreLocation
             };
+
+            certificate.StoreSearchCriteria.Aggregate(certificateContext.SearchCriteria, (t, next) =>
+            {
+                t.Add(new CertificateSearchCriteria { SearchValue = next.SearchCriteria, SearchCriteriaType = next.SearchCriteriaType });
+                return t;
+            });
 
             var keyDescriptorConfiguration = new KeyDescriptorConfiguration
             {
