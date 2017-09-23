@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Kernel.DependancyResolver;
 using Shared.Initialisation;
 
 namespace OAuthAuthorisationService.Initialisation
 {
-    internal class OAuthAuthorisationServiceInitialiser : Initialiser
+    public class OAuthAuthorisationServiceInitialiser : Initialiser
     {
         public override byte Order
         {

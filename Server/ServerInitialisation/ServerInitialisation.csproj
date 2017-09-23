@@ -100,6 +100,10 @@
       <Project>{e198c691-91a6-4082-9976-f5f006f24960}</Project>
       <Name>Kernel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ORM\Providers\Provider.EntityFramework\Provider.EntityFramework.csproj">
+      <Project>{8CE800B3-084A-4900-BEC3-27B81707ADC9}</Project>
+      <Name>Provider.EntityFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Serialisation\Serialisation.Xml\Serialisation.Xml.csproj">
       <Project>{CAAA3B30-55E9-4F50-8F09-89CA54DF9614}</Project>
       <Name>Serialisation.Xml</Name>

@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using AspNet.EntityFramework.IdentityProvider.Initialisation;
 using Federation.Metadata.HttpRetriever.Initialisation;
 using Federation.Metadata.RelyingParty.Initialisation;
-using InlineMetadataContextProvider.Initialisation;
 using Kernel.DependancyResolver;
 using Kernel.Initialisation;
 using Kernel.Logging;
 using Kernel.Reflection;
 using Microsoft.AspNet.Identity.Owin.Provider.Initialisation;
+using OAuthAuthorisationService.Initialisation;
 using ORMMetadataContextProvider.Initialisation;
+using Provider.EntityFramework.Initialisation;
 using SecurityManagement.Initialisation;
 using Serialisation.Xml.Initialisation;
 using Shared.Initialisation;
@@ -40,6 +41,8 @@ namespace ServerInitialisation
                 yield return typeof(HttpDocumentRetrieverInitialiser).Assembly;
                 yield return typeof(MetadataConsumerInitialiser).Assembly;
                 yield return typeof(ORMMetadataContextProviderInitialiser).Assembly;
+                yield return typeof(OAuthAuthorisationServiceInitialiser).Assembly;
+                yield return typeof(DbContextInitialiser).Assembly;
                 //return Enumerable.Empty<Assembly>();
             }
         }
