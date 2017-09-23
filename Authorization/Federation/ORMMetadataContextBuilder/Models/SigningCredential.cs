@@ -12,6 +12,6 @@ namespace ORMMetadataContextProvider.Models
         public string DigestAlgorithm { get; set; }
 
         public string SignatureAlgorithm { get; set; }
-        public ICollection<Certificate> Certificates { get; }
+        public virtual ICollection<Certificate> Certificates { get; }
     }
 }

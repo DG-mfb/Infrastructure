@@ -34,6 +34,30 @@ namespace ORMMetadataContextProvider
             return entityDescriptorConfiguration;
         }
 
+        public static KeyDescriptorConfiguration BuildKeyDescriptorConfiguration(Certificate certificate)
+        {
+            var certificateContext = new X509CertificateContext
+            {
+                StoreName = certificate.CetrificateStore,
+                ValidOnly = false,
+                StoreLocation = certificate.StoreLocation
+            };
+
+            certificate.StoreSearchCriteria.Aggregate(certificateContext.SearchCriteria, (t, next) =>
+            {
+                t.Add(new CertificateSearchCriteria { SearchValue = next.SearchCriteria, SearchCriteriaType = next.SearchCriteriaType });
+                return t;
+            });
+
+            var keyDescriptorConfiguration = new KeyDescriptorConfiguration
+            {
+                IsDefault = certificate.IsDefault,
+                Use = certificate.Use,
+                CertificateContext = certificateContext
+            };
+            return keyDescriptorConfiguration;
+        }
+
         private static OrganisationConfiguration BuidOrganisationConfiguration(OrganisationSettings organisationSettings)
         {
             var orgConfiguration = new OrganisationConfiguration
@@ -147,29 +171,7 @@ namespace ORMMetadataContextProvider
             return sPSSODescriptorConfiguration;
         }
 
-        private static KeyDescriptorConfiguration BuildKeyDescriptorConfiguration(Certificate certificate)
-        {
-            var certificateContext = new X509CertificateContext
-            {
-                StoreName = certificate.CetrificateStore,
-                ValidOnly = false,
-                StoreLocation = certificate.StoreLocation
-            };
-
-            certificate.StoreSearchCriteria.Aggregate(certificateContext.SearchCriteria, (t, next) =>
-            {
-                t.Add(new CertificateSearchCriteria { SearchValue = next.SearchCriteria, SearchCriteriaType = next.SearchCriteriaType });
-                return t;
-            });
-
-            var keyDescriptorConfiguration = new KeyDescriptorConfiguration
-            {
-                IsDefault = certificate.IsDefault,
-                Use = certificate.Use,
-                CertificateContext = certificateContext
-            };
-            return keyDescriptorConfiguration;
-        }
+        
 
         private static TimeSpan TimeSpanFromDatapartEntry(DatepartValue datepart)
         {

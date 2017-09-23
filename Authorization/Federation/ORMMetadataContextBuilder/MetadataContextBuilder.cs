@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Kernel.Data.ORM;
 using Kernel.Federation.MetaData.Configuration;
+using Kernel.Federation.MetaData.Configuration.Cryptography;
 using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider
@@ -18,10 +19,15 @@ namespace ORMMetadataContextProvider
                 .First();
 
             var entityDescriptorConfiguration = MetadataHelper.BuildEntityDesriptorConfiguration(entityDescriptor);
+            var signing = this._dbContext.Set<SigningCredential>()
+                .First();
 
+            var signingContext = new MetadataSigningContext(signing.SignatureAlgorithm, signing.DigestAlgorithm);
+            signingContext.KeyDescriptors.Add(MetadataHelper.BuildKeyDescriptorConfiguration(signing.Certificates.First(x => x.Use == KeyUsage.Signing && x.IsDefault)));
             return new MetadataContext
             {
-                EntityDesriptorConfiguration = entityDescriptorConfiguration
+                EntityDesriptorConfiguration = entityDescriptorConfiguration,
+                MetadataSigningContext = signingContext
             };
         }
 
