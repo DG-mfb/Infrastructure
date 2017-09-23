@@ -5,7 +5,7 @@ using System.Net.Security;
 using Federation.Metadata.HttpRetriever;
 using Federation.Metadata.RelyingParty.Configuration;
 using Kernel.DependancyResolver;
-using Kernel.Federation.MetadataConsumer;
+using Kernel.Federation.RelyingParty;
 using Microsoft.Owin;
 using Microsoft.Owin.Logging;
 using Microsoft.Owin.Security;
@@ -56,7 +56,7 @@ namespace SSOOwinMiddleware
                 var certValidator = this._resolver.Resolve<Kernel.Cryptography.Validation.ICertificateValidator>();
                 var serialiser = new FederationMetadataSerialiser(certValidator);
                 var configurationRetriever = new WsFederationConfigurationRetriever(documentRetriever, serialiser);
-                var context = new MetadataConsumerContext(this.Options.MetadataAddress);
+                var context = new RelyingPartyContext(this.Options.MetadataAddress);
                 this.Options.ConfigurationManager = new ConfigurationManager<MetadataBase>(context, configurationRetriever);
             }
         }

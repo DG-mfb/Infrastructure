@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Kernel.Federation.MetaData;
-using Kernel.Federation.MetadataConsumer;
+using Kernel.Federation.RelyingParty;
 
 namespace Federation.Metadata.RelyingParty.Configuration
 {

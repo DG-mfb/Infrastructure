@@ -48,7 +48,7 @@
     <Compile Include="FederationConfiguration\IAllowedAudienceConfiguration.cs" />
     <Compile Include="FederationConfiguration\IConfiguration.cs" />
     <Compile Include="IRelayState.cs" />
-    <Compile Include="MetadataConsumer\ConsumerContext.cs" />
+    <Compile Include="RelyingParty\RelyingPartyContext.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\FileSystemStore.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\KeyDescriptorConfiguration.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\KeyTarget.cs" />
@@ -82,9 +82,9 @@
     <Compile Include="CertificateProvider\ICertificateCachePopulator.cs" />
     <Compile Include="Protocols\AuthnRequestContext.cs" />
     <Compile Include="Protocols\IAuthnRequestBuilder.cs" />
-    <Compile Include="MetadataConsumer\IConfigurationManager.cs" />
-    <Compile Include="MetadataConsumer\IConfigurationRetriever.cs" />
-    <Compile Include="MetadataConsumer\IDocumentRetriever.cs" />
+    <Compile Include="RelyingParty\IConfigurationManager.cs" />
+    <Compile Include="RelyingParty\IConfigurationRetriever.cs" />
+    <Compile Include="RelyingParty\IDocumentRetriever.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kernel.Cache\Kernel.Cache.csproj">

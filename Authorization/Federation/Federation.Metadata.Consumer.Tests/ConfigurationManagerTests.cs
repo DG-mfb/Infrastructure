@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Federation.Metadata.Consumer.Tests.Mock;
 using Federation.Metadata.RelyingParty.Configuration;
-using Kernel.Federation.MetadataConsumer;
+using Kernel.Federation.RelyingParty;
 using NUnit.Framework;
 
 namespace Federation.Metadata.Consumer.Tests
@@ -16,7 +16,7 @@ namespace Federation.Metadata.Consumer.Tests
             //ARRANGE
             MetadataBase configuration = null;
             var configurationRetriever = new ConfigurationRetrieverMock();
-            var context = new MetadataConsumerContext("C:\\");
+            var context = new RelyingPartyContext("C:\\");
             var configurationManager = new ConfigurationManager<MetadataBase>(context, configurationRetriever);
             //ACT
             configuration = await configurationManager.GetConfigurationAsync();

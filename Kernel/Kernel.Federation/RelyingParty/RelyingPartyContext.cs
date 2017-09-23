@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Kernel.Federation.MetadataConsumer
+namespace Kernel.Federation.RelyingParty
 {
-    public class MetadataConsumerContext
+    public class RelyingPartyContext
     {
         public static readonly TimeSpan DefaultAutomaticRefreshInterval = new TimeSpan(1, 0, 0, 0);
         public static readonly TimeSpan DefaultRefreshInterval = new TimeSpan(0, 0, 0, 30);
@@ -22,8 +22,8 @@ namespace Kernel.Federation.MetadataConsumer
             }
             set
             {
-                if (value < MetadataConsumerContext.MinimumAutomaticRefreshInterval)
-                    throw new ArgumentOutOfRangeException("value", String.Format("IDX10107: When setting AutomaticRefreshInterval, the value must be greater than MinimumAutomaticRefreshInterval: '{0}'. value: '{1}'.", MetadataConsumerContext.MinimumAutomaticRefreshInterval, value));
+                if (value < RelyingPartyContext.MinimumAutomaticRefreshInterval)
+                    throw new ArgumentOutOfRangeException("value", String.Format("IDX10107: When setting AutomaticRefreshInterval, the value must be greater than MinimumAutomaticRefreshInterval: '{0}'. value: '{1}'.", RelyingPartyContext.MinimumAutomaticRefreshInterval, value));
                 this._automaticRefreshInterval = value;
             }
         }
@@ -36,18 +36,18 @@ namespace Kernel.Federation.MetadataConsumer
             }
             set
             {
-                if (value < MetadataConsumerContext.MinimumRefreshInterval)
-                    throw new ArgumentOutOfRangeException("value", String.Format("IDX10106: When setting RefreshInterval, the value must be greater than MinimumRefreshInterval: '{0}'. value: '{1}'.", MetadataConsumerContext.MinimumRefreshInterval, value));
+                if (value < RelyingPartyContext.MinimumRefreshInterval)
+                    throw new ArgumentOutOfRangeException("value", String.Format("IDX10106: When setting RefreshInterval, the value must be greater than MinimumRefreshInterval: '{0}'. value: '{1}'.", RelyingPartyContext.MinimumRefreshInterval, value));
                 this._refreshInterval = value;
             }
         }
-        public MetadataConsumerContext(string metadataAddress)
+        public RelyingPartyContext(string metadataAddress)
         {
             if (String.IsNullOrWhiteSpace(metadataAddress))
                 throw new ArgumentNullException("metadataContext");
             this.MetadataAddress = metadataAddress;
-            this.AutomaticRefreshInterval = MetadataConsumerContext.DefaultAutomaticRefreshInterval;
-            this.RefreshInterval = MetadataConsumerContext.DefaultRefreshInterval;
+            this.AutomaticRefreshInterval = RelyingPartyContext.DefaultAutomaticRefreshInterval;
+            this.RefreshInterval = RelyingPartyContext.DefaultRefreshInterval;
         }
     }
 }

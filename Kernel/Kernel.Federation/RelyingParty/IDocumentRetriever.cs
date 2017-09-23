@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace Kernel.Federation.MetadataConsumer
+namespace Kernel.Federation.RelyingParty
 {
     public interface IDocumentRetriever
     {

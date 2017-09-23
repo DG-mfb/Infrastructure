@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Kernel.Extensions;
-using Kernel.Federation.MetadataConsumer;
+using Kernel.Federation.RelyingParty;
 
 namespace Federation.Metadata.RelyingParty.Configuration
 {
@@ -14,7 +14,7 @@ namespace Federation.Metadata.RelyingParty.Configuration
         private readonly SemaphoreSlim _refreshLock;
         
         private readonly IConfigurationRetriever<T> _configRetriever;
-        private readonly MetadataConsumerContext _context;
+        private readonly RelyingPartyContext _context;
         private T _currentConfiguration;
 
 
@@ -36,7 +36,7 @@ namespace Federation.Metadata.RelyingParty.Configuration
             }
         }
         
-        public ConfigurationManager(MetadataConsumerContext context, IConfigurationRetriever<T> configRetriever)
+        public ConfigurationManager(RelyingPartyContext context, IConfigurationRetriever<T> configRetriever)
         {
             if (context == null)
                 throw new ArgumentNullException("context");
