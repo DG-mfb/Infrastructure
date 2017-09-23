@@ -12,8 +12,9 @@ namespace ORMMetadataContextProvider.Models
         }
 
         public string EntityId { get; set; }
+        public string FederationId { get; set; }
         public DateTimeOffset ValidUntil { get; set; }
-        public int CacheDuration { get; set; }
+        public virtual DatepartValue CacheDuration { get; set; }
         public virtual OrganisationSettings Organisation { get; set; }
         public virtual ICollection<RoleDescriptorSettings> RoleDescriptors { get; }
     }

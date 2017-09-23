@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Initialisation\ORMMetadataContextProviderInitialiser.cs" />
     <Compile Include="MetadataContextBuilder.cs" />
+    <Compile Include="MetadataHelper.cs" />
+    <Compile Include="Models\Datapart.cs" />
+    <Compile Include="Models\DatepartValue.cs" />
     <Compile Include="Models\PersonContact.cs" />
     <Compile Include="Models\EndPointSetting.cs" />
     <Compile Include="Models\GlobalConfiguration\SecuritySettings.cs" />
@@ -78,6 +81,10 @@
     <ProjectReference Include="..\..\..\Infrastructure\Shared\Shared.csproj">
       <Project>{FA2CD1BF-A890-4306-9EDB-A1B10042E57E}</Project>
       <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kernel\Kernel.Cryptography\Kernel.Cryptography.csproj">
+      <Project>{857217F2-B265-4154-883F-568285643238}</Project>
+      <Name>Kernel.Cryptography</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Kernel\Kernel.Data\Kernel.Data.csproj">
       <Project>{58F76882-5E21-452F-A070-76D468D6E27C}</Project>

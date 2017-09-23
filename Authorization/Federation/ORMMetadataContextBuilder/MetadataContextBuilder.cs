@@ -14,10 +14,15 @@ namespace ORMMetadataContextProvider
         }
         public MetadataContext BuildContext()
         {
-            var foo = this._dbContext.Set<EntityDescriptorSettings>()
+            var entityDescriptor = this._dbContext.Set<EntityDescriptorSettings>()
                 .First();
 
-            return new MetadataContext();
+            var entityDescriptorConfiguration = MetadataHelper.BuildEntityDesriptorConfiguration(entityDescriptor);
+
+            return new MetadataContext
+            {
+                EntityDesriptorConfiguration = entityDescriptorConfiguration
+            };
         }
 
         public void Dispose()

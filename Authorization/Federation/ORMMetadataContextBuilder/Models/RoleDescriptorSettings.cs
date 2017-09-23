@@ -12,7 +12,7 @@ namespace ORMMetadataContextProvider.Models
             this.Certificates = new List<Certificate>();
         }
         public DateTimeOffset ValidUntil { get; set; }
-        public int CacheDuration { get; set; }
+        public virtual DatepartValue CacheDuration { get; set; }
         public string ErrorUrl { get; set; }
         public virtual ICollection<Protocol> Protocols { get; }
         public virtual ICollection<Certificate> Certificates { get; }

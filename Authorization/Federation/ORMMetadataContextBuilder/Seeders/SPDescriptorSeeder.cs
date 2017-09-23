@@ -16,7 +16,7 @@ namespace ORMMetadataContextProvider.Seeders
             {
                 WantAssertionsSigned = true,
                 RequestSigned = true,
-                CacheDuration = 100,
+                CacheDuration = new DatepartValue { Value = 100, Datepart = Datapart.Day },
                 ValidUntil = DateTimeOffset.Now.AddDays(90),
                 ErrorUrl = "http://localhost:60879/api/Account/Error"
             };
@@ -48,6 +48,7 @@ namespace ORMMetadataContextProvider.Seeders
             descriptor.AssertionServices.Add(new IndexedEndPointSetting
             {
                 Index = 0,
+                IsDefault = true,
                 Binding = httpPostBinding,
                 Url = "http://localhost:60879/api/Account/SSOLogon"
             });
