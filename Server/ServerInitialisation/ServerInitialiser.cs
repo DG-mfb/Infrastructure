@@ -13,6 +13,7 @@ using Kernel.Initialisation;
 using Kernel.Logging;
 using Kernel.Reflection;
 using Microsoft.AspNet.Identity.Owin.Provider.Initialisation;
+using ORMMetadataContextProvider.Initialisation;
 using SecurityManagement.Initialisation;
 using Serialisation.Xml.Initialisation;
 using Shared.Initialisation;
@@ -35,9 +36,10 @@ namespace ServerInitialisation
                 yield return typeof(WebClientMetadataWriterInitialiser).Assembly;
                 yield return typeof(MetadataSerialisationInitialiser).Assembly;
                 yield return typeof(XmlSerializerInitialiser).Assembly;
-                yield return typeof(InlineMetadaContextProviderInitialiser).Assembly;
+                //yield return typeof(InlineMetadaContextProviderInitialiser).Assembly;
                 yield return typeof(HttpDocumentRetrieverInitialiser).Assembly;
                 yield return typeof(MetadataConsumerInitialiser).Assembly;
+                yield return typeof(ORMMetadataContextProviderInitialiser).Assembly;
                 //return Enumerable.Empty<Assembly>();
             }
         }

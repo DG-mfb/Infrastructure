@@ -5,7 +5,6 @@ using System.Linq;
 using Kernel.Data;
 using Kernel.Data.Connection;
 using Kernel.Data.ORM;
-using Kernel.Initialisation;
 using Kernel.Reflection;
 using Provider.EntityFramework.Initialisation;
 

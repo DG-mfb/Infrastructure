@@ -64,6 +64,10 @@
       <Project>{99B877E4-7B04-4490-9163-C7A41FEE0097}</Project>
       <Name>Federation.Metadata.HttpRetriever</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Authorization\Federation\ORMMetadataContextBuilder\ORMMetadataContextProvider.csproj">
+      <Project>{3A8DF840-5A87-4CD3-915E-07ABF10B065A}</Project>
+      <Name>ORMMetadataContextProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Authorization\Federation\SecurityManagement\SecurityManagement.csproj">
       <Project>{F194D759-AE81-488C-8230-EF63836B44C9}</Project>
       <Name>SecurityManagement</Name>

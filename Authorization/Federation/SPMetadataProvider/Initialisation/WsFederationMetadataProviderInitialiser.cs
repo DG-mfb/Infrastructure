@@ -21,7 +21,10 @@ namespace WsFederationMetadataProvider.Initialisation
             dependencyResolver.RegisterFactory<Func<MetadataType, MetadataContext>>(() => _ =>
             {
                 var builder = dependencyResolver.Resolve<IMetadataContextBuilder>();
-                return builder.BuildContext();
+                using (builder)
+                {
+                    return builder.BuildContext();
+                }
             } , Lifetime.Singleton);
            
             return Task.CompletedTask;

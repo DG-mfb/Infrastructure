@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Kernel.Data.ORM
 {
     public interface IDbCustomConfiguration
     {
         ICollection<ISeeder> Seeders { get; }
+        Func<IEnumerable<Type>> ModelsFactory { set; }
     }
 }
