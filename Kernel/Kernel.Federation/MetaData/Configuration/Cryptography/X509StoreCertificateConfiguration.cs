@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using Kernel.Cryptography.CertificateManagement;
 
 namespace Kernel.Federation.MetaData.Configuration.Cryptography
@@ -22,16 +23,30 @@ namespace Kernel.Federation.MetaData.Configuration.Cryptography
         {
             if (this._certificateContext == null)
                 throw new ArgumentNullException("certificateContext");
-            var searchCriteria = this._certificateContext.SearchCriteria.First();
+            
             using (base.Store)
             {
                 base.Store.Open(OpenFlags.ReadOnly);
                 var certificates = base.Store.Certificates;
-                var cert = certificates.Find(searchCriteria.SearchCriteriaType, searchCriteria.SearchValue, this._certificateContext.ValidOnly);
-                if (cert.Count != 1)
-                    throw new InvalidOperationException(String.Format("There must be one certificate found with search criteria type: {0}. Search criteria: {1}", searchCriteria.SearchCriteriaType, searchCriteria.SearchValue));
+                bool found = false;
+                X509Certificate2 cert = null;
+                var builder = new StringBuilder();
 
-                return cert[0];
+                foreach (var current in this._certificateContext.SearchCriteria)
+                {
+                    builder.AppendFormat("SearchCriteriaType: {0}, value: {1}/r/n", current.SearchCriteriaType, current.SearchValue);
+
+                    var certs = certificates.Find(current.SearchCriteriaType, current.SearchValue, this._certificateContext.ValidOnly);
+                    if (certs.Count != 1)
+                        continue;
+
+                    found = true;
+                    cert = certs[0];
+                    break;
+                }
+                if (!found)
+                    throw new InvalidOperationException(String.Format("No certificate found. Search searches performed: {0}", builder.ToString()));
+                return cert;
             }
         }
     }
