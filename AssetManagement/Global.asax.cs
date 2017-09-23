@@ -43,7 +43,7 @@ namespace AssetManagement
 			//register mvc routes
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-			//WebApa dependency resolver
+			//WebApi dependency resolver
 			GlobalConfiguration.Configuration.DependencyResolver = new CustomHttpDependencyResolver(ApplicationConfiguration.Instance.DependencyResolver);
 		}
 
