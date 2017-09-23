@@ -1,12 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Kernel.Data.ORM;
 using Kernel.Federation.MetaData.Configuration;
 using Kernel.Federation.MetaData.Configuration.Cryptography;
+using Kernel.Federation.RelyingParty;
 using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider
 {
-    public class MetadataContextBuilder : IMetadataContextBuilder
+    public class MetadataContextBuilder : IMetadataContextBuilder, IRelyingPartyContextBuilder
     {
         private readonly IDbContext _dbContext;
         public MetadataContextBuilder(IDbContext dbContext)
@@ -29,6 +31,17 @@ namespace ORMMetadataContextProvider
                 EntityDesriptorConfiguration = entityDescriptorConfiguration,
                 MetadataSigningContext = signingContext
             };
+        }
+
+        public RelyingPartyContext BuildRelyingPartyContext(string relyingPartyId)
+        {
+            var relyingPartyContext = this._dbContext.Set<RelyingPartySettings>()
+                .FirstOrDefault(x => x.RelyingPartyId == relyingPartyId);
+
+            var context = new RelyingPartyContext(relyingPartyContext.MetadataLocation);
+            context.RefreshInterval = TimeSpan.FromSeconds(relyingPartyContext.RefreshInterval);
+            context.AutomaticRefreshInterval = TimeSpan.FromDays(relyingPartyContext.AutoRefreshInterval);
+            return context;
         }
 
         public void Dispose()

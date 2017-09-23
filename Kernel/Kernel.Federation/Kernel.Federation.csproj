@@ -48,6 +48,7 @@
     <Compile Include="FederationConfiguration\IAllowedAudienceConfiguration.cs" />
     <Compile Include="FederationConfiguration\IConfiguration.cs" />
     <Compile Include="IRelayState.cs" />
+    <Compile Include="RelyingParty\IRelyingPartyContextBuilder.cs" />
     <Compile Include="RelyingParty\RelyingPartyContext.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\FileSystemStore.cs" />
     <Compile Include="MetaData\Configuration\Cryptography\KeyDescriptorConfiguration.cs" />
