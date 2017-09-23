@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,6 +76,10 @@
     <ProjectReference Include="..\ORMMetadataContextBuilder\ORMMetadataContextProvider.csproj">
       <Project>{3a8df840-5a87-4cd3-915e-07abf10b065a}</Project>
       <Name>ORMMetadataContextProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPMetadataProvider\WsFederationMetadataProvider.csproj">
+      <Project>{220407EA-E1E1-4BC6-BEC3-3ABFE5070DF5}</Project>
+      <Name>WsFederationMetadataProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -152,9 +152,9 @@ namespace ORMMetadataContextProvider
             var searchCriteria = certificate.StoreSearchCriteria.First();
             var certificateContext = new X509CertificateContext
             {
-                StoreName = searchCriteria.SearchCriteria,
-                SearchCriteria = certificate.StoreSearchCriteria,
-                ValidOnly = true,
+                StoreName = certificate.CetrificateStore,
+                SearchCriteria = searchCriteria.SearchCriteria,
+                ValidOnly = false,
                 SearchCriteriaType = searchCriteria.SearchCriteriaType,
                 StoreLocation = searchCriteria.StoreLocation
             };

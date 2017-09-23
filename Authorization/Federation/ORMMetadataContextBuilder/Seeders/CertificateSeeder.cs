@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens;
+using System.Security.Cryptography.X509Certificates;
 using Kernel.Data.ORM;
 using ORMMetadataContextProvider.Models;
 
@@ -18,6 +19,7 @@ namespace ORMMetadataContextProvider.Seeders
             {
                 SearchCriteriaType = System.Security.Cryptography.X509Certificates.X509FindType.FindBySubjectName,
                 SearchCriteria = "ApiraTestCertificate",
+                StoreLocation = StoreLocation.LocalMachine
             };
             var signingCritencials = new SigningCredential
             {
