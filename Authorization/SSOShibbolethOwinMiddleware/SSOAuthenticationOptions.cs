@@ -41,7 +41,7 @@ namespace SSOOwinMiddleware
 
         public MetadataBase Configuration { get; set; }
 
-        public string MetadataAddress { get; set; }
+        //public string MetadataAddress { get; set; }
 
         public IConfigurationManager<MetadataBase> ConfigurationManager { get; set; }
 

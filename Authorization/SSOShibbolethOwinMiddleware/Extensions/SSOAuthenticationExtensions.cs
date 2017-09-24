@@ -28,12 +28,11 @@ namespace SSOOwinMiddleware.Extensions
             return app;
         }
 
-        public static IAppBuilder UseShibbolethAuthentication(this IAppBuilder app, string wtrealm, string metadataAddress)
+        public static IAppBuilder UseShibbolethAuthentication(this IAppBuilder app, string wtrealm)
         {
             return app.UseShibbolethAuthentication(new SSOAuthenticationOptions()
             {
-                Wtrealm = wtrealm,
-                MetadataAddress = metadataAddress
+                Wtrealm = wtrealm
             });
         }
         private static TMetadatGenerator ResolveMetadataGenerator<TMetadatGenerator>() where TMetadatGenerator : IMetadataGenerator

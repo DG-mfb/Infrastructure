@@ -15,7 +15,16 @@ namespace ORMMetadataContextProvider.Seeders
                 MetadataLocation = "HTTP",
                 RelyingPartyId = "imperial.ac.uk"
             };
-            context.Add<RelyingPartySettings>(relyingParty);  
+            var testRelyingParty = new RelyingPartySettings
+            {
+                RefreshInterval = 30,
+                AutoRefreshInterval = 1000,
+                MetadataPath = "https://www.testshib.org/metadata/testshib-providers.xml",
+                MetadataLocation = "HTTP",
+                RelyingPartyId = "testShib"
+            };
+            context.Add<RelyingPartySettings>(relyingParty);
+            context.Add<RelyingPartySettings>(testRelyingParty);
         }
     }
 }

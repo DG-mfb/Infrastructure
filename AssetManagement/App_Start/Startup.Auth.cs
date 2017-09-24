@@ -35,15 +35,12 @@ namespace AssetManagement
    
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
-
+            
             //Shibboleth middleware, test metadata
-            //SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://www.testshib.org/metadata/testshib-providers.xml");
+            SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "testShib");
 
             //Shibboleth middleware, localhost metadata metadata
-            SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://dg-mfb/idp/shibboleth");
-
-            //imperial.ac.uk
-            //SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "appId", "https://shibboleth.imperial.ac.uk/idp/shibboleth");
+            //SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "imperial.ac.uk");
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
