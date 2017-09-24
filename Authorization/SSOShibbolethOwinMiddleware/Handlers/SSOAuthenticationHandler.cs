@@ -52,8 +52,9 @@ namespace SSOOwinMiddleware.Handlers
             //ToDo: shoudn't need those. The tests don't so probably reletated to IIS express etc
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            var relyingPartyId = "imperial.ac.uk";
             if (this._configuration == null)
-                this._configuration = await this.Options.ConfigurationManager.GetConfigurationAsync(new System.Threading.CancellationToken());
+                this._configuration = await this.Options.ConfigurationManager.GetConfigurationAsync(relyingPartyId, new System.Threading.CancellationToken());
             
             Uri signInUrl = null;
 

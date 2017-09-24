@@ -1,6 +1,8 @@
-﻿namespace Kernel.Federation.RelyingParty
+﻿using System;
+
+namespace Kernel.Federation.RelyingParty
 {
-    public interface IRelyingPartyContextBuilder
+    public interface IRelyingPartyContextBuilder : IDisposable
     {
         RelyingPartyContext BuildRelyingPartyContext(string relyingPartyId);
     }

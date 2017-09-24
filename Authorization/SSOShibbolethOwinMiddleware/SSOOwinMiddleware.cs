@@ -56,8 +56,8 @@ namespace SSOOwinMiddleware
                 var certValidator = this._resolver.Resolve<Kernel.Cryptography.Validation.ICertificateValidator>();
                 var serialiser = new FederationMetadataSerialiser(certValidator);
                 var configurationRetriever = new WsFederationConfigurationRetriever(documentRetriever, serialiser);
-                var context = new RelyingPartyContext(this.Options.MetadataAddress);
-                this.Options.ConfigurationManager = new ConfigurationManager<MetadataBase>(context, configurationRetriever);
+                var relyingPartyContextBuilder = this._resolver.Resolve<IRelyingPartyContextBuilder>();
+                this.Options.ConfigurationManager = new ConfigurationManager<MetadataBase>(relyingPartyContextBuilder, configurationRetriever);
             }
         }
         

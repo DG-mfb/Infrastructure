@@ -52,6 +52,7 @@
     <Compile Include="ConfigurationManagerTests.cs" />
     <Compile Include="MetadataRetrieverMetadataTests.cs" />
     <Compile Include="Mock\ConfigurationRetrieverMock.cs" />
+    <Compile Include="Mock\RelyingPartyContextBuilderMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

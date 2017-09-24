@@ -15,11 +15,12 @@ namespace Federation.Metadata.Consumer.Tests
         {
             //ARRANGE
             MetadataBase configuration = null;
+            var relyingPartyId = "imperial.ac.uk";
+            var relyingPartyContextBuilder = new RelyingPartyContextBuilderMock();
             var configurationRetriever = new ConfigurationRetrieverMock();
-            var context = new RelyingPartyContext("C:\\");
-            var configurationManager = new ConfigurationManager<MetadataBase>(context, configurationRetriever);
+            var configurationManager = new ConfigurationManager<MetadataBase>(relyingPartyContextBuilder, configurationRetriever);
             //ACT
-            configuration = await configurationManager.GetConfigurationAsync();
+            configuration = await configurationManager.GetConfigurationAsync(relyingPartyId);
             //ASSET
             Assert.IsNotNull(configuration);
         }

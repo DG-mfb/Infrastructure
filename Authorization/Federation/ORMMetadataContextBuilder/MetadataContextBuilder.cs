@@ -8,7 +8,7 @@ using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider
 {
-    public class MetadataContextBuilder : IMetadataContextBuilder, IRelyingPartyContextBuilder
+    public class MetadataContextBuilder : IMetadataContextBuilder
     {
         private readonly IDbContext _dbContext;
         public MetadataContextBuilder(IDbContext dbContext)
@@ -32,18 +32,7 @@ namespace ORMMetadataContextProvider
                 MetadataSigningContext = signingContext
             };
         }
-
-        public RelyingPartyContext BuildRelyingPartyContext(string relyingPartyId)
-        {
-            var relyingPartyContext = this._dbContext.Set<RelyingPartySettings>()
-                .FirstOrDefault(x => x.RelyingPartyId == relyingPartyId);
-
-            var context = new RelyingPartyContext(relyingPartyContext.MetadataLocation);
-            context.RefreshInterval = TimeSpan.FromSeconds(relyingPartyContext.RefreshInterval);
-            context.AutomaticRefreshInterval = TimeSpan.FromDays(relyingPartyContext.AutoRefreshInterval);
-            return context;
-        }
-
+        
         public void Dispose()
         {
             this._dbContext.Dispose();
