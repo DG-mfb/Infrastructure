@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Kernel.Cache;
 using Kernel.Data;
 using Kernel.Data.ORM;
 using Kernel.DependancyResolver;
@@ -50,6 +51,7 @@ namespace ORMMetadataContextProvider.Initialisation
 
             dependencyResolver.RegisterFactory<IRelyingPartyContextBuilder>(() =>
             {
+                var cacheProvider = dependencyResolver.Resolve<ICacheProvider>();
                 var models = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
 
@@ -65,7 +67,7 @@ namespace ORMMetadataContextProvider.Initialisation
                     .OrderBy(x => x.SeedingOrder)
                     .Aggregate(contextCustomConfiguration, (c, next) => { c.Seeders.Add(next); return c; });
 
-                return new RelyingPartyContextBuilder(context);
+                return new RelyingPartyContextBuilder(context, cacheProvider);
             }, Lifetime.Transient);
             
             return Task.CompletedTask;

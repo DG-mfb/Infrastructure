@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Kernel.Data.ORM;
 using Kernel.Federation.MetaData.Configuration;
 using Kernel.Federation.MetaData.Configuration.Cryptography;
-using Kernel.Federation.RelyingParty;
 using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider

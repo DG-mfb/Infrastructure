@@ -44,14 +44,23 @@
   <ItemGroup>
     <Compile Include="Dependencies\DependencyController.cs" />
     <Compile Include="Dependencies\HostFileChangeMonitor.cs" />
+    <Compile Include="Initialisation\CacheProviderInitialiser.cs" />
     <Compile Include="MemoryCacheItemPolicy.cs" />
     <Compile Include="MemoryCacheRuntimeImplementor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Shared\Shared.csproj">
+      <Project>{FA2CD1BF-A890-4306-9EDB-A1B10042E57E}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel.Cache\Kernel.Cache.csproj">
       <Project>{5a1d47f4-b15f-4f42-8eaf-24f1474fe503}</Project>
       <Name>Kernel.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kernel\Kernel\Kernel.csproj">
+      <Project>{E198C691-91A6-4082-9976-F5F006F24960}</Project>
+      <Name>Kernel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

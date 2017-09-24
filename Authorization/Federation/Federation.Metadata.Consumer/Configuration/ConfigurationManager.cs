@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using Kernel.Extensions;
@@ -8,6 +9,7 @@ namespace Federation.Metadata.RelyingParty.Configuration
 {
     public class ConfigurationManager<T> : IConfigurationManager<T> where T : class
     {
+        private static ConcurrentDictionary<string, T> _congigurationCache = new ConcurrentDictionary<string, T>();
         private readonly SemaphoreSlim _refreshLock;
         private readonly IConfigurationRetriever<T> _configRetriever;
         private readonly IRelyingPartyContextBuilder _relyingPartyContextBuilder;
@@ -34,10 +36,12 @@ namespace Federation.Metadata.RelyingParty.Configuration
 
         public async Task<T> GetConfigurationAsync(string relyingPrtyId, CancellationToken cancel)
         {
+            //var now = DateTimeOffset.UtcNow;
             var context = this._relyingPartyContextBuilder.BuildRelyingPartyContext(relyingPrtyId);
-
-            var configuration = await this.GetConfiguration(context, cancel);
-            return configuration;
+           
+            var currentConfiguration = await this.GetConfiguration(context, cancel);
+            
+            return currentConfiguration;
         }
 
         public void RequestRefresh(string relyingPartyId)
@@ -52,14 +56,18 @@ namespace Federation.Metadata.RelyingParty.Configuration
         private async Task<T> GetConfiguration(RelyingPartyContext context, CancellationToken cancel)
         {
             var now = DateTimeOffset.UtcNow;
+
+            T currentConfiguration;
+            if (ConfigurationManager<T>._congigurationCache.TryGetValue(context.RelyingPartyId, out currentConfiguration))
+            {
+                if (context.SyncAfter > now)
+                    return currentConfiguration;
+            }
            
-            T currentConfiguration = null;
             await this._refreshLock.WaitAsync(cancel);
             try
             {
-
-                int num = 0;
-                if (num == 1 || context.SyncAfter <= now)
+                if (context.SyncAfter <= now)
                 {
                     try
                     {
@@ -80,10 +88,9 @@ namespace Federation.Metadata.RelyingParty.Configuration
                         throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (context.MetadataAddress ?? "null")), ex);
                     }
                 }
-                if (currentConfiguration != null)
-                    return currentConfiguration;
 
-                throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (context.MetadataAddress ?? "null")));
+                ConfigurationManager<T>._congigurationCache.TryAdd(context.RelyingPartyId, currentConfiguration);
+                return currentConfiguration;
             }
             finally
             {

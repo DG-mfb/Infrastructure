@@ -11,6 +11,7 @@ using Kernel.DependancyResolver;
 using Kernel.Initialisation;
 using Kernel.Logging;
 using Kernel.Reflection;
+using MemoryCacheProvider.Initialisation;
 using Microsoft.AspNet.Identity.Owin.Provider.Initialisation;
 using OAuthAuthorisationService.Initialisation;
 using ORMMetadataContextProvider.Initialisation;
@@ -43,7 +44,8 @@ namespace ServerInitialisation
                 yield return typeof(ORMMetadataContextProviderInitialiser).Assembly;
                 yield return typeof(OAuthAuthorisationServiceInitialiser).Assembly;
                 yield return typeof(DbContextInitialiser).Assembly;
-                //return Enumerable.Empty<Assembly>();
+                yield return typeof(CacheProviderInitialiser).Assembly;
+                
             }
         }
 
