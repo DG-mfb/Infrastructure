@@ -18,7 +18,7 @@ namespace ORMMetadataContextProvider.Tests
         public void Test1()
         {
             //ARRANGE
-            
+            var cacheProvider = new CacheProviderMock();
             var connectionStringProvider = new MetadataConnectionStringProviderMock();
             var models = ReflectionHelper.GetAllTypes(new[] {typeof(MetadataContextBuilder).Assembly })
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
@@ -32,7 +32,7 @@ namespace ORMMetadataContextProvider.Tests
                 .Aggregate((IDbCustomConfiguration)context, (c, next) => { c.Seeders.Add(next); return c; });
             
 
-            var metadataContextBuilder = new MetadataContextBuilder((IDbContext)context);
+            var metadataContextBuilder = new MetadataContextBuilder((IDbContext)context, cacheProvider);
             //ACT
             var metadata = metadataContextBuilder.BuildContext();
             //ASSERT
@@ -54,8 +54,8 @@ namespace ORMMetadataContextProvider.Tests
                 .OrderBy(x => x.SeedingOrder)
                 .Aggregate((IDbCustomConfiguration)dbContext, (c, next) => { c.Seeders.Add(next); return c; });
 
-
-            var metadataContextBuilder = new MetadataContextBuilder((IDbContext)dbContext);
+            var cacheProvider = new CacheProviderMock();
+            var metadataContextBuilder = new MetadataContextBuilder((IDbContext)dbContext, cacheProvider);
             var context = metadataContextBuilder.BuildContext();
             var spDescriptorConfigurtion = context.EntityDesriptorConfiguration.RoleDescriptors.First() as SPSSODescriptorConfiguration;
             var descriptorBuilder = new ServiceProviderSingleSignOnDescriptorBuilder();

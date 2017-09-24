@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateAndSeed.cs" />
+    <Compile Include="Mock\CacheProviderMock.cs" />
     <Compile Include="Mock\GlobalConnectionStringProviderMock.cs" />
     <Compile Include="Mock\MetadataConnectionStringProviderMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,6 +58,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Kernel\Kernel.Cache\Kernel.Cache.csproj">
+      <Project>{5A1D47F4-B15F-4F42-8EAF-24F1474FE503}</Project>
+      <Name>Kernel.Cache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Kernel\Kernel.Data\Kernel.Data.csproj">
       <Project>{58F76882-5E21-452F-A070-76D468D6E27C}</Project>
       <Name>Kernel.Data</Name>

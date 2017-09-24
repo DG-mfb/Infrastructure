@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Kernel.Cache;
 using Kernel.Data.ORM;
 using Kernel.Federation.MetaData.Configuration;
 using Kernel.Federation.MetaData.Configuration.Cryptography;
@@ -9,8 +10,11 @@ namespace ORMMetadataContextProvider
     public class MetadataContextBuilder : IMetadataContextBuilder
     {
         private readonly IDbContext _dbContext;
-        public MetadataContextBuilder(IDbContext dbContext)
+        private readonly ICacheProvider _cacheProvider;
+
+        public MetadataContextBuilder(IDbContext dbContext, ICacheProvider cacheProvider)
         {
+            this._cacheProvider = cacheProvider;
             this._dbContext = dbContext;
         }
         public MetadataContext BuildContext()

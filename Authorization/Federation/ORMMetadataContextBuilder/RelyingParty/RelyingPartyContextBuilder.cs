@@ -3,6 +3,7 @@ using System.Linq;
 using Kernel.Cache;
 using Kernel.Data.ORM;
 using Kernel.Federation.RelyingParty;
+using MemoryCacheProvider;
 using ORMMetadataContextProvider.Models;
 
 namespace ORMMetadataContextProvider.RelyingParty
@@ -28,7 +29,9 @@ namespace ORMMetadataContextProvider.RelyingParty
             var context = new RelyingPartyContext(relyingPartyId, relyingPartyContext.MetadataPath);
             context.RefreshInterval = TimeSpan.FromSeconds(relyingPartyContext.RefreshInterval);
             context.AutomaticRefreshInterval = TimeSpan.FromDays(relyingPartyContext.AutoRefreshInterval);
-            this._cacheProvider.Put(relyingPartyId, context);
+            object policy = new MemoryCacheItemPolicy();
+            ((ICacheItemPolicy)policy).SlidingExpiration = TimeSpan.FromDays(1);
+            this._cacheProvider.Put(relyingPartyId, context,  (ICacheItemPolicy)policy);
             return context;
         }
 

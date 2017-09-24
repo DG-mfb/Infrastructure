@@ -31,6 +31,7 @@ namespace ORMMetadataContextProvider.Initialisation
 
             dependencyResolver.RegisterFactory<IMetadataContextBuilder>(() =>
             {
+                var cacheProvider = dependencyResolver.Resolve<ICacheProvider>();
                 var models = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
 
@@ -46,7 +47,7 @@ namespace ORMMetadataContextProvider.Initialisation
                     .OrderBy(x => x.SeedingOrder)
                     .Aggregate(contextCustomConfiguration, (c, next) => { c.Seeders.Add(next); return c; });
 
-                return new MetadataContextBuilder(context);
+                return new MetadataContextBuilder(context, cacheProvider);
             }, Lifetime.Transient);
 
             dependencyResolver.RegisterFactory<IRelyingPartyContextBuilder>(() =>

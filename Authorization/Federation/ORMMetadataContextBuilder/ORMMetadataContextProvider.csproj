@@ -79,6 +79,10 @@
     <Compile Include="Seeders\ProtocolSeeder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Cache\MemoryCacheProvider\MemoryCacheProvider.csproj">
+      <Project>{5647CA93-FE6C-4247-93C6-5617D16BE29B}</Project>
+      <Name>MemoryCacheProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Infrastructure\Shared\Shared.csproj">
       <Project>{FA2CD1BF-A890-4306-9EDB-A1B10042E57E}</Project>
       <Name>Shared</Name>
