@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Kernel.Extensions;
@@ -10,7 +8,6 @@ namespace Federation.Metadata.RelyingParty.Configuration
 {
     public class ConfigurationManager<T> : IConfigurationManager<T> where T : class
     {
-        private static ConcurrentDictionary<RelyingPartyContext, T> _configurationCache = new ConcurrentDictionary<RelyingPartyContext, T>();
         private readonly SemaphoreSlim _refreshLock;
         
         private readonly IConfigurationRetriever<T> _configRetriever;
@@ -39,28 +36,21 @@ namespace Federation.Metadata.RelyingParty.Configuration
         public async Task<T> GetConfigurationAsync(string relyingPrtyId, CancellationToken cancel)
         {
             var context = this._relyingPartyContextBuilder.BuildRelyingPartyContext(relyingPrtyId);
-            
-            var configuration = ConfigurationManager<T>._configurationCache.GetOrAdd(context, c =>
-            {
-                var task = Task.Factory.StartNew<Task<T>>(async() => await this.GetConfiguration(c, cancel));
-                return task.Result.Result;
-            });
+
+            var configuration = await this.GetConfiguration(context, cancel);
             return configuration;
         }
 
         public void RequestRefresh(string relyingPartyId)
         {
-            var contextEntry = ConfigurationManager<T>._configurationCache.FirstOrDefault(x => x.Key.RelyingPartyId.Equals(relyingPartyId, StringComparison.OrdinalIgnoreCase));
-            if (contextEntry.Key == null)
-                return;
-            var context = contextEntry.Key;   
+            var context = this._relyingPartyContextBuilder.BuildRelyingPartyContext(relyingPartyId);
             var utcNow = DateTimeOffset.UtcNow;
             if (!(utcNow >= DataTimeExtensions.Add(context.LastRefresh.UtcDateTime, context.RefreshInterval)))
                 return;
             context.SyncAfter = utcNow;
         }
 
-        private async Task<T> GetConfiguration(RelyingPartyContext c, CancellationToken cancel)
+        private async Task<T> GetConfiguration(RelyingPartyContext context, CancellationToken cancel)
         {
             var now = DateTimeOffset.UtcNow;
            
@@ -70,31 +60,31 @@ namespace Federation.Metadata.RelyingParty.Configuration
             {
 
                 int num = 0;
-                if (num == 1 || c.SyncAfter <= now)
+                if (num == 1 || context.SyncAfter <= now)
                 {
                     try
                     {
                         ConfigurationManager<T> configurationManager = this;
                         
-                        T obj = await this._configRetriever.GetAsync(c.MetadataAddress, CancellationToken.None).ConfigureAwait(false);
+                        T obj = await this._configRetriever.GetAsync(context.MetadataAddress, CancellationToken.None).ConfigureAwait(false);
                         currentConfiguration = obj;
                         
                         configurationManager = null;
                         obj = default(T);
 
-                        c.LastRefresh = now;
-                        c.SyncAfter = DataTimeExtensions.Add(now.UtcDateTime, c.AutomaticRefreshInterval);
+                        context.LastRefresh = now;
+                        context.SyncAfter = DataTimeExtensions.Add(now.UtcDateTime, context.AutomaticRefreshInterval);
                     }
                     catch (Exception ex)
                     {
-                        c.SyncAfter = DataTimeExtensions.Add(now.UtcDateTime, c.AutomaticRefreshInterval < c.RefreshInterval ? c.AutomaticRefreshInterval : c.RefreshInterval);
-                        throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (c.MetadataAddress ?? "null")), ex);
+                        context.SyncAfter = DataTimeExtensions.Add(now.UtcDateTime, context.AutomaticRefreshInterval < context.RefreshInterval ? context.AutomaticRefreshInterval : context.RefreshInterval);
+                        throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (context.MetadataAddress ?? "null")), ex);
                     }
                 }
                 if (currentConfiguration != null)
                     return currentConfiguration;
 
-                throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (c.MetadataAddress ?? "null")));
+                throw new InvalidOperationException(String.Format("IDX10803: Unable to obtain configuration from: '{0}'.", (context.MetadataAddress ?? "null")));
             }
             finally
             {
