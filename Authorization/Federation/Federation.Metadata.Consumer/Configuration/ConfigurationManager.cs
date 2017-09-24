@@ -9,15 +9,14 @@ namespace Federation.Metadata.RelyingParty.Configuration
     public class ConfigurationManager<T> : IConfigurationManager<T> where T : class
     {
         private readonly SemaphoreSlim _refreshLock;
-        
         private readonly IConfigurationRetriever<T> _configRetriever;
         private readonly IRelyingPartyContextBuilder _relyingPartyContextBuilder;
-        //private T _currentConfiguration;
         
         public ConfigurationManager(IRelyingPartyContextBuilder relyingPartyContextBuilder, IConfigurationRetriever<T> configRetriever)
         {
             if (relyingPartyContextBuilder == null)
                 throw new ArgumentNullException("context");
+
             if (configRetriever == null)
                 throw new ArgumentNullException("configRetriever");
             
