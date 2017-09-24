@@ -56,7 +56,9 @@
     <Compile Include="HashBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Signing.Xml\IXmlSignatureManager.cs" />
+    <Compile Include="Validation\CertificateValidationContext .cs" />
     <Compile Include="Validation\BackchannelCertificateValidationContext.cs" />
+    <Compile Include="Validation\ICertificateValidationRule.cs" />
     <Compile Include="Validation\ICertificateValidator.cs" />
     <Compile Include="Validation\IBackchannelCertificateValidationRule.cs" />
   </ItemGroup>
