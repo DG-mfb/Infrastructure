@@ -30,11 +30,14 @@ namespace WebApi
             app.UseOAuthBearerTokens(OAuthOptions);
 
             //Shibboleth middleware, test metadata
-            SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "testShib");
+            //SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "testShib");
+
+            //local
+            SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "local");
 
             //Shibboleth middleware, localhost metadata metadata
             //SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "imperial.ac.uk");
-            
+
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",

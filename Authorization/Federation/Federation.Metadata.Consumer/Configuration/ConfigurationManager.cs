@@ -36,7 +36,6 @@ namespace Federation.Metadata.RelyingParty.Configuration
 
         public async Task<T> GetConfigurationAsync(string relyingPrtyId, CancellationToken cancel)
         {
-            //var now = DateTimeOffset.UtcNow;
             var context = this._relyingPartyContextBuilder.BuildRelyingPartyContext(relyingPrtyId);
            
             var currentConfiguration = await this.GetConfiguration(context, cancel);

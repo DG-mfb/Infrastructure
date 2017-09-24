@@ -26,8 +26,17 @@ namespace ORMMetadataContextProvider.Seeders
                 MetadataLocation = "HTTP",
                 RelyingPartyId = "testShib"
             };
+            var localRelyingParty = new RelyingPartySettings
+            {
+                RefreshInterval = 30,
+                AutoRefreshInterval = 1000,
+                MetadataPath = "https://dg-mfb/idp/shibboleth",
+                MetadataLocation = "HTTP",
+                RelyingPartyId = "local"
+            };
             context.Add<RelyingPartySettings>(relyingParty);
             context.Add<RelyingPartySettings>(testRelyingParty);
+            context.Add<RelyingPartySettings>(localRelyingParty);
         }
     }
 }
