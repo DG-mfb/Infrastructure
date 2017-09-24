@@ -5,6 +5,7 @@ namespace ORMMetadataContextProvider.Seeders
 {
     internal class RelyingPartySeeder : Seeder
     {
+        //imperial collage settings
         public override void Seed(IDbContext context)
         {
             var relyingParty = new RelyingPartySettings
@@ -15,6 +16,8 @@ namespace ORMMetadataContextProvider.Seeders
                 MetadataLocation = "HTTP",
                 RelyingPartyId = "imperial.ac.uk"
             };
+
+            //shibboleth test metadata settings
             var testRelyingParty = new RelyingPartySettings
             {
                 RefreshInterval = 30,
