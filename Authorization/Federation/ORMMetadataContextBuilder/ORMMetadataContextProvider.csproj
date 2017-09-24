@@ -48,6 +48,8 @@
     <Compile Include="MetadataHelper.cs" />
     <Compile Include="Models\Datapart.cs" />
     <Compile Include="Models\DatepartValue.cs" />
+    <Compile Include="Models\GlobalConfiguration\CertificateValidationRule.cs" />
+    <Compile Include="Models\GlobalConfiguration\ValidationScope.cs" />
     <Compile Include="Models\PersonContact.cs" />
     <Compile Include="Models\EndPointSetting.cs" />
     <Compile Include="Models\GlobalConfiguration\SecuritySettings.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="RelyingParty\RelyingPartyContextBuilder.cs" />
     <Compile Include="Seeders\EntityDescriptorSeeder.cs" />
     <Compile Include="Seeders\OrganisationSeeder.cs" />
+    <Compile Include="Seeders\SecuritySettingsSeeder.cs" />
     <Compile Include="Seeders\SPDescriptorSeeder.cs" />
     <Compile Include="Seeders\Seeder.cs" />
     <Compile Include="Seeders\CertificateSeeder.cs" />

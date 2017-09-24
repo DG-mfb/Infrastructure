@@ -8,10 +8,11 @@ namespace ORMMetadataContextProvider.Models.GlobalConfiguration
     {
         public SecuritySettings()
         {
-            this.BackchannelCertificateRules = new LinkedList<string>();
+            this.CertificateValidationRules = new List<CertificateValidationRule>();
         }
         public X509CertificateValidationMode X509CertificateValidationMode { get; set; }
-        public int BackchannelCertificateValidationMode { get; set; }
-        public ICollection<string> BackchannelCertificateRules { get; set; }
+        public bool PinnedValidation { get; set; }
+        public string PinnedTypeValidator { get; set; }
+        public virtual ICollection<CertificateValidationRule> CertificateValidationRules { get; set; }
     }
 }
