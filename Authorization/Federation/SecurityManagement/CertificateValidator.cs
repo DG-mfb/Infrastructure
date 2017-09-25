@@ -8,12 +8,13 @@ using System.ServiceModel.Security;
 using System.Threading.Tasks;
 using Kernel.Cryptography.Validation;
 using SecurityManagement.BackchannelCertificateValidationRules;
+using SecurityManagement.CertificateValidationRules;
 
 namespace SecurityManagement
 {
     internal class CertificateValidator : X509CertificateValidator, ICertificateValidator
     {
-        ICertificateValidationConfigurationProvider _configurationProvider;
+        private readonly ICertificateValidationConfigurationProvider _configurationProvider;
         public CertificateValidator(ICertificateValidationConfigurationProvider configurationProvider)
         {
             if (configurationProvider == null)
@@ -48,7 +49,14 @@ namespace SecurityManagement
         
         public override void Validate(X509Certificate2 certificate)
         {
-            //throw new NotImplementedException();
+            var configiration = this._configurationProvider.GetConfiguration();
+            var context = new CertificateValidationContext(certificate);
+            Func<CertificateValidationContext, Task> seed = x => Task.CompletedTask;
+
+            var rules = CertificateValidationRulesFactory.GetRules(configiration);
+            var validationDelegate = rules.Aggregate(seed, (f, next) => new Func<CertificateValidationContext, Task>(c => next.Validate(c, f)));
+            var task = validationDelegate(context);
+            task.Wait();
         }
 
         //ToDo: use factory or DI container
