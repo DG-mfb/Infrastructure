@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbCustomConfiguration.cs" />
     <Compile Include="Initialisation\ORMMetadataContextProviderInitialiser.cs" />
     <Compile Include="MetadataContextBuilder.cs" />
     <Compile Include="MetadataHelper.cs" />

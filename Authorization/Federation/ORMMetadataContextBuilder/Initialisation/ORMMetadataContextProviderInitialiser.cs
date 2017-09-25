@@ -28,50 +28,41 @@ namespace ORMMetadataContextProvider.Initialisation
             dependencyResolver.RegisterFactory<Func<PropertyInfo, string>>(() => x => x.Name, Lifetime.Transient);
             
             dependencyResolver.RegisterFactory<Func<NameValueCollection>>(() => () => ConfigurationManager.AppSettings, Lifetime.Transient);
-
+            dependencyResolver.RegisterFactory<IDbCustomConfiguration>(() => this.BuildDbCustomConfiguration(), Lifetime.Transient);
             dependencyResolver.RegisterFactory<IMetadataContextBuilder>(() =>
             {
                 var cacheProvider = dependencyResolver.Resolve<ICacheProvider>();
-                var models = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
-                .Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
-
+               
                 var context = dependencyResolver.Resolve<IDbContext>();
-                var contextCustomConfiguration = context as IDbCustomConfiguration;
-
-                contextCustomConfiguration.ModelsFactory = () => models;
-
-                var seeders = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
-                    .Where(t => !t.IsAbstract && !t.IsInterface && typeof(ISeeder).IsAssignableFrom(t))
-                    .Select(x => (ISeeder)Activator.CreateInstance(x));
-                seeders
-                    .OrderBy(x => x.SeedingOrder)
-                    .Aggregate(contextCustomConfiguration, (c, next) => { c.Seeders.Add(next); return c; });
-
+                
                 return new MetadataContextBuilder(context, cacheProvider);
             }, Lifetime.Transient);
 
             dependencyResolver.RegisterFactory<IRelyingPartyContextBuilder>(() =>
             {
                 var cacheProvider = dependencyResolver.Resolve<ICacheProvider>();
-                var models = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
-                .Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
-
+                
                 var context = dependencyResolver.Resolve<IDbContext>();
-                var contextCustomConfiguration = context as IDbCustomConfiguration;
-
-                contextCustomConfiguration.ModelsFactory = () => models;
-
-                var seeders = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
-                    .Where(t => !t.IsAbstract && !t.IsInterface && typeof(ISeeder).IsAssignableFrom(t))
-                    .Select(x => (ISeeder)Activator.CreateInstance(x));
-                seeders
-                    .OrderBy(x => x.SeedingOrder)
-                    .Aggregate(contextCustomConfiguration, (c, next) => { c.Seeders.Add(next); return c; });
-
                 return new RelyingPartyContextBuilder(context, cacheProvider);
             }, Lifetime.Transient);
             
             return Task.CompletedTask;
+        }
+
+        private IDbCustomConfiguration BuildDbCustomConfiguration()
+        {
+            var customConfiguration = new DbCustomConfiguration();
+            var models = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
+               .Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
+            customConfiguration.ModelsFactory = () => models;
+
+            var seeders = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
+                    .Where(t => !t.IsAbstract && !t.IsInterface && typeof(ISeeder).IsAssignableFrom(t))
+                    .Select(x => (ISeeder)Activator.CreateInstance(x));
+            seeders
+                .OrderBy(x => x.SeedingOrder)
+                .Aggregate(customConfiguration, (c, next) => { c.Seeders.Add(next); return c; });
+            return customConfiguration;
         }
     }
 }

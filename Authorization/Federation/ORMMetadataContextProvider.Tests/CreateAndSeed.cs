@@ -19,19 +19,21 @@ namespace ORMMetadataContextProvider.Tests
         {
             //ARRANGE
             var cacheProvider = new CacheProviderMock();
+            var customConfiguration = new DbCustomConfiguration();
             var connectionStringProvider = new MetadataConnectionStringProviderMock();
             var models = ReflectionHelper.GetAllTypes(new[] {typeof(MetadataContextBuilder).Assembly })
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
-            object context = new DBContext(connectionStringProvider) { ModelsFactory = () => models };
+            customConfiguration.ModelsFactory = () => models;
 
             var seeders = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(ISeeder).IsAssignableFrom(t))
                 .Select(x => (ISeeder)Activator.CreateInstance(x));
             seeders
                 .OrderBy(x => x.SeedingOrder)
-                .Aggregate((IDbCustomConfiguration)context, (c, next) => { c.Seeders.Add(next); return c; });
-            
+                .Aggregate(customConfiguration.Seeders, (c, next) => { c.Add(next); return c; });
 
+            object context = new DBContext(connectionStringProvider, customConfiguration);
+            
             var metadataContextBuilder = new MetadataContextBuilder((IDbContext)context, cacheProvider);
             //ACT
             var metadata = metadataContextBuilder.BuildContext();
@@ -42,20 +44,23 @@ namespace ORMMetadataContextProvider.Tests
         public void ServiceProviderSingleSignOnDescriptorBuilderTest_db_contex_provider()
         {
             //ARRANGE
+            var cacheProvider = new CacheProviderMock();
+            var customConfiguration = new DbCustomConfiguration();
             var connectionStringProvider = new MetadataConnectionStringProviderMock();
             var models = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
-            object dbContext = new DBContext(connectionStringProvider) { ModelsFactory = () => models };
+            customConfiguration.ModelsFactory = () => models;
 
             var seeders = ReflectionHelper.GetAllTypes(new[] { typeof(MetadataContextBuilder).Assembly })
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(ISeeder).IsAssignableFrom(t))
                 .Select(x => (ISeeder)Activator.CreateInstance(x));
             seeders
                 .OrderBy(x => x.SeedingOrder)
-                .Aggregate((IDbCustomConfiguration)dbContext, (c, next) => { c.Seeders.Add(next); return c; });
+                .Aggregate(customConfiguration.Seeders, (c, next) => { c.Add(next); return c; });
 
-            var cacheProvider = new CacheProviderMock();
-            var metadataContextBuilder = new MetadataContextBuilder((IDbContext)dbContext, cacheProvider);
+            object dbcontext = new DBContext(connectionStringProvider, customConfiguration);
+
+            var metadataContextBuilder = new MetadataContextBuilder((IDbContext)dbcontext, cacheProvider);
             var context = metadataContextBuilder.BuildContext();
             var spDescriptorConfigurtion = context.EntityDesriptorConfiguration.RoleDescriptors.First() as SPSSODescriptorConfiguration;
             var descriptorBuilder = new ServiceProviderSingleSignOnDescriptorBuilder();

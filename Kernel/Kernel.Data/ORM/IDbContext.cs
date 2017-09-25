@@ -9,12 +9,13 @@
 	/// <seealso cref="System.IDisposable" />
 	public interface IDbContext : IDisposable
 	{
-		/// <summary>
-		/// Sets this instance.
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <returns></returns>
-		IQueryable<T> Set<T>() where T : class;
+        IDbCustomConfiguration CustomConfiguration { get; }
+        /// <summary>
+        /// Sets this instance.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        IQueryable<T> Set<T>() where T : class;
 
 		/// <summary>
 		/// Saves the changes.

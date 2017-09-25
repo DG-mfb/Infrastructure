@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CreateAndSeed.cs" />
     <Compile Include="Mock\CacheProviderMock.cs" />
+    <Compile Include="Mock\DbCustomConfigurationMock.cs" />
     <Compile Include="Mock\GlobalConnectionStringProviderMock.cs" />
     <Compile Include="Mock\MetadataConnectionStringProviderMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

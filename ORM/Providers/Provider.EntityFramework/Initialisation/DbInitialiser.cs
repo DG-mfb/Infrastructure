@@ -17,11 +17,7 @@ namespace Provider.EntityFramework.Initialisation
 		/// <param name="context"></param>
 		protected override void Seed(DBContext context)
 		{
-            var customConfiguration = context as IDbCustomConfiguration;
-            if (customConfiguration == null)
-                return;
-           
-            var seeders = customConfiguration.Seeders;
+            var seeders = context.CustomConfiguration.Seeders;
 
             foreach (var seeder in seeders.OrderBy(x => x.SeedingOrder))
             {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using Kernel.Data;
 using Kernel.Data.Connection;
@@ -10,11 +8,9 @@ using Provider.EntityFramework.Initialisation;
 
 namespace Provider.EntityFramework
 {
-    public class DBContext : DbContext, IDbContext, IDbCustomConfiguration
+    public class DBContext : DbContext, IDbContext
     {
-        public Func<IEnumerable<Type>> ModelsFactory { private get; set; }
-
-        public ICollection<ISeeder> Seeders { get; }
+        public IDbCustomConfiguration CustomConfiguration { get; }
 
         static DBContext()
 		{
@@ -25,10 +21,10 @@ namespace Provider.EntityFramework
 		/// </summary>
 		/// <param name="connectionString"></param>
 		/// <param name="identityProvider"></param>
-		public DBContext(IConnectionStringProvider connectionString)
+		public DBContext(IConnectionStringProvider connectionString, IDbCustomConfiguration customConfiguration)
 			: base(connectionString.GetConnectionString().ConnectionString)
         {
-            this.Seeders = new List<ISeeder>();
+            this.CustomConfiguration = customConfiguration;
         }
 
 		/// <summary>
@@ -57,7 +53,7 @@ namespace Provider.EntityFramework
 		/// <param name="modelBuilder"></param>
 		protected virtual void CreateModel(DbModelBuilder modelBuilder)
 		{
-            var models = this.ModelsFactory != null ? this.ModelsFactory() : ReflectionHelper.GetAllTypes()
+            var models = this.CustomConfiguration.ModelsFactory != null ? this.CustomConfiguration.ModelsFactory() : ReflectionHelper.GetAllTypes()
 				.Where(t => !t.IsAbstract && !t.IsInterface && typeof(BaseModel).IsAssignableFrom(t));
 
 			foreach(var m in models)
