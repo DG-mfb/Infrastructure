@@ -4,6 +4,7 @@ using System.IdentityModel.Selectors;
 using System.Linq;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel.Security;
 using System.Threading.Tasks;
 using Kernel.Cryptography.Validation;
 using SecurityManagement.BackchannelCertificateValidationRules;
@@ -12,6 +13,21 @@ namespace SecurityManagement
 {
     internal class CertificateValidator : X509CertificateValidator, ICertificateValidator
     {
+        ICertificateValidationConfigurationProvider _configurationProvider;
+        public CertificateValidator(ICertificateValidationConfigurationProvider configurationProvider)
+        {
+            this._configurationProvider = configurationProvider;
+        }
+
+        public X509CertificateValidationMode X509CertificateValidationMode
+        {
+            get
+            {
+                var configuration = this._configurationProvider.GetConfiguration();
+                return configuration.X509CertificateValidationMode;
+            }
+        }
+
         public bool Validate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             var context = new BackchannelCertificateValidationContext(certificate, chain, sslPolicyErrors);

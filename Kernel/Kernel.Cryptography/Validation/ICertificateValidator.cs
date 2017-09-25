@@ -1,5 +1,6 @@
 ﻿using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel.Security;
 
 namespace Kernel.Cryptography.Validation
 {
@@ -10,6 +11,7 @@ namespace Kernel.Cryptography.Validation
     //     CAs issuing certificates for hosts without the knowledge of the host owner.
     public interface ICertificateValidator
     {
+        X509CertificateValidationMode X509CertificateValidationMode { get; }
         //
         // Summary:
         //     Verifies the remote Secure Sockets Layer (SSL) certificate used for authentication.

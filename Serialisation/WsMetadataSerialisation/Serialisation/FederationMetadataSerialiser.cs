@@ -9,14 +9,10 @@ namespace WsMetadataSerialisation.Serialisation
 {
     public class FederationMetadataSerialiser : MetadataSerializer, IMetadataSerialiser<MetadataBase>
     {
-        //ToDo: resolve validator from conficuration.
-        //ICertificateValidator _certificateValidator;
-        //Needs certificate configuration
-        //inject base class or introduce other interface
         public FederationMetadataSerialiser(ICertificateValidator certificateValidator)
         {
             base.CertificateValidator = (X509CertificateValidator)certificateValidator;
-            base.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.Custom;
+            base.CertificateValidationMode = certificateValidator.X509CertificateValidationMode;
         }
         public void Serialise(XmlWriter writer, MetadataBase metadata)
         {

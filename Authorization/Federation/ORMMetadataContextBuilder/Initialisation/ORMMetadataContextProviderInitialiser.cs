@@ -12,6 +12,7 @@ using Kernel.Federation.MetaData.Configuration;
 using Kernel.Federation.RelyingParty;
 using Kernel.Reflection;
 using ORMMetadataContextProvider.RelyingParty;
+using ORMMetadataContextProvider.Security;
 using Shared.Initialisation;
 
 namespace ORMMetadataContextProvider.Initialisation
@@ -26,7 +27,7 @@ namespace ORMMetadataContextProvider.Initialisation
         protected override Task InitialiseInternal(IDependencyResolver dependencyResolver)
         {
             dependencyResolver.RegisterFactory<Func<PropertyInfo, string>>(() => x => x.Name, Lifetime.Transient);
-            
+            dependencyResolver.RegisterType<CertificateValidationConfigurationProvider>(Lifetime.Transient);
             dependencyResolver.RegisterFactory<Func<NameValueCollection>>(() => () => ConfigurationManager.AppSettings, Lifetime.Transient);
             dependencyResolver.RegisterFactory<IDbCustomConfiguration>(() => this.BuildDbCustomConfiguration(), Lifetime.Transient);
             dependencyResolver.RegisterFactory<IMetadataContextBuilder>(() =>

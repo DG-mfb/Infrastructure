@@ -2,6 +2,7 @@
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
+using SecurityManagement.Tests.Mock;
 
 namespace SecurityManagement.Tests
 {
@@ -14,7 +15,8 @@ namespace SecurityManagement.Tests
         public void MetadataSerialisationCertificateTest()
         {
             //ARRANGE
-            var validator = new CertificateValidator();
+            var configurationProvider = new CertificateValidationConfigurationProvider();
+            var validator = new CertificateValidator(configurationProvider);
             //ACT
 
             //ASSERT
@@ -25,7 +27,8 @@ namespace SecurityManagement.Tests
         public void RemoteCertificateValidationCallbackTest()
         {
             //ARRANGE
-            var validator = new CertificateValidator();
+            var configurationProvider = new CertificateValidationConfigurationProvider();
+            var validator = new CertificateValidator(configurationProvider);
             //ACT
 
             //ASSERT
@@ -36,7 +39,8 @@ namespace SecurityManagement.Tests
         public void RemoteCertificateValidationRulesTest()
         {
             //ARRANGE
-            var validator = new CertificateValidator();
+            var configurationProvider = new CertificateValidationConfigurationProvider();
+            var validator = new CertificateValidator(configurationProvider);
 
             var certificateStore = new X509Store("TestCertStore", StoreLocation.LocalMachine);
             var validationResult = false;

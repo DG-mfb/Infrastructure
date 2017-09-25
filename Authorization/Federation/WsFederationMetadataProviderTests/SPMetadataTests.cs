@@ -36,7 +36,8 @@ namespace WsFederationMetadataProviderTests
             var contextBuilder = new InlineMetadataContextBuilder();
             var context = contextBuilder.BuildContext();
 
-            var certificateValidator = new CertificateValidator();
+            var configurationProvider = new CertificateValidationConfigurationProvider();
+            var certificateValidator = new CertificateValidator(configurationProvider);
             var ssoCryptoProvider = new CertificateManager();
             
             var metadataSerialiser = new FederationMetadataSerialiser(certificateValidator);
@@ -74,7 +75,8 @@ namespace WsFederationMetadataProviderTests
             var contextBuilder = new InlineMetadataContextBuilder();
             var context = contextBuilder.BuildContext();
 
-            var certificateValidator = new CertificateValidator();
+            var configurationProvider = new CertificateValidationConfigurationProvider();
+            var certificateValidator = new CertificateValidator(configurationProvider);
             var ssoCryptoProvider = new CertificateManager();
 
             var metadataSerialiser = new FederationMetadataSerialiser(certificateValidator);
@@ -98,7 +100,8 @@ namespace WsFederationMetadataProviderTests
             var contextBuilder = new InlineMetadataContextBuilder();
             var context = contextBuilder.BuildContext();
 
-            var certificateValidator = new CertificateValidator();
+            var configurationProvider = new CertificateValidationConfigurationProvider();
+            var certificateValidator = new CertificateValidator(configurationProvider);
             var ssoCryptoProvider = new CertificateManager();
 
             var metadataSerialiser = new FederationMetadataSerialiser(certificateValidator);

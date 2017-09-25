@@ -22,7 +22,11 @@ namespace ORMMetadataContextProvider.Security
         {
             var settings = this._dbContext.Set<SecuritySettings>()
                 .First();
-            var configuration = new CertificateValidationConfiguration();
+            var configuration = new CertificateValidationConfiguration
+            {
+                X509CertificateValidationMode = settings.X509CertificateValidationMode,
+                UsePinningValidation = settings.PinnedValidation
+            };
             return configuration;
         }
         public void Dispose()

@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Security;
 using System.Threading;
 using System.Threading.Tasks;
+using Federation.Metadata.Consumer.Tests.Mock;
 using Federation.Metadata.HttpRetriever;
 using Federation.Metadata.RelyingParty.Configuration;
 using NUnit.Framework;
@@ -40,7 +41,8 @@ namespace Federation.Metadata.Consumer.Tests
             webRequestHandler.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((_, __, ___, ____) => true);
             var httpClient = new HttpClient(webRequestHandler);
             var documentRetrieer = new HttpDocumentRetriever(() => httpClient);
-            var certValidator = new CertificateValidator();
+            var configurationProvider = new CertificateValidationConfigurationProvider();
+            var certValidator = new CertificateValidator(configurationProvider);
             var serialiser = new FederationMetadataSerialiser(certValidator);
             var configurationRetriever = new WsFederationConfigurationRetriever(documentRetrieer, serialiser);
            

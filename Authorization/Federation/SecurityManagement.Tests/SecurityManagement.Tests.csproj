@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CertificateStoreTests.cs" />
     <Compile Include="CertificateValidatorTests.cs" />
+    <Compile Include="Mock\CertificateValidationConfigurationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
