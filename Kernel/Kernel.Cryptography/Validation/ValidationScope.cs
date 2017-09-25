@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ORMMetadataContextProvider.Models.GlobalConfiguration
+namespace Kernel.Cryptography.Validation
 {
     [Flags]
     public enum ValidationScope
