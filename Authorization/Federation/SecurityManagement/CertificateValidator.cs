@@ -16,6 +16,9 @@ namespace SecurityManagement
         ICertificateValidationConfigurationProvider _configurationProvider;
         public CertificateValidator(ICertificateValidationConfigurationProvider configurationProvider)
         {
+            if (configurationProvider == null)
+                throw new ArgumentNullException("configurationProvider");
+
             this._configurationProvider = configurationProvider;
         }
 
@@ -24,6 +27,9 @@ namespace SecurityManagement
             get
             {
                 var configuration = this._configurationProvider.GetConfiguration();
+                if (configuration == null)
+                    throw new ArgumentNullException("certificateValidationConfiguration");
+
                 return configuration.X509CertificateValidationMode;
             }
         }
