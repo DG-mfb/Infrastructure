@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CircuitBreakerInfrastructure;
 
 namespace CircuitBreaker.StateManagers
@@ -23,9 +24,11 @@ namespace CircuitBreaker.StateManagers
         }
         
 
-        public IExecutionResult Execute(BreakerExecutionContext executionContext)
+        public Task<IExecutionResult> Execute(BreakerExecutionContext executionContext)
         {
-            throw new NotImplementedException();
+            return this.ExecuteInternal(executionContext);
         }
+
+        protected abstract Task<IExecutionResult> ExecuteInternal(BreakerExecutionContext executionContext);
     }
 }

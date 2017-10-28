@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using CircuitBreaker.States;
 using CircuitBreakerInfrastructure;
 
 namespace CircuitBreaker.BreakerProxy
@@ -18,19 +13,25 @@ namespace CircuitBreaker.BreakerProxy
             this._stateProvider = stateProvider;
         }
 
-        public BreakerState CurrentState => this._stateManager.State;
+        public BreakerState CurrentState
+        {
+            get
+            {
+                return this._stateManager.State;
+            }
+        }
+
+        public async Task<IBrakerResponse> Execute(BreakerExecutionContext executionContext)
+        {
+            var result = await this._stateManager.Execute(executionContext);
+            return result.Execute(this);
+        }
 
         public void Close()
         {
             var closedState = this._stateProvider.GetState(State.Close);
             var haldOpenState = this._stateProvider.GetState(State.HalfOpen);
             Interlocked.CompareExchange(ref this._stateManager, closedState, haldOpenState);
-        }
-
-        public IBrakerResponse Execute(BreakerExecutionContext executionContext)
-        {
-            var result = this._stateManager.Execute(executionContext);
-            return result.Execute(this);
         }
 
         public void HalfOpen()
@@ -42,9 +43,8 @@ namespace CircuitBreaker.BreakerProxy
 
         public void Open()
         {
-            var closedState = this._stateProvider.GetState(State.Close);
             var openState = this._stateProvider.GetState(State.Open);
-            Interlocked.CompareExchange(ref this._stateManager, openState, closedState);
+            Interlocked.Exchange(ref this._stateManager, openState);
         }
     }
 }

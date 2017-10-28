@@ -10,8 +10,14 @@ namespace CircuitBreaker.StateManagers
 {
     internal class CloseStateManager : StateManager<CloseState>
     {
-        public CloseStateManager(CloseState state, ITimeManager timeManager, IBreakerProxy breaker) : base(state, timeManager, breaker)
+        public CloseStateManager(CloseState state, ITimeManager timeManager, IBreakerProxy breaker)
+            : base(state, timeManager, breaker)
         {
+        }
+
+        protected override Task<IExecutionResult> ExecuteInternal(BreakerExecutionContext executionContext)
+        {
+            throw new NotImplementedException();
         }
     }
 }

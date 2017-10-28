@@ -13,5 +13,10 @@ namespace CircuitBreaker.StateManagers
         public OpenStateManager(OpenState state, ITimeManager timeManager, IBreakerProxy breaker) : base(state, timeManager, breaker)
         {
         }
+
+        protected override Task<IExecutionResult> ExecuteInternal(BreakerExecutionContext executionContext)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
