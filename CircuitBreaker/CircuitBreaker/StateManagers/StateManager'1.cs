@@ -23,7 +23,6 @@ namespace CircuitBreaker.StateManagers
             }
         }
         
-
         public Task<IExecutionResult> Execute(BreakerExecutionContext executionContext)
         {
             return this.ExecuteInternal(executionContext);

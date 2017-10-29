@@ -4,26 +4,27 @@ using CircuitBreakerInfrastructure;
 
 namespace CircuitBreaker.BreakerProxy
 {
-    internal abstract class BreakerProxy : IBreakerProxy
+    internal class BreakerProxy : IBreakerProxy
     {
         private IStateProvider _stateProvider;
-        private IStateManager _stateManager;
+        private BreakerState _state;
         protected BreakerProxy(IStateProvider stateProvider)
         {
             this._stateProvider = stateProvider;
+            this._state = stateProvider.GetState(State.Close);
         }
 
         public BreakerState CurrentState
         {
             get
             {
-                return this._stateManager.State;
+                return this._state;
             }
         }
 
         public async Task<IBrakerResponse> Execute(BreakerExecutionContext executionContext)
         {
-            var result = await this._stateManager.Execute(executionContext);
+            var result = await this._state.Execute(executionContext);
             return result.Execute(this);
         }
 
@@ -31,20 +32,20 @@ namespace CircuitBreaker.BreakerProxy
         {
             var closedState = this._stateProvider.GetState(State.Close);
             var haldOpenState = this._stateProvider.GetState(State.HalfOpen);
-            Interlocked.CompareExchange(ref this._stateManager, closedState, haldOpenState);
+            Interlocked.CompareExchange(ref this._state, closedState, haldOpenState);
         }
 
         public void HalfOpen()
         {
             var openState = this._stateProvider.GetState(State.Open);
             var halfOpenState = this._stateProvider.GetState(State.HalfOpen);
-            Interlocked.CompareExchange(ref this._stateManager, halfOpenState, openState);
+            Interlocked.CompareExchange(ref this._state, halfOpenState, openState);
         }
 
         public void Open()
         {
             var openState = this._stateProvider.GetState(State.Open);
-            Interlocked.Exchange(ref this._stateManager, openState);
+            Interlocked.Exchange(ref this._state, openState);
         }
     }
 }

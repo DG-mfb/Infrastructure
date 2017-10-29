@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CircuitBreakerInfrastructure;
 
@@ -21,7 +18,17 @@ namespace CircuitBreaker.States
             }
         }
 
-        public override IExecutionResult Execute(BreakerExecutionContext executionContext)
+        public override Task Enter()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<IExecutionResult> Execute(BreakerExecutionContext executionContext)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task Exit()
         {
             throw new NotImplementedException();
         }

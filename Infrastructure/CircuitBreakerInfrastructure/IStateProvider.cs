@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CircuitBreakerInfrastructure
+﻿namespace CircuitBreakerInfrastructure
 {
     public interface IStateProvider
     {
-        IStateManager GetState(State state);
+        BreakerState GetState(State state);
     }
 }

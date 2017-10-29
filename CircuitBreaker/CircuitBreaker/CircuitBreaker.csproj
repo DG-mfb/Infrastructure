@@ -46,9 +46,6 @@
     <Compile Include="ExecutionResults\OpenExecutionResult.cs" />
     <Compile Include="FailedOperationStrategies\TimeoutFailedOperationStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StateManagers\HalfOpenStateManager.cs" />
-    <Compile Include="StateManagers\OpenStateManager.cs" />
-    <Compile Include="StateManagers\CloseStateManager.cs" />
     <Compile Include="BreakerProxy\BreakerProxy.cs" />
     <Compile Include="StateManagers\StateManager%271.cs" />
     <Compile Include="StateManagers\TimeManager.cs" />

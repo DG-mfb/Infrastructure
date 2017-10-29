@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CircuitBreakerInfrastructure;
+﻿using System.Threading.Tasks;
 
 namespace CircuitBreakerInfrastructure
 {
@@ -15,6 +10,8 @@ namespace CircuitBreakerInfrastructure
         {
         }
 
-        public abstract IExecutionResult Execute(BreakerExecutionContext executionContext);
+        public abstract Task Enter();
+        public abstract Task Exit();
+        public abstract Task<IExecutionResult> Execute(BreakerExecutionContext executionContext);
     }
 }
