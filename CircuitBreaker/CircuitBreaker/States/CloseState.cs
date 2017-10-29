@@ -6,7 +6,7 @@ namespace CircuitBreaker.States
 {
     internal class CloseState : BreakerState
     {
-        public CloseState()
+        public CloseState(IStateManager stateManager) : base(stateManager)
         {
         }
 

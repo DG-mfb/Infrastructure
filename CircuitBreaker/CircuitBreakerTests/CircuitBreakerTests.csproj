@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="MockData\BackchannelCertificateValidatorMock.cs" />
     <Compile Include="MockData\PingFailedOperationStrategy.cs" />
+    <Compile Include="MockData\StateProviderMock.cs" />
     <Compile Include="MockData\TimeoutFailedOperationStrategy.cs" />
     <Compile Include="CircuitBreakerTests.cs" />
     <Compile Include="MockData\HttpDocumentRetrieverMock.cs" />

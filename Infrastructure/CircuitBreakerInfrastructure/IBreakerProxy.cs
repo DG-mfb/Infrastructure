@@ -4,10 +4,8 @@ namespace CircuitBreakerInfrastructure
 {
     public interface IBreakerProxy
     {
-        BreakerState CurrentState { get; }
-        void Open();
-        void HalfOpen();
-        void Close();
+        IStateManager StateManager { get; }
+        
         Task<IBrakerResponse> Execute(BreakerExecutionContext executionContext);
     }
 }

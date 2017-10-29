@@ -1,4 +1,4 @@
-﻿using System.Threading;
+﻿using System;
 using System.Threading.Tasks;
 using CircuitBreakerInfrastructure;
 
@@ -6,46 +6,42 @@ namespace CircuitBreaker.BreakerProxy
 {
     internal class BreakerProxy : IBreakerProxy
     {
-        private IStateProvider _stateProvider;
-        private BreakerState _state;
-        protected BreakerProxy(IStateProvider stateProvider)
+        static private Func<IStateManager> _stateManagerFactory = () => null;
+        private static BreakerProxy _instance;
+        public static void StateProviderFactory(Func<IStateManager> stateManagerFactory)
         {
-            this._stateProvider = stateProvider;
-            this._state = stateProvider.GetState(State.Close);
+            BreakerProxy._stateManagerFactory = stateManagerFactory;
         }
-
-        public BreakerState CurrentState
+        public static BreakerProxy Instance
         {
             get
             {
-                return this._state;
+                if (BreakerProxy._instance == null)
+                    BreakerProxy._instance = new BreakerProxy(BreakerProxy._stateManagerFactory());
+                return BreakerProxy._instance;
             }
         }
 
+        public IStateManager StateManager
+        {
+            get
+            {
+                return this._stateManager;
+            }
+        }
+        
+        private readonly IStateManager _stateManager;
+        
+        private BreakerProxy(IStateManager stateManager)
+        {
+            this._stateManager = stateManager;
+           
+        }
+        
         public async Task<IBrakerResponse> Execute(BreakerExecutionContext executionContext)
         {
-            var result = await this._state.Execute(executionContext);
+            var result = await this._stateManager.Execute(executionContext);
             return result.Execute(this);
-        }
-
-        public void Close()
-        {
-            var closedState = this._stateProvider.GetState(State.Close);
-            var haldOpenState = this._stateProvider.GetState(State.HalfOpen);
-            Interlocked.CompareExchange(ref this._state, closedState, haldOpenState);
-        }
-
-        public void HalfOpen()
-        {
-            var openState = this._stateProvider.GetState(State.Open);
-            var halfOpenState = this._stateProvider.GetState(State.HalfOpen);
-            Interlocked.CompareExchange(ref this._state, halfOpenState, openState);
-        }
-
-        public void Open()
-        {
-            var openState = this._stateProvider.GetState(State.Open);
-            Interlocked.Exchange(ref this._state, openState);
         }
     }
 }

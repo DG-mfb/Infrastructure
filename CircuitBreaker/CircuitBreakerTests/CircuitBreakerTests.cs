@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using CircuitBreaker.BreakerProxy;
+using CircuitBreaker.StateManagers;
 using CircuitBreakerInfrastructure;
 using CircuitBreakerTests.MockData;
 using NUnit.Framework;
@@ -9,12 +13,18 @@ namespace CircuitBreakerTests
     [TestFixture]
     public class CircuitBreakerTests
     {
-        public void BreakerTest()
+        [Test]
+        public async Task BreakerTest()
         {
             //ARRANGE
             var validator = new BackchannelCertificateValidatorMock(() => true);
             var webClient = new HttpDocumentRetrieverMock(validator);
+            var manager = new StateManager(new TimeManager(), new StateProviderMock());
+            BreakerProxy.StateProviderFactory(() => manager);
+            var breaker = BreakerProxy.Instance;
+            var executingContext = new BreakerExecutionContext { Action = () => webClient.GetDocumentAsync("https://dg-mfb/idp/shibboleth", CancellationToken.None) };
             //ACT
+            var response = await breaker.Execute(executingContext);
             //ASSERT
         }
 

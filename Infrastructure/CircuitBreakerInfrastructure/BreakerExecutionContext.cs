@@ -8,5 +8,6 @@ namespace CircuitBreakerInfrastructure
 {
     public class BreakerExecutionContext
     {
+        public Func<Task> Action { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace CircuitBreaker.ExecutionResults
 
         protected override void ExcuteInternal(IBreakerProxy breaker)
         {
-            breaker.Open();
+            throw new NotImplementedException();
         }
     }
 }
