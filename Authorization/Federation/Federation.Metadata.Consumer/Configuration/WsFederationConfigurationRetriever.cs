@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Kernel.Federation.MetaData;
 using Kernel.Federation.RelyingParty;
+using Kernel.Web;
 
 namespace Federation.Metadata.RelyingParty.Configuration
 {

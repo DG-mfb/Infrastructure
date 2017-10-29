@@ -9,6 +9,15 @@ namespace CircuitBreakerTests
     [TestFixture]
     public class CircuitBreakerTests
     {
+        public void BreakerTest()
+        {
+            //ARRANGE
+            var validator = new BackchannelCertificateValidatorMock(() => true);
+            var webClient = new HttpDocumentRetrieverMock(validator);
+            //ACT
+            //ASSERT
+        }
+
         //[Test]
         //public void TestMethod1()
         //{

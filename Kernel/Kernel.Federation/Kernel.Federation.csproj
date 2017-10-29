@@ -85,7 +85,6 @@
     <Compile Include="Protocols\IAuthnRequestBuilder.cs" />
     <Compile Include="RelyingParty\IConfigurationManager.cs" />
     <Compile Include="RelyingParty\IConfigurationRetriever.cs" />
-    <Compile Include="RelyingParty\IDocumentRetriever.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kernel.Cache\Kernel.Cache.csproj">

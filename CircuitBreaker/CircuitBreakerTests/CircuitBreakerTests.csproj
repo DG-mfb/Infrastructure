@@ -43,17 +43,33 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockData\BackchannelCertificateValidatorMock.cs" />
     <Compile Include="MockData\PingFailedOperationStrategy.cs" />
     <Compile Include="MockData\TimeoutFailedOperationStrategy.cs" />
     <Compile Include="CircuitBreakerTests.cs" />
+    <Compile Include="MockData\HttpDocumentRetrieverMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\CircuitBreakerInfrastructure\CircuitBreakerInfrastructure.csproj">
       <Project>{2f108dfd-57d3-4f32-9a8c-fcd1ed17424b}</Project>
       <Name>CircuitBreakerInfrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kernel\Kernel.Configuration\Kernel.Configuration.csproj">
+      <Project>{B78BEABA-813A-4C65-BA17-2207E5F37B66}</Project>
+      <Name>Kernel.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kernel\Kernel.Security\Kernel.Security.csproj">
+      <Project>{7C4225E8-700D-4FEE-9BBB-28A935364F05}</Project>
+      <Name>Kernel.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kernel\Kernel.Web\Kernel.Web.csproj">
+      <Project>{9653C064-54C1-41B6-B34C-8AF2DC747C65}</Project>
+      <Name>Kernel.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\CircuitBreaker\CircuitBreaker.csproj">
       <Project>{008789f3-04ad-4135-81e2-c94b0082300f}</Project>

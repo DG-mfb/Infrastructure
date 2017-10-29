@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace Kernel.Federation.RelyingParty
+namespace Kernel.Web
 {
     public interface IDocumentRetriever
     {
