@@ -41,7 +41,7 @@ namespace CircuitBreaker.BreakerProxy
         public async Task<IBrakerResponse> Execute(BreakerExecutionContext executionContext)
         {
             var result = await this._stateManager.Execute(executionContext);
-            return result.Execute(this);
+            return result.Execute();
         }
     }
 }

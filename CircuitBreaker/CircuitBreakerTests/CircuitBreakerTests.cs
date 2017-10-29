@@ -22,7 +22,8 @@ namespace CircuitBreakerTests
             var manager = new StateManager(new TimeManager(), new StateProviderMock());
             BreakerProxy.StateProviderFactory(() => manager);
             var breaker = BreakerProxy.Instance;
-            var executingContext = new BreakerExecutionContext { Action = () => webClient.GetDocumentAsync("https://dg-mfb/idp/shibboleth", CancellationToken.None) };
+            var result = String.Empty;
+            var executingContext = new BreakerExecutionContext { Action = async() => result = await webClient.GetDocumentAsync("https://dg-mfb/idp/shibboleth", CancellationToken.None) };
             //ACT
             var response = await breaker.Execute(executingContext);
             //ASSERT

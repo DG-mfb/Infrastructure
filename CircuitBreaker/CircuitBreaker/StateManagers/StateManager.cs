@@ -7,6 +7,7 @@ namespace CircuitBreaker.StateManagers
 {
     internal class StateManager : IStateManager
     {
+        private static bool _initialised;
         private BreakerState _state;
         private ITimeManager _timeManager;
         private IStateProvider _stateProvider;
@@ -14,7 +15,9 @@ namespace CircuitBreaker.StateManagers
         {
             this._timeManager = timeManager;
             this._stateProvider = stateProvider;
+            this.Initialise();
         }
+       
         public BreakerState CurrentState
         {
             get
@@ -30,7 +33,7 @@ namespace CircuitBreaker.StateManagers
         
         public Task<IExecutionResult> Execute(BreakerExecutionContext executionContext)
         {
-            throw new NotImplementedException();
+            return this.CurrentState.Execute(executionContext);
         }
 
         public void Close()
@@ -51,6 +54,20 @@ namespace CircuitBreaker.StateManagers
         {
             var openState = this._stateProvider.GetState(State.Open, this);
             Interlocked.Exchange(ref this._state, openState);
+        }
+
+        private void Initialise()
+        {
+            if (StateManager._initialised)
+                throw new InvalidOperationException("State manager must be initialised once only. If resoved from DI container register it as a singleton");
+
+            var closedState = this._stateProvider.GetState(State.Close, this);
+
+            var previous = Interlocked.CompareExchange(ref this._state, closedState, null);
+            if(previous != null)
+                throw new InvalidOperationException("State manager must be initialised once only. If resoved from DI container register it as a singleton");
+
+            StateManager._initialised = true;
         }
     }
 }

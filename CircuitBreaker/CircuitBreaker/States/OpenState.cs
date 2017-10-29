@@ -18,17 +18,12 @@ namespace CircuitBreaker.States
             }
         }
 
-        public override Task Enter()
+        protected override Task<IExecutionResult> ExecuteInternal(BreakerExecutionContext executionContext)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<IExecutionResult> Execute(BreakerExecutionContext executionContext)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task Exit()
+        protected override Task<IExecutionResult> Trip(Exception e, BreakerExecutionContext executionContext)
         {
             throw new NotImplementedException();
         }

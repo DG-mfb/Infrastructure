@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CircuitBreaker.ExecutionResults;
 using CircuitBreakerInfrastructure;
 
 namespace CircuitBreaker.States
@@ -18,19 +19,15 @@ namespace CircuitBreaker.States
             }
         }
 
-        public override Task Enter()
+        protected override async Task<IExecutionResult> ExecuteInternal(BreakerExecutionContext executionContext)
         {
-            throw new NotImplementedException();
+            await executionContext.Action();
+            return new SuccessExecutionResult(() => null);
         }
 
-        public override Task<IExecutionResult> Execute(BreakerExecutionContext executionContext)
+        protected override Task<IExecutionResult> Trip(Exception e, BreakerExecutionContext executionContext)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Task Exit()
-        {
-            throw new NotImplementedException();
+            return Task.FromResult<IExecutionResult>( new FailedExecutionResult(null, e));
         }
     }
 }

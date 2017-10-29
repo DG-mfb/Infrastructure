@@ -43,7 +43,8 @@
   <ItemGroup>
     <Compile Include="BreakerResponses\BrakerResponse.cs" />
     <Compile Include="ExecutionResults\ExecutionResult.cs" />
-    <Compile Include="ExecutionResults\OpenExecutionResult.cs" />
+    <Compile Include="ExecutionResults\FailedExecutionResult.cs" />
+    <Compile Include="ExecutionResults\SuccessExecutionResult.cs" />
     <Compile Include="FailedOperationStrategies\TimeoutFailedOperationStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BreakerProxy\BreakerProxy.cs" />
