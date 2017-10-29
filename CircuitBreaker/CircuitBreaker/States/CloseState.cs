@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using CircuitBreaker.ExecutionResults;
 using CircuitBreakerInfrastructure;
+using Kernel.Extensions;
+using Kernel.Reflection;
+//using Kernel.Reflection.Extensions;
 
 namespace CircuitBreaker.States
 {
     internal class CloseState : BreakerState
     {
+        private int _failCount;
+        private readonly Timer _timer;
         public CloseState(IStateManager stateManager) : base(stateManager)
         {
+            this._timer = new Timer(new TimerCallback( o => { Interlocked.Exchange(ref this._failCount, 0); }), this, TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(20));
         }
 
         public override State State
@@ -19,15 +26,33 @@ namespace CircuitBreaker.States
             }
         }
 
-        protected override async Task<IExecutionResult> ExecuteInternal(BreakerExecutionContext executionContext)
+        protected override Task<IExecutionResult> ExecuteInternal(BreakerExecutionContext executionContext)
         {
-            await executionContext.Action();
-            return new SuccessExecutionResult(() => null);
-        }
+            var t = executionContext.Action();
+            
+            t.Wait();
+
+            return Task.FromResult<IExecutionResult>(new SuccessExecutionResult(this.GetResultFactory(t)));        }
 
         protected override Task<IExecutionResult> Trip(Exception e, BreakerExecutionContext executionContext)
         {
-            return Task.FromResult<IExecutionResult>( new FailedExecutionResult(null, e));
+            Interlocked.Increment(ref this._failCount);
+            if (_failCount > 1)
+                this.StateManager.Open();
+            return Task.FromResult<IExecutionResult>( new FailedExecutionResult(() => null, this.StateManager.CurrentState.State, e));
+        }
+
+        private Func<object> GetResultFactory(Task task)
+        {
+            return () =>
+            {
+                var hasResult = TypeExtensions.IsAssignableToGenericType(task.GetType(), typeof(Task<>));
+                if (!hasResult)
+                    return null;
+                var del = Kernel.Reflection.Extensions.TypeExtensions.GetInstancePropertyDelegate<object>(task.GetType(), "Result");
+                var res = del(task);
+                return res;
+            };
         }
     }
 }

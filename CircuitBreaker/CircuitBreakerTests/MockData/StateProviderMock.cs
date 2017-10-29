@@ -21,6 +21,12 @@ namespace CircuitBreakerTests.MockData
                 case State.Close:
                     breakerState = new CloseState(manager);
                     break;
+                case State.Open:
+                    breakerState = new OpenState(manager);
+                    break;
+                case State.HalfOpen:
+                    breakerState = new HalfOpenState(manager);
+                    break;
                 default:
                     throw new NotSupportedException("state");
             }

@@ -8,5 +8,10 @@ namespace CircuitBreakerInfrastructure
 {
     public interface IBrakerResponse
     {
+        object Result { get; }
+        Type ResultType { get; }
+        State BrakerState { get; }
+        string ProjectedError { get; }
+        Exception Exception { get; }
     }
 }

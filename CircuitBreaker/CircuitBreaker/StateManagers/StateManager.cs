@@ -45,14 +45,16 @@ namespace CircuitBreaker.StateManagers
 
         public void HalfOpen()
         {
-            var openState = this._stateProvider.GetState(State.Open, this);
+            //var openState = this._stateProvider.GetState(State.Open, this);
             var halfOpenState = this._stateProvider.GetState(State.HalfOpen, this);
-            Interlocked.CompareExchange(ref this._state, halfOpenState, openState);
+            halfOpenState.Enter();
+            Interlocked.Exchange(ref this._state, halfOpenState);
         }
 
         public void Open()
         {
             var openState = this._stateProvider.GetState(State.Open, this);
+            openState.Enter();
             Interlocked.Exchange(ref this._state, openState);
         }
 

@@ -29,6 +29,41 @@ namespace CircuitBreakerTests
             //ASSERT
         }
 
+        [Test]
+        public async Task BreakerTest1()
+        {
+            //ARRANGE
+            var validator = new BackchannelCertificateValidatorMock(() => true);
+            var webClient = new HttpDocumentRetrieverMock(validator);
+            var manager = new StateManager(new TimeManager(), new StateProviderMock());
+            BreakerProxy.StateProviderFactory(() => manager);
+            var breaker = BreakerProxy.Instance;
+            
+            var executingContext = new BreakerExecutionContext { Action = () => webClient.GetDocumentAsync("https://dg-mfb/idp/shibboleth", CancellationToken.None) };
+            //ACT
+            var response = await breaker.Execute(executingContext);
+            //ASSERT
+        }
+
+        [Test]
+        public async Task BreakerTest2()
+        {
+            //ARRANGE
+            var validator = new BackchannelCertificateValidatorMock(() => true);
+            var webClient = new HttpDocumentRetrieverMock(validator);
+            var manager = new StateManager(new TimeManager(), new StateProviderMock());
+            BreakerProxy.StateProviderFactory(() => manager);
+            var breaker = BreakerProxy.Instance;
+
+            var executingContext = new BreakerExecutionContext { Action = () => webClient.GetDocumentAsync("https://dg-mfb/idp/shibboleth", CancellationToken.None) };
+            //ACT
+            var response = await breaker.Execute(executingContext);
+            response = await breaker.Execute(executingContext);
+            Thread.Sleep(20000);
+            response = await breaker.Execute(executingContext);
+            //ASSERT
+        }
+
         //[Test]
         //public void TestMethod1()
         //{
