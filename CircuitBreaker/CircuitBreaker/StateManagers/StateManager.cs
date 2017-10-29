@@ -39,8 +39,8 @@ namespace CircuitBreaker.StateManagers
         public void Close()
         {
             var closedState = this._stateProvider.GetState(State.Close, this);
-            var haldOpenState = this._stateProvider.GetState(State.HalfOpen, this);
-            Interlocked.CompareExchange(ref this._state, closedState, haldOpenState);
+            closedState.Enter();
+            Interlocked.Exchange(ref this._state, closedState);
         }
 
         public void HalfOpen()

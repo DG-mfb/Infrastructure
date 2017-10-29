@@ -32,7 +32,8 @@ namespace CircuitBreaker.States
             
             t.Wait();
 
-            return Task.FromResult<IExecutionResult>(new SuccessExecutionResult(this.GetResultFactory(t)));        }
+            return Task.FromResult<IExecutionResult>(new SuccessExecutionResult(base.GetResultFactory(t)));
+        }
 
         protected override Task<IExecutionResult> Trip(Exception e, BreakerExecutionContext executionContext)
         {
@@ -40,19 +41,6 @@ namespace CircuitBreaker.States
             if (_failCount > 1)
                 this.StateManager.Open();
             return Task.FromResult<IExecutionResult>( new FailedExecutionResult(() => null, this.StateManager.CurrentState.State, e));
-        }
-
-        private Func<object> GetResultFactory(Task task)
-        {
-            return () =>
-            {
-                var hasResult = TypeExtensions.IsAssignableToGenericType(task.GetType(), typeof(Task<>));
-                if (!hasResult)
-                    return null;
-                var del = Kernel.Reflection.Extensions.TypeExtensions.GetInstancePropertyDelegate<object>(task.GetType(), "Result");
-                var res = del(task);
-                return res;
-            };
         }
     }
 }

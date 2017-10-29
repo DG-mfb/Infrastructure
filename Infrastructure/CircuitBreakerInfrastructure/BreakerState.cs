@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Kernel.Extensions;
 
 namespace CircuitBreakerInfrastructure
 {
@@ -37,6 +38,19 @@ namespace CircuitBreakerInfrastructure
             {
                 return Trip(e, executionContext);
             }
+        }
+
+        protected Func<object> GetResultFactory(Task task)
+        {
+            return () =>
+            {
+                var hasResult = TypeExtensions.IsAssignableToGenericType(task.GetType(), typeof(Task<>));
+                if (!hasResult)
+                    return null;
+                var del = Kernel.Reflection.Extensions.TypeExtensions.GetInstancePropertyDelegate<object>(task.GetType(), "Result");
+                var res = del(task);
+                return res;
+            };
         }
 
         protected abstract Task<IExecutionResult> Trip(Exception e, BreakerExecutionContext executionContext);

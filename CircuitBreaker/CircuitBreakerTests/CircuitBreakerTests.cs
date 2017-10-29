@@ -59,7 +59,7 @@ namespace CircuitBreakerTests
             //ACT
             var response = await breaker.Execute(executingContext);
             response = await breaker.Execute(executingContext);
-            Thread.Sleep(20000);
+            Thread.Sleep(8000);
             response = await breaker.Execute(executingContext);
             //ASSERT
         }
