@@ -2,6 +2,7 @@
 
 namespace Kernel.CQRS.Messaging
 {
+    [Serializable]
     public abstract class Message
     {
         public Guid Id { get; }

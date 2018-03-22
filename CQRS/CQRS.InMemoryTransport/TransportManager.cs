@@ -1,43 +1,55 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Kernel.CQRS.Messaging.Transaction;
 using Kernel.CQRS.Transport;
+using Kernel.Logging;
 
 namespace CQRS.InMemoryTransport
 {
     internal class TransportManager : ITransportManager
     {
-        private readonly InMemoryQueueTransport _transport;
-        
-        public TransportManager(InMemoryQueueTransport transport)
+        protected readonly ITransport Transport;
+        protected readonly ILogProvider LogProvider;
+        public TransportManager(InMemoryQueueTransport transport, ILogProvider logProvider)
         {
-            this._transport = transport;
-            transport.RegisterManager(this);
+            this.Transport = transport;
+            this.LogProvider = logProvider;
         }
 
-        public Task<bool> EnqueueMessage(byte[] message)
+        public virtual async Task<bool> EnqueueMessage(byte[] message)
         {
-            var result = this._transport.Enque(message);
-            return Task.FromResult(result);
+            try
+            {
+                var result = await this.Transport.Send(message);
+                return result;
+            }
+            catch(Exception e)
+            {
+                Exception inner;
+                this.LogProvider.TryLogException(e, out inner);
+                throw;
+            }
         }
 
         public Task Initialise()
         {
-            return this._transport.Initialise();
+            return this.Transport.Initialise();
         }
 
         public Task RegisterListener(IMessageListener listener)
         {
-            this._transport.MessageListeners.Add(listener.ReceiveMessage);
+            this.Transport.Configuration.Listeners.Add(listener);
             return Task.CompletedTask;
         }
 
         public Task Start()
         {
-            return this._transport.Start();
+            return this.Transport.Start();
         }
 
         public Task Stop()
         {
-            return this._transport.Stop();
+            return this.Transport.Stop();
         }
     }
 }

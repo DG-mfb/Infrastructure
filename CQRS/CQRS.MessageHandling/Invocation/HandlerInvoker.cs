@@ -7,7 +7,7 @@ using Kernel.Initialisation;
 
 namespace CQRS.MessageHandling.Invocation
 {
-    internal class HandlerInvoker : IHandlerInvoker, IAutoRegisterAsTransient
+    internal class HandlerInvoker : IHandlerInvoker
     {
         public Task InvokeHandlers(IEnumerable<object> handlers, object message)
         {

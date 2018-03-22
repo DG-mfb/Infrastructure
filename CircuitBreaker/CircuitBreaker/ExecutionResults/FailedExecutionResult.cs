@@ -12,7 +12,7 @@ namespace CircuitBreaker.ExecutionResults
 
         protected override IBrakerResponse BuildResponse()
         {
-            return new BrakerResponse(base.Result(), base.BrakerState);
+            return new BrakerResponse(base.Result(), base.BrakerState, this.Error);
         }
     }
 }

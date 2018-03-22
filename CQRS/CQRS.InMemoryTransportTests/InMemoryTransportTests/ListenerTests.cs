@@ -1,6 +1,11 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using CQRS.Infrastructure.Transport;
 using CQRS.InMemoryTransport;
+using CQRS.InMemoryTransportTests.MockData;
 using CQRS.InMemoryTransportTests.MockData.Listeners;
+using Kernel.CQRS.Transport;
 using NUnit.Framework;
 
 namespace CQRS.InMemoryTransportTests.InMemoryTransportTests
@@ -9,20 +14,22 @@ namespace CQRS.InMemoryTransportTests.InMemoryTransportTests
     internal class ListenerTests
     {
         [Test]
-        public void ListnerTest_one_listener()
+        public async Task ListnerTest_one_listener()
         {
             //ARRANGE
-            var transport = new InMemoryQueueTransport();
-            var manager = new TransportManager(transport);
+            var logger = new LogProviderMock();
+            Func<ITransportConfiguration> configuration = () => new TransportConfiguration();
+            var transport = new InMemoryQueueTransport(logger, configuration);
+            var manager = new TransportManager(transport, logger);
             var message = new byte[] { 0, 1, 2 };
             
             byte[] messageReceived = null;
             
             var listener = new MessageListener1(m => messageReceived = m);
             //ACT
-            listener.AttachTo(manager);
-            transport.Start();
-            manager.EnqueueMessage(message);
+            await listener.AttachTo(manager);
+            await transport.Start();
+            await manager.EnqueueMessage(message);
             Thread.Sleep(500);
             //ASSERT
             
@@ -30,11 +37,13 @@ namespace CQRS.InMemoryTransportTests.InMemoryTransportTests
         }
 
         [Test]
-        public void ListnerTest_2_listeners()
+        public async Task ListnerTest_2_listeners()
         {
             //ARRANGE
-            var transport = new InMemoryQueueTransport();
-            var manager = new TransportManager(transport);
+            var logger = new LogProviderMock();
+            Func<ITransportConfiguration> configuration = () => new TransportConfiguration();
+            var transport = new InMemoryQueueTransport(logger, configuration);
+            var manager = new TransportManager(transport, logger);
             var message = new byte[] { 0, 1, 2 };
 
             byte[] messageReceived1 = null;
@@ -43,10 +52,10 @@ namespace CQRS.InMemoryTransportTests.InMemoryTransportTests
             var listener1 = new MessageListener1(m => messageReceived1= m);
             var listener2 = new MessageListener2(m => messageReceived2 = m);
             //ACT
-            listener1.AttachTo(manager);
-            listener2.AttachTo(manager);
-            transport.Start();
-            manager.EnqueueMessage(message);
+            await listener1.AttachTo(manager);
+            await listener2.AttachTo(manager);
+            await transport.Start();
+            await manager.EnqueueMessage(message);
             Thread.Sleep(500);
             //ASSERT
 

@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandDistpacher.cs" />
+    <Compile Include="CommandDispatcher.cs" />
+    <Compile Include="Initialisation\MessageDispatchertInitialiser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -49,9 +50,17 @@
       <Project>{496e6b52-33d0-4e4e-945f-692e97642506}</Project>
       <Name>CQRS.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\Shared\Shared.csproj">
+      <Project>{FA2CD1BF-A890-4306-9EDB-A1B10042E57E}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel.CQRS\Kernel.CQRS.csproj">
       <Project>{dbe9a282-f646-41c9-896d-00abdc5b9aad}</Project>
       <Name>Kernel.CQRS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kernel\Kernel.Logging\Kernel.Logging.csproj">
+      <Project>{7DA939D6-5443-498F-AAA1-3CE3134BC3EB}</Project>
+      <Name>Kernel.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kernel\Kernel\Kernel.csproj">
       <Project>{e198c691-91a6-4082-9976-f5f006f24960}</Project>

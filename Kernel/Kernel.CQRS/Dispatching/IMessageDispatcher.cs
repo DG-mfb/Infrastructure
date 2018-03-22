@@ -4,7 +4,7 @@ using Kernel.Initialisation;
 
 namespace Kernel.CQRS.Dispatching
 {
-    public interface IMessageDispatcher : IAutoRegisterAsTransient
+    public interface IMessageDispatcher
     {
         Task SendMessage(Message message);
     }

@@ -23,7 +23,7 @@ namespace CircuitBreakerTests
             BreakerProxy.StateProviderFactory(() => manager);
             var breaker = BreakerProxy.Instance;
             var result = String.Empty;
-            var executingContext = new BreakerExecutionContext { Action = async() => result = await webClient.GetDocumentAsync("https://dg-mfb/idp/shibboleth", CancellationToken.None) };
+            var executingContext = new BreakerExecutionContext { Action = () => throw new NotImplementedException() };
             //ACT
             var response = await breaker.Execute(executingContext);
             //ASSERT

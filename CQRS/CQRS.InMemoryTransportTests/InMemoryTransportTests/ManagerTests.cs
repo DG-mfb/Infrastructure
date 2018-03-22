@@ -1,4 +1,9 @@
-﻿using CQRS.InMemoryTransport;
+﻿using System;
+using System.Threading.Tasks;
+using CQRS.Infrastructure.Transport;
+using CQRS.InMemoryTransport;
+using CQRS.InMemoryTransportTests.MockData;
+using Kernel.CQRS.Transport;
 using NUnit.Framework;
 
 namespace CQRS.InMemoryTransportTests.InMemoryTransportTests
@@ -7,16 +12,18 @@ namespace CQRS.InMemoryTransportTests.InMemoryTransportTests
     internal class ManagerTests
     {
         [Test]
-        public void EnqueueMessageTest()
+        public async Task EnqueueMessageTest()
         {
             //ARRANGE
-            var transport = new InMemoryQueueTransport();
-            var manager = new TransportManager(transport);
+            var logger = new LogProviderMock();
+            Func<ITransportConfiguration> configuration = () => new TransportConfiguration();
+            var transport = new InMemoryQueueTransport(logger, configuration);
+            var manager = new TransportManager(transport, logger);
             var message = new byte[] { 0, 1, 2 };
             byte[] dequeuedMessage;
             //ACT
-            transport.Start();
-            manager.EnqueueMessage(message);
+            await transport.Start();
+            await manager.EnqueueMessage(message);
             var result = transport.TryDequeue(out dequeuedMessage);
             //ASSERT
             Assert.IsTrue(result);

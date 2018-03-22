@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CQRS.MessageHandling.Factories;
+using CQRS.MessageHandling.Invocation;
 using Kernel.CQRS.MessageHandling;
 using Kernel.DependancyResolver;
 using Shared.Initialisation;
 
 namespace CQRS.MessageHandling.Initialisation
 {
-    class MessageHandlingInitialiser : Initialiser
+    public class MessageHandlingInitialiser : Initialiser
     {
         public override byte Order
         {
@@ -15,22 +17,15 @@ namespace CQRS.MessageHandling.Initialisation
 
         protected override Task InitialiseInternal(IDependencyResolver dependencyResolver)
         {
-            throw new NotImplementedException();
+            dependencyResolver.RegisterType<HandlerResolver>(Lifetime.Transient);
+            dependencyResolver.RegisterType<HandlerInvoker>(Lifetime.Transient);
+            return Task.CompletedTask;
         }
 
         internal static Func<Type, IHandlerResolver> RegisterHandlerFactories(IDependencyResolver dependencyResolver)
         {
             return t =>
             {
-                //var settings = typeof(IArticleBoundContext).IsAssignableFrom(t) ? (IHandlerFactorySettings)dependencyResolver.Resolve<IArticleDispatcherSettings>()
-                //: (IHandlerFactorySettings)dependencyResolver.Resolve<IDirectoryDispatcherSettings>();
-
-                //if (typeof(Command).IsAssignableFrom(t))
-                //    return new CommandHandlerFactory(dependencyResolver, settings);
-
-                //if (typeof(Event).IsAssignableFrom(t))
-                //    return new EventHandlerFactory(dependencyResolver, settings);
-
                 throw new InvalidOperationException($"Unknown type: {t.Name}. The type must inherit Command or Event");
             };
         }

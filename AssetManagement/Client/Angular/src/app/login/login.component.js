@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 //import { UserService } from '../../services/user.service';
-var LoginComponent = (function () {
+var LoginComponent = /** @class */ (function () {
     function LoginComponent(router
         //private userService: UserService
     ) {
@@ -43,18 +43,18 @@ var LoginComponent = (function () {
         this.showWarningMessage = false;
         this.showErrorMessage = false;
     };
+    LoginComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'login',
+            templateUrl: 'login.component.html',
+            styleUrls: ['login.component.scss']
+        }),
+        __metadata("design:paramtypes", [router_1.Router
+            //private userService: UserService
+        ])
+    ], LoginComponent);
     return LoginComponent;
 }());
-LoginComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'login',
-        templateUrl: 'login.component.html',
-        styleUrls: ['login.component.scss']
-    }),
-    __metadata("design:paramtypes", [router_1.Router
-        //private userService: UserService
-    ])
-], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

@@ -37,7 +37,7 @@ namespace AssetManagement
             app.UseOAuthBearerTokens(OAuthOptions);
             
             //Shibboleth middleware, test metadata
-            SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "testShib");
+            //SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "testShib");
 
             //Shibboleth middleware, localhost metadata metadata
             //SSOAuthenticationExtensions.UseShibbolethAuthentication(app, "imperial.ac.uk");

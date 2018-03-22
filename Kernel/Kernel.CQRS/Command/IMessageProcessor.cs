@@ -9,6 +9,6 @@
     public interface IMessageProcessor
     {
 		Task ProcessMessage(string command);
-		Task ProcessProcess(Message command);
+		Task ProcessMessage(Message command);
 	}
 }

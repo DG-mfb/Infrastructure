@@ -1,12 +1,18 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Kernel.CQRS.Transport
 {
     public interface ITransport
     {
-        ITransportManager Manager { get; }
+        ITransportConfiguration Configuration { get; }
+        Task<bool> Send(byte[] message);
+        bool IsTransactional { get; }
+        int PendingMessages { get; }
         Task Initialise();
         Task Start();
         Task Stop();
+        Task<IEnumerable<byte[]>> ReadAllMessages();
+        Task CopyMessages(byte[][] destination);
     }
 }
